@@ -57,6 +57,7 @@ public class SceneBuildingSpawner : MonoBehaviour
     Color curSky, curGround, fromSky, fromGround, toSky, toGround;
     Color dustColor = new Color(0.9f, 0.85f, 0.78f);
     static Sprite whiteSprite;
+    static readonly Dictionary<string, Sprite> buildingSprites = new Dictionary<string, Sprite>();
 
     void Start()
     {
@@ -162,9 +163,10 @@ public class SceneBuildingSpawner : MonoBehaviour
             }
             else
             {
-                float grow = 1f + 0.35f * level;   // seviye artinca kutu buyur
-                sr.sprite = WhiteSprite();
-                v.baseColor = b.placeholderColor;
+                // Sprite'larin arasinda bosluk kalsin; yuksek milestone seviyeleri komsu binalara tasmasin.
+                float grow = 1f + 0.07f * level;
+                sr.sprite = BuildingSprite(b);
+                v.baseColor = Color.white; // Renkler sprite'in icine zaten uygulandi.
                 v.baseScale = new Vector3(b.placeholderSize.x * grow, b.placeholderSize.y * grow, 1f);
                 v.width = v.baseScale.x;
                 v.height = v.baseScale.y;
@@ -393,5 +395,47 @@ public class SceneBuildingSpawner : MonoBehaviour
             whiteSprite = Sprite.Create(tex, new Rect(0, 0, 4, 4), new Vector2(0.5f, 0f), 4f);
         }
         return whiteSprite;
+    }
+
+    // Sprite atanmamis binalari duz kare yerine renkli, kucuk bir yapi siluetiyle goster.
+    static Sprite BuildingSprite(BuildingData data)
+    {
+        Sprite cached;
+        if (buildingSprites.TryGetValue(data.id, out cached)) return cached;
+
+        const int w = 24, h = 24;
+        var pixels = new Color32[w * h];
+        Color.RGBToHSV(data.placeholderColor, out float hue, out float saturation, out float value);
+        Color palette = Color.HSVToRGB(hue, Mathf.Min(saturation, 0.62f) * 0.72f, Mathf.Clamp(value * 0.82f + 0.12f, 0f, 0.9f));
+        Color32 wall = palette;
+        Color32 shade = Color.Lerp(palette, Color.black, 0.34f);
+        Color32 roof = Color.Lerp(palette, Color.white, 0.2f);
+        Color32 window = new Color32(255, 224, 139, 255);
+        int seed = Mathf.Abs(data.id.GetHashCode());
+        int left = 4 + seed % 3, right = 20 - seed % 3;
+        int roofTop = 14 + seed % 5;
+        for (int y = 0; y < h; y++)
+        for (int x = 0; x < w; x++)
+        {
+            Color32 c = new Color32(0, 0, 0, 0);
+            bool body = x >= left && x <= right && y >= 2 && y <= roofTop;
+            int roofHeight = Mathf.Max(1, roofTop / 3);
+            bool roofPixel = y > roofTop && y <= roofTop + roofHeight &&
+                x >= left - (y - roofTop) && x <= right + (y - roofTop);
+            if (body) c = x == left || x == right || y == 2 ? shade : wall;
+            if (roofPixel) c = roof;
+            if (body && y >= 7 && y <= 10 && (x == left + 3 || x == right - 3)) c = window;
+            if (body && x >= (left + right) / 2 - 1 && x <= (left + right) / 2 + 1 && y >= 2 && y <= 7) c = shade;
+            pixels[y * w + x] = c;
+        }
+
+        var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
+        tex.name = "generated_" + data.id;
+        tex.filterMode = FilterMode.Point;
+        tex.SetPixels32(pixels);
+        tex.Apply();
+        cached = Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0f), 24f);
+        buildingSprites[data.id] = cached;
+        return cached;
     }
 }

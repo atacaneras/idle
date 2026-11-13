@@ -70,11 +70,13 @@ public class TimeMachinePanel : MonoBehaviour
     {
         openButton = UIFactory.CreateButton(canvas, "OpenTreeButton", "Bilgi Ağacı", 30f, out openLabel);
         var rt = (RectTransform)openButton.transform;
-        rt.SetAsFirstSibling();
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
-        rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-30f, -125f);   // Bilgi yazisinin hemen alti (iki satira kadar yer birakildi)
-        rt.sizeDelta = new Vector2(300f, 60f);
+        rt.SetAsLastSibling();
+        // Yukseltme panelinin basligina yerlestir; bina satirlarinin ustune tasmasin.
+        rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
+        rt.pivot = new Vector2(0f, 1f);
+        rt.anchoredPosition = new Vector2(415f, -250f);
+        rt.sizeDelta = new Vector2(200f, 50f);
+        openLabel.fontSize = 22f;
         openButton.onClick.AddListener(Open);
     }
 

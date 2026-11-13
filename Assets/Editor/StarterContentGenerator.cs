@@ -35,6 +35,9 @@ public static class StarterContentGenerator
         // Yeni kaynaklar
         Resource("milk", "Süt", "res_milk");
         Resource("flour", "Un", "res_flour");
+        Resource("bronze", "Bronz", "res_bronze");
+        Resource("coin", "Sikke", "res_coin");
+        Resource("knowledge", "Bilgelik", "res_wisdom");
 
         // Binalar
         Building("stone_gatherer", "bld_gatherer", "Toplayıcı Alanı", "food", "food", 15.0, 0.5, -8f, -3.4f, 1, 0f, 1f, 0f);
@@ -53,6 +56,14 @@ public static class StarterContentGenerator
         Building("farm_bakery", "bld_farm_bakery", "Köy Fırını", "flour", "milk", 40000.0, 250.0, -0.5f, -2.7f, 0, 0.85f, 0.45f, 0.2f);
         Building("farm_canal", "bld_farm_canal", "Sulama Kanalı", "wheat", "flour", 300000.0, 2500.0, 1f, -3.4f, 1, 0.2f, 0.5f, 0.8f);
         Building("farm_square", "bld_farm_square", "Dedikodu Meydanı", "flour", "milk", 2500000.0, 5000.0, 2.5f, -2.7f, 0, 0.6f, 0.6f, 0.3f);
+        Building("bronze_smelter", "bld_bronze_smelter", "Bronz Dökümhanesi", "bronze", "wheat", 20e6, 18000, -8f, -3.4f, 1, 0.72f, 0.35f, 0.18f);
+        Building("bronze_mint", "bld_bronze_mint", "Sikke Darphanesi", "coin", "bronze", 90e6, 7000, -6f, -2.7f, 0, 0.86f, 0.68f, 0.28f);
+        Building("bronze_library", "bld_bronze_library", "Kil Tablet Arşivi", "knowledge", "coin", 300e6, 2500, -4f, -3.4f, 1, 0.55f, 0.38f, 0.22f);
+        Building("bronze_cart", "bld_bronze_cart", "Tekerlekli Kervan", "coin", "bronze", 900e6, 80000, -2f, -2.7f, 0, 0.48f, 0.3f, 0.16f);
+        Building("bronze_aqueduct", "bld_bronze_aqueduct", "Su Kemeri", "knowledge", "coin", 5e9, 24000, 0f, -3.4f, 1, 0.42f, 0.67f, 0.72f);
+        Building("bronze_workshop", "bld_bronze_workshop", "Zanaat Atölyesi", "bronze", "knowledge", 18e9, 350000, 2f, -2.7f, 0, 0.72f, 0.48f, 0.25f);
+        Building("bronze_observatory", "bld_bronze_observatory", "Gözlemevi", "knowledge", "bronze", 70e9, 180000, 4f, -3.4f, 1, 0.24f, 0.32f, 0.55f);
+        Building("bronze_forum", "bld_bronze_forum", "Şehir Forumu", "coin", "knowledge", 250e9, 1800000, 6f, -2.7f, 0, 0.78f, 0.58f, 0.32f);
 
         // Cag ici yukseltmeler
         Upgrade("stone_click1", "Daha Sivri Taş", "Sivri olan daha iyi toplar. Bu bilim.", UpgradeKind.ClickMultiplier, 2.0, null, "food", 100.0, null, 0, null);
@@ -99,6 +110,21 @@ public static class StarterContentGenerator
         Upgrade("farm_square_b", "Meydan Muhabbeti", "Haberler sözlü. Çoğu yanlış. Hepsi eğlenceli.", UpgradeKind.BuildingMultiplier, 2.0, "farm_square", "milk", 450000000.0, "farm_square", 20, "farm_square_a");
         Upgrade("farm_global1", "Takvim İcadı", "Ne zaman ekeceğimizi biliyoruz. Çiftçiler 'zaten biliyorduk' diyor.", UpgradeKind.GlobalMultiplier, 1.5, null, "wheat", 25000.0, "farm_mill", 10, null);
         Upgrade("farm_global2", "Çit Çekmek", "Çit koyduk. Komşunun ineği 'sınır nerede' diye soruyor.", UpgradeKind.GlobalMultiplier, 2.0, null, "wheat", 600000.0, "farm_canal", 10, null);
+        Upgrade("bronze_click1", "Döküm Kalıbı", "Aynı baltayı tekrar tekrar dökmek artık mümkün.", UpgradeKind.ClickMultiplier, 2, null, "bronze", 25000, null, 0, null);
+        Upgrade("bronze_click2", "Usta Çekiç", "Çekiç daha ağır. Başparmak daha dikkatli.", UpgradeKind.ClickMultiplier, 3, null, "bronze", 900000, null, 0, "bronze_click1");
+        Upgrade("bronze_click3", "Yazılı Tarifler", "Tablete yazdık. Tablet ağır, tarif kısa.", UpgradeKind.ClickProductionShare, .015, null, "knowledge", 250000, null, 0, "bronze_click2");
+        Upgrade("bronze_click4", "Atölye Nöbeti", "Vardiya sistemi icat edildi. Usta hâlâ uyumuyor.", UpgradeKind.ClickMultiplier, 4, null, "coin", 8000000, null, 0, "bronze_click3");
+        string[] bb = { "bronze_smelter", "bronze_mint", "bronze_library", "bronze_cart", "bronze_aqueduct", "bronze_workshop", "bronze_observatory", "bronze_forum" };
+        string[] bn = { "Fırın Tuğlaları", "Düzenli Sikke", "Tablet Kataloğu", "Tekerlek Gresi", "Çift Kemer", "Usta Çıraklığı", "Yıldız Cetveli", "Açık Forum" };
+        string[] br = { "bronze", "coin", "knowledge", "coin", "knowledge", "bronze", "knowledge", "coin" };
+        double[] bc = { 100000, 450000, 1500000, 4500000, 15000000, 45000000, 150000000, 450000000 };
+        for (int i = 0; i < bb.Length; i++)
+        {
+            Upgrade("bronze_" + bb[i] + "_a", bn[i], "Daha iyi araçlar, daha düzenli üretim.", UpgradeKind.BuildingMultiplier, 2, bb[i], br[i], bc[i], bb[i], 5, null);
+            Upgrade("bronze_" + bb[i] + "_b", bn[i] + " II", "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.", UpgradeKind.BuildingMultiplier, 2, bb[i], br[i], bc[i] * 100, bb[i], 20, "bronze_" + bb[i] + "_a");
+        }
+        Upgrade("bronze_global1", "Standart Ölçüler", "Herkes aynı ölçü kabını kullanıyor. Neredeyse.", UpgradeKind.GlobalMultiplier, 1.5, null, "coin", 3000000, "bronze_mint", 10, null);
+        Upgrade("bronze_global2", "Yazılı Kanunlar", "Kurallar tablete yazıldı; artık kimse okuyamıyor.", UpgradeKind.GlobalMultiplier, 2, null, "knowledge", 100000000, "bronze_forum", 10, null);
         foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
 
         // Kalici yukseltmeler (Bilgi Agaci)
@@ -114,6 +140,9 @@ public static class StarterContentGenerator
         // Caglar
         ConfigureAge("age_stone", new[] { "food", "wood", "stone" }, new[] { "stone_gatherer", "stone_woodcamp", "stone_hunter", "stone_quarry", "stone_axeshop", "stone_firepit", "stone_mammoth", "stone_gallery" }, new[] { "stone_click1", "stone_click2", "stone_click3", "stone_click4", "stone_gatherer_a", "stone_gatherer_b", "stone_woodcamp_a", "stone_woodcamp_b", "stone_hunter_a", "stone_hunter_b", "stone_quarry_a", "stone_quarry_b", "stone_axeshop_a", "stone_axeshop_b", "stone_firepit_a", "stone_firepit_b", "stone_mammoth_a", "stone_mammoth_b", "stone_gallery_a", "stone_gallery_b", "stone_global1", "stone_global2" }, 3800000.0, 3.0);
         ConfigureAge("age_farm", new[] { "wheat", "milk", "flour" }, new[] { "farm_field", "farm_cows", "farm_mill", "farm_scarecrow", "farm_market", "farm_bakery", "farm_canal", "farm_square" }, new[] { "farm_click1", "farm_click2", "farm_click3", "farm_click4", "farm_field_a", "farm_field_b", "farm_cows_a", "farm_cows_b", "farm_mill_a", "farm_mill_b", "farm_scarecrow_a", "farm_scarecrow_b", "farm_market_a", "farm_market_b", "farm_bakery_a", "farm_bakery_b", "farm_canal_a", "farm_canal_b", "farm_square_a", "farm_square_b", "farm_global1", "farm_global2" }, 290000000.0, 0.0);
+        var bronzeUpgrades = new List<string> { "bronze_click1", "bronze_click2", "bronze_click3", "bronze_click4", "bronze_global1", "bronze_global2" };
+        foreach (var b in bb) { bronzeUpgrades.Add("bronze_" + b + "_a"); bronzeUpgrades.Add("bronze_" + b + "_b"); }
+        ConfigureAge("age_bronze", new[] { "bronze", "coin", "knowledge" }, bb, bronzeUpgrades.ToArray(), 1000000000000.0, 0);
 
         AssignPermanentsToScene();
         AssetDatabase.SaveAssets();
@@ -200,6 +229,8 @@ public static class StarterContentGenerator
         age.buildings = System.Array.ConvertAll(blds, s => buildings[s]);
         age.upgrades = System.Array.ConvertAll(upgs, s => upgrades[s]);
         age.advanceCost = advanceCost;
+        if (age.clickResource == null) age.clickResource = resources[res[0]];
+        if (age.advanceResource == null) age.advanceResource = resources[res[0]];
         if (knowledge > 0) age.knowledgeReward = knowledge;
         EditorUtility.SetDirty(age);
     }

@@ -286,6 +286,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBuildingSpawner
   levelThresholds: 010000000a00000019000000i
+  enableAnimations: 1
+  buildDuration: 0.55
+  bounceDuration: 0.4
+  levelUpDuration: 0.75
+  dustCount: 8
+  maxParticles: 150
+  colorFadeDuration: 1.2
 --- !u!4 &150104010
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1136,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 55}
-  m_SizeDelta: {x: 600, y: -390}
+  m_SizeDelta: {x: 760, y: -390}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &622594518
 MonoBehaviour:
@@ -1393,10 +1400,21 @@ MonoBehaviour:
   ages:
   - {fileID: 11400000, guid: 0da7ddae89c7cf94eb83820fa00169a7, type: 2}
   - {fileID: 11400000, guid: f7a590dd19e93174997960739b8bb9bf, type: 2}
+  permanentUpgrades:
+  - {fileID: 11400000, guid: b93f096bbffcd3d40a8ce36678096601, type: 2}
+  - {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}
+  - {fileID: 11400000, guid: e4acae7899d8ba3438c10e47a6d053c7, type: 2}
+  - {fileID: 11400000, guid: 05a8a3ef41e47524c9b1e2c54d0c3a1e, type: 2}
+  - {fileID: 11400000, guid: b48842700870f524bb8604066108c7c2, type: 2}
+  - {fileID: 11400000, guid: f50a55ad462171543b34373fdcd0580f, type: 2}
+  - {fileID: 11400000, guid: 68e5dec61b0d32041841bbcc3312beb2, type: 2}
   clickPower: 1
   autosaveInterval: 30
   maxOfflineHours: 8
-  knowledgeBonusPerPoint: 0.1
+  lifetimeKnowledgeBonus: 0.02
+  milestoneCounts: 190000003200000064000000c80000002c01000090010000f4010000i
+  milestoneMultiplier: 2
+  timeMachineKnowledgeBase: 10
 --- !u!4 &1373558346
 Transform:
   m_ObjectHideFlags: 0
@@ -1711,6 +1729,8 @@ MonoBehaviour:
   advanceButtonLabel: {fileID: 450970379}
   rowParent: {fileID: 2092228823}
   rowPrefab: {fileID: 3688490099099725533, guid: 44515fe7fdd1e914b80c5bd8294516ca, type: 3}
+  floatingText: {fileID: 0}
+  offlineMessageSeconds: 8
 --- !u!114 &1662890194
 MonoBehaviour:
   m_ObjectHideFlags: 0
