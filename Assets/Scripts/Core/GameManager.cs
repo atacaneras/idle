@@ -20,19 +20,25 @@ public class GameManager : MonoBehaviour
     public double OfflineSecondsApplied { get; private set; }
     public double Multiplier { get { return 1.0 + Knowledge * knowledgeBonusPerPoint; } }
 
-    public event Action OnStateChanged;   // her tick
+    public event Action OnStateChanged;   // saniyede ~10 kez + her tiklama/satin almada
     public event Action OnAgeChanged;     // cag degisince / ilk yukleme
+
+    const float UiInterval = 0.1f;   // arayuz saniyede en fazla 10 kez yenilenir
 
     readonly Dictionary<string, double> resources = new Dictionary<string, double>();
     readonly Dictionary<string, int> counts = new Dictionary<string, int>();
     float autosaveTimer;
+    float uiTimer;
+    DateTime lastTickUtc;
 
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         if (ages == null || ages.Length == 0) { Debug.LogError("GameManager: ages listesi bos."); return; }
+        ValidateData();
         LoadGame();
+        lastTickUtc = DateTime.UtcNow;
     }
 
     void OnDestroy() { if (Instance == this) Instance = null; }
@@ -40,7 +46,17 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (CurrentAge == null) return;
-        Tick(Time.deltaTime);
+
+        // Gercek saate gore ilerle: kare takilsa, pencere arka planda kalsa ya da bilgisayar uyusa da
+        // uretim kaybolmaz. Time.deltaTime kullanmiyoruz cunku Unity onu 1/3 saniyede kirpar.
+        var now = DateTime.UtcNow;
+        double dt = (now - lastTickUtc).TotalSeconds;
+        lastTickUtc = now;
+        if (dt > 0) Produce(Math.Min(dt, maxOfflineHours * 3600.0));
+
+        uiTimer += Time.unscaledDeltaTime;
+        if (uiTimer >= UiInterval) { uiTimer = 0; RaiseStateChanged(); }
+
         autosaveTimer += Time.unscaledDeltaTime;
         if (autosaveTimer >= autosaveInterval) { autosaveTimer = 0; SaveGame(); }
     }
@@ -50,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     // ---- Uretim ----
     // Uretim sabit hizli oldugu icin offline ilerleme de ayni fonksiyonla tek adimda hesaplanir.
-    void Tick(double dt)
+    void Produce(double dt)
     {
         var list = CurrentAge.buildings;
         for (int i = 0; i < list.Length; i++)
@@ -60,6 +76,10 @@ public class GameManager : MonoBehaviour
             if (n == 0) continue;
             AddResource(b.produces, n * b.baseProduction * Multiplier * dt);
         }
+    }
+
+    void RaiseStateChanged()
+    {
         if (OnStateChanged != null) OnStateChanged();
     }
 
@@ -87,7 +107,7 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentAge == null || CurrentAge.clickResource == null) return;
         AddResource(CurrentAge.clickResource, clickPower * Multiplier);
-        if (OnStateChanged != null) OnStateChanged();
+        RaiseStateChanged();
     }
 
     public bool TryBuy(BuildingData b)
@@ -95,7 +115,7 @@ public class GameManager : MonoBehaviour
         if (!CanAfford(b)) return false;
         resources[b.costResource.id] = GetResource(b.costResource) - GetCost(b);
         counts[b.id] = GetCount(b) + 1;
-        if (OnStateChanged != null) OnStateChanged();
+        RaiseStateChanged();
         return true;
     }
 
@@ -110,7 +130,12 @@ public class GameManager : MonoBehaviour
 
     public bool CanAdvance
     {
-        get { return NextAge != null && GetResource(CurrentAge.advanceResource) >= CurrentAge.advanceCost; }
+        get
+        {
+            return NextAge != null
+                && CurrentAge.advanceResource != null
+                && GetResource(CurrentAge.advanceResource) >= CurrentAge.advanceCost;
+        }
     }
 
     public void AdvanceAge()
@@ -123,7 +148,7 @@ public class GameManager : MonoBehaviour
         CurrentAge = next;
         SaveGame();
         if (OnAgeChanged != null) OnAgeChanged();
-        if (OnStateChanged != null) OnStateChanged();
+        RaiseStateChanged();
     }
 
     // ---- Kayit ----
@@ -153,7 +178,40 @@ public class GameManager : MonoBehaviour
 
         double elapsed = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - s.lastSaveUnix;
         elapsed = Math.Max(0, Math.Min(elapsed, maxOfflineHours * 3600.0));
-        if (elapsed > 1) { OfflineSecondsApplied = elapsed; Tick(elapsed); }
+        if (elapsed > 1) { OfflineSecondsApplied = elapsed; Produce(elapsed); }
+    }
+
+    // ---- Veri kontrolu: yanlis girilmis asset'leri baslangicta Console'a yazar ----
+    void ValidateData()
+    {
+        var buildingIds = new HashSet<string>();
+        var resourceIds = new HashSet<string>();
+        var ageIds = new HashSet<string>();
+
+        foreach (var a in ages)
+        {
+            if (a == null) { Debug.LogError("GameManager: ages listesinde bos eleman var."); continue; }
+            if (string.IsNullOrEmpty(a.id) || a.id != a.id.Trim()) Debug.LogWarning("Cag '" + a.name + "': id bos ya da basinda/sonunda bosluk var.", a);
+            if (!ageIds.Add(a.id)) Debug.LogError("Cag id'si tekrar ediyor: " + a.id, a);
+            if (a.clickResource == null) Debug.LogWarning("Cag '" + a.name + "': Click Resource bos.", a);
+            if (a.advanceResource == null) Debug.LogWarning("Cag '" + a.name + "': Advance Resource bos.", a);
+
+            if (a.resources != null)
+                foreach (var r in a.resources)
+                {
+                    if (r == null) { Debug.LogError("Cag '" + a.name + "': Resources listesinde bos eleman var.", a); continue; }
+                    resourceIds.Add(r.id);
+                }
+
+            if (a.buildings == null) continue;
+            foreach (var b in a.buildings)
+            {
+                if (b == null) { Debug.LogError("Cag '" + a.name + "': Buildings listesinde bos eleman var.", a); continue; }
+                if (string.IsNullOrEmpty(b.id) || b.id != b.id.Trim()) Debug.LogWarning("Bina '" + b.name + "': id bos ya da basinda/sonunda bosluk var.", b);
+                if (!buildingIds.Add(b.id)) Debug.LogError("Bina id'si tekrar ediyor: " + b.id, b);
+                if (b.produces == null || b.costResource == null) Debug.LogError("Bina '" + b.name + "': Produces ya da Cost Resource bos.", b);
+            }
+        }
     }
 
     // ---- Test araclari (Inspector'da bilesenin uc nokta menusunden) ----

@@ -19,4 +19,9 @@ public class AgeData : ScriptableObject
     [Header("Placeholder renk paleti")]
     public Color skyColor = new Color(0.98f, 0.8f, 0.65f);
     public Color groundColor = new Color(0.45f, 0.3f, 0.2f);
+
+    void OnValidate()
+    {
+        if (id != null) id = id.Trim();   // yanlislikla yazilan bosluk/tab kayit sistemini bozmasin
+    }
 }

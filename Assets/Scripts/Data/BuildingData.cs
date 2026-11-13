@@ -30,4 +30,9 @@ public class BuildingData : ScriptableObject
         if (levelSprites == null || levelSprites.Length == 0) return null;
         return levelSprites[Mathf.Clamp(level, 0, levelSprites.Length - 1)];
     }
+
+    void OnValidate()
+    {
+        if (id != null) id = id.Trim();   // yanlislikla yazilan bosluk/tab kayit sistemini bozmasin
+    }
 }

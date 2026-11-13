@@ -15,7 +15,11 @@ public class UIBuildingRow : MonoBehaviour
     public void Setup(BuildingData d)
     {
         data = d;
-        if (icon != null && d.icon != null) icon.sprite = d.icon;
+        if (icon != null)
+        {
+            icon.sprite = d.icon;
+            icon.enabled = d.icon != null;   // sprite yokken beyaz kutu gorunmesin
+        }
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() => GameManager.Instance.TryBuy(data));
         Refresh();

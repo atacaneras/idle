@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463226b404ca49f41af037aa00f72ca2, type: 3}
   m_Name: bld_woodcamp
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  id: "stone_woodcamp\t"
+  id: stone_woodcamp
   displayName: "Odun Kamp\u0131"
   icon: {fileID: 0}
   produces: {fileID: 11400000, guid: 79bf7358f72d3e74a8b95a5c515c77c8, type: 2}
