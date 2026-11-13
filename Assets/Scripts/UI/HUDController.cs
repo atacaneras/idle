@@ -22,6 +22,10 @@ public class HUDController : MonoBehaviour
     [SerializeField] Transform rowParent;
     [SerializeField] UIBuildingRow rowPrefab;
 
+    [Header("Geri bildirim (opsiyonel, bos birakilirsa otomatik eklenir)")]
+    [SerializeField] FloatingTextSpawner floatingText;
+    [SerializeField] float offlineMessageSeconds = 8f;
+
     readonly List<UIBuildingRow> rows = new List<UIBuildingRow>();
     readonly StringBuilder sb = new StringBuilder();
 
@@ -33,15 +37,48 @@ public class HUDController : MonoBehaviour
         gatherButton.onClick.AddListener(gm.Gather);
         advanceButton.onClick.AddListener(gm.AdvanceAge);
 
+        // Yuzen "+X" yazilari ve buton punch animasyonu: sahneyi elle duzenlemeye gerek yok.
+        if (floatingText == null) floatingText = GetComponent<FloatingTextSpawner>();
+        if (floatingText == null) floatingText = gameObject.AddComponent<FloatingTextSpawner>();
+        var feedback = gatherButton.GetComponent<GatherButtonFeedback>();
+        if (feedback == null) feedback = gatherButton.gameObject.AddComponent<GatherButtonFeedback>();
+        feedback.Init(floatingText);
+
+        // Toplu satin alma butonlari, sesler, cag gecisi ve pasif uretim baloncuklari (hepsi kodla kurulur)
+        GetOrAdd<BuyModeSelector>();
+        GetOrAdd<SoundManager>();
+        GetOrAdd<AgeTransition>();
+        GetOrAdd<PassiveIncomeBubbles>().Init(floatingText, FindFirstObjectByType<SceneBuildingSpawner>());
+
         RebuildRows();
         Refresh();
 
         if (offlineText != null)
         {
-            offlineText.text = gm.OfflineSecondsApplied > 1
-                ? "Sen yokken " + Mathf.RoundToInt((float)gm.OfflineSecondsApplied / 60f) + " dk ilerleme kazandın"
-                : "";
+            if (gm.OfflineSecondsApplied > 1)
+            {
+                offlineText.text = "Sen yokken " + FormatDuration(gm.OfflineSecondsApplied) + " ilerleme kazandın";
+                Invoke(nameof(HideOfflineText), offlineMessageSeconds);   // sonsuza kadar ekranda kalmasin
+            }
+            else offlineText.text = "";
         }
+    }
+
+    T GetOrAdd<T>() where T : Component
+    {
+        var c = GetComponent<T>();
+        return c != null ? c : gameObject.AddComponent<T>();
+    }
+
+    void HideOfflineText() { if (offlineText != null) offlineText.text = ""; }
+
+    static string FormatDuration(double seconds)
+    {
+        int s = Mathf.RoundToInt((float)seconds);
+        if (s < 90) return s + " sn";
+        int m = s / 60;
+        if (m < 90) return m + " dk";
+        return (m / 60) + " sa " + (m % 60) + " dk";
     }
 
     void OnDestroy()

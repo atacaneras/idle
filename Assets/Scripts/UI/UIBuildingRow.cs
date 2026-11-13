@@ -21,7 +21,7 @@ public class UIBuildingRow : MonoBehaviour
             icon.enabled = d.icon != null;   // sprite yokken beyaz kutu gorunmesin
         }
         buyButton.onClick.RemoveAllListeners();
-        buyButton.onClick.AddListener(() => GameManager.Instance.TryBuy(data));
+        buyButton.onClick.AddListener(() => GameManager.Instance.TryBuyCurrent(data));
         Refresh();
     }
 
@@ -30,7 +30,11 @@ public class UIBuildingRow : MonoBehaviour
         var gm = GameManager.Instance;
         nameText.text = data.displayName + "  x" + gm.GetCount(data);
         infoText.text = "+" + NumberFormatter.Format(data.baseProduction * gm.Multiplier) + "/sn " + data.produces.displayName;
-        costText.text = NumberFormatter.Format(gm.GetCost(data)) + " " + data.costResource.displayName;
-        buyButton.interactable = gm.CanAfford(data);
+
+        // x10 / x100 / Max modunda toplam maliyet ve adet gosterilir
+        int qty = gm.GetBuyQuantity(data);
+        costText.text = NumberFormatter.Format(gm.GetCostFor(data, qty)) + " " + data.costResource.displayName
+            + (qty > 1 ? "  (x" + qty + ")" : "");
+        buyButton.interactable = gm.CanBuyCurrent(data);
     }
 }

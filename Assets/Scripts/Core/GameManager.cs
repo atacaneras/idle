@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BuyMode { One, Ten, Hundred, Max }
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -19,9 +21,16 @@ public class GameManager : MonoBehaviour
     public double Knowledge { get; private set; }
     public double OfflineSecondsApplied { get; private set; }
     public double Multiplier { get { return 1.0 + Knowledge * knowledgeBonusPerPoint; } }
+    public double ClickValue { get { return clickPower * Multiplier; } }   // tek tiklamada kazanilan miktar
 
     public event Action OnStateChanged;   // saniyede ~10 kez + her tiklama/satin almada
     public event Action OnAgeChanged;     // cag degisince / ilk yukleme
+    public event Action<BuildingData, int> OnBuildingBought;   // basarili satin almadan sonra (bina, adet): animasyon ve ses icin
+    public event Action OnGathered;       // topla butonuna her basista (ses icin)
+    public event Action OnBuyModeChanged; // x1 / x10 / x100 / Max degisince
+
+    public BuyMode CurrentBuyMode { get; private set; }
+    const int MaxBulk = 100000;
 
     const float UiInterval = 0.1f;   // arayuz saniyede en fazla 10 kez yenilenir
 
@@ -106,17 +115,78 @@ public class GameManager : MonoBehaviour
     public void Gather()
     {
         if (CurrentAge == null || CurrentAge.clickResource == null) return;
-        AddResource(CurrentAge.clickResource, clickPower * Multiplier);
+        AddResource(CurrentAge.clickResource, ClickValue);
+        RaiseStateChanged();
+        if (OnGathered != null) OnGathered();
+    }
+
+    // ---- Satin alma (tekli ve toplu) ----
+    public void SetBuyMode(BuyMode mode)
+    {
+        if (CurrentBuyMode == mode) return;
+        CurrentBuyMode = mode;
+        if (OnBuyModeChanged != null) OnBuyModeChanged();
         RaiseStateChanged();
     }
 
-    public bool TryBuy(BuildingData b)
+    // Mevcut adetten baslayarak qty tane daha almanin toplam maliyeti (geometrik toplam)
+    public double GetCostFor(BuildingData b, int qty)
     {
-        if (!CanAfford(b)) return false;
-        resources[b.costResource.id] = GetResource(b.costResource) - GetCost(b);
-        counts[b.id] = GetCount(b) + 1;
-        RaiseStateChanged();
-        return true;
+        if (qty <= 0) return 0;
+        double first = GetCost(b);
+        double g = b.costGrowth;
+        if (Math.Abs(g - 1.0) < 1e-9) return first * qty;
+        return first * (Math.Pow(g, qty) - 1.0) / (g - 1.0);
+    }
+
+    // Eldeki kaynakla en fazla kac tane alinabilir (0 olabilir)
+    public int GetMaxAffordable(BuildingData b)
+    {
+        double r = GetResource(b.costResource);
+        double first = GetCost(b);
+        if (r < first) return 0;
+
+        double g = b.costGrowth;
+        double est = Math.Abs(g - 1.0) < 1e-9 ? r / first : Math.Log(1.0 + r * (g - 1.0) / first) / Math.Log(g);
+        if (double.IsNaN(est) || double.IsInfinity(est)) est = 1;
+        int q = (int)Math.Max(0, Math.Min(Math.Floor(est), MaxBulk));
+
+        // Kayan nokta hatasini duzelt
+        for (int i = 0; i < 8 && q > 0 && GetCostFor(b, q) > r; i++) q--;
+        for (int i = 0; i < 8 && q < MaxBulk && GetCostFor(b, q + 1) <= r; i++) q++;
+        return q;
+    }
+
+    // Su anki moda gore bir tiklamada alinacak adet (Max modunda en az 1: butonda maliyet gorunsun diye)
+    public int GetBuyQuantity(BuildingData b)
+    {
+        switch (CurrentBuyMode)
+        {
+            case BuyMode.Ten: return 10;
+            case BuyMode.Hundred: return 100;
+            case BuyMode.Max: return Math.Max(1, GetMaxAffordable(b));
+            default: return 1;
+        }
+    }
+
+    public bool CanBuyCurrent(BuildingData b)
+    {
+        return GetResource(b.costResource) >= GetCostFor(b, GetBuyQuantity(b));
+    }
+
+    public int TryBuyCurrent(BuildingData b) { return Buy(b, GetBuyQuantity(b)); }
+    public bool TryBuy(BuildingData b) { return Buy(b, 1) > 0; }
+
+    int Buy(BuildingData b, int qty)
+    {
+        if (qty <= 0) return 0;
+        double cost = GetCostFor(b, qty);
+        if (GetResource(b.costResource) < cost) return 0;
+        resources[b.costResource.id] = GetResource(b.costResource) - cost;
+        counts[b.id] = GetCount(b) + qty;
+        RaiseStateChanged();   // once gorunumler guncellensin, sonra animasyon baslasin
+        if (OnBuildingBought != null) OnBuildingBought(b, qty);
+        return qty;
     }
 
     public AgeData NextAge
