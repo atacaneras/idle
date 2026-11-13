@@ -32,4 +32,43 @@ public static class UIFactory
         labelText.raycastTarget = false;
         return btn;
     }
+
+    // Renkli, istege bagli raycast alan bir dikdortgen (panel / arka plan)
+    public static RectTransform CreatePanel(Transform parent, string name, Color color, bool blocksRaycast)
+    {
+        var go = new GameObject(name, typeof(RectTransform), typeof(Image));
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(parent, false);
+        var img = go.GetComponent<Image>();
+        img.color = color;
+        img.raycastTarget = blocksRaycast;
+        return rt;
+    }
+
+    // Verilen anchor/offset ile metin olusturur. autoSize: kutuya sigmazsa kuculur.
+    public static TextMeshProUGUI CreateText(Transform parent, string name, string text, float size,
+        TextAlignmentOptions align, Color color, Vector2 anchorMin, Vector2 anchorMax, Vector2 offsetMin, Vector2 offsetMax,
+        bool bold = false, bool autoSize = false)
+    {
+        var go = new GameObject(name, typeof(RectTransform));
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(parent, false);
+        rt.anchorMin = anchorMin; rt.anchorMax = anchorMax;
+        rt.offsetMin = offsetMin; rt.offsetMax = offsetMax;
+
+        var t = go.AddComponent<TextMeshProUGUI>();
+        t.text = text;
+        t.fontSize = size;
+        t.alignment = align;
+        t.color = color;
+        t.raycastTarget = false;
+        if (bold) t.fontStyle = FontStyles.Bold;
+        if (autoSize)
+        {
+            t.enableAutoSizing = true;
+            t.fontSizeMax = size;
+            t.fontSizeMin = Mathf.Max(10f, size * 0.55f);
+        }
+        return t;
+    }
 }

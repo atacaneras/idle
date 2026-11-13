@@ -56,7 +56,7 @@ public class PassiveIncomeBubbles : MonoBehaviour
         Vector3 world;
         if (!scene.TryGetTopPosition(b, out world)) return;
 
-        double amount = n * b.baseProduction * gm.Multiplier * interval;
+        double amount = gm.GetBuildingProductionPerSecond(b) * interval;
         Vector2 screen = cam.WorldToScreenPoint(world);
         texts.Spawn("+" + NumberFormatter.Format(amount), screen, color, scale, riseMultiplier);
     }

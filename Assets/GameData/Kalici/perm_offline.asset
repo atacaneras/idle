@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d565ce15a45e334c825cc7e0f0787a8, type: 3}
+  m_Name: perm_offline
+  m_EditorClassIdentifier: Assembly-CSharp::PermanentUpgradeData
+  id: perm_offline
+  displayName: "G\xF6z\xFC A\xE7\u0131k Uyku"
+  description: "Sen yokken k\xF6y \xE7al\u0131\u015F\u0131yor. Sana sormadan."
+  kind: 3
+  valuePerLevel: 1
+  maxLevel: 8
+  baseCost: 3
+  costGrowth: 1.5
+  requires: {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}

@@ -9,6 +9,7 @@ public class AgeData : ScriptableObject
     [Header("Icerik")]
     public ResourceData[] resources;
     public BuildingData[] buildings;
+    public UpgradeData[] upgrades;       // cag ici tek seferlik yukseltmeler
     public ResourceData clickResource;   // tiklayinca kazanilan kaynak
 
     [Header("Cag atlama")]

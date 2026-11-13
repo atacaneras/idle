@@ -29,7 +29,12 @@ public class UIBuildingRow : MonoBehaviour
     {
         var gm = GameManager.Instance;
         nameText.text = data.displayName + "  x" + gm.GetCount(data);
-        infoText.text = "+" + NumberFormatter.Format(data.baseProduction * gm.Multiplier) + "/sn " + data.produces.displayName;
+        int owned = gm.GetCount(data);
+        int next = gm.GetNextMilestone(data);
+        string info = "+" + NumberFormatter.Format(gm.GetUnitProduction(data)) + "/sn " + data.produces.displayName;
+        if (owned > 0) info += "  (toplam " + NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)) + ")";
+        if (next > 0) info += "\nSonraki x" + NumberFormatter.Format(gm.MilestoneMultiplier) + ": " + next + " adet";
+        infoText.text = info;
 
         // x10 / x100 / Max modunda toplam maliyet ve adet gosterilir
         int qty = gm.GetBuyQuantity(data);

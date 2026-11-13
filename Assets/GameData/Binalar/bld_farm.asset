@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: bld_farm
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
   id: farm_field
-  displayName: "\xC7iftlik"
+  displayName: "Bu\u011Fday Tarlas\u0131"
   icon: {fileID: 0}
   produces: {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
   costResource: {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
@@ -21,7 +21,7 @@ MonoBehaviour:
   costGrowth: 1.15
   baseProduction: 1
   levelSprites: []
-  scenePosition: {x: -4, y: -3.2}
-  sortingOrder: 0
-  placeholderColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  scenePosition: {x: -8, y: -3.4}
+  sortingOrder: 1
+  placeholderColor: {r: 1, g: 0.92, b: 0.016, a: 1}
   placeholderSize: {x: 1.2, y: 1.2}

@@ -19,9 +19,9 @@ MonoBehaviour:
   costResource: {fileID: 11400000, guid: caf2fe570a335804f93f92251e0ce005, type: 2}
   baseCost: 15
   costGrowth: 1.15
-  baseProduction: 0.4
+  baseProduction: 0.5
   levelSprites: []
-  scenePosition: {x: -7, y: -3.2}
-  sortingOrder: 0
+  scenePosition: {x: -8, y: -3.4}
+  sortingOrder: 1
   placeholderColor: {r: 0, g: 1, b: 0, a: 1}
   placeholderSize: {x: 1.2, y: 1.2}

@@ -26,6 +26,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] FloatingTextSpawner floatingText;
     [SerializeField] float offlineMessageSeconds = 8f;
 
+    SceneBuildingSpawner sceneSpawner;
     readonly List<UIBuildingRow> rows = new List<UIBuildingRow>();
     readonly StringBuilder sb = new StringBuilder();
 
@@ -35,7 +36,7 @@ public class HUDController : MonoBehaviour
         gm.OnAgeChanged += RebuildRows;
         gm.OnStateChanged += Refresh;
         gatherButton.onClick.AddListener(gm.Gather);
-        advanceButton.onClick.AddListener(gm.AdvanceAge);
+        advanceButton.onClick.AddListener(OnAdvanceClicked);
 
         // Yuzen "+X" yazilari ve buton punch animasyonu: sahneyi elle duzenlemeye gerek yok.
         if (floatingText == null) floatingText = GetComponent<FloatingTextSpawner>();
@@ -48,7 +49,11 @@ public class HUDController : MonoBehaviour
         GetOrAdd<BuyModeSelector>();
         GetOrAdd<SoundManager>();
         GetOrAdd<AgeTransition>();
-        GetOrAdd<PassiveIncomeBubbles>().Init(floatingText, FindFirstObjectByType<SceneBuildingSpawner>());
+        sceneSpawner = FindFirstObjectByType<SceneBuildingSpawner>();
+        gm.OnMilestoneReached += OnMilestone;
+        GetOrAdd<PassiveIncomeBubbles>().Init(floatingText, sceneSpawner);
+        GetOrAdd<UpgradePanel>();
+        GetOrAdd<TimeMachinePanel>();
 
         RebuildRows();
         Refresh();
@@ -64,10 +69,29 @@ public class HUDController : MonoBehaviour
         }
     }
 
+    // Son cagda bu buton Zaman Makinesi panelini acar (panel onay ve odul onizlemesi gosterir)
+    void OnAdvanceClicked()
+    {
+        var gm = GameManager.Instance;
+        if (gm.IsFinalAge) { var tm = GetComponent<TimeMachinePanel>(); if (tm != null) tm.Open(); }
+        else gm.AdvanceAge();
+    }
+
     T GetOrAdd<T>() where T : Component
     {
         var c = GetComponent<T>();
         return c != null ? c : gameObject.AddComponent<T>();
+    }
+
+    // Kilometre tasi esigi gecilince binanin ustunde "x2!" cikar
+    void OnMilestone(BuildingData b, int count)
+    {
+        Vector3 world;
+        var cam = Camera.main;
+        if (sceneSpawner == null || cam == null || !sceneSpawner.TryGetTopPosition(b, out world)) return;
+        string msg = "x" + NumberFormatter.Format(GameManager.Instance.MilestoneMultiplier) + "!";
+        floatingText.Spawn(msg, cam.WorldToScreenPoint(world), new Color(1f, 0.85f, 0.25f), 1.4f, 1.2f);
+        SoundManager.Play(SoundId.LevelUp, 1.1f, 1f);
     }
 
     void HideOfflineText() { if (offlineText != null) offlineText.text = ""; }
@@ -87,6 +111,7 @@ public class HUDController : MonoBehaviour
         if (gm == null) return;
         gm.OnAgeChanged -= RebuildRows;
         gm.OnStateChanged -= Refresh;
+        gm.OnMilestoneReached -= OnMilestone;
     }
 
     void RebuildRows()
@@ -108,7 +133,8 @@ public class HUDController : MonoBehaviour
 
         ageText.text = age.displayName;
         knowledgeText.text = "Bilgi: " + NumberFormatter.Format(gm.Knowledge)
-            + "  (x" + gm.Multiplier.ToString("0.0", CultureInfo.InvariantCulture) + ")";
+            + "  (x" + gm.Multiplier.ToString("0.0", CultureInfo.InvariantCulture) + ")"
+            + (gm.TimeLoops > 0 ? "\nZaman Döngüsü: " + gm.TimeLoops : "");
 
         sb.Length = 0;
         foreach (var r in age.resources)
@@ -122,12 +148,20 @@ public class HUDController : MonoBehaviour
         foreach (var row in rows) row.Refresh();
 
         var next = gm.NextAge;
-        advanceButton.interactable = gm.CanAdvance;
-        if (advanceButtonLabel != null)
+        if (next != null)
         {
-            advanceButtonLabel.text = next != null
-                ? next.displayName + "'na Geç (" + NumberFormatter.Format(age.advanceCost) + " " + age.advanceResource.displayName + ")"
-                : "Son Çağ";
+            advanceButton.interactable = gm.CanAdvance;
+            if (advanceButtonLabel != null)
+                advanceButtonLabel.text = next.displayName + "'na Geç (" + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName + ")";
+        }
+        else
+        {
+            // Son cag: cag atlama yerine Zaman Makinesi
+            advanceButton.interactable = gm.CanUseTimeMachine;
+            if (advanceButtonLabel != null)
+                advanceButtonLabel.text = gm.CanUseTimeMachine
+                    ? "Zaman Makinesi (+" + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi)"
+                    : "Zaman Makinesi (" + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName + ")";
         }
     }
 }

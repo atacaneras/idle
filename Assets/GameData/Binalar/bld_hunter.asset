@@ -17,11 +17,11 @@ MonoBehaviour:
   icon: {fileID: 0}
   produces: {fileID: 11400000, guid: caf2fe570a335804f93f92251e0ce005, type: 2}
   costResource: {fileID: 11400000, guid: 79bf7358f72d3e74a8b95a5c515c77c8, type: 2}
-  baseCost: 40
+  baseCost: 300
   costGrowth: 1.15
-  baseProduction: 3
+  baseProduction: 8
   levelSprites: []
-  scenePosition: {x: -1, y: -3.2}
-  sortingOrder: 0
+  scenePosition: {x: -5, y: -3.4}
+  sortingOrder: 1
   placeholderColor: {r: 1, g: 0, b: 0, a: 1}
   placeholderSize: {x: 1.2, y: 1.2}

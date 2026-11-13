@@ -16,11 +16,43 @@ MonoBehaviour:
   displayName: "Tar\u0131m \xC7a\u011F\u0131"
   resources:
   - {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
+  - {fileID: 11400000, guid: b0d8e22a01961a04cbee580f05149c7f, type: 2}
+  - {fileID: 11400000, guid: 902f87c8b7ed363499a486cbccd3dda2, type: 2}
   buildings:
   - {fileID: 11400000, guid: 840d2dd58fa60ca4f941880ed0323815, type: 2}
+  - {fileID: 11400000, guid: 6ac2fc003389cbf49bf8d392b22b38f8, type: 2}
+  - {fileID: 11400000, guid: 3262047fb58002442b0e0f0227fa5839, type: 2}
+  - {fileID: 11400000, guid: 598ae1889e9b8294d96d34256875bf71, type: 2}
+  - {fileID: 11400000, guid: 8ebf9f18f8234bc40ba71f5f6390994c, type: 2}
+  - {fileID: 11400000, guid: 3139aa9beaa493a4d82c6e0fe97b8941, type: 2}
+  - {fileID: 11400000, guid: e46d278eb15bd2d49a12d28b214799a8, type: 2}
+  - {fileID: 11400000, guid: 61e3ba8e23f22274ca367294970ee319, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: ce5b1b58c4a87c94fbcdea88cb9779a7, type: 2}
+  - {fileID: 11400000, guid: 7782ac16efc4ff147b20cec8783bcda6, type: 2}
+  - {fileID: 11400000, guid: d470f6eb8ba31a04996a7a2540ae31ff, type: 2}
+  - {fileID: 11400000, guid: a42f76bd1765d1c42813a516810505af, type: 2}
+  - {fileID: 11400000, guid: 7dc7bcbbd9e79ca44901696fdbb352af, type: 2}
+  - {fileID: 11400000, guid: 0aefbac188da5384dbed11fccb3f77e6, type: 2}
+  - {fileID: 11400000, guid: addaac07125e9bc48a82f05326923cf6, type: 2}
+  - {fileID: 11400000, guid: 13d126b21d04ebd4d85b7080756c3ee8, type: 2}
+  - {fileID: 11400000, guid: 1413e59712f17de458854333f21e01d1, type: 2}
+  - {fileID: 11400000, guid: ea7615414bbe39d49b6e85e9e0c86e59, type: 2}
+  - {fileID: 11400000, guid: 07654b3220dc59245a3e5aa27ef842bd, type: 2}
+  - {fileID: 11400000, guid: e4e874cabc40e5c48bdb87b4012c6506, type: 2}
+  - {fileID: 11400000, guid: 165e061e0f2a37649930540033bbb88d, type: 2}
+  - {fileID: 11400000, guid: 1d01d691d86993b46a923980fd711fb1, type: 2}
+  - {fileID: 11400000, guid: d3c99d68daf84a240998b366880583e2, type: 2}
+  - {fileID: 11400000, guid: 8ce96e92585e1fc46b3fb04a8bf4c7d7, type: 2}
+  - {fileID: 11400000, guid: 91f7680c0be65b54182d72b2b956b42d, type: 2}
+  - {fileID: 11400000, guid: cd72f7ed42c290d49b3400a5007ef546, type: 2}
+  - {fileID: 11400000, guid: 36c8dd82755cc9a44972904a66e1de33, type: 2}
+  - {fileID: 11400000, guid: 737f76ed61c1b6f489c8e32fae3a0a03, type: 2}
+  - {fileID: 11400000, guid: a4c584e0a7d105948b631bdea94703a1, type: 2}
+  - {fileID: 11400000, guid: 1f1579ce7b446fb419d2629f826dafd2, type: 2}
   clickResource: {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
   advanceResource: {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
-  advanceCost: 1000
+  advanceCost: 290000000
   knowledgeReward: 1
   skyColor: {r: 0.60898006, g: 0.7956447, b: 0.8018868, a: 1}
   groundColor: {r: 0.9245283, g: 0.6126731, b: 0.2747419, a: 1}
