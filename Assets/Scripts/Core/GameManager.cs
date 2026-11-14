@@ -43,7 +43,17 @@ public class GameManager : MonoBehaviour
     public int TimeLoops { get; private set; }
     public double OfflineSecondsApplied { get; private set; }
     public bool FastTestMode { get; private set; }
+    public bool SaveRecovered { get { return SaveSystem.LastLoadUsedBackup; } }
     public PermanentUpgradeData[] PermanentUpgrades { get { return permanentUpgrades; } }
+    public AgeData[] Ages { get { return ages; } }
+
+    // ---- Istatistikler (basarim ekrani ve basarim kosullari icin) ----
+    public double TotalClicks { get; private set; }
+    public double TotalBuildingsBought { get; private set; }
+    public double TotalUpgradesBought { get; private set; }
+    public double PlaySeconds { get; private set; }
+    public int AgesAdvanced { get; private set; }
+    public int AchievementCount { get { return unlockedAchievements.Count; } }
 
     // Genel carpan: pasif Bilgi bonusu x kalici yukseltmeler x bu cagdaki genel yukseltmeler
     public double Multiplier { get { return (1.0 + LifetimeKnowledge * lifetimeKnowledgeBonus) * permGlobal * ageGlobalMult; } }
@@ -59,6 +69,7 @@ public class GameManager : MonoBehaviour
     public event Action<UpgradeData> OnUpgradeBought;
     public event Action<double> OnTimeMachineUsed;   // kazanilan Bilgi
     public event Action<BuildingData, int> OnMilestoneReached;   // bina, ulasilan esik (adet)
+    public event Action<string> OnAchievementUnlocked;           // basarim id
 
     public BuyMode CurrentBuyMode { get; private set; }
     const int MaxBulk = 100000;
@@ -70,11 +81,13 @@ public class GameManager : MonoBehaviour
     readonly Dictionary<string, int> counts = new Dictionary<string, int>();
     readonly HashSet<string> purchased = new HashSet<string>();
     readonly Dictionary<string, int> permLevels = new Dictionary<string, int>();
+    readonly HashSet<string> unlockedAchievements = new HashSet<string>();
 
     // Onbellek: RecalcCaches() ile satin alma / yukleme / cag degisiminde yenilenir
     readonly Dictionary<string, double> upgradeBuildingMult = new Dictionary<string, double>();
     double clickUpgradeMult = 1, ageGlobalMult = 1, clickShare;
     double permGlobal = 1, permClick = 1, permCostMult = 1, permAdvanceMult = 1, permKnowledgeGain = 1, permOfflineHours;
+    double permAutoClick, permMilestoneBoost;
     float autosaveTimer;
     float uiTimer;
     DateTime lastTickUtc;
@@ -100,7 +113,13 @@ public class GameManager : MonoBehaviour
         var now = DateTime.UtcNow;
         double dt = (now - lastTickUtc).TotalSeconds;
         lastTickUtc = now;
-        if (dt > 0) Produce(Math.Min(dt, MaxOfflineHours * 3600.0));
+        if (dt > 0)
+        {
+            double step = Math.Min(dt, MaxOfflineHours * 3600.0);
+            Produce(step);
+            ProduceAutoClicks(step);
+            PlaySeconds += Math.Min(dt, 60.0);   // bilgisayar uyurken gecen sure oynama sayilmasin
+        }
 
         uiTimer += Time.unscaledDeltaTime;
         if (uiTimer >= UiInterval) { uiTimer = 0; RaiseStateChanged(); }
@@ -110,6 +129,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnApplicationPause(bool paused) { if (paused && CurrentAge != null) SaveGame(); }
+    void OnApplicationFocus(bool focused) { if (!focused && CurrentAge != null) SaveGame(); }
     void OnApplicationQuit() { if (CurrentAge != null) SaveGame(); }
 
     // ---- Uretim ----
@@ -123,6 +143,13 @@ public class GameManager : MonoBehaviour
             if (GetCount(b) == 0) continue;
             AddResource(b.produces, GetBuildingProductionPerSecond(b) * dt);
         }
+    }
+
+    // Kalici "Otomatik El" yukseltmesi: saniyede belirli sayida tiklamaya esdeger uretim.
+    void ProduceAutoClicks(double dt)
+    {
+        if (permAutoClick <= 0 || CurrentAge == null || CurrentAge.clickResource == null) return;
+        AddResource(CurrentAge.clickResource, ClickValue * permAutoClick * dt);
     }
 
     void RaiseStateChanged()
@@ -161,7 +188,7 @@ public class GameManager : MonoBehaviour
     // Bina basina carpan = kilometre tasi x bu binaya ozel yukseltmeler (genel carpan Multiplier ayri)
     public double GetBuildingMultiplier(BuildingData b)
     {
-        double m = Math.Pow(milestoneMultiplier, MilestonesReached(GetCount(b)));
+        double m = Math.Pow(milestoneMultiplier + permMilestoneBoost, MilestonesReached(GetCount(b)));
         double u;
         if (upgradeBuildingMult.TryGetValue(b.id, out u)) m *= u;
         return m;
@@ -350,6 +377,28 @@ public class GameManager : MonoBehaviour
         purchased.Clear();
     }
 
+    // Ayarlar > "Kaydi Sifirla": her seyi bastan baslatir (kalici yukseltmeler ve Bilgi dahil).
+    public void ResetProgress()
+    {
+        SaveSystem.Delete();
+        Knowledge = 0;
+        LifetimeKnowledge = 0;
+        TimeLoops = 0;
+        OfflineSecondsApplied = 0;
+        resources.Clear();
+        runEarned.Clear();
+        counts.Clear();
+        purchased.Clear();
+        permLevels.Clear();
+        CurrentAge = ages[0];
+        RecalcCaches();
+        SaveGame();
+        if (OnAgeChanged != null) OnAgeChanged();
+        if (OnUpgradesChanged != null) OnUpgradesChanged();
+        if (OnPermanentChanged != null) OnPermanentChanged();
+        RaiseStateChanged();
+    }
+
     double GrantKnowledge(double baseAmount)
     {
         double amount = Math.Floor(baseAmount * permKnowledgeGain + 1e-9);
@@ -426,7 +475,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        double g = 0, c = 0, cost = 0, adv = 0, kg = 0, off = 0;
+        double g = 0, c = 0, cost = 0, adv = 0, kg = 0, off = 0, auto = 0, ms = 0;
         if (permanentUpgrades != null)
         {
             foreach (var p in permanentUpgrades)
@@ -443,6 +492,8 @@ public class GameManager : MonoBehaviour
                     case PermanentKind.AdvanceDiscount: adv += v; break;
                     case PermanentKind.KnowledgeGain: kg += v; break;
                     case PermanentKind.OfflineHours: off += v; break;
+                    case PermanentKind.AutoClick: auto += v; break;
+                    case PermanentKind.MilestoneBoost: ms += v; break;
                 }
             }
         }
@@ -452,6 +503,8 @@ public class GameManager : MonoBehaviour
         permAdvanceMult = 1 - Math.Min(adv, MaxReduction);
         permKnowledgeGain = 1 + kg;
         permOfflineHours = off;
+        permAutoClick = auto;
+        permMilestoneBoost = ms;
     }
 
     // ---- Kalici yukseltmeler (Bilgi Agaci) ----
@@ -565,7 +618,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Eski kayitlari yeni formata cevirir. Yeni bir kayit alani eklenince burayi genislet.
-    static void MigrateSave(GameState s)
+    public static void MigrateSave(GameState s)
     {
         if (s.version < 2)
         {

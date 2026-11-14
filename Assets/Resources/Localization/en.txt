@@ -1,0 +1,477 @@
+# Evrim - Ingilizce ceviriler
+# Bicim: Turkce metin|English text
+# Anahtar, oyundaki Turkce metnin BIREBIR aynisidir. Ceviri yoksa Turkce gosterilir.
+
+# ---- Arayuz ----
+TOPLA|GATHER
+AL|BUY
+Bilgi|Knowledge
+{0}'na Geç|Advance to {0}
+Bilgi: {0}  (x{1})|Knowledge: {0}  (x{1})
+  •  Döngü {0}|  •  Loop {0}
+{0}: {1}  (+{2}/sn)|{0}: {1}  (+{2}/s)
+{0}'na Geç\n{1} / {2} {3}|Advance to {0}\n{1} / {2} {3}
+Zaman Makinesi\n+{0} Bilgi|Time Machine\n+{0} Knowledge
+Zaman Makinesi\n{0} / {1} {2}|Time Machine\n{0} / {1} {2}
+Sen yokken {0} ilerleme kazandın|You gained {0} of progress while away
+Kayıt dosyası bozuktu, yedekten kurtarıldı.|The save was corrupted and recovered from a backup.
+sn|s
+dk|min
+sa|h
++{0}/sn {1}|+{0}/s {1}
+Toplam: {0}/sn|Total: {0}/s
+Sonraki x{0}: {1} adet|Next x{0}: {1} owned
+  (x{0})|  (x{0})
+YÜKSELTMELER|UPGRADES
+YÜKSELTMELER ({0})|UPGRADES ({0})
+Yeni fikir yok. Biraz daha bina al, belki ilham gelir.|No new ideas. Buy a few more buildings and inspiration may strike.
+Tıklama gücü x{0}|Click power x{0}
+Her tıklama +%{0} saniyelik üretim|Each click adds %{0} of one second of production
+{0} üretimi x{1}|{0} production x{1}
+Tüm üretim x{0}|All production x{0}
+
+# ---- Bilgi Agaci / Zaman Makinesi ----
+Bilgi Ağacı|Knowledge Tree
+Bilgi Ağacı •|Knowledge Tree •
+Kapat|Close
+Zaman Makinesi|Time Machine
+Bilgi: {0}|Knowledge: {0}
+Kilitli. Önce: {0}|Locked. Requires: {0}
+MAKS|MAX
+{0} Bilgi|{0} Knowledge
+<b>Zaman Makinesi</b>\nSon çağa ulaşınca açılır. Her şeyi sıfırlar ama Bilgi ve bu ağaçtaki yükseltmeler kalır.|<b>Time Machine</b>\nUnlocks at the last age. It resets everything except Knowledge and the upgrades in this tree.
+Zaman Makinesi (Kilitli)|Time Machine (Locked)
+<b>Zaman Makinesi</b>\nBu turda toplam {0} {1} kazanman gerekiyor. Şu an: {2}. Daha fazla üretirsen daha çok Bilgi kazanırsın.|<b>Time Machine</b>\nYou need to earn {0} {1} this run. Currently: {2}. The more you produce, the more Knowledge you gain.
+<b>Zaman Makinesi hazır.</b>\nBu turda {0} {1} kazandın. Şu an çalıştırırsan <color=#{2}>+{3} Bilgi</color> kazanırsın. Daha fazla üretirsen ödül büyür (karekökle). Bina, kaynak ve yükseltmelerin sıfırlanır.|<b>The Time Machine is ready.</b>\nYou earned {0} {1} this run. Running it now gives you <color=#{2}>+{3} Knowledge</color>. The more you produce, the bigger the reward (square root). Buildings, resources and upgrades reset.
+Emin misin? Her şey sıfırlanır. Tekrar bas!|Are you sure? Everything resets. Press again!
+Zaman Makinesi'ni Çalıştır|Run the Time Machine
++{0} Bilgi|+{0} Knowledge
+Tüm üretim +{0} / seviye  (şu an +{1})|All production +{0} / level  (now +{1})
+Tıklama gücü +{0} / seviye  (şu an +{1})|Click power +{0} / level  (now +{1})
+Bina maliyeti -{0} / seviye  (şu an -{1})|Building cost -{0} / level  (now -{1})
+Çağ atlama maliyeti -{0} / seviye  (şu an -{1})|Age advance cost -{0} / level  (now -{1})
+Kazanılan Bilgi +{0} / seviye  (şu an +{1})|Knowledge gained +{0} / level  (now +{1})
+Çevrimdışı sınır +{0} sa / seviye  (şu an +{1} sa)|Offline cap +{0} h / level  (now +{1} h)
+Otomatik tıklama +{0}/sn  (şu an +{1}/sn)|Auto click +{0}/s  (now +{1}/s)
+Kilometre taşı gücü +{0} / seviye  (şu an +{1})|Milestone power +{0} / level  (now +{1})
+
+# ---- Ayarlar ----
+Ayarlar|Settings
+Ses|Sound
+Ekran|Display
+Kayıt|Save
+Tehlikeli Bölge|Danger Zone
+Dil|Language
+Tam Ekran|Fullscreen
+Tam Ekran: Açık|Fullscreen: On
+Pencere Modu|Windowed
+Dışa Aktar|Export
+Kaydı Sıfırla|Reset Save
+Emin misin? Tekrar bas|Are you sure? Press again
+Oyundan Çık|Quit Game
+Sürüm {0}  •  {1}|Version {0}  •  {1}
+Kayıt kopyalandı:\n{0}|Save copied:\n{0}
+Dışa aktarılacak kayıt bulunamadı.|No save file to export.
+Ses: Açık|Sound: On
+Ses: Kapalı|Sound: Off
+Başarımlar|Achievements
+Başarımlar •|Achievements •
+İstatistikler|Statistics
+Görevler|Objectives
+Açık|Unlocked
+{0} / {1}|{0} / {1}
+Toplam tıklama|Total clicks
+Alınan bina|Buildings bought
+Alınan yükseltme|Upgrades bought
+Kalıcı seviye|Permanent levels
+Kazanılan Bilgi|Knowledge earned
+Geçilen çağ|Ages advanced
+Zaman döngüsü|Time loops
+Oynama süresi|Play time
+Başarım: {0}|Achievement: {0}
+Tebrikler!|Congratulations!
+
+# ---- Gorevler (caga gore) ----
+{0} adet {1} al|Buy {0} {1}
+Saniyede {0} {1} üret|Produce {0} {1} per second
+Bir yükseltme al|Buy an upgrade
+Sonraki çağa geç|Advance to the next age
+Zaman Makinesi'ni çalıştır|Run the Time Machine
+
+# ---- Ip uclari ----
+TOPLA'ya basarak {0} topla. (Space)|Press GATHER to collect {0}. (Space)
+İlk binanı al: üretim kendiliğinden başlar.|Buy your first building: production starts on its own.
+YÜKSELTMELER panelinden bir yükseltme al.|Buy an upgrade from the UPGRADES panel.
+Yeterince kaynak birikti: çağ atlayabilirsin.|You have enough resources: you can advance.
+Bilgi Ağacı'ndan kalıcı bir yükseltme al.|Buy a permanent upgrade from the Knowledge Tree.
+Tamam|OK
+
+# ---- Kaynaklar ----
+Bronz|Bronze
+Kumaş|Cloth
+Sikke|Coin
+Drahmi|Drachma
+İnanç|Faith
+Un|Flour
+Yiyecek|Food
+Demir|Iron
+Bilgelik|Wisdom
+Mermer|Marble
+Süt|Milk
+Papir|Papyrus
+Taş|Stone
+Buğday|Wheat
+Odun|Wood
+Yün|Wool
+
+# ---- Caglar ----
+Taş Çağı|Stone Age
+Tarım Çağı|Farming Age
+Bronz Çağı|Bronze Age
+Antik Çağ|Classical Age
+Orta Çağ|Medieval Age
+
+# ---- Binalar ----
+Toplayıcı Alanı|Gathering Ground
+Odun Kampı|Wood Camp
+Avcı Kampı|Hunter Camp
+Taş Ocağı|Stone Quarry
+Balta Atölyesi|Axe Workshop
+Ateş Çukuru|Fire Pit
+Mamut Taşıyıcılar|Mammoth Carriers
+Mağara Galerisi|Cave Gallery
+Buğday Tarlası|Wheat Field
+İnek Ahırı|Cow Barn
+Yel Değirmeni|Windmill
+Korkuluk Birliği|Scarecrow Union
+Pazar Tezgâhı|Market Stall
+Köy Fırını|Village Oven
+Sulama Kanalı|Irrigation Channel
+Dedikodu Meydanı|Gossip Square
+Bronz Dökümhanesi|Bronze Foundry
+Sikke Darphanesi|Coin Mint
+Kil Tablet Arşivi|Clay Tablet Archive
+Tekerlekli Kervan|Wheeled Caravan
+Su Kemeri|Aqueduct
+Zanaat Atölyesi|Craft Workshop
+Gözlemevi|Observatory
+Şehir Forumu|City Forum
+Papirüs Tarlası|Papyrus Field
+Mermer Ocağı|Marble Quarry
+Kâtipler Birliği|Scribes Guild
+Agora Pazarı|Agora Market
+Felsefe Akademisi|Philosophy Academy
+Amfitiyatro|Amphitheater
+İskenderiye Feneri|Lighthouse of Alexandria
+Koyun Ağılı|Sheep Pen
+Dokuma Tezgâhı|Weaving Loom
+Demirci Ocağı|Blacksmith Forge
+Şapel|Chapel
+Lonca Pazarı|Guild Market
+Kale|Castle
+Manastır|Monastery
+Katedral|Cathedral
+
+# ---- Yukseltmeler: Tas Cagi ----
+Daha Sivri Taş|Sharper Stone
+Sivri olan daha iyi toplar. Bu bilim.|Pointy ones gather better. That's science.
+Çift Elle Toplama|Two-Handed Gathering
+İki el, iki kat verim. Matematik zor ama doğru.|Two hands, double yield. The math is hard but correct.
+Toplama Teknikleri|Gathering Techniques
+Ustalar işi böyle yapar. Kimse ustaların kim olduğunu bilmiyor.|This is how the masters do it. Nobody knows who the masters are.
+Kas Hafızası|Muscle Memory
+Kollar düşünmeden topluyor. Beyin tatilde.|Arms gather without thinking. The brain is on vacation.
+Sepet Örmek|Basket Weaving
+İlk sepet. Kimse nasıl yapıldığını hatırlamıyor ama herkes çok gururlu.|The first basket. Nobody remembers how it was made, but everyone is very proud.
+Meyve Haritası|Fruit Map
+Hangi çalıdan ne çıktığını duvara çizdik. Duvar artık bizim arama motoru.|We drew which bush gives what on the wall. The wall is now our search engine.
+Sivri Sopa|Pointy Stick
+Her sopa bir ağaç söker. Teoride.|Every stick can uproot a tree. In theory.
+Odun Sendikası|Wood Union
+Mesai saati icat edildi. Kimse ne olduğunu anlamadı.|Working hours were invented. Nobody understood what they were.
+Mızrak Ucu|Spear Tip
+Eskiden elimizdeki sopaya mızrak derdik. Şimdi ucu var, çok profesyonel.|We used to call a plain stick a spear. Now it has a tip. Very professional.
+Av Stratejisi|Hunting Strategy
+Önce bağırmayı, sonra koşmayı öğrendik. Sıra önemli.|We learned to shout first, then run. Order matters.
+Daha İyi Kazma|Better Pickaxe
+Taşla taş kazmak mantıklı mı? Çalışıyor, soru sorma.|Is digging stone with stone sensible? It works, don't ask.
+Taşa Yazı Yazmak|Writing on Stone
+Kimse okuyamıyor ama çok şık duruyor.|Nobody can read it, but it looks great.
+Bileme Taşı|Whetstone
+Taşı bilemek için taş. Evrenin ironisi.|A stone to sharpen a stone. The universe's irony.
+Çırak Alımı|Hiring Apprentices
+Çırak bedava çalışıyor. Buna 'tecrübe' diyoruz.|The apprentice works for free. We call it 'experience'.
+Kuru Odun Kuralı|Dry Wood Rule
+Islak odun yanmaz. Üç kişi yanarak öğrendi.|Wet wood doesn't burn. Three people learned this by burning.
+Baharat Keşfi|Spice Discovery
+Bir ot ateşe düştü, koku harika çıktı. Mutfak doğdu.|A herb fell into the fire and smelled amazing. Cooking was born.
+Mamut Eğitimi|Mammoth Training
+Mamutlar 'otur' komutunu öğrenmedi ama taşıyorlar.|The mammoths never learned 'sit', but they do carry things.
+Mamut Sendikası|Mammoth Union
+Mamutlar zam istiyor. Yaprakla değil, gerçek zam.|The mammoths want a raise. Not a leaf raise, a real one.
+Parmak Boyası|Finger Painting
+İlk eleştirmen: 'Benim çocuğum da yapar.'|First critic: 'My kid could do that.'
+Sanat Turu|Art Tour
+Komşu kabileden turistler geliyor. Rehber: 'Yiyecek ayrıca.'|Tourists arrive from the neighboring tribe. Guide: 'Food is extra.'
+Ateşi Evcilleştirmek|Taming Fire
+Artık yakmıyor da ısıtıyor. Büyük ilerleme.|Now it warms instead of burns. Big progress.
+Tekerlek Fikri|The Wheel Idea
+Henüz tekerlek yok ama fikir var. Fikri bile ağır.|No wheel yet, but we have the idea. Even the idea is heavy.
+
+# ---- Yukseltmeler: Tarim Cagi ----
+Daha İyi Orak|Better Sickle
+Orak keskin. Parmaklar da.|The sickle is sharp. So are the fingers.
+Çift Orak|Double Sickle
+Biri yeterliydi ama iki tane daha havalı.|One was enough, but two is cooler.
+Bereket Duası|Fertility Prayer
+Dua ediyoruz. Sonuç: biraz daha fazla buğday.|We pray. Result: slightly more wheat.
+Sabah Antrenmanı|Morning Drills
+Horoz ötmeden kalkıyoruz. Horoz küstü.|We get up before the rooster. The rooster is offended.
+Demir Saban|Iron Plow
+Tahta saban kırılıyordu. Demir diye bir şey keşfettik.|The wooden plow kept breaking. We discovered a thing called iron.
+Ürün Rotasyonu|Crop Rotation
+Aynı tarlaya aynı şeyi ekme. Ya da ek, bakalım.|Don't plant the same thing in the same field. Or do, let's see.
+Yonca Menüsü|Clover Menu
+İnekler artık yonca istiyor. 'Ot' demek hakaret sayılıyor.|The cows want clover now. Calling it 'grass' counts as an insult.
+Sabah Sağımı|Morning Milking
+İnekler sabah insanı değil ama idare ediyor.|The cows are not morning people, but they manage.
+Daha Büyük Kanatlar|Bigger Blades
+Rüzgâr çıkınca çalışıyor. Çıkmayınca toplantı yapıyoruz.|It works when the wind blows. When it doesn't, we hold meetings.
+Değirmen Ustası|Mill Master
+'Ben bilirim' deyip her şeyi bozdu. Sonra tamir etti.|He said 'I know best' and broke everything. Then he fixed it.
+Ürkütücü Yüzler|Scary Faces
+Kargalar bile ürküyor. Komşu da.|Even the crows are scared. So is the neighbor.
+Korkuluk Tatbikatı|Scarecrow Drill
+Düşman yok, tatbikat var. Ama hazırlıklıyız.|No enemy, just a drill. But we are ready.
+Pazarlık Sanatı|The Art of Haggling
+'Son fiyat' ilk fiyatın yarısı. Herkes biliyor ama oynuyor.|'Final price' is half the first price. Everyone knows, but plays along.
+Bağırarak Satış|Selling by Shouting
+En yüksek ses en çok satar. Bilimsel olarak kanıtlandı: biri bağırdı.|The loudest voice sells the most. Scientifically proven: someone shouted.
+Taş Fırın|Stone Oven
+Ekmek kabarıyor. Neden kabarıyor? Kimse bilmiyor.|The bread rises. Why? Nobody knows.
+Maya Bekçisi|Yeast Keeper
+Mayanın bakımını biri yapıyor. Maya ona teşekkür etmiyor.|Someone looks after the yeast. The yeast never thanks them.
+Daha Derin Hendek|Deeper Ditch
+Su akıyor. Neredeyse istediğimiz yere.|Water flows. Almost where we want it.
+Kanal Bekçisi|Channel Guard
+Biri suyu çalıyor. Komşu mu? Evet, komşu.|Someone is stealing water. The neighbor? Yes, the neighbor.
+Çeşme Başı|At the Fountain
+Su alırken konuşuyoruz. Konu: başkaları.|We talk while fetching water. Topic: other people.
+Meydan Muhabbeti|Square Talk
+Haberler sözlü. Çoğu yanlış. Hepsi eğlenceli.|The news is oral. Mostly wrong. All entertaining.
+Takvim İcadı|Inventing the Calendar
+Ne zaman ekeceğimizi biliyoruz. Çiftçiler 'zaten biliyorduk' diyor.|We know when to sow. The farmers say 'we already knew'.
+Çit Çekmek|Fencing
+Çit koyduk. Komşunun ineği 'sınır nerede' diye soruyor.|We put up a fence. The neighbor's cow asks where the border is.
+
+# ---- Yukseltmeler: Bronz Cagi ----
+Döküm Kalıbı|Casting Mold
+Aynı baltayı tekrar tekrar dökmek artık mümkün.|Pouring the same axe over and over is possible now.
+Usta Çekiç|Master Hammer
+Çekiç daha ağır. Başparmak daha dikkatli.|The hammer is heavier. The thumb is more careful.
+Yazılı Tarifler|Written Recipes
+Tablete yazdık. Tablet ağır, tarif kısa.|We wrote it on a tablet. The tablet is heavy, the recipe is short.
+Atölye Nöbeti|Workshop Shifts
+Vardiya sistemi icat edildi. Usta hâlâ uyumuyor.|Shifts were invented. The master still doesn't sleep.
+Fırın Tuğlaları|Kiln Bricks
+Daha iyi araçlar, daha düzenli üretim.|Better tools, steadier production.
+Fırın Tuğlaları II|Kiln Bricks II
+İlk yöntem işe yaradı. Biraz daha iyisini yaptık.|The first method worked. We made it slightly better.
+Düzenli Sikke|Standard Coins
+Düzenli Sikke II|Standard Coins II
+Tablet Kataloğu|Tablet Catalog
+Tablet Kataloğu II|Tablet Catalog II
+Tekerlek Gresi|Wheel Grease
+Tekerlek Gresi II|Wheel Grease II
+Çift Kemer|Double Arch
+Çift Kemer II|Double Arch II
+Usta Çıraklığı|Master Apprenticeship
+Usta Çıraklığı II|Master Apprenticeship II
+Yıldız Cetveli|Star Ruler
+Yıldız Cetveli II|Star Ruler II
+Açık Forum|Open Forum
+Açık Forum II|Open Forum II
+Standart Ölçüler|Standard Measures
+Herkes aynı ölçü kabını kullanıyor. Neredeyse.|Everyone uses the same measuring jar. Almost.
+Yazılı Kanunlar|Written Laws
+Kurallar tablete yazıldı; artık kimse okuyamıyor.|The rules were written on a tablet; now nobody can read them.
+
+# ---- Yukseltmeler: Antik Cag ----
+Keskin Kamış Kalem|Sharp Reed Pen
+Yazı hızlandı. Okunabilirlik aynı kaldı.|Writing got faster. Legibility stayed the same.
+Çift Taraflı Tablet|Double-Sided Tablet
+Önü dolunca arkasına yazdık. Deha böyle bir şey.|When the front filled up, we wrote on the back. That's genius.
+Kamusal Tartışma|Public Debate
+Birisi konuşuyor, herkes üretimi bırakıp dinliyor.|Someone is talking; everyone stops producing to listen.
+Retorik Dersi|Rhetoric Lesson
+Aynı şeyi daha uzun anlatınca daha ikna edici oluyor.|Saying the same thing longer makes it more convincing.
+Daha Verimli Kamışlık|More Efficient Reed Bed
+Daha Verimli Kamışlık II|More Efficient Reed Bed II
+Düzgün Kesilmiş Mermer|Properly Cut Marble
+Düzgün Kesilmiş Mermer II|Properly Cut Marble II
+Kopya Kâtipler|Copyist Scribes
+Kopya Kâtipler II|Copyist Scribes II
+Agora İndirimi|Agora Discount
+Agora İndirimi II|Agora Discount II
+Düşünce Molası|Thinking Break
+Düşünce Molası II|Thinking Break II
+Ucuz Koltuklar|Cheap Seats
+Ucuz Koltuklar II|Cheap Seats II
+İkinci Su Hattı|Second Water Line
+İkinci Su Hattı II|Second Water Line II
+Daha Güçlü Ayna|Stronger Mirror
+Daha Güçlü Ayna II|Stronger Mirror II
+Üretim arttı. Toplantı tutanağı kayıp.|Production rose. The meeting minutes are missing.
+İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.|We improved the first method. The committee is still meeting.
+Standart Drahmi|Standard Drachma
+Artık herkes aynı parayı tartışıyor.|Now everyone argues about the same coin.
+Büyük Kütüphane|Great Library
+Bilginin merkezi. Yangın söndürücü bütçesi yok.|The center of knowledge. No fire extinguisher budget.
+
+# ---- Yukseltmeler: Orta Cag ----
+Daha Kalın Yün|Thicker Wool
+Yün kalınlaştı. Koyunlar aynı ifadeyle bakmaya devam ediyor.|The wool got thicker. The sheep keep the same expression.
+Çift El Makası|Two-Handed Shears
+İki el, iki makas. Koyunlar artık koşuyor.|Two hands, two shears. The sheep are running now.
+Dokuma Şarkısı|Weaving Song
+Şarkı söylerken daha hızlı dokuyoruz. Kulaklar biraz acıyor.|We weave faster while singing. The ears hurt a little.
+Lonca Yemini|Guild Oath
+Loncaya yemin ettik. Neye yemin ettiğimizi unuttuk ama ciddiyiz.|We swore a guild oath. We forgot what we swore to, but we're serious.
+Koyun Sayımı|Counting Sheep
+Koyunları saydık. Sonuç: uyuduk.|We counted the sheep. Result: we fell asleep.
+Koyun Sendikası|Sheep Union
+Koyunlar zam istiyor. Yün olarak ödüyoruz.|The sheep want a raise. We pay in wool.
+Sıkı Dokuma|Tight Weave
+Dokuma sıklaştı. Çorap artık iki kişilik.|The weave got tighter. A sock now fits two.
+Çırak Dokumacı|Apprentice Weaver
+Çırak işi öğrendi. Usta hâlâ anlatıyor.|The apprentice learned the job. The master is still explaining.
+Körük Isıtma|Bellows Heating
+Körük daha güçlü. Demirci daha az terliyor.|The bellows are stronger. The smith sweats less.
+Usta Demirci|Master Smith
+Usta "ben yaparım" dedi. Yaptı. Herkes şaşırdı.|The master said "I'll do it". He did. Everyone was surprised.
+Daha Yüksek Çan|Higher Bell
+Çan yükseldi. Sabah erken çalıyor, kimse memnun değil.|The bell is higher. It rings early and nobody is happy.
+Çan Ustası|Bell Master
+Çan ustası geldi. Çan hâlâ aynı sesi çıkarıyor.|The bell master arrived. The bell still sounds the same.
+Pazarlık Tezgâhı|Haggling Stall
+İlk fiyat iki katı. Herkes biliyor, kimse söylemiyor.|The first price is double. Everyone knows, nobody says.
+Lonca Fiyat Anlaşması|Guild Price Deal
+Lonca fiyatı belirledi. Pazar da belirledi. İkisi de aynı.|The guild set the price. The market did too. They match.
+Mazgallı Sur|Crenellated Wall
+Sur yükseldi. Düşman yok ama manzara güzel.|The wall got taller. No enemy, but the view is nice.
+Kraliyet Mührü|Royal Seal
+Mühür basıldı. Ne olduğunu kimse bilmiyor ama resmi.|The seal is stamped. Nobody knows what it does, but it's official.
+Kopya Kitaplar|Copied Books
+Kitapları kopyaladık. Mürekkep bitti, keşişler uyuyor.|We copied the books. The ink ran out, the monks are asleep.
+Sessizlik Kuralı|Rule of Silence
+Kural: sessizlik. Uygulama: tartışma.|Rule: silence. Practice: arguing.
+Daha Yüksek Kubbe|Higher Dome
+Kubbe yükseldi. İskele 200 yıl daha kalacak.|The dome got higher. The scaffolding stays for another 200 years.
+İskele Ustası|Scaffolding Master
+İskele ustası "bitti" dedi. İskele hâlâ orada.|The scaffolding master said "done". The scaffolding is still there.
+Lonca Sistemi|Guild System
+Her meslek kendi loncasını kurdu. Kimse diğerinin ne yaptığını bilmiyor.|Every trade formed its own guild. Nobody knows what the others do.
+Kraliyet Fermanı|Royal Decree
+Kral "üretim artacak" diye ferman yazdı. Ekonomi buna inanmak zorunda.|The king decreed "production will rise". The economy has to believe it.
+
+# ---- Kalici yukseltmeler ----
+Atalardan Notlar|Ancestors' Notes
+Kimse okuyamıyor ama duvarda çok şık duruyor.|Nobody can read it, but it looks great on the wall.
+Güçlü Bilekler|Strong Wrists
+Ellerin hafızası var. Zaman makinesi bunu silemedi.|The hands remember. The time machine couldn't erase that.
+Pazarlık Ruhu|Haggler's Spirit
+Tüccarlar 'bu sefer fiyatı sen belirle' dedi. İlk kez.|The merchants said 'you set the price this time'. For the first time.
+Kestirme Yol|Shortcut
+Haritada yok ama bir keçi yolu biliyoruz.|Not on the map, but we know a goat path.
+Not Alma Alışkanlığı|Note-Taking Habit
+Zaman yolculuğundan her seferinde daha çok şey hatırlıyoruz.|We remember more from each time trip.
+Gözü Açık Uyku|Sleeping with One Eye Open
+Sen yokken köy çalışıyor. Sana sormadan.|The village works while you're away. Without asking you.
+Paradoks Verimi|Paradox Yield
+Geçmişteki biz, gelecekteki bizi kıskanıyor.|Our past selves envy our future selves.
+Otomatik El|Automatic Hand
+Kendi kendine topluyor. Biraz ürkütücü, ama işe yarıyor.|It gathers by itself. A bit creepy, but it works.
+Taş Anıtlar|Stone Monuments
+Kilometre taşlarını büyütüyor. Taşlar da gururlu.|Boosts milestone bonuses. The stones are proud too.
+Uygarlık Hafızası|Civilization Memory
+Her döngüde biraz daha akıllanıyoruz. Biraz.|We get a little wiser every loop. A little.
+Demir Yumruk|Iron Fist
+Eldiven yok, sadece inanç.|No gloves, just faith.
+Toptan Pazarlık|Bulk Bargaining
+Daha çok alırsan daha az ödersin. Devrim.|Buy more, pay less. Revolutionary.
+Pusula|Compass
+Yön bulmak artık daha ucuz.|Finding your way is cheaper now.
+Kütüphane Kartı|Library Card
+Gecikme ücreti yok. Sadece Bilgi.|No late fees. Just Knowledge.
+Gece Vardiyası|Night Shift
+Köy uyumuyor. Sen uyuyorsun.|The village doesn't sleep. You do.
+
+# ---- Basarimlar ----
+İlk Adım|First Step
+10 kez topla.|Gather 10 times.
+Parmak Isınıyor|Warming Up
+100 kez topla.|Gather 100 times.
+Tıklama Ustası|Click Master
+1.000 kez topla.|Gather 1,000 times.
+Klavye Kırıcı|Keyboard Breaker
+10.000 kez topla.|Gather 10,000 times.
+Parmak Efsanesi|Finger Legend
+100.000 kez topla.|Gather 100,000 times.
+İlk Taş|First Stone
+İlk binanı al.|Buy your first building.
+Küçük Köy|Small Village
+10 bina al.|Buy 10 buildings.
+Kasaba|Town
+50 bina al.|Buy 50 buildings.
+Şehir|City
+200 bina al.|Buy 200 buildings.
+Metropol|Metropolis
+1.000 bina al.|Buy 1,000 buildings.
+Uygarlık|Civilization
+5.000 bina al.|Buy 5,000 buildings.
+İlk Fikir|First Idea
+İlk yükseltmeni al.|Buy your first upgrade.
+Araştırmacı|Researcher
+10 yükseltme al.|Buy 10 upgrades.
+Bilim İnsanı|Scientist
+40 yükseltme al.|Buy 40 upgrades.
+Ansiklopedi|Encyclopedia
+100 yükseltme al.|Buy 100 upgrades.
+Kalıcı Bilgi|Permanent Knowledge
+İlk kalıcı yükseltmeni al.|Buy your first permanent upgrade.
+Ağaç Büyüyor|Growing Tree
+5 kalıcı seviye al.|Reach 5 permanent levels.
+Bilge|Sage
+20 kalıcı seviye al.|Reach 20 permanent levels.
+Ağaç Ustası|Tree Master
+50 kalıcı seviye al.|Reach 50 permanent levels.
+İlk Bilgi|First Knowledge
+İlk Bilgi'yi kazan.|Earn your first Knowledge.
+Meraklı|Curious
+10 Bilgi kazan.|Earn 10 Knowledge.
+Filozof|Philosopher
+100 Bilgi kazan.|Earn 100 Knowledge.
+Aydınlanma|Enlightenment
+1.000 Bilgi kazan.|Earn 1,000 Knowledge.
+Yeni Ufuklar|New Horizons
+İlk çağ atlamanı yap.|Advance to a new age.
+Zaman Gezgini|Time Traveler
+2 kez çağ atla.|Advance 2 times.
+Tarihçi|Historian
+4 kez çağ atla.|Advance 4 times.
+Döngü Başladı|Loop Started
+Zaman Makinesi'ni bir kez çalıştır.|Run the Time Machine once.
+Tekrar|Again
+Zaman Makinesi'ni 5 kez çalıştır.|Run the Time Machine 5 times.
+Paradoks|Paradox
+Zaman Makinesi'ni 25 kez çalıştır.|Run the Time Machine 25 times.
+Sonsuz Döngü|Infinite Loop
+Zaman Makinesi'ni 100 kez çalıştır.|Run the Time Machine 100 times.
+Bir Saat|One Hour
+1 saat oyna.|Play for 1 hour.
+Beş Saat|Five Hours
+5 saat oyna.|Play for 5 hours.
+Yirmi Saat|Twenty Hours
+20 saat oyna.|Play for 20 hours.
+Elli Saat|Fifty Hours
+50 saat oyna.|Play for 50 hours.

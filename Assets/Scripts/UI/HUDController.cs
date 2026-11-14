@@ -17,8 +17,10 @@ public class HUDController : MonoBehaviour
     [SerializeField] Button gatherButton;
     [SerializeField] Button advanceButton;
     [SerializeField] TMP_Text advanceButtonLabel;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     Button fastTestButton;
     TMP_Text fastTestButtonLabel;
+#endif
 
     [Header("Bina listesi")]
     [SerializeField] Transform rowParent;
@@ -58,15 +60,29 @@ public class HUDController : MonoBehaviour
         GetOrAdd<PassiveIncomeBubbles>().Init(floatingText, sceneSpawner);
         GetOrAdd<UpgradePanel>();
         GetOrAdd<TimeMachinePanel>();
+        GetOrAdd<SettingsPanel>();
+        GetOrAdd<AchievementPanel>();
+        GetOrAdd<Hotkeys>();
+        GetOrAdd<TutorialHints>().Init(floatingText);
+        GetOrAdd<AchievementSystem>().Init(floatingText);
+
+        // Steam Deck / gamepad: ilk secili oge Topla olsun; yon tuslariyla gezilebilsin.
+        var es = UnityEngine.EventSystems.EventSystem.current;
+        if (es != null && gatherButton != null) es.SetSelectedGameObject(gatherButton.gameObject);
 
         RebuildRows();
         Refresh();
 
         if (offlineText != null)
         {
-            if (gm.OfflineSecondsApplied > 1)
+            if (gm.SaveRecovered)
             {
-                offlineText.text = "Sen yokken " + FormatDuration(gm.OfflineSecondsApplied) + " ilerleme kazandın";
+                offlineText.text = Loc.T("Kayıt dosyası bozuktu, yedekten kurtarıldı.");
+                Invoke(nameof(HideOfflineText), offlineMessageSeconds * 2f);
+            }
+            else if (gm.OfflineSecondsApplied > 1)
+            {
+                offlineText.text = Loc.F("Sen yokken {0} ilerleme kazandın", FormatDuration(gm.OfflineSecondsApplied));
                 Invoke(nameof(HideOfflineText), offlineMessageSeconds);   // sonsuza kadar ekranda kalmasin
             }
             else offlineText.text = "";
@@ -89,6 +105,8 @@ public class HUDController : MonoBehaviour
 
     void BuildFastTestButton()
     {
+        // Test modu sadece editorde ve development build'lerde gorunur; oyuncu build'inde yok.
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         var canvas = GetComponentInParent<Canvas>();
         if (canvas == null) return;
 
@@ -101,10 +119,12 @@ public class HUDController : MonoBehaviour
         rt.sizeDelta = new Vector2(240f, 76f);
         fastTestButton.onClick.AddListener(GameManager.Instance.ToggleFastTestMode);
         RefreshFastTestButton();
+#endif
     }
 
     void RefreshFastTestButton()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (fastTestButton == null || GameManager.Instance == null) return;
         bool enabled = GameManager.Instance.FastTestMode;
         fastTestButtonLabel.text = enabled ? "TEST MODU AÇIK\nTık x1M • Üret x1K" : "HIZLI TEST: KAPALI";
@@ -116,6 +136,7 @@ public class HUDController : MonoBehaviour
         fastTestButton.GetComponent<Image>().color = enabled
             ? new Color(0.96f, 0.73f, 0.28f)
             : new Color(0.25f, 0.2f, 0.18f, 0.96f);
+#endif
     }
 
     void PolishHud()
@@ -152,7 +173,7 @@ public class HUDController : MonoBehaviour
         var gatherLabel = gatherButton != null ? gatherButton.GetComponentInChildren<TMP_Text>() : null;
         if (gatherLabel != null)
         {
-            gatherLabel.text = "TOPLA";
+            gatherLabel.text = Loc.T("TOPLA");
             gatherLabel.fontStyle = FontStyles.Bold;
             gatherLabel.fontSize = 28f;
             gatherLabel.color = new Color(0.24f, 0.17f, 0.1f);
@@ -196,10 +217,10 @@ public class HUDController : MonoBehaviour
     static string FormatDuration(double seconds)
     {
         int s = Mathf.RoundToInt((float)seconds);
-        if (s < 90) return s + " sn";
+        if (s < 90) return s + " " + Loc.T("sn");
         int m = s / 60;
-        if (m < 90) return m + " dk";
-        return (m / 60) + " sa " + (m % 60) + " dk";
+        if (m < 90) return m + " " + Loc.T("dk");
+        return (m / 60) + " " + Loc.T("sa") + " " + (m % 60) + " " + Loc.T("dk");
     }
 
     void OnDestroy()
@@ -227,19 +248,22 @@ public class HUDController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         var age = gm.CurrentAge;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         RefreshFastTestButton();
+#endif
 
-        ageText.text = age.displayName;
-        knowledgeText.text = "Bilgi: " + NumberFormatter.Format(gm.Knowledge)
-            + "  (x" + gm.Multiplier.ToString("0.0", CultureInfo.InvariantCulture) + ")"
-            + (gm.TimeLoops > 0 ? "  •  Döngü " + gm.TimeLoops : "");
+        ageText.text = Loc.T(age.displayName);
+        knowledgeText.text = Loc.F("Bilgi: {0}  (x{1})", NumberFormatter.Format(gm.Knowledge),
+                gm.Multiplier.ToString("0.0", CultureInfo.InvariantCulture))
+            + (gm.TimeLoops > 0 ? Loc.F("  •  Döngü {0}", gm.TimeLoops) : "");
 
         sb.Length = 0;
         foreach (var r in age.resources)
         {
-            sb.Append(r.displayName).Append(": ")
-              .Append(NumberFormatter.Format(gm.GetResource(r)))
-              .Append("  (+").Append(NumberFormatter.Format(gm.GetProductionPerSecond(r))).Append("/sn)\n");
+            sb.Append(Loc.F("{0}: {1}  (+{2}/sn)", Loc.T(r.displayName),
+                    NumberFormatter.Format(gm.GetResource(r)),
+                    NumberFormatter.Format(gm.GetProductionPerSecond(r))))
+              .Append('\n');
         }
         resourcesText.text = sb.ToString();
 
@@ -250,9 +274,9 @@ public class HUDController : MonoBehaviour
         {
             advanceButton.interactable = gm.CanAdvance;
             if (advanceButtonLabel != null)
-                advanceButtonLabel.text = next.displayName + "'na Geç\n"
+                advanceButtonLabel.text = Loc.F("{0}'na Geç", Loc.T(next.displayName)) + "\n"
                     + NumberFormatter.Format(gm.GetRunEarned(age.advanceResource)) + " / "
-                    + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName;
+                    + NumberFormatter.Format(gm.AdvanceCost) + " " + Loc.T(age.advanceResource.displayName);
         }
         else
         {
@@ -260,9 +284,9 @@ public class HUDController : MonoBehaviour
             advanceButton.interactable = gm.CanUseTimeMachine;
             if (advanceButtonLabel != null)
                 advanceButtonLabel.text = gm.CanUseTimeMachine
-                    ? "Zaman Makinesi\n+" + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi"
-                    : "Zaman Makinesi\n" + NumberFormatter.Format(gm.GetRunEarned(age.advanceResource)) + " / "
-                        + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName;
+                    ? Loc.T("Zaman Makinesi") + "\n+" + NumberFormatter.Format(gm.TimeMachineReward) + " " + Loc.T("Bilgi")
+                    : Loc.T("Zaman Makinesi") + "\n" + NumberFormatter.Format(gm.GetRunEarned(age.advanceResource)) + " / "
+                        + NumberFormatter.Format(gm.AdvanceCost) + " " + Loc.T(age.advanceResource.displayName);
         }
 
         bool canProgress = advanceButton.interactable;

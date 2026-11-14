@@ -54,7 +54,7 @@ public class UpgradePanel : MonoBehaviour
         root.anchoredPosition = new Vector2(30f, -250f);
         root.sizeDelta = new Vector2(560f, HeaderHeight);
 
-        headerLabel = UIFactory.CreateText(root, "HeaderLabel", "YÜKSELTMELER", 22f, TextAlignmentOptions.MidlineLeft, Color.white,
+        headerLabel = UIFactory.CreateText(root, "HeaderLabel", Loc.T("YÜKSELTMELER"), 22f, TextAlignmentOptions.MidlineLeft, Color.white,
             Vector2.zero, Vector2.one, new Vector2(14f, 0f), new Vector2(-62f, 0f), true);
         headerButton = UIFactory.CreateButton(root, "ExpandButton", "+", 26f, out plusLabel);
         var headerRt = (RectTransform)headerButton.transform;
@@ -155,7 +155,7 @@ public class UpgradePanel : MonoBehaviour
 
         if (shown == 0)
         {
-            emptyText.text = "Yeni fikir yok. Biraz daha bina al, belki ilham gelir.";
+            emptyText.text = Loc.T("Yeni fikir yok. Biraz daha bina al, belki ilham gelir.");
             emptyText.gameObject.SetActive(true);
         }
         else emptyText.gameObject.SetActive(false);
@@ -180,8 +180,9 @@ public class UpgradePanel : MonoBehaviour
 
     void UpdateHeader()
     {
-        string countLabel = visible.Count > 0 ? " (" + visible.Count + ")" : "";
-        headerLabel.text = "YÜKSELTMELER" + countLabel;
+        headerLabel.text = visible.Count > 0
+            ? Loc.F("YÜKSELTMELER ({0})", visible.Count)
+            : Loc.T("YÜKSELTMELER");
         plusLabel.text = expanded ? "−" : "+";
     }
 
@@ -198,11 +199,11 @@ public class UpgradePanel : MonoBehaviour
         rt.anchoredPosition = new Vector2(0f, -index * (RowHeight + RowGap));
         rt.sizeDelta = new Vector2(0f, RowHeight);
 
-        UIFactory.CreateText(rt, "Name", u.displayName, 28f, TextAlignmentOptions.MidlineLeft, Color.white,
+        UIFactory.CreateText(rt, "Name", Loc.T(u.displayName), 28f, TextAlignmentOptions.MidlineLeft, Color.white,
             new Vector2(0f, 0.55f), new Vector2(1f, 1f), new Vector2(12f, 0f), new Vector2(-190f, -6f), true, true);
 
         string desc = "<color=#" + ColorUtility.ToHtmlStringRGB(EffectColor) + ">" + DescribeEffect(u) + "</color>";
-        if (!string.IsNullOrEmpty(u.description)) desc += "\n" + u.description;
+        if (!string.IsNullOrEmpty(u.description)) desc += "\n" + Loc.T(u.description);
         UIFactory.CreateText(rt, "Desc", desc, 20f, TextAlignmentOptions.TopLeft, FlavorColor,
             new Vector2(0f, 0f), new Vector2(1f, 0.55f), new Vector2(12f, 6f), new Vector2(-190f, 0f), false, true);
 
@@ -216,7 +217,7 @@ public class UpgradePanel : MonoBehaviour
 
     static string FormatCost(GameManager gm, UpgradeData u)
     {
-        return NumberFormatter.Format(gm.GetUpgradeCost(u)) + (u.costResource != null ? " " + u.costResource.displayName : "");
+        return NumberFormatter.Format(gm.GetUpgradeCost(u)) + (u.costResource != null ? " " + Loc.T(u.costResource.displayName) : "");
     }
 
     void Buy(UpgradeData u, RectTransform where)
@@ -224,7 +225,7 @@ public class UpgradePanel : MonoBehaviour
         var gm = GameManager.Instance;
         if (!gm.TryBuyUpgrade(u)) return;
         SoundManager.Play(SoundId.Buy, 1.25f, 1f);
-        if (texts != null && where != null) texts.SpawnAt(u.displayName, where);
+        if (texts != null && where != null) texts.SpawnAt(Loc.T(u.displayName), where);
     }
 
     public static string DescribeEffect(UpgradeData u)
@@ -233,13 +234,15 @@ public class UpgradePanel : MonoBehaviour
         switch (u.kind)
         {
             case UpgradeKind.ClickMultiplier:
-                return "Tıklama gücü x" + NumberFormatter.Format(u.value);
+                return Loc.F("Tıklama gücü x{0}", NumberFormatter.Format(u.value));
             case UpgradeKind.ClickProductionShare:
-                return "Her tıklama +%" + (u.value * 100.0).ToString("0.##", ci) + " saniyelik üretim";
+                return Loc.F("Her tıklama +%{0} saniyelik üretim", (u.value * 100.0).ToString("0.##", ci));
             case UpgradeKind.BuildingMultiplier:
-                return (u.targetBuilding != null ? u.targetBuilding.displayName : "?") + " üretimi x" + NumberFormatter.Format(u.value);
+                return Loc.F("{0} üretimi x{1}",
+                    u.targetBuilding != null ? Loc.T(u.targetBuilding.displayName) : "?",
+                    NumberFormatter.Format(u.value));
             case UpgradeKind.GlobalMultiplier:
-                return "Tüm üretim x" + NumberFormatter.Format(u.value);
+                return Loc.F("Tüm üretim x{0}", NumberFormatter.Format(u.value));
         }
         return "";
     }

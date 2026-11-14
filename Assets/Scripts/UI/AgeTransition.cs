@@ -57,7 +57,7 @@ public class AgeTransition : MonoBehaviour
 
     void Play()
     {
-        banner.text = GameManager.Instance.CurrentAge.displayName;
+        banner.text = Loc.T(GameManager.Instance.CurrentAge.displayName);
         t = 0f;
         flash.gameObject.SetActive(true);
         bannerRt.gameObject.SetActive(true);

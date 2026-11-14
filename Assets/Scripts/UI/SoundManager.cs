@@ -14,8 +14,23 @@ public class SoundManager : MonoBehaviour
 
     const int SampleRate = 44100;
     const string MuteKey = "evrim_muted";
+    const string VolumeKey = "evrim_volume";
+    const float DefaultVolume = 0.6f;
 
-    [SerializeField, Range(0f, 1f)] float volume = 0.6f;
+    [SerializeField, Range(0f, 1f)] float volume = DefaultVolume;
+
+    // Ayarlar paneli ve mute butonu icin ortak ses seviyesi (0..1). PlayerPrefs'te saklanir.
+    public static float Volume
+    {
+        get { return Instance != null ? Instance.volume : PlayerPrefs.GetFloat(VolumeKey, DefaultVolume); }
+        set
+        {
+            float v = Mathf.Clamp01(value);
+            PlayerPrefs.SetFloat(VolumeKey, v);
+            PlayerPrefs.Save();
+            if (Instance != null) Instance.volume = v;
+        }
+    }
 
     AudioSource[] sources;
     AudioClip[] clips;
@@ -69,6 +84,7 @@ public class SoundManager : MonoBehaviour
         });
 
         muted = PlayerPrefs.GetInt(MuteKey, 0) == 1;
+        volume = Mathf.Clamp01(PlayerPrefs.GetFloat(VolumeKey, volume));
     }
 
     void Start()
@@ -128,7 +144,7 @@ public class SoundManager : MonoBehaviour
         if (!muted) PlayInternal(SoundId.Click, 1f, 1f);
     }
 
-    void UpdateMuteLabel() { if (muteLabel != null) muteLabel.text = muted ? "Ses: Kapalı" : "Ses: Açık"; }
+    void UpdateMuteLabel() { if (muteLabel != null) muteLabel.text = muted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık"); }
 
     // ---- Sentez ----
     static AudioClip Synth(string clipName, float seconds, Func<float, float> sampler)

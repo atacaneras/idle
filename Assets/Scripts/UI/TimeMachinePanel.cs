@@ -68,7 +68,7 @@ public class TimeMachinePanel : MonoBehaviour
     // ---- Kurulum ----
     void BuildOpenButton(Transform canvas)
     {
-        openButton = UIFactory.CreateButton(canvas, "OpenTreeButton", "Bilgi Ağacı", 30f, out openLabel);
+        openButton = UIFactory.CreateButton(canvas, "OpenTreeButton", Loc.T("Bilgi Ağacı"), 30f, out openLabel);
         var rt = (RectTransform)openButton.transform;
         rt.SetAsLastSibling();
         // Kaynak/bilgi satirinin altinda, sag ustte; yukseltme panelinden ayri dursun.
@@ -101,13 +101,13 @@ public class TimeMachinePanel : MonoBehaviour
         win.anchoredPosition = Vector2.zero;
         win.sizeDelta = new Vector2(winW, Mathf.Min(winH, 1040f));
 
-        UIFactory.CreateText(win, "Title", "Bilgi Ağacı", 44f, TextAlignmentOptions.MidlineLeft, Color.white,
+        UIFactory.CreateText(win, "Title", Loc.T("Bilgi Ağacı"), 44f, TextAlignmentOptions.MidlineLeft, Color.white,
             new Vector2(0f, 1f), new Vector2(0.6f, 1f), new Vector2(24f, -80f), new Vector2(0f, -10f), true);
         balanceText = UIFactory.CreateText(win, "Balance", "", 34f, TextAlignmentOptions.MidlineRight, GoldColor,
             new Vector2(0.45f, 1f), new Vector2(1f, 1f), new Vector2(0f, -80f), new Vector2(-170f, -10f), true);
 
         TextMeshProUGUI closeLbl;
-        var close = UIFactory.CreateButton(win, "Close", "Kapat", 28f, out closeLbl);
+        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 28f, out closeLbl);
         var crt = (RectTransform)close.transform;
         crt.anchorMin = crt.anchorMax = new Vector2(1f, 1f);
         crt.pivot = new Vector2(1f, 1f);
@@ -132,7 +132,7 @@ public class TimeMachinePanel : MonoBehaviour
             rt.sizeDelta = new Vector2(NodeWidth, NodeHeight);
 
             var n = new Node { data = p, button = btn };
-            n.name = UIFactory.CreateText(rt, "Name", p.displayName, 28f, TextAlignmentOptions.MidlineLeft, Color.white,
+            n.name = UIFactory.CreateText(rt, "Name", Loc.T(p.displayName), 28f, TextAlignmentOptions.MidlineLeft, Color.white,
                 new Vector2(0f, 0.58f), new Vector2(1f, 1f), new Vector2(14f, 0f), new Vector2(-170f, -6f), true, true);
             n.desc = UIFactory.CreateText(rt, "Desc", "", 20f, TextAlignmentOptions.TopLeft, GrayColor,
                 new Vector2(0f, 0f), new Vector2(1f, 0.58f), new Vector2(14f, 6f), new Vector2(-170f, 0f), false, true);
@@ -152,7 +152,7 @@ public class TimeMachinePanel : MonoBehaviour
         tmInfoText = UIFactory.CreateText(win, "TMInfo", "", 24f, TextAlignmentOptions.TopLeft, GrayColor,
             new Vector2(0f, 0f), new Vector2(0.55f, 0f), new Vector2(24f, 16f), new Vector2(0f, 166f), false, true);
 
-        tmButton = UIFactory.CreateButton(win, "TimeMachineButton", "Zaman Makinesi", 30f, out tmLabel);
+        tmButton = UIFactory.CreateButton(win, "TimeMachineButton", Loc.T("Zaman Makinesi"), 30f, out tmLabel);
         var trt = (RectTransform)tmButton.transform;
         trt.anchorMin = trt.anchorMax = new Vector2(1f, 0f);
         trt.pivot = new Vector2(1f, 0f);
@@ -171,7 +171,10 @@ public class TimeMachinePanel : MonoBehaviour
         Refresh();
     }
 
-    void Close()
+    public bool IsOpen { get { return open; } }
+
+    // Esc ile veya diger panellerden kapatilabilsin.
+    public void Close()
     {
         open = false;
         confirmTimer = -1f;
@@ -210,7 +213,7 @@ public class TimeMachinePanel : MonoBehaviour
     {
         Close();
         if (texts != null)
-            texts.Spawn("+" + NumberFormatter.Format(reward) + " Bilgi", new Vector2(Screen.width * 0.5f, Screen.height * 0.45f));
+            texts.Spawn(Loc.F("+{0} Bilgi", NumberFormatter.Format(reward)), new Vector2(Screen.width * 0.5f, Screen.height * 0.45f));
     }
 
     // ---- Gorunum ----
@@ -225,12 +228,12 @@ public class TimeMachinePanel : MonoBehaviour
         if (any != lastAffordable || openLabel.text.Length == 0)
         {
             lastAffordable = any;
-            openLabel.text = any ? "Bilgi Ağacı •" : "Bilgi Ağacı";
+            openLabel.text = any ? Loc.T("Bilgi Ağacı •") : Loc.T("Bilgi Ağacı");
         }
 
         if (!open) return;
 
-        balanceText.text = "Bilgi: " + NumberFormatter.Format(gm.Knowledge);
+        balanceText.text = Loc.F("Bilgi: {0}", NumberFormatter.Format(gm.Knowledge));
 
         foreach (var n in nodes) RefreshNode(gm, n);
         RefreshTimeMachine(gm);
@@ -243,17 +246,18 @@ public class TimeMachinePanel : MonoBehaviour
         bool visible = gm.IsPermVisible(p);
         bool maxed = gm.IsPermMaxed(p);
 
-        n.name.text = p.displayName + (visible ? "   " + lv + "/" + p.maxLevel : "");
+        n.name.text = Loc.T(p.displayName) + (visible ? "   " + lv + "/" + p.maxLevel : "");
         if (!visible)
         {
-            n.desc.text = "Kilitli. Önce: " + (p.requires != null ? p.requires.displayName : "?");
+            n.desc.text = Loc.F("Kilitli. Önce: {0}",
+                p.requires != null ? Loc.T(p.requires.displayName) : "?");
             n.cost.text = "";
         }
         else
         {
-            n.desc.text = "<color=#" + ColorUtility.ToHtmlStringRGB(GreenColor) + ">" + DescribeEffect(p, lv, maxed) + "</color>"
-                + (string.IsNullOrEmpty(p.description) ? "" : "\n" + p.description);
-            n.cost.text = maxed ? "MAKS" : NumberFormatter.Format(gm.GetPermCost(p)) + " Bilgi";
+            n.desc.text = "<color=#" + ColorUtility.ToHtmlStringRGB(GreenColor) + ">" + DescribeEffect(p, lv) + "</color>"
+                + (string.IsNullOrEmpty(p.description) ? "" : "\n" + Loc.T(p.description));
+            n.cost.text = maxed ? Loc.T("MAKS") : Loc.F("{0} Bilgi", NumberFormatter.Format(gm.GetPermCost(p)));
         }
         n.button.interactable = gm.CanBuyPerm(p);
     }
@@ -263,50 +267,49 @@ public class TimeMachinePanel : MonoBehaviour
         var age = gm.CurrentAge;
         if (!gm.IsFinalAge)
         {
-            tmInfoText.text = "<b>Zaman Makinesi</b>\nSon çağa ulaşınca açılır. Her şeyi sıfırlar ama Bilgi ve bu ağaçtaki yükseltmeler kalır.";
-            tmLabel.text = "Zaman Makinesi (Kilitli)";
+            tmInfoText.text = Loc.T("<b>Zaman Makinesi</b>\nSon çağa ulaşınca açılır. Her şeyi sıfırlar ama Bilgi ve bu ağaçtaki yükseltmeler kalır.");
+            tmLabel.text = Loc.T("Zaman Makinesi (Kilitli)");
             tmButton.interactable = false;
             return;
         }
 
-        string res = age.advanceResource != null ? age.advanceResource.displayName : "?";
+        string res = age.advanceResource != null ? Loc.T(age.advanceResource.displayName) : "?";
         string earned = NumberFormatter.Format(gm.GetRunEarned(age.advanceResource));
         if (!gm.CanUseTimeMachine)
         {
-            tmInfoText.text = "<b>Zaman Makinesi</b>\nBu turda toplam " + NumberFormatter.Format(gm.AdvanceCost) + " " + res
-                + " kazanman gerekiyor. Şu an: " + earned + ". Daha fazla üretirsen daha çok Bilgi kazanırsın.";
-            tmLabel.text = "Zaman Makinesi (Kilitli)";
+            tmInfoText.text = Loc.F("<b>Zaman Makinesi</b>\nBu turda toplam {0} {1} kazanman gerekiyor. Şu an: {2}. Daha fazla üretirsen daha çok Bilgi kazanırsın.",
+                NumberFormatter.Format(gm.AdvanceCost), res, earned);
+            tmLabel.text = Loc.T("Zaman Makinesi (Kilitli)");
             tmButton.interactable = false;
             return;
         }
 
-        tmInfoText.text = "<b>Zaman Makinesi hazır.</b>\nBu turda " + earned + " " + res + " kazandın. Şu an çalıştırırsan <color=#"
-            + ColorUtility.ToHtmlStringRGB(GoldColor) + ">+" + NumberFormatter.Format(gm.TimeMachineReward)
-            + " Bilgi</color> kazanırsın. Daha fazla üretirsen ödül büyür (karekökle). "
-            + "Bina, kaynak ve yükseltmelerin sıfırlanır.";
+        tmInfoText.text = Loc.F("<b>Zaman Makinesi hazır.</b>\nBu turda {0} {1} kazandın. Şu an çalıştırırsan <color=#{2}>+{3} Bilgi</color> kazanırsın. Daha fazla üretirsen ödül büyür (karekökle). Bina, kaynak ve yükseltmelerin sıfırlanır.",
+            earned, res, ColorUtility.ToHtmlStringRGB(GoldColor), NumberFormatter.Format(gm.TimeMachineReward));
         tmButton.interactable = true;
-        tmLabel.text = confirmTimer >= 0f ? "Emin misin? Her şey sıfırlanır. Tekrar bas!" : "Zaman Makinesi'ni Çalıştır";
+        tmLabel.text = confirmTimer >= 0f ? Loc.T("Emin misin? Her şey sıfırlanır. Tekrar bas!") : Loc.T("Zaman Makinesi'ni Çalıştır");
     }
 
-    static string DescribeEffect(PermanentUpgradeData p, int level, bool maxed)
+    static string DescribeEffect(PermanentUpgradeData p, int level)
     {
         var ci = CultureInfo.InvariantCulture;
         double per = p.valuePerLevel;
         double now = per * level;
         string pct = "%" + (per * 100.0).ToString("0.##", ci);
         string nowPct = "%" + (now * 100.0).ToString("0.##", ci);
-        string cur = level > 0 ? "  (şu an " : "";
-        string tail = level > 0 ? ")" : "";
+        string perNum = per.ToString("0.##", ci);
+        string nowNum = now.ToString("0.##", ci);
 
         switch (p.kind)
         {
-            case PermanentKind.GlobalProduction: return "Tüm üretim +" + pct + " / seviye" + cur + "+" + nowPct + tail;
-            case PermanentKind.ClickPower: return "Tıklama gücü +" + pct + " / seviye" + cur + "+" + nowPct + tail;
-            case PermanentKind.CostReduction: return "Bina maliyeti -" + pct + " / seviye" + cur + "-" + nowPct + tail;
-            case PermanentKind.AdvanceDiscount: return "Çağ atlama maliyeti -" + pct + " / seviye" + cur + "-" + nowPct + tail;
-            case PermanentKind.KnowledgeGain: return "Kazanılan Bilgi +" + pct + " / seviye" + cur + "+" + nowPct + tail;
-            case PermanentKind.OfflineHours:
-                return "Çevrimdışı sınır +" + per.ToString("0.##", ci) + " sa / seviye" + (level > 0 ? "  (şu an +" + now.ToString("0.##", ci) + " sa)" : "");
+            case PermanentKind.GlobalProduction: return Loc.F("Tüm üretim +{0} / seviye  (şu an +{1})", pct, nowPct);
+            case PermanentKind.ClickPower: return Loc.F("Tıklama gücü +{0} / seviye  (şu an +{1})", pct, nowPct);
+            case PermanentKind.CostReduction: return Loc.F("Bina maliyeti -{0} / seviye  (şu an -{1})", pct, nowPct);
+            case PermanentKind.AdvanceDiscount: return Loc.F("Çağ atlama maliyeti -{0} / seviye  (şu an -{1})", pct, nowPct);
+            case PermanentKind.KnowledgeGain: return Loc.F("Kazanılan Bilgi +{0} / seviye  (şu an +{1})", pct, nowPct);
+            case PermanentKind.OfflineHours: return Loc.F("Çevrimdışı sınır +{0} sa / seviye  (şu an +{1} sa)", perNum, nowNum);
+            case PermanentKind.AutoClick: return Loc.F("Otomatik tıklama +{0}/sn  (şu an +{1}/sn)", perNum, nowNum);
+            case PermanentKind.MilestoneBoost: return Loc.F("Kilometre taşı gücü +{0} / seviye  (şu an +{1})", pct, nowPct);
         }
         return "";
     }

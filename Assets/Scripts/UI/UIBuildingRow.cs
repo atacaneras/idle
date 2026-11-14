@@ -71,7 +71,7 @@ public class UIBuildingRow : MonoBehaviour
         var buyLabel = buyButton.GetComponentInChildren<TMP_Text>();
         if (buyLabel != null)
         {
-            buyLabel.text = "AL";
+            buyLabel.text = Loc.T("AL");
             buyLabel.fontStyle = FontStyles.Bold;
             buyLabel.color = new Color(0.19f, 0.13f, 0.08f);
             buyLabel.enableAutoSizing = true;
@@ -96,18 +96,18 @@ public class UIBuildingRow : MonoBehaviour
     public void Refresh()
     {
         var gm = GameManager.Instance;
-        nameText.text = data.displayName + "  x" + gm.GetCount(data);
+        nameText.text = Loc.T(data.displayName) + "  x" + gm.GetCount(data);
         int owned = gm.GetCount(data);
         int next = gm.GetNextMilestone(data);
-        string info = "+" + NumberFormatter.Format(gm.GetUnitProduction(data)) + "/sn " + data.produces.displayName;
-        if (owned > 0) info += "\nToplam: " + NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)) + "/sn";
-        if (next > 0) info += "\nSonraki x" + NumberFormatter.Format(gm.MilestoneMultiplier) + ": " + next + " adet";
+        string info = Loc.F("+{0}/sn {1}", NumberFormatter.Format(gm.GetUnitProduction(data)), Loc.T(data.produces.displayName));
+        if (owned > 0) info += "\n" + Loc.F("Toplam: {0}/sn", NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)));
+        if (next > 0) info += "\n" + Loc.F("Sonraki x{0}: {1} adet", NumberFormatter.Format(gm.MilestoneMultiplier), next);
         infoText.text = info;
 
         // x10 / x100 / Max modunda toplam maliyet ve adet gosterilir
         int qty = gm.GetBuyQuantity(data);
-        costText.text = NumberFormatter.Format(gm.GetCostFor(data, qty)) + " " + data.costResource.displayName
-            + (qty > 1 ? "  (x" + qty + ")" : "");
+        costText.text = NumberFormatter.Format(gm.GetCostFor(data, qty)) + " " + Loc.T(data.costResource.displayName)
+            + (qty > 1 ? Loc.F("  (x{0})", qty) : "");
         buyButton.interactable = gm.CanBuyCurrent(data);
     }
 }
