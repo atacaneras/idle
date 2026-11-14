@@ -21,10 +21,9 @@ public class TowerView : MonoBehaviour
     public bool Busy { get; private set; }
 
     GameObject canvasGo;
-    RectTransform tcRt, root, leftHalf, rightHalf, hole;
+    RectTransform tcRt, root;
     readonly Dictionary<int, RectTransform> floors = new Dictionary<int, RectTransform>();
     readonly List<KeyValuePair<RectTransform, float>> bosses = new List<KeyValuePair<RectTransform, float>>();   // rect, en/boy
-    bool earthOpen;
     float W = 1920f, H = 1080f;
 
     static readonly string[] HellNames = {
@@ -102,18 +101,30 @@ public class TowerView : MonoBehaviour
             bosses.Add(new KeyValuePair<RectTransform, float>(b, aspect));
         }
 
-        if (f != 0) return;
-        // Yer yuzu: iki yari + altinda "delik". Acilista yarilar ayrilir.
-        hole = UIFactory.CreatePanel(p, "Hole", Color.black, false);
-        hole.anchorMin = Vector2.zero; hole.anchorMax = Vector2.one; hole.offsetMin = hole.offsetMax = Vector2.zero;
-        leftHalf = UIFactory.CreatePanel(p, "EarthLeft", c, false);
-        rightHalf = UIFactory.CreatePanel(p, "EarthRight", c, false);
-        leftHalf.anchorMin = leftHalf.anchorMax = rightHalf.anchorMin = rightHalf.anchorMax = new Vector2(0.5f, 0.5f);
-        leftHalf.sizeDelta = rightHalf.sizeDelta = new Vector2(W / 2f, H);
-        ResetEarth();
+        if (f != 0)
+        {
+            // Kat siniri: kamera kaydirilirken "kat degisiyor" hissi versin diye ustte koyu/acik serit.
+            // (Ozellikle cehennemde tum katlar kirmizi oldugu icin serit olmazsa inis fark edilmiyordu.)
+            var edge = UIFactory.CreatePanel(p, "Edge", f < 0 ? new Color(0f, 0f, 0f, 0.55f) : new Color(1f, 1f, 1f, 0.45f), false);
+            edge.anchorMin = new Vector2(0f, 1f); edge.anchorMax = new Vector2(1f, 1f);
+            edge.pivot = new Vector2(0.5f, 1f);
+            edge.offsetMin = new Vector2(0f, -70f); edge.offsetMax = Vector2.zero;
+            var line = UIFactory.CreatePanel(p, "EdgeLine", f < 0 ? new Color(1f, 0.45f, 0.1f, 0.9f) : new Color(1f, 0.95f, 0.6f, 0.9f), false);
+            line.anchorMin = new Vector2(0f, 1f); line.anchorMax = new Vector2(1f, 1f);
+            line.pivot = new Vector2(0.5f, 1f);
+            line.offsetMin = new Vector2(0f, -76f); line.offsetMax = new Vector2(0f, -70f);
+            return;
+        }
+        // Yer yuzu (Windows XP arka plani): Assets/Resources/Art/earth/background.png
+        // (ya da earth.png / klasordeki ilk gorsel). Ayri bir acilma animasyonu yok;
+        // oyun basinda kamera dogrudan bu kattan 1. kata kayar.
+        if (bgSprite == null)
+        {
+            var alt = Resources.Load<Sprite>("Art/earth/earth");
+            if (alt == null) { var all = Resources.LoadAll<Sprite>("Art/earth"); if (all.Length > 0) alt = all[0]; }
+            if (alt != null) { var im0 = p.GetComponent<Image>(); im0.sprite = alt; im0.color = Color.white; }
+        }
     }
-
-    void ResetEarth() { earthOpen = false; leftHalf.anchoredPosition = new Vector2(-W / 4f, 0); rightHalf.anchoredPosition = new Vector2(W / 4f, 0); }
 
     // Pencere / cozunurluk degisirse katlari yeni ekran olcusune gore yeniden diz.
     void Update()
@@ -125,9 +136,6 @@ public class TowerView : MonoBehaviour
         W = r.width; H = r.height;
         root.sizeDelta = new Vector2(W, H);
         foreach (var kv in floors) { kv.Value.sizeDelta = new Vector2(W, H); kv.Value.anchoredPosition = new Vector2(0, kv.Key * H); }
-        leftHalf.sizeDelta = rightHalf.sizeDelta = new Vector2(W / 2f, H);
-        if (earthOpen) { leftHalf.anchoredPosition = new Vector2(-W * 0.75f, 0); rightHalf.anchoredPosition = new Vector2(W * 0.75f, 0); }
-        else ResetEarth();
         foreach (var b in bosses) b.Key.sizeDelta = new Vector2(H * BossH * b.Value, H * BossH);
         if (!Busy) SnapTo(CurrentFloor);
     }
@@ -141,26 +149,17 @@ public class TowerView : MonoBehaviour
         StartCoroutine(Move(CurrentFloor, floor, dur));
     }
 
-    // Oyun basi: yer yuzu acilir, kamera 1. kata iner (cehennem) / cikar (cennet)
+    // Oyun basi: yer yuzu (XP arka plani) ekranda durur, sonra kamera dogrudan 1. kata iner (cehennem) / cikar (cennet)
     public void PlayIntro(Side side, Action done)
     {
-        hole.GetComponent<Image>().color = side == Side.Hell ? new Color(0.4f, 0.03f, 0f) : new Color(1f, 0.97f, 0.8f);
         SnapTo(0);
-        ResetEarth();
         StartCoroutine(Intro(side, done));
     }
 
     IEnumerator Intro(Side side, Action done)
     {
         Busy = true;
-        for (float t = 0; t < 1.3f; t += Time.unscaledDeltaTime)   // yer yuzu yariliyor
-        {
-            float e = Ease(t / 1.3f);
-            leftHalf.anchoredPosition = new Vector2(-W / 4f - e * W / 2f, 0);
-            rightHalf.anchoredPosition = new Vector2(W / 4f + e * W / 2f, 0);
-            yield return null;
-        }
-        earthOpen = true;
+        for (float t = 0; t < 0.8f; t += Time.unscaledDeltaTime) yield return null;   // yer yuzu bir an gorunsun
         yield return Move(0, FloorIndex(side, 1), 2f);
         Busy = false;
         if (done != null) done();
