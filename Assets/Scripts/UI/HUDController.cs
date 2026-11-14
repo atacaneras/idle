@@ -17,6 +17,8 @@ public class HUDController : MonoBehaviour
     [SerializeField] Button gatherButton;
     [SerializeField] Button advanceButton;
     [SerializeField] TMP_Text advanceButtonLabel;
+    Button fastTestButton;
+    TMP_Text fastTestButtonLabel;
 
     [Header("Bina listesi")]
     [SerializeField] Transform rowParent;
@@ -34,6 +36,7 @@ public class HUDController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         PolishHud();
+        BuildFastTestButton();
         gm.OnAgeChanged += RebuildRows;
         gm.OnStateChanged += Refresh;
         gatherButton.onClick.AddListener(gm.Gather);
@@ -82,6 +85,37 @@ public class HUDController : MonoBehaviour
     {
         var c = GetComponent<T>();
         return c != null ? c : gameObject.AddComponent<T>();
+    }
+
+    void BuildFastTestButton()
+    {
+        var canvas = GetComponentInParent<Canvas>();
+        if (canvas == null) return;
+
+        fastTestButton = UIFactory.CreateButton(canvas.rootCanvas.transform, "FastTestToggle", "", 24f, out var label);
+        fastTestButtonLabel = label;
+        var rt = (RectTransform)fastTestButton.transform;
+        rt.anchorMin = rt.anchorMax = Vector2.zero;
+        rt.pivot = new Vector2(0f, 0.5f);
+        rt.anchoredPosition = new Vector2(365f, 150f);
+        rt.sizeDelta = new Vector2(240f, 76f);
+        fastTestButton.onClick.AddListener(GameManager.Instance.ToggleFastTestMode);
+        RefreshFastTestButton();
+    }
+
+    void RefreshFastTestButton()
+    {
+        if (fastTestButton == null || GameManager.Instance == null) return;
+        bool enabled = GameManager.Instance.FastTestMode;
+        fastTestButtonLabel.text = enabled ? "TEST MODU AÇIK\nTık x1M • Üret x1K" : "HIZLI TEST: KAPALI";
+        fastTestButtonLabel.fontSize = 20f;
+        fastTestButtonLabel.fontSizeMin = 17f;
+        fastTestButtonLabel.fontSizeMax = 22f;
+        fastTestButtonLabel.enableAutoSizing = true;
+        fastTestButtonLabel.color = enabled ? new Color(0.2f, 0.14f, 0.07f) : Color.white;
+        fastTestButton.GetComponent<Image>().color = enabled
+            ? new Color(0.96f, 0.73f, 0.28f)
+            : new Color(0.25f, 0.2f, 0.18f, 0.96f);
     }
 
     void PolishHud()
@@ -193,6 +227,7 @@ public class HUDController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         var age = gm.CurrentAge;
+        RefreshFastTestButton();
 
         ageText.text = age.displayName;
         knowledgeText.text = "Bilgi: " + NumberFormatter.Format(gm.Knowledge)

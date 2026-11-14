@@ -25,6 +25,7 @@ public class UpgradePanel : MonoBehaviour
         public UpgradeData data;
         public RectTransform rt;
         public Button button;
+        public TextMeshProUGUI cost;
     }
 
     readonly List<Row> rows = new List<Row>();
@@ -129,7 +130,11 @@ public class UpgradePanel : MonoBehaviour
 
         if (!same) { Rebuild(); return; }
 
-        foreach (var r in rows) r.button.interactable = gm.CanAffordUpgrade(r.data);
+        foreach (var r in rows)
+        {
+            r.button.interactable = gm.CanAffordUpgrade(r.data);
+            r.cost.text = FormatCost(gm, r.data);
+        }
     }
 
     void Rebuild()
@@ -201,13 +206,17 @@ public class UpgradePanel : MonoBehaviour
         UIFactory.CreateText(rt, "Desc", desc, 20f, TextAlignmentOptions.TopLeft, FlavorColor,
             new Vector2(0f, 0f), new Vector2(1f, 0.55f), new Vector2(12f, 6f), new Vector2(-190f, 0f), false, true);
 
-        string cost = NumberFormatter.Format(u.cost) + (u.costResource != null ? " " + u.costResource.displayName : "");
-        UIFactory.CreateText(rt, "Cost", cost, 26f, TextAlignmentOptions.MidlineRight, CostColor,
+        var cost = UIFactory.CreateText(rt, "Cost", FormatCost(GameManager.Instance, u), 26f, TextAlignmentOptions.MidlineRight, CostColor,
             new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(-180f, 0f), new Vector2(-12f, 0f), true, true);
 
         var captured = u;
         btn.onClick.AddListener(() => Buy(captured, rt));
-        return new Row { data = u, rt = rt, button = btn };
+        return new Row { data = u, rt = rt, button = btn, cost = cost };
+    }
+
+    static string FormatCost(GameManager gm, UpgradeData u)
+    {
+        return NumberFormatter.Format(gm.GetUpgradeCost(u)) + (u.costResource != null ? " " + u.costResource.displayName : "");
     }
 
     void Buy(UpgradeData u, RectTransform where)

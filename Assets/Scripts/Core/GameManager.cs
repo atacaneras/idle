@@ -31,12 +31,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] double timeMachineKnowledgeBase = 10;
 
     const double MaxReduction = 0.75;   // maliyet indirimleri bu oranin ustune cikmaz
+    const double FastClickMultiplier = 1000000.0;
+    const double FastProductionMultiplier = 1000.0;
+    const double FastBuildingCostMultiplier = 0.01;
+    const double FastUpgradeCostMultiplier = 0.01;
+    const double FastAdvanceCostMultiplier = 0.001;
 
     public AgeData CurrentAge { get; private set; }
     public double Knowledge { get; private set; }           // harcanabilir
     public double LifetimeKnowledge { get; private set; }   // toplam kazanilan
     public int TimeLoops { get; private set; }
     public double OfflineSecondsApplied { get; private set; }
+    public bool FastTestMode { get; private set; }
     public PermanentUpgradeData[] PermanentUpgrades { get { return permanentUpgrades; } }
 
     // Genel carpan: pasif Bilgi bonusu x kalici yukseltmeler x bu cagdaki genel yukseltmeler
@@ -126,7 +132,11 @@ public class GameManager : MonoBehaviour
     // ---- Sorgular ----
     public double GetResource(ResourceData r) { double v; return resources.TryGetValue(r.id, out v) ? v : 0; }
     public int GetCount(BuildingData b) { int v; return counts.TryGetValue(b.id, out v) ? v : 0; }
-    public double GetCost(BuildingData b) { return b.baseCost * Math.Pow(b.costGrowth, GetCount(b)) * permCostMult; }
+    public double GetCost(BuildingData b)
+    {
+        return b.baseCost * Math.Pow(b.costGrowth, GetCount(b)) * permCostMult
+            * (FastTestMode ? FastBuildingCostMultiplier : 1.0);
+    }
     public bool CanAfford(BuildingData b) { return GetResource(b.costResource) >= GetCost(b); }
 
     public double GetProductionPerSecond(ResourceData r)
@@ -148,7 +158,11 @@ public class GameManager : MonoBehaviour
     }
 
     // Tek bir binanin (adet 1) saniyedeki uretimi, tum carpanlar dahil
-    public double GetUnitProduction(BuildingData b) { return b.baseProduction * GetBuildingMultiplier(b) * Multiplier; }
+    public double GetUnitProduction(BuildingData b)
+    {
+        return b.baseProduction * GetBuildingMultiplier(b) * Multiplier
+            * (FastTestMode ? FastProductionMultiplier : 1.0);
+    }
 
     public double GetBuildingProductionPerSecond(BuildingData b) { return GetCount(b) * GetUnitProduction(b); }
 
@@ -177,8 +191,14 @@ public class GameManager : MonoBehaviour
             double v = clickPower * clickUpgradeMult * permClick * Multiplier;
             if (clickShare > 0 && CurrentAge != null && CurrentAge.clickResource != null)
                 v += clickShare * GetProductionPerSecond(CurrentAge.clickResource);
-            return v;
+            return FastTestMode ? v * FastClickMultiplier : v;
         }
+    }
+
+    public void ToggleFastTestMode()
+    {
+        FastTestMode = !FastTestMode;
+        RaiseStateChanged();
     }
 
     // ---- Eylemler ----
@@ -279,7 +299,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public double AdvanceCost { get { return CurrentAge.advanceCost * permAdvanceMult; } }
+    public double AdvanceCost { get { return CurrentAge.advanceCost * permAdvanceMult * (FastTestMode ? FastAdvanceCostMultiplier : 1.0); } }
 
     public bool CanAdvance
     {
@@ -342,12 +362,20 @@ public class GameManager : MonoBehaviour
         result.Sort((a, c) => a.cost.CompareTo(c.cost));
     }
 
-    public bool CanAffordUpgrade(UpgradeData u) { return u.costResource != null && GetResource(u.costResource) >= u.cost; }
+    public double GetUpgradeCost(UpgradeData u)
+    {
+        return u.cost * (FastTestMode ? FastUpgradeCostMultiplier : 1.0);
+    }
+
+    public bool CanAffordUpgrade(UpgradeData u)
+    {
+        return u.costResource != null && GetResource(u.costResource) >= GetUpgradeCost(u);
+    }
 
     public bool TryBuyUpgrade(UpgradeData u)
     {
         if (u == null || !IsUpgradeVisible(u) || !CanAffordUpgrade(u)) return false;
-        resources[u.costResource.id] = GetResource(u.costResource) - u.cost;
+        resources[u.costResource.id] = GetResource(u.costResource) - GetUpgradeCost(u);
         purchased.Add(u.id);
         RecalcCaches();
         if (OnUpgradeBought != null) OnUpgradeBought(u);
