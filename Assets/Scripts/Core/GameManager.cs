@@ -526,13 +526,13 @@ public class GameManager : MonoBehaviour
     void ValidateData()
     {
         var buildingIds = new HashSet<string>();
-        var resourceIds = new HashSet<string>();
         var ageIds = new HashSet<string>();
         var upgradeIds = new HashSet<string>();
 
         foreach (var a in ages)
         {
             if (a == null) { Debug.LogError("GameManager: ages listesinde bos eleman var."); continue; }
+            var ageResourceIds = new HashSet<string>();
             if (string.IsNullOrEmpty(a.id) || a.id != a.id.Trim()) Debug.LogWarning("Cag '" + a.name + "': id bos ya da basinda/sonunda bosluk var.", a);
             if (!ageIds.Add(a.id)) Debug.LogError("Cag id'si tekrar ediyor: " + a.id, a);
             if (a.clickResource == null) Debug.LogWarning("Cag '" + a.name + "': Click Resource bos.", a);
@@ -542,8 +542,12 @@ public class GameManager : MonoBehaviour
                 foreach (var r in a.resources)
                 {
                     if (r == null) { Debug.LogError("Cag '" + a.name + "': Resources listesinde bos eleman var.", a); continue; }
-                    resourceIds.Add(r.id);
+                    ageResourceIds.Add(r.id);
                 }
+            if (a.clickResource != null && !ageResourceIds.Contains(a.clickResource.id))
+                Debug.LogError("Cag '" + a.name + "': Click Resource kaynak listesinde yok.", a);
+            if (a.advanceResource != null && !ageResourceIds.Contains(a.advanceResource.id))
+                Debug.LogError("Cag '" + a.name + "': Advance Resource kaynak listesinde yok.", a);
 
             if (a.upgrades != null)
                 foreach (var u in a.upgrades)
@@ -552,6 +556,7 @@ public class GameManager : MonoBehaviour
                     if (string.IsNullOrEmpty(u.id)) Debug.LogWarning("Yukseltme '" + u.name + "': id bos.", u);
                     if (!upgradeIds.Add(u.id)) Debug.LogError("Yukseltme id'si tekrar ediyor: " + u.id, u);
                     if (u.costResource == null) Debug.LogError("Yukseltme '" + u.name + "': Cost Resource bos.", u);
+                    else if (!ageResourceIds.Contains(u.costResource.id)) Debug.LogError("Yukseltme '" + u.name + "': maliyet kaynagi bu cagda yok.", u);
                     if (u.kind == UpgradeKind.BuildingMultiplier && u.targetBuilding == null) Debug.LogError("Yukseltme '" + u.name + "': Target Building bos.", u);
                 }
 
@@ -562,6 +567,8 @@ public class GameManager : MonoBehaviour
                 if (string.IsNullOrEmpty(b.id) || b.id != b.id.Trim()) Debug.LogWarning("Bina '" + b.name + "': id bos ya da basinda/sonunda bosluk var.", b);
                 if (!buildingIds.Add(b.id)) Debug.LogError("Bina id'si tekrar ediyor: " + b.id, b);
                 if (b.produces == null || b.costResource == null) Debug.LogError("Bina '" + b.name + "': Produces ya da Cost Resource bos.", b);
+                else if (!ageResourceIds.Contains(b.costResource.id)) Debug.LogError("Bina '" + b.name + "': maliyet kaynagi bu cagda yok.", b);
+                if (b.produces != null && !ageResourceIds.Contains(b.produces.id)) Debug.LogError("Bina '" + b.name + "': urettigi kaynak bu cagda yok.", b);
             }
         }
     }

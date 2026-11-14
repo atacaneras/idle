@@ -1,7 +1,7 @@
 # Tek kaynak: hem simulasyon hem C# uretici bunu kullanir.
 # bina: id, ad, uretir, maliyetKaynak, baseCost, baseProd, (x,y,order), renk(r,g,b)
 STONE = dict(
-  id="stone", name="Taş Çağı", click="food", advance="stone", advanceCost=3000, knowledge=3,
+  id="stone", name="Taş Çağı", click="food", advance="stone", advanceCost=3800000, knowledge=3,
   buildings=[
     ("stone_gatherer","Toplayıcı Alanı","food","food",15,0.5,(-8,-3.4,1),(0,1,0)),
     ("stone_woodcamp","Odun Kampı","wood","food",100,1.0,(-6.5,-2.7,0),(0.545,0.27,0.075)),
@@ -35,7 +35,7 @@ STONE = dict(
 )
 
 FARM = dict(
-  id="farm", name="Tarım Çağı", click="wheat", advance="wheat", advanceCost=2000000, knowledge=0,
+  id="farm", name="Tarım Çağı", click="wheat", advance="wheat", advanceCost=290000000, knowledge=0,
   new_resources=[("res_milk","milk","Süt"),("res_flour","flour","Un")],
   buildings=[
     ("farm_field","Buğday Tarlası","wheat","wheat",10,1,(-8,-3.4,1),(1,0.92,0.016)),
@@ -69,6 +69,78 @@ FARM = dict(
   ],
 )
 
+BRONZE = dict(
+  id="bronze", name="Bronz Çağı", click="bronze", advance="bronze", advanceCost=1000000000000, knowledge=0,
+  buildings=[
+    ("bronze_smelter","Bronz Dökümhanesi","bronze","bronze",100,18000,(-8,-3.4,1),(0.72,0.35,0.18)),
+    ("bronze_mint","Sikke Darphanesi","coin","bronze",90000000,7000,(-6,-2.7,0),(0.86,0.68,0.28)),
+    ("bronze_library","Kil Tablet Arşivi","knowledge","coin",300000000,2500,(-4,-3.4,1),(0.55,0.38,0.22)),
+    ("bronze_cart","Tekerlekli Kervan","coin","bronze",900000000,80000,(-2,-2.7,0),(0.48,0.3,0.16)),
+    ("bronze_aqueduct","Su Kemeri","knowledge","coin",5000000000,24000,(0,-3.4,1),(0.42,0.67,0.72)),
+    ("bronze_workshop","Zanaat Atölyesi","bronze","knowledge",18000000000,350000,(2,-2.7,0),(0.72,0.48,0.25)),
+    ("bronze_observatory","Gözlemevi","knowledge","bronze",70000000000,180000,(4,-3.4,1),(0.24,0.32,0.55)),
+    ("bronze_forum","Şehir Forumu","coin","knowledge",250000000000,1800000,(6,-2.7,0),(0.78,0.58,0.32)),
+  ],
+  click_upgrades=[
+    ("bronze_click1","Döküm Kalıbı","click",2,25000,"Aynı baltayı tekrar tekrar dökmek artık mümkün.",None),
+    ("bronze_click2","Usta Çekiç","click",3,900000,"Çekiç daha ağır. Başparmak daha dikkatli.",0),
+    ("bronze_click3","Yazılı Tarifler","share",0.015,250000,"Tablete yazdık. Tablet ağır, tarif kısa.",1),
+    ("bronze_click4","Atölye Nöbeti","click",4,8000000,"Vardiya sistemi icat edildi. Usta hâlâ uyumuyor.",2),
+  ],
+  building_upgrades={
+    "bronze_smelter":[("Fırın Tuğlaları","Daha iyi araçlar, daha düzenli üretim."),("Fırın Tuğlaları II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_mint":[("Düzenli Sikke","Daha iyi araçlar, daha düzenli üretim."),("Düzenli Sikke II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_library":[("Tablet Kataloğu","Daha iyi araçlar, daha düzenli üretim."),("Tablet Kataloğu II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_cart":[("Tekerlek Gresi","Daha iyi araçlar, daha düzenli üretim."),("Tekerlek Gresi II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_aqueduct":[("Çift Kemer","Daha iyi araçlar, daha düzenli üretim."),("Çift Kemer II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_workshop":[("Usta Çıraklığı","Daha iyi araçlar, daha düzenli üretim."),("Usta Çıraklığı II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_observatory":[("Yıldız Cetveli","Daha iyi araçlar, daha düzenli üretim."),("Yıldız Cetveli II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+    "bronze_forum":[("Açık Forum","Daha iyi araçlar, daha düzenli üretim."),("Açık Forum II","İlk yöntem işe yaradı. Biraz daha iyisini yaptık.")],
+  },
+  upgrade_costs={"bronze_smelter":(100000,10000000),"bronze_mint":(450000,45000000),"bronze_library":(1500000,150000000),"bronze_cart":(4500000,450000000),"bronze_aqueduct":(15000000,1500000000),"bronze_workshop":(45000000,4500000000),"bronze_observatory":(150000000,15000000000),"bronze_forum":(450000000,45000000000)},
+  upgrade_resources={"bronze_smelter":"bronze","bronze_mint":"coin","bronze_library":"knowledge","bronze_cart":"coin","bronze_aqueduct":"knowledge","bronze_workshop":"bronze","bronze_observatory":"knowledge","bronze_forum":"coin"},
+  global_upgrades=[
+    ("Standart Ölçüler","Herkes aynı ölçü kabını kullanıyor. Neredeyse.",1.5,3000000,"bronze_mint",10,"coin"),
+    ("Yazılı Kanunlar","Kurallar tablete yazıldı; artık kimse okuyamıyor.",2,100000000,"bronze_forum",10,"knowledge"),
+  ],
+)
+
+ANCIENT = dict(
+  id="antique", name="Antik Çağ", click="papyrus", advance="drachma", advanceCost=8000000000000, knowledge=1,
+  buildings=[
+    ("antique_field","Papirüs Tarlası","papyrus","papyrus",10,1,(-8,-3.4,1),(0.56,0.67,0.35)),
+    ("antique_masonry","Mermer Ocağı","marble","papyrus",120,2,(-6,-2.7,0),(0.78,0.75,0.65)),
+    ("antique_scribes","Kâtipler Birliği","knowledge","papyrus",450,5,(-4,-3.4,1),(0.75,0.63,0.42)),
+    ("antique_market","Agora Pazarı","drachma","papyrus",1800,16,(-2,-2.7,0),(0.75,0.48,0.28)),
+    ("antique_academy","Felsefe Akademisi","knowledge","drachma",14000,90,(0,-3.4,1),(0.42,0.55,0.72)),
+    ("antique_theater","Amfitiyatro","drachma","marble",50000,450,(2,-2.7,0),(0.68,0.32,0.25)),
+    ("antique_aqueduct","Su Kemeri","papyrus","marble",350000,3200,(4,-3.4,1),(0.37,0.58,0.66)),
+    ("antique_lighthouse","İskenderiye Feneri","knowledge","drachma",3000000,10000,(6,-2.7,0),(0.92,0.73,0.38)),
+  ],
+  click_upgrades=[
+    ("antique_click1","Keskin Kamış Kalem","click",2,250,"Yazı hızlandı. Okunabilirlik aynı kaldı.",None),
+    ("antique_click2","Çift Taraflı Tablet","click",2,8000,"Önü dolunca arkasına yazdık. Deha böyle bir şey.",0),
+    ("antique_click3","Kamusal Tartışma","share",0.015,120000,"Birisi konuşuyor, herkes üretimi bırakıp dinliyor.",1),
+    ("antique_click4","Retorik Dersi","click",3,1800000,"Aynı şeyi daha uzun anlatınca daha ikna edici oluyor.",2),
+  ],
+  building_upgrades={
+    "antique_field":[("Daha Verimli Kamışlık","Üretim arttı. Toplantı tutanağı kayıp."),("Daha Verimli Kamışlık II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_masonry":[("Düzgün Kesilmiş Mermer","Üretim arttı. Toplantı tutanağı kayıp."),("Düzgün Kesilmiş Mermer II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_scribes":[("Kopya Kâtipler","Üretim arttı. Toplantı tutanağı kayıp."),("Kopya Kâtipler II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_market":[("Agora İndirimi","Üretim arttı. Toplantı tutanağı kayıp."),("Agora İndirimi II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_academy":[("Düşünce Molası","Üretim arttı. Toplantı tutanağı kayıp."),("Düşünce Molası II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_theater":[("Ucuz Koltuklar","Üretim arttı. Toplantı tutanağı kayıp."),("Ucuz Koltuklar II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_aqueduct":[("İkinci Su Hattı","Üretim arttı. Toplantı tutanağı kayıp."),("İkinci Su Hattı II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+    "antique_lighthouse":[("Daha Güçlü Ayna","Üretim arttı. Toplantı tutanağı kayıp."),("Daha Güçlü Ayna II","İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.")],
+  },
+  global_upgrades=[
+    ("Standart Drahmi","Artık herkes aynı parayı tartışıyor.",1.5,25000,"antique_market",10,"drachma"),
+    ("Büyük Kütüphane","Bilginin merkezi. Yangın söndürücü bütçesi yok.",2,8000000,"antique_academy",10,"knowledge"),
+  ],
+)
+
+AGES=[STONE,FARM,BRONZE,ANCIENT]
+
 PERMS=[ # id, ad, aciklama, tur, deger/seviye, maxSeviye, baseCost, growth, requires(idx)
   ("perm_global","Atalardan Notlar","Kimse okuyamıyor ama duvarda çok şık duruyor.","GlobalProduction",0.10,10,3,1.55,None),
   ("perm_click","Güçlü Bilekler","Ellerin hafızası var. Zaman makinesi bunu silemedi.","ClickPower",0.25,8,2,1.5,None),
@@ -88,8 +160,12 @@ def upgrades_for(age):
                         pre=age['click_upgrades'][u[6]][0] if u[6] is not None else None,unlock=None,target=None))
     for b in age['buildings']:
         (an,ad),(bn,bd)=age['building_upgrades'][b[0]]
-        ups.append(dict(id=b[0]+"_a",name=an,kind='bld',value=2,res=b[3],cost=b[4]*12,desc=ad,pre=None,unlock=(b[0],5),target=b[0]))
-        ups.append(dict(id=b[0]+"_b",name=bn,kind='bld',value=2,res=b[3],cost=b[4]*180,desc=bd,pre=b[0]+"_a",unlock=(b[0],20),target=b[0]))
-    for j,(n,d,v,c,ub,uc) in enumerate(age['global_upgrades']):
-        ups.append(dict(id=age['id']+"_global%d"%(j+1),name=n,kind='glob',value=v,res=age['advance'] if False else age['click'],cost=c,desc=d,pre=None,unlock=(ub,uc),target=None))
+        cost_a,cost_b=age.get('upgrade_costs',{}).get(b[0],(b[4]*12,b[4]*180))
+        cost_resource=age.get('upgrade_resources',{}).get(b[0],b[3])
+        ups.append(dict(id=b[0]+"_a",name=an,kind='bld',value=2,res=cost_resource,cost=cost_a,desc=ad,pre=None,unlock=(b[0],5),target=b[0]))
+        ups.append(dict(id=b[0]+"_b",name=bn,kind='bld',value=2,res=cost_resource,cost=cost_b,desc=bd,pre=b[0]+"_a",unlock=(b[0],20),target=b[0]))
+    for j,g in enumerate(age['global_upgrades']):
+        n,d,v,c,ub,uc=g[:6]
+        cost_resource=g[6] if len(g)>6 else age['click']
+        ups.append(dict(id=age['id']+"_global%d"%(j+1),name=n,kind='glob',value=v,res=cost_resource,cost=c,desc=d,pre=None,unlock=(ub,uc),target=None))
     return ups

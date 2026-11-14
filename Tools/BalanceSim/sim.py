@@ -1,7 +1,7 @@
 import math, sys
 from data import *
 MIL=[25,50,100,200,300,400,500]
-def run(age, upgrades, clicks_per_sec=0.7, growth=1.15, maxt=6*3600, verbose=False):
+def run(age, upgrades, clicks_per_sec=0.7, growth=1.15, maxt=16*3600, verbose=False, step=5):
     res={}; cnt={b[0]:0 for b in age['buildings']}; bought=set(); t=0
     B={b[0]:b for b in age['buildings']}
     def get(r): return res.get(r,0)
@@ -56,9 +56,9 @@ def run(age, upgrades, clicks_per_sec=0.7, growth=1.15, maxt=6*3600, verbose=Fal
             if best[0]=='b': res[best[1][3]]-=best[2]; cnt[best[1][0]]+=1
             else: res[best[1]['res']]-=best[2]; bought.add(best[1]['id'])
         p=prod(); cv=clickv()
-        for r,v in p.items(): res[r]=get(r)+v
-        res[age['click']]=get(age['click'])+cv*clicks_per_sec
-        t+=1
+        for r,v in p.items(): res[r]=get(r)+v*step
+        res[age['click']]=get(age['click'])+cv*clicks_per_sec*step
+        t+=step
     return None,cnt
 if __name__=='__main__':
     t,cnt=run(STONE,[])

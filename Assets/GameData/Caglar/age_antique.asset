@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
+  m_Name: age_antique
+  m_EditorClassIdentifier: Assembly-CSharp::AgeData
+  id: antique
+  displayName: "Antik \xC7a\u011F"
+  resources:
+  - {fileID: 11400000, guid: 80e7846410ffc274db91d17e07aab3a8, type: 2}
+  - {fileID: 11400000, guid: cc05639b00445e745bd00607109d9fcc, type: 2}
+  - {fileID: 11400000, guid: acf710cdbe52ccc4ea9797e33b619946, type: 2}
+  - {fileID: 11400000, guid: b0554be53404e1f4aba6b0291c45103d, type: 2}
+  buildings:
+  - {fileID: 11400000, guid: f0f92204c3ad9d640afb4635e0f99894, type: 2}
+  - {fileID: 11400000, guid: 4e9fd47390801844bacc9dbe3374bac3, type: 2}
+  - {fileID: 11400000, guid: 483aab53afd5503429ad2b3fd6f1eca1, type: 2}
+  - {fileID: 11400000, guid: 6846a5064ecb61c459e28e75a93af6a5, type: 2}
+  - {fileID: 11400000, guid: 9901760b014880a44b66bae988f56e28, type: 2}
+  - {fileID: 11400000, guid: bc962a0464b8f7b4180222035e19966f, type: 2}
+  - {fileID: 11400000, guid: 257c5dd9fa9a3644a9826f79d4bba74f, type: 2}
+  - {fileID: 11400000, guid: eb3b58fb6909e56408acf7c234f1b4dc, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: df55e4ab51962b941b4bf95a5315d0ce, type: 2}
+  - {fileID: 11400000, guid: fb8072d8042616841adee3b7b13911e1, type: 2}
+  - {fileID: 11400000, guid: 5d0cbf9d23858b34ab9a4b9070a36e91, type: 2}
+  - {fileID: 11400000, guid: 863981891feece445a46895101f73033, type: 2}
+  - {fileID: 11400000, guid: 5a2593ae72273bc4e8739f3144a2f9c3, type: 2}
+  - {fileID: 11400000, guid: de23f6711aaaf934f913ed23b499a440, type: 2}
+  - {fileID: 11400000, guid: e0ad56ab9ae354b48810026e1cc4f790, type: 2}
+  - {fileID: 11400000, guid: e4b79aa97897d6b479186a7d9f28fd4b, type: 2}
+  - {fileID: 11400000, guid: fb1087a5606fa194ca3bfc57e1f47876, type: 2}
+  - {fileID: 11400000, guid: 72ccff5da43aaf946918c270d7ebadd0, type: 2}
+  - {fileID: 11400000, guid: 307cbb95e252ff2419048b5d934d7da9, type: 2}
+  - {fileID: 11400000, guid: 8e6bcdcb37197024784d82f9abb43b7f, type: 2}
+  - {fileID: 11400000, guid: b622ca757effa35448dc6d6afb0c65c7, type: 2}
+  - {fileID: 11400000, guid: 7d72b648141ab534ab1d50c63a20a9bb, type: 2}
+  - {fileID: 11400000, guid: 6865d16799ec9c14f863707e539e3c12, type: 2}
+  - {fileID: 11400000, guid: fb1b2656265ec4a408fcdd9a26e0fb53, type: 2}
+  - {fileID: 11400000, guid: bd42ff2689dff924bbf2db829889e665, type: 2}
+  - {fileID: 11400000, guid: c7a99e3415d0e5c4f81e8f75e5c7e3ea, type: 2}
+  - {fileID: 11400000, guid: 822ddd912846e324faf3fccbea2141a9, type: 2}
+  - {fileID: 11400000, guid: 508bd2323b665d84cbcabc6a714563ce, type: 2}
+  - {fileID: 11400000, guid: ba657b82e8949a34bad3ebac4ba457f5, type: 2}
+  - {fileID: 11400000, guid: 6fbc41178b0c37e4684b58bcb039fab9, type: 2}
+  clickResource: {fileID: 11400000, guid: 80e7846410ffc274db91d17e07aab3a8, type: 2}
+  advanceResource: {fileID: 11400000, guid: acf710cdbe52ccc4ea9797e33b619946, type: 2}
+  advanceCost: 8000000000000
+  knowledgeReward: 1
+  skyColor: {r: 0.88, g: 0.72, b: 0.51, a: 1}
+  groundColor: {r: 0.45, g: 0.34, b: 0.25, a: 1}

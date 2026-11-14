@@ -33,6 +33,7 @@ public class HUDController : MonoBehaviour
     void Start()
     {
         var gm = GameManager.Instance;
+        PolishHud();
         gm.OnAgeChanged += RebuildRows;
         gm.OnStateChanged += Refresh;
         gatherButton.onClick.AddListener(gm.Gather);
@@ -81,6 +82,68 @@ public class HUDController : MonoBehaviour
     {
         var c = GetComponent<T>();
         return c != null ? c : gameObject.AddComponent<T>();
+    }
+
+    void PolishHud()
+    {
+        SetTopText(resourcesText, new Vector2(0f, 1f), new Vector2(30f, -24f), new Vector2(620f, 150f), TextAlignmentOptions.TopLeft);
+        SetTopText(ageText, new Vector2(0.5f, 1f), new Vector2(0f, -20f), new Vector2(780f, 88f), TextAlignmentOptions.Midline);
+        SetTopText(knowledgeText, new Vector2(1f, 1f), new Vector2(-30f, -24f), new Vector2(500f, 56f), TextAlignmentOptions.MidlineRight);
+
+        if (resourcesText != null)
+        {
+            resourcesText.enableAutoSizing = true;
+            resourcesText.fontSizeMin = 26f;
+            resourcesText.fontSizeMax = 36f;
+            resourcesText.color = new Color(0.16f, 0.13f, 0.12f);
+        }
+        if (ageText != null)
+        {
+            ageText.enableAutoSizing = true;
+            ageText.fontSizeMin = 38f;
+            ageText.fontSizeMax = 54f;
+            ageText.color = new Color(0.17f, 0.13f, 0.11f);
+        }
+        if (knowledgeText != null)
+        {
+            knowledgeText.enableAutoSizing = true;
+            knowledgeText.fontSizeMin = 22f;
+            knowledgeText.fontSizeMax = 30f;
+            knowledgeText.color = new Color(0.22f, 0.16f, 0.12f);
+            knowledgeText.textWrappingMode = TextWrappingModes.NoWrap;
+        }
+
+        var gatherImage = gatherButton != null ? gatherButton.GetComponent<Image>() : null;
+        if (gatherImage != null) gatherImage.color = new Color(0.96f, 0.73f, 0.28f);
+        var gatherLabel = gatherButton != null ? gatherButton.GetComponentInChildren<TMP_Text>() : null;
+        if (gatherLabel != null)
+        {
+            gatherLabel.text = "TOPLA";
+            gatherLabel.fontStyle = FontStyles.Bold;
+            gatherLabel.fontSize = 28f;
+            gatherLabel.color = new Color(0.24f, 0.17f, 0.1f);
+        }
+        if (advanceButtonLabel != null)
+        {
+            advanceButtonLabel.enableAutoSizing = true;
+            advanceButtonLabel.fontSizeMin = 18f;
+            advanceButtonLabel.fontSizeMax = 24f;
+            advanceButtonLabel.fontStyle = FontStyles.Bold;
+        }
+    }
+
+    static void SetTopText(TMP_Text text, Vector2 anchor, Vector2 position, Vector2 size, TextAlignmentOptions alignment)
+    {
+        if (text == null) return;
+        var rt = text.rectTransform;
+        rt.anchorMin = rt.anchorMax = anchor;
+        rt.pivot = anchor;
+        rt.anchoredPosition = position;
+        rt.sizeDelta = size;
+        text.alignment = alignment;
+        text.textWrappingMode = TextWrappingModes.Normal;
+        text.overflowMode = TextOverflowModes.Ellipsis;
+        text.raycastTarget = false;
     }
 
     // Kilometre tasi esigi gecilince binanin ustunde "x2!" cikar
@@ -134,7 +197,7 @@ public class HUDController : MonoBehaviour
         ageText.text = age.displayName;
         knowledgeText.text = "Bilgi: " + NumberFormatter.Format(gm.Knowledge)
             + "  (x" + gm.Multiplier.ToString("0.0", CultureInfo.InvariantCulture) + ")"
-            + (gm.TimeLoops > 0 ? "\nZaman Döngüsü: " + gm.TimeLoops : "");
+            + (gm.TimeLoops > 0 ? "  •  Döngü " + gm.TimeLoops : "");
 
         sb.Length = 0;
         foreach (var r in age.resources)
@@ -163,5 +226,12 @@ public class HUDController : MonoBehaviour
                     ? "Zaman Makinesi (+" + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi)"
                     : "Zaman Makinesi (" + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName + ")";
         }
+
+        bool canProgress = advanceButton.interactable;
+        var advanceImage = advanceButton.GetComponent<Image>();
+        if (advanceImage != null)
+            advanceImage.color = canProgress ? new Color(0.91f, 0.63f, 0.28f) : new Color(0.66f, 0.58f, 0.53f);
+        if (advanceButtonLabel != null)
+            advanceButtonLabel.color = canProgress ? new Color(0.25f, 0.17f, 0.1f) : new Color(0.32f, 0.28f, 0.26f);
     }
 }

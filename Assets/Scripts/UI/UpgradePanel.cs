@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Sol ortada, cag ici yukseltmeleri gosteren panel. Sahneye elle bir sey eklemek gerekmez.
+// Sol tarafta, cag ici yukseltmeleri gosteren acilir liste. Sahneye elle bir sey eklemek gerekmez.
 // Gorunur yukseltmelerin en ucuz MaxShown tanesi listelenir; biri alininca siradaki gelir.
 public class UpgradePanel : MonoBehaviour
 {
@@ -12,14 +12,13 @@ public class UpgradePanel : MonoBehaviour
     const float RowHeight = 100f;
     const float RowGap = 8f;
     const float HeaderHeight = 50f;
-    const float PopupHeaderHeight = 64f;
-    const float PopupWidth = 1000f;
+    const float DropdownMaxHeight = 460f;
+    const float DropdownPadding = 8f;
 
     static readonly Color PanelColor = new Color(0.08f, 0.07f, 0.1f, 0.55f);
     static readonly Color EffectColor = new Color(0.62f, 0.93f, 0.62f);
     static readonly Color FlavorColor = new Color(0.85f, 0.85f, 0.88f);
     static readonly Color CostColor = new Color(1f, 0.85f, 0.35f);
-    static readonly Color ModalDim = new Color(0f, 0f, 0f, 0.68f);
 
     class Row
     {
@@ -31,11 +30,14 @@ public class UpgradePanel : MonoBehaviour
     readonly List<Row> rows = new List<Row>();
     readonly List<UpgradeData> visible = new List<UpgradeData>();
     RectTransform root;
-    RectTransform popup;
-    GameObject overlay;
+    RectTransform dropdown;
+    RectTransform viewport;
+    RectTransform content;
+    ScrollRect scrollRect;
     TextMeshProUGUI emptyText;
     Button headerButton;
     TextMeshProUGUI headerLabel;
+    TextMeshProUGUI plusLabel;
     FloatingTextSpawner texts;
     bool expanded;
 
@@ -49,43 +51,55 @@ public class UpgradePanel : MonoBehaviour
         root.anchorMin = root.anchorMax = new Vector2(0f, 1f);
         root.pivot = new Vector2(0f, 1f);
         root.anchoredPosition = new Vector2(30f, -250f);
-        root.sizeDelta = new Vector2(600f, HeaderHeight);
+        root.sizeDelta = new Vector2(560f, HeaderHeight);
 
-        headerButton = UIFactory.CreateButton(root, "Header", "YÜKSELTMELER  +", 22f, out headerLabel);
+        headerLabel = UIFactory.CreateText(root, "HeaderLabel", "YÜKSELTMELER", 22f, TextAlignmentOptions.MidlineLeft, Color.white,
+            Vector2.zero, Vector2.one, new Vector2(14f, 0f), new Vector2(-62f, 0f), true);
+        headerButton = UIFactory.CreateButton(root, "ExpandButton", "+", 26f, out plusLabel);
         var headerRt = (RectTransform)headerButton.transform;
-        headerRt.anchorMin = new Vector2(0f, 1f); headerRt.anchorMax = new Vector2(1f, 1f);
-        headerRt.pivot = new Vector2(0f, 1f);
-        headerRt.anchoredPosition = Vector2.zero;
-        headerRt.sizeDelta = new Vector2(0f, HeaderHeight);
-        headerLabel.alignment = TextAlignmentOptions.MidlineLeft;
-        headerLabel.margin = new Vector4(14f, 0f, 210f, 0f);
-        headerLabel.fontSize = 22f;
+        headerRt.anchorMin = headerRt.anchorMax = new Vector2(1f, 1f);
+        headerRt.pivot = new Vector2(1f, 1f);
+        headerRt.anchoredPosition = new Vector2(-4f, -4f);
+        headerRt.sizeDelta = new Vector2(46f, HeaderHeight - 8f);
         headerButton.GetComponent<Image>().color = new Color(0.27f, 0.21f, 0.2f, 0.96f);
         headerButton.onClick.AddListener(ToggleExpanded);
 
-        var dim = UIFactory.CreatePanel(canvas.transform, "UpgradeOverlay", ModalDim, true);
-        overlay = dim.gameObject;
-        dim.anchorMin = Vector2.zero; dim.anchorMax = Vector2.one;
-        dim.offsetMin = Vector2.zero; dim.offsetMax = Vector2.zero;
-        popup = UIFactory.CreatePanel(dim, "UpgradeWindow", new Color(0.12f, 0.1f, 0.12f, 0.98f), true);
-        popup.anchorMin = popup.anchorMax = popup.pivot = new Vector2(0.5f, 0.5f);
-        popup.anchoredPosition = Vector2.zero;
-        popup.sizeDelta = new Vector2(PopupWidth, PopupHeaderHeight + RowHeight + RowGap + 16f);
-        UIFactory.CreateText(popup, "PopupTitle", "Yükseltmeler", 32f, TextAlignmentOptions.MidlineLeft, Color.white,
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(20f, -PopupHeaderHeight), new Vector2(-170f, 0f), true);
+        dropdown = UIFactory.CreatePanel(root, "UpgradeDropdown", new Color(0.12f, 0.1f, 0.12f, 0.97f), true);
+        dropdown.anchorMin = new Vector2(0f, 1f);
+        dropdown.anchorMax = new Vector2(1f, 1f);
+        dropdown.pivot = new Vector2(0f, 1f);
+        dropdown.anchoredPosition = new Vector2(0f, -HeaderHeight);
+        dropdown.sizeDelta = new Vector2(0f, 0f);
 
-        TextMeshProUGUI closeLabel;
-        var closeButton = UIFactory.CreateButton(popup, "CloseUpgrades", "Kapat", 20f, out closeLabel);
-        var closeRt = (RectTransform)closeButton.transform;
-        closeRt.anchorMin = closeRt.anchorMax = new Vector2(1f, 1f);
-        closeRt.pivot = new Vector2(1f, 1f);
-        closeRt.anchoredPosition = new Vector2(-14f, -8f);
-        closeRt.sizeDelta = new Vector2(140f, 48f);
-        closeButton.onClick.AddListener(ClosePopup);
+        scrollRect = dropdown.gameObject.AddComponent<ScrollRect>();
+        scrollRect.horizontal = false;
+        scrollRect.vertical = true;
+        scrollRect.movementType = ScrollRect.MovementType.Clamped;
+        scrollRect.scrollSensitivity = 35f;
 
-        emptyText = UIFactory.CreateText(popup, "Empty", "", 24f, TextAlignmentOptions.TopLeft, FlavorColor,
-            new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(20f, 12f), new Vector2(-20f, -PopupHeaderHeight - 8f), false, true);
-        overlay.SetActive(false);
+        var maskRect = UIFactory.CreatePanel(dropdown, "Viewport", Color.white, true);
+        viewport = maskRect;
+        viewport.anchorMin = Vector2.zero;
+        viewport.anchorMax = Vector2.one;
+        viewport.offsetMin = new Vector2(DropdownPadding, DropdownPadding);
+        viewport.offsetMax = new Vector2(-DropdownPadding, -DropdownPadding);
+        var mask = viewport.gameObject.AddComponent<Mask>();
+        mask.showMaskGraphic = false;
+
+        var contentObject = new GameObject("Content", typeof(RectTransform));
+        content = (RectTransform)contentObject.transform;
+        content.SetParent(viewport, false);
+        content.anchorMin = new Vector2(0f, 1f);
+        content.anchorMax = new Vector2(1f, 1f);
+        content.pivot = new Vector2(0.5f, 1f);
+        content.anchoredPosition = Vector2.zero;
+        content.sizeDelta = Vector2.zero;
+        scrollRect.viewport = viewport;
+        scrollRect.content = content;
+
+        emptyText = UIFactory.CreateText(content, "Empty", "", 24f, TextAlignmentOptions.TopLeft, FlavorColor,
+            Vector2.zero, Vector2.one, new Vector2(12f, 12f), new Vector2(-12f, -12f), false, true);
+        dropdown.gameObject.SetActive(false);
 
         var gm = GameManager.Instance;
         gm.OnUpgradesChanged += Rebuild;
@@ -99,11 +113,6 @@ public class UpgradePanel : MonoBehaviour
         if (gm == null) return;
         gm.OnUpgradesChanged -= Rebuild;
         gm.OnStateChanged -= Refresh;
-    }
-
-    void Update()
-    {
-        if (expanded && Input.GetKeyDown(KeyCode.Escape)) ClosePopup();
     }
 
     // Gorunur liste degistiyse satirlari yeniden kurar, degismediyse sadece tiklanabilirligi gunceller.
@@ -131,7 +140,11 @@ public class UpgradePanel : MonoBehaviour
 
         gm.GetVisibleUpgrades(visible);
         int shown = Mathf.Min(MaxShown, visible.Count);
-        popup.sizeDelta = new Vector2(PopupWidth, PopupHeaderHeight + Mathf.Max(1, shown) * (RowHeight + RowGap) + 16f);
+        float contentHeight = Mathf.Max(1, shown) * (RowHeight + RowGap);
+        float dropdownHeight = Mathf.Min(DropdownMaxHeight, contentHeight + DropdownPadding * 2f);
+        dropdown.sizeDelta = new Vector2(0f, dropdownHeight);
+        content.sizeDelta = new Vector2(0f, contentHeight);
+        scrollRect.vertical = contentHeight + DropdownPadding * 2f > dropdownHeight;
         UpdateHeader();
         for (int i = 0; i < shown; i++) rows.Add(CreateRow(visible[i], i));
 
@@ -148,35 +161,37 @@ public class UpgradePanel : MonoBehaviour
     void ToggleExpanded()
     {
         expanded = !expanded;
-        overlay.SetActive(expanded);
-        if (expanded) overlay.transform.SetAsLastSibling();
+        dropdown.gameObject.SetActive(expanded);
+        if (expanded) root.SetAsLastSibling();
         UpdateHeader();
     }
 
     void ClosePopup()
     {
         expanded = false;
-        overlay.SetActive(false);
+        dropdown.gameObject.SetActive(false);
         UpdateHeader();
     }
 
     void UpdateHeader()
     {
         string countLabel = visible.Count > 0 ? " (" + visible.Count + ")" : "";
-        headerLabel.text = expanded ? "YÜKSELTMELER" + countLabel + "  −" : "YÜKSELTMELER" + countLabel + "  +";
+        headerLabel.text = "YÜKSELTMELER" + countLabel;
+        plusLabel.text = expanded ? "−" : "+";
     }
 
     Row CreateRow(UpgradeData u, int index)
     {
         TextMeshProUGUI unused;
-        var btn = UIFactory.CreateButton(popup, "Upg_" + u.id, "", 20f, out unused);
+        var btn = UIFactory.CreateButton(content, "Upg_" + u.id, "", 20f, out unused);
         Destroy(unused.gameObject);   // CreateButton'in tek satirlik etiketine ihtiyacimiz yok
 
         var rt = (RectTransform)btn.transform;
-        rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
+        rt.anchorMin = new Vector2(0f, 1f);
+        rt.anchorMax = new Vector2(1f, 1f);
         rt.pivot = new Vector2(0f, 1f);
-        rt.anchoredPosition = new Vector2(8f, -PopupHeaderHeight - index * (RowHeight + RowGap));
-        rt.sizeDelta = new Vector2(PopupWidth - 16f, RowHeight);
+        rt.anchoredPosition = new Vector2(0f, -index * (RowHeight + RowGap));
+        rt.sizeDelta = new Vector2(0f, RowHeight);
 
         UIFactory.CreateText(rt, "Name", u.displayName, 28f, TextAlignmentOptions.MidlineLeft, Color.white,
             new Vector2(0f, 0.55f), new Vector2(1f, 1f), new Vector2(12f, 0f), new Vector2(-190f, -6f), true, true);

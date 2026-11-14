@@ -1400,6 +1400,8 @@ MonoBehaviour:
   ages:
   - {fileID: 11400000, guid: 0da7ddae89c7cf94eb83820fa00169a7, type: 2}
   - {fileID: 11400000, guid: f7a590dd19e93174997960739b8bb9bf, type: 2}
+  - {fileID: 11400000, guid: c9b58fd5e9694ab8b0ccf43189a5404a, type: 2}
+  - {fileID: 11400000, guid: 7d31bc70850c4c6795c4c338ebf88e0c, type: 2}
   permanentUpgrades:
   - {fileID: 11400000, guid: b93f096bbffcd3d40a8ce36678096601, type: 2}
   - {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}

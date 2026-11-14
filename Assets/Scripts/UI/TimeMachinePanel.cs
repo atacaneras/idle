@@ -71,12 +71,15 @@ public class TimeMachinePanel : MonoBehaviour
         openButton = UIFactory.CreateButton(canvas, "OpenTreeButton", "Bilgi Ağacı", 30f, out openLabel);
         var rt = (RectTransform)openButton.transform;
         rt.SetAsLastSibling();
-        // Yukseltme panelinin basligina yerlestir; bina satirlarinin ustune tasmasin.
-        rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
-        rt.pivot = new Vector2(0f, 1f);
-        rt.anchoredPosition = new Vector2(415f, -250f);
-        rt.sizeDelta = new Vector2(200f, 50f);
+        // Kaynak/bilgi satirinin altinda, sag ustte; yukseltme panelinden ayri dursun.
+        rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
+        rt.pivot = new Vector2(1f, 1f);
+        rt.anchoredPosition = new Vector2(-30f, -86f);
+        rt.sizeDelta = new Vector2(260f, 54f);
         openLabel.fontSize = 22f;
+        openLabel.fontSizeMin = 17f;
+        openLabel.fontSizeMax = 22f;
+        openLabel.enableAutoSizing = true;
         openButton.onClick.AddListener(Open);
     }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_antique_antique_scribes_a
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: antique_antique_scribes_a
+  displayName: "Kopya K\xE2tipler"
+  description: "\xDCretim artt\u0131. Toplant\u0131 tutana\u011F\u0131 kay\u0131p."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: 483aab53afd5503429ad2b3fd6f1eca1, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: b0554be53404e1f4aba6b0291c45103d, type: 2}
+  cost: 5400
+  unlockBuilding: {fileID: 11400000, guid: 483aab53afd5503429ad2b3fd6f1eca1, type: 2}
+  unlockCount: 5
+  prerequisite: {fileID: 0}

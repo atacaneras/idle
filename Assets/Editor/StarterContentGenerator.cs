@@ -38,6 +38,7 @@ public static class StarterContentGenerator
         Resource("bronze", "Bronz", "res_bronze");
         Resource("coin", "Sikke", "res_coin");
         Resource("knowledge", "Bilgelik", "res_wisdom");
+        AddAncientResources();
 
         // Binalar
         Building("stone_gatherer", "bld_gatherer", "Toplayıcı Alanı", "food", "food", 15.0, 0.5, -8f, -3.4f, 1, 0f, 1f, 0f);
@@ -56,7 +57,7 @@ public static class StarterContentGenerator
         Building("farm_bakery", "bld_farm_bakery", "Köy Fırını", "flour", "milk", 40000.0, 250.0, -0.5f, -2.7f, 0, 0.85f, 0.45f, 0.2f);
         Building("farm_canal", "bld_farm_canal", "Sulama Kanalı", "wheat", "flour", 300000.0, 2500.0, 1f, -3.4f, 1, 0.2f, 0.5f, 0.8f);
         Building("farm_square", "bld_farm_square", "Dedikodu Meydanı", "flour", "milk", 2500000.0, 5000.0, 2.5f, -2.7f, 0, 0.6f, 0.6f, 0.3f);
-        Building("bronze_smelter", "bld_bronze_smelter", "Bronz Dökümhanesi", "bronze", "wheat", 20e6, 18000, -8f, -3.4f, 1, 0.72f, 0.35f, 0.18f);
+        Building("bronze_smelter", "bld_bronze_smelter", "Bronz Dökümhanesi", "bronze", "bronze", 100, 18000, -8f, -3.4f, 1, 0.72f, 0.35f, 0.18f);
         Building("bronze_mint", "bld_bronze_mint", "Sikke Darphanesi", "coin", "bronze", 90e6, 7000, -6f, -2.7f, 0, 0.86f, 0.68f, 0.28f);
         Building("bronze_library", "bld_bronze_library", "Kil Tablet Arşivi", "knowledge", "coin", 300e6, 2500, -4f, -3.4f, 1, 0.55f, 0.38f, 0.22f);
         Building("bronze_cart", "bld_bronze_cart", "Tekerlekli Kervan", "coin", "bronze", 900e6, 80000, -2f, -2.7f, 0, 0.48f, 0.3f, 0.16f);
@@ -64,6 +65,7 @@ public static class StarterContentGenerator
         Building("bronze_workshop", "bld_bronze_workshop", "Zanaat Atölyesi", "bronze", "knowledge", 18e9, 350000, 2f, -2.7f, 0, 0.72f, 0.48f, 0.25f);
         Building("bronze_observatory", "bld_bronze_observatory", "Gözlemevi", "knowledge", "bronze", 70e9, 180000, 4f, -3.4f, 1, 0.24f, 0.32f, 0.55f);
         Building("bronze_forum", "bld_bronze_forum", "Şehir Forumu", "coin", "knowledge", 250e9, 1800000, 6f, -2.7f, 0, 0.78f, 0.58f, 0.32f);
+        CreateAncientBuildings();
 
         // Cag ici yukseltmeler
         Upgrade("stone_click1", "Daha Sivri Taş", "Sivri olan daha iyi toplar. Bu bilim.", UpgradeKind.ClickMultiplier, 2.0, null, "food", 100.0, null, 0, null);
@@ -125,6 +127,7 @@ public static class StarterContentGenerator
         }
         Upgrade("bronze_global1", "Standart Ölçüler", "Herkes aynı ölçü kabını kullanıyor. Neredeyse.", UpgradeKind.GlobalMultiplier, 1.5, null, "coin", 3000000, "bronze_mint", 10, null);
         Upgrade("bronze_global2", "Yazılı Kanunlar", "Kurallar tablete yazıldı; artık kimse okuyamıyor.", UpgradeKind.GlobalMultiplier, 2, null, "knowledge", 100000000, "bronze_forum", 10, null);
+        CreateAncientUpgradesAndAge();
         foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
 
         // Kalici yukseltmeler (Bilgi Agaci)
@@ -148,6 +151,63 @@ public static class StarterContentGenerator
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Evrim: baslangic icerigi olusturuldu. Sahneyi kaydet (Ctrl+S).");
+    }
+
+    [MenuItem("Evrim/Antik Çağ İçeriğini Oluştur")]
+    public static void GenerateAncientOnly()
+    {
+        resources.Clear(); buildings.Clear(); upgrades.Clear();
+        pendingPrereq.Clear();
+        ExistingResource("knowledge", "res_wisdom");
+        AddAncientResources();
+        CreateAncientBuildings();
+        CreateAncientUpgradesAndAge();
+        foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("Antik Çağ asset'leri oluşturuldu; mevcut çağ asset'leri yeniden yazılmadı.");
+    }
+
+    static void AddAncientResources()
+    {
+        Resource("papyrus", "Papir", "res_papyrus");
+        Resource("marble", "Mermer", "res_marble");
+        Resource("drachma", "Drahmi", "res_drachma");
+    }
+
+    static void CreateAncientBuildings()
+    {
+        Building("antique_field", "bld_antique_field", "Papirüs Tarlası", "papyrus", "papyrus", 10.0, 1.0, -8f, -3.4f, 1, 0.56f, 0.67f, 0.35f);
+        Building("antique_masonry", "bld_antique_masonry", "Mermer Ocağı", "marble", "papyrus", 120.0, 2.0, -6f, -2.7f, 0, 0.78f, 0.75f, 0.65f);
+        Building("antique_scribes", "bld_antique_scribes", "Kâtipler Birliği", "knowledge", "papyrus", 450.0, 5.0, -4f, -3.4f, 1, 0.75f, 0.63f, 0.42f);
+        Building("antique_market", "bld_antique_market", "Agora Pazarı", "drachma", "papyrus", 1800.0, 16.0, -2f, -2.7f, 0, 0.75f, 0.48f, 0.28f);
+        Building("antique_academy", "bld_antique_academy", "Felsefe Akademisi", "knowledge", "drachma", 14000.0, 90.0, 0f, -3.4f, 1, 0.42f, 0.55f, 0.72f);
+        Building("antique_theater", "bld_antique_theater", "Amfitiyatro", "drachma", "marble", 50000.0, 450.0, 2f, -2.7f, 0, 0.68f, 0.32f, 0.25f);
+        Building("antique_aqueduct", "bld_antique_aqueduct", "Su Kemeri", "papyrus", "marble", 350000.0, 3200.0, 4f, -3.4f, 1, 0.37f, 0.58f, 0.66f);
+        Building("antique_lighthouse", "bld_antique_lighthouse", "İskenderiye Feneri", "knowledge", "drachma", 3000000.0, 10000.0, 6f, -2.7f, 0, 0.92f, 0.73f, 0.38f);
+    }
+
+    static void CreateAncientUpgradesAndAge()
+    {
+        Upgrade("antique_click1", "Keskin Kamış Kalem", "Yazı hızlandı. Okunabilirlik aynı kaldı.", UpgradeKind.ClickMultiplier, 2, null, "papyrus", 250, null, 0, null);
+        Upgrade("antique_click2", "Çift Taraflı Tablet", "Önü dolunca arkasına yazdık. Deha böyle bir şey.", UpgradeKind.ClickMultiplier, 2, null, "papyrus", 8000, null, 0, "antique_click1");
+        Upgrade("antique_click3", "Kamusal Tartışma", "Birisi konuşuyor, herkes üretimi bırakıp dinliyor.", UpgradeKind.ClickProductionShare, 0.015, null, "drachma", 120000, null, 0, "antique_click2");
+        Upgrade("antique_click4", "Retorik Dersi", "Aynı şeyi daha uzun anlatınca daha ikna edici oluyor.", UpgradeKind.ClickMultiplier, 3, null, "marble", 1800000, null, 0, "antique_click3");
+        string[] ab = { "antique_field", "antique_masonry", "antique_scribes", "antique_market", "antique_academy", "antique_theater", "antique_aqueduct", "antique_lighthouse" };
+        string[] an = { "Daha Verimli Kamışlık", "Düzgün Kesilmiş Mermer", "Kopya Kâtipler", "Agora İndirimi", "Düşünce Molası", "Ucuz Koltuklar", "İkinci Su Hattı", "Daha Güçlü Ayna" };
+        string[] ar = { "papyrus", "marble", "knowledge", "drachma", "knowledge", "drachma", "papyrus", "knowledge" };
+        double[] ac = { 120, 1440, 5400, 21600, 168000, 600000, 4200000, 36000000 };
+        for (int i = 0; i < ab.Length; i++)
+        {
+            Upgrade("antique_" + ab[i] + "_a", an[i], "Üretim arttı. Toplantı tutanağı kayıp.", UpgradeKind.BuildingMultiplier, 2, ab[i], ar[i], ac[i], ab[i], 5, null);
+            Upgrade("antique_" + ab[i] + "_b", an[i] + " II", "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.", UpgradeKind.BuildingMultiplier, 2, ab[i], ar[i], ac[i] * 15, ab[i], 20, "antique_" + ab[i] + "_a");
+        }
+        Upgrade("antique_global1", "Standart Drahmi", "Artık herkes aynı parayı tartışıyor.", UpgradeKind.GlobalMultiplier, 1.5, null, "drachma", 25000, "antique_market", 10, null);
+        Upgrade("antique_global2", "Büyük Kütüphane", "Bilginin merkezi. Yangın söndürücü bütçesi yok.", UpgradeKind.GlobalMultiplier, 2, null, "knowledge", 8000000, "antique_academy", 10, null);
+        foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
+        var antiqueUpgrades = new List<string> { "antique_click1", "antique_click2", "antique_click3", "antique_click4", "antique_global1", "antique_global2" };
+        foreach (var b in ab) { antiqueUpgrades.Add("antique_" + b + "_a"); antiqueUpgrades.Add("antique_" + b + "_b"); }
+        ConfigureAge("age_antique", new[] { "papyrus", "marble", "drachma", "knowledge" }, ab, antiqueUpgrades.ToArray(), 8000000000000.0, 1, "drachma");
     }
 
     // ---- Yardimcilar ----
@@ -221,7 +281,7 @@ public static class StarterContentGenerator
         perms[id] = p;
     }
 
-    static void ConfigureAge(string file, string[] res, string[] blds, string[] upgs, double advanceCost, double knowledge)
+    static void ConfigureAge(string file, string[] res, string[] blds, string[] upgs, double advanceCost, double knowledge, string advanceResourceId = null)
     {
         var age = AssetDatabase.LoadAssetAtPath<AgeData>(Root + "/Caglar/" + file + ".asset");
         if (age == null) { Debug.LogError("Cag bulunamadi: " + file); return; }
@@ -231,6 +291,7 @@ public static class StarterContentGenerator
         age.advanceCost = advanceCost;
         if (age.clickResource == null) age.clickResource = resources[res[0]];
         if (age.advanceResource == null) age.advanceResource = resources[res[0]];
+        if (advanceResourceId != null) age.advanceResource = resources[advanceResourceId];
         if (knowledge > 0) age.knowledgeReward = knowledge;
         EditorUtility.SetDirty(age);
     }
