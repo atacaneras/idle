@@ -38,6 +38,7 @@ public static class StarterContentGenerator
 
         Validate(content);
 
+        used.Clear();
         var resources = new Dictionary<string, ResourceData>();
         var buildings = new Dictionary<string, BuildingData>();
         var upgrades = new Dictionary<string, UpgradeData>();
@@ -61,6 +62,7 @@ public static class StarterContentGenerator
             {
                 var asset = LoadOrCreate<BuildingData>("Binalar", b.asset);
                 asset.id = b.id;
+                asset.artFolder = age.id;
                 asset.displayName = b.displayName;
                 asset.produces = Get(resources, b.produces, "bina " + b.id + " produces");
                 asset.costResource = Get(resources, b.costResource, "bina " + b.id + " costResource");
@@ -142,9 +144,22 @@ public static class StarterContentGenerator
             var asset = LoadOrCreate<AgeData>("Caglar", a.asset);
             asset.id = a.id;
             asset.displayName = a.displayName;
+            asset.side = a.side == "hell" ? Side.Hell : a.side == "heaven" ? Side.Heaven : Side.None;
+            asset.clickLabel = a.clickLabel;
+            asset.goalTitle = a.goalTitle;
             asset.resources = Map(a.resources, resources, "cag " + a.id + " resources");
             asset.buildings = MapEntries(a.buildings, x => x.id, buildings, "cag " + a.id + " buildings");
             asset.upgrades = MapEntries(a.upgrades, x => x.id, upgrades, "cag " + a.id + " upgrades");
+            var qlist = new List<QuestDef>();
+            if (a.quests != null)
+                foreach (var q in a.quests)
+                    qlist.Add(new QuestDef
+                    {
+                        id = q.id, text = q.text, kind = (QuestKind)Enum.Parse(typeof(QuestKind), q.kind),
+                        building = string.IsNullOrEmpty(q.building) ? null : Get(buildings, q.building, "gorev " + q.id),
+                        amount = q.amount, rewardFlat = q.rewardFlat, rewardSeconds = q.rewardSeconds, rewardKnowledge = q.rewardKnowledge
+                    });
+            asset.quests = qlist.ToArray();
             asset.clickResource = Get(resources, a.clickResource, "cag " + a.id + " clickResource");
             asset.advanceResource = Get(resources, a.advanceResource, "cag " + a.id + " advanceResource");
             asset.advanceCost = a.advanceCost;
@@ -158,9 +173,12 @@ public static class StarterContentGenerator
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
+        CleanOrphans();
+
         var permList = new List<PermanentUpgradeData>();
         foreach (var p in content.permanentUpgrades) permList.Add(perms[p.id]);
         AssignToGameManager(ages, permList, content.game);
+        ArtGuide.Generate();
         Debug.Log("Icerik uretildi: " + ages.Count + " cag, " + buildings.Count + " bina, "
             + upgrades.Count + " yukseltme, " + perms.Count + " kalici yukseltme.");
     }
@@ -170,9 +188,25 @@ public static class StarterContentGenerator
     static void GenerateLegacy() { Generate(); }
 
     // ---- Yardimcilar ----
+    static readonly HashSet<string> used = new HashSet<string>();
+
+    // Yeni JSON'da olmayan eski kaynak/bina/yukseltme/cag asset'lerini siler (eski icerigi temizler).
+    static void CleanOrphans()
+    {
+        int n = 0;
+        foreach (var folder in new[] { "Kaynaklar", "Binalar", "Yukseltmeler", "Caglar" })
+            foreach (var guid in AssetDatabase.FindAssets("t:ScriptableObject", new[] { Root + "/" + folder }))
+            {
+                string p = AssetDatabase.GUIDToAssetPath(guid);
+                if (!used.Contains(p) && AssetDatabase.DeleteAsset(p)) n++;
+            }
+        Debug.Log("Eski icerik temizlendi: " + n + " asset silindi.");
+    }
+
     static T LoadOrCreate<T>(string folder, string assetName) where T : ScriptableObject
     {
         string path = Root + "/" + folder + "/" + assetName + ".asset";
+        used.Add(path);
         var asset = AssetDatabase.LoadAssetAtPath<T>(path);
         if (asset != null) return asset;
         asset = ScriptableObject.CreateInstance<T>();
@@ -285,6 +319,9 @@ public static class StarterContentGenerator
         public string id;
         public string asset;
         public string displayName;
+        public string side;
+        public string clickLabel;
+        public string goalTitle;
         public string clickResource;
         public string advanceResource;
         public double advanceCost;
@@ -293,6 +330,7 @@ public static class StarterContentGenerator
         public float[] skyColor;
         public float[] groundColor;
         public BuildingEntry[] buildings;
+        public QuestEntry[] quests;
         public UpgradeEntry[] upgrades;
     }
 
@@ -310,6 +348,18 @@ public static class StarterContentGenerator
         public int sortingOrder;
         public float[] placeholderColor;
         public float[] placeholderSize;
+    }
+
+    [Serializable] public class QuestEntry
+    {
+        public string id;
+        public string text;
+        public string kind;
+        public string building;
+        public double amount;
+        public double rewardFlat;
+        public double rewardSeconds;
+        public double rewardKnowledge;
     }
 
     [Serializable] public class UpgradeEntry

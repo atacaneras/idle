@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463226b404ca49f41af037aa00f72ca2, type: 3}
+  m_Name: bld_heaven_1_teyze
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingData
+  artFolder: heaven_1
+  id: heaven_1_teyze
+  displayName: "Teyzeye Yol G\xF6sterme Tezg\xE2h\u0131"
+  icon: {fileID: 0}
+  produces: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  costResource: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  baseCost: 15
+  costGrowth: 1.15
+  baseProduction: 0.2
+  levelSprites: []
+  scenePosition: {x: -8, y: -3.4}
+  sortingOrder: 0
+  placeholderColor: {r: 1, g: 1, b: 1, a: 1}
+  placeholderSize: {x: 1.4, y: 1.8}

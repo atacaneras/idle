@@ -31,7 +31,15 @@ public class GameState
     public double playSeconds;
     public int agesAdvanced;
     public List<string> achievements = new List<string>();
+
+    // v5 (surum numarasi artmadi: eksik alanlar 0 gelir): taraf ve kat
+    public int side;    // 0 = secilmedi, 1 = Cehennem, 2 = Cennet
+    public int floor;   // -7..-1 cehennem, 0 yeryuzu, 1..7 cennet
+    public double runClicks;                                      // bu turdaki tiklama (gorevler icin)
+    public List<string> claimedQuests = new List<string>();       // bu turda odulu alinan gorevler
 }
+
+public enum Side { None = 0, Hell = 1, Heaven = 2 }
 
 [Serializable] public struct NamedDouble { public string id; public double value; }
 [Serializable] public struct NamedInt { public string id; public int value; }

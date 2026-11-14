@@ -18,2726 +18,756 @@
   },
   "resources": [
     {
-      "id": "bronze",
-      "displayName": "Bronz",
-      "asset": "res_bronze"
+      "id": "sin",
+      "displayName": "Günah Fişi",
+      "asset": "res_sin"
     },
     {
-      "id": "cloth",
-      "displayName": "Kumaş",
-      "asset": "res_cloth"
-    },
-    {
-      "id": "coin",
-      "displayName": "Sikke",
-      "asset": "res_coin"
-    },
-    {
-      "id": "drachma",
-      "displayName": "Drahmi",
-      "asset": "res_drachma"
-    },
-    {
-      "id": "faith",
-      "displayName": "İnanç",
-      "asset": "res_faith"
-    },
-    {
-      "id": "flour",
-      "displayName": "Un",
-      "asset": "res_flour"
-    },
-    {
-      "id": "food",
-      "displayName": "Yiyecek",
-      "asset": "res_food"
-    },
-    {
-      "id": "iron",
-      "displayName": "Demir",
-      "asset": "res_iron"
-    },
-    {
-      "id": "knowledge",
-      "displayName": "Bilgelik",
-      "asset": "res_wisdom"
-    },
-    {
-      "id": "marble",
-      "displayName": "Mermer",
-      "asset": "res_marble"
-    },
-    {
-      "id": "milk",
-      "displayName": "Süt",
-      "asset": "res_milk"
-    },
-    {
-      "id": "papyrus",
-      "displayName": "Papir",
-      "asset": "res_papyrus"
-    },
-    {
-      "id": "stone",
-      "displayName": "Taş",
-      "asset": "res_stone"
-    },
-    {
-      "id": "wheat",
-      "displayName": "Buğday",
-      "asset": "res_wheat"
-    },
-    {
-      "id": "wood",
-      "displayName": "Odun",
-      "asset": "res_wood"
-    },
-    {
-      "id": "wool",
-      "displayName": "Yün",
-      "asset": "res_wool"
+      "id": "good",
+      "displayName": "Sevap",
+      "asset": "res_good"
     }
   ],
   "ages": [
     {
-      "id": "stone",
-      "asset": "age_stone",
-      "displayName": "Taş Çağı",
-      "clickResource": "food",
-      "advanceResource": "stone",
-      "advanceCost": 90000000.0,
+      "id": "hell_1",
+      "asset": "age_hell_1",
+      "displayName": "Cehennem 1. Kat: Bekleme Salonu",
+      "side": "hell",
+      "clickLabel": "CEZALANDIR",
+      "goalTitle": "BOSS: Numaratör Nuri",
+      "clickResource": "sin",
+      "advanceResource": "sin",
+      "advanceCost": 2000000,
       "knowledgeReward": 3,
       "resources": [
-        "food",
-        "wood",
-        "stone"
+        "sin"
       ],
       "skyColor": [
-        0.98,
-        0.8,
-        0.65
+        0.45,
+        0.05,
+        0.03
       ],
       "groundColor": [
-        0.45,
-        0.3,
-        0.2
+        0.2,
+        0.02,
+        0.02
       ],
       "buildings": [
         {
-          "id": "stone_gatherer",
-          "asset": "bld_gatherer",
-          "displayName": "Toplayıcı Alanı",
-          "produces": "food",
-          "costResource": "food",
+          "id": "hell_1_korna",
+          "asset": "bld_hell_1_korna",
+          "displayName": "Kornacı Ceza Kulübesi",
+          "produces": "sin",
+          "costResource": "sin",
           "baseCost": 15,
           "costGrowth": 1.15,
-          "baseProduction": 0.5,
+          "baseProduction": 0.2,
           "scenePosition": [
-            -8,
+            -8.0,
             -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0,
-            1,
-            0
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "stone_woodcamp",
-          "asset": "bld_woodcamp",
-          "displayName": "Odun Kampı",
-          "produces": "wood",
-          "costResource": "food",
-          "baseCost": 100,
-          "costGrowth": 1.15,
-          "baseProduction": 1.0,
-          "scenePosition": [
-            -6.5,
-            -2.7
           ],
           "sortingOrder": 0,
           "placeholderColor": [
-            0.545,
-            0.27,
-            0.075
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "stone_hunter",
-          "asset": "bld_hunter",
-          "displayName": "Avcı Kampı",
-          "produces": "food",
-          "costResource": "wood",
-          "baseCost": 300,
-          "costGrowth": 1.15,
-          "baseProduction": 8,
-          "scenePosition": [
-            -5,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
             1,
-            0,
-            0
+            0.3,
+            0.2
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         },
         {
-          "id": "stone_quarry",
-          "asset": "bld_quarry",
-          "displayName": "Taş Ocağı",
-          "produces": "stone",
-          "costResource": "wood",
-          "baseCost": 1100,
+          "id": "hell_1_bant",
+          "asset": "bld_hell_1_bant",
+          "displayName": "Kırmızı Bant Memuru",
+          "produces": "sin",
+          "costResource": "sin",
+          "baseCost": 120,
           "costGrowth": 1.15,
-          "baseProduction": 1.0,
+          "baseProduction": 1.5,
           "scenePosition": [
-            -3.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.3,
-            0.3,
-            0.3
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "stone_axeshop",
-          "asset": "bld_stone_axeshop",
-          "displayName": "Balta Atölyesi",
-          "produces": "wood",
-          "costResource": "stone",
-          "baseCost": 300,
-          "costGrowth": 1.15,
-          "baseProduction": 30,
-          "scenePosition": [
-            -2,
+            -4.4,
             -3.4
           ],
           "sortingOrder": 1,
+          "placeholderColor": [
+            0.9,
+            0.2,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_1_fotokopi",
+          "asset": "bld_hell_1_fotokopi",
+          "displayName": "Sonsuz Fotokopi Makinesi",
+          "produces": "sin",
+          "costResource": "sin",
+          "baseCost": 1200,
+          "costGrowth": 1.15,
+          "baseProduction": 9,
+          "scenePosition": [
+            -0.7999999999999998,
+            -3.4
+          ],
+          "sortingOrder": 2,
+          "placeholderColor": [
+            0.8,
+            0.5,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_1_asansor",
+          "asset": "bld_hell_1_asansor",
+          "displayName": "Asansör Müziği Hoparlörü",
+          "produces": "sin",
+          "costResource": "sin",
+          "baseCost": 14000,
+          "costGrowth": 1.15,
+          "baseProduction": 55,
+          "scenePosition": [
+            2.8000000000000007,
+            -3.4
+          ],
+          "sortingOrder": 3,
           "placeholderColor": [
             0.6,
-            0.45,
+            0.1,
             0.3
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         },
         {
-          "id": "stone_firepit",
-          "asset": "bld_stone_firepit",
-          "displayName": "Ateş Çukuru",
-          "produces": "food",
-          "costResource": "stone",
-          "baseCost": 1500,
+          "id": "hell_1_tabela",
+          "asset": "bld_hell_1_tabela",
+          "displayName": "“Lütfen Bekleyiniz” Tabelası",
+          "produces": "sin",
+          "costResource": "sin",
+          "baseCost": 170000,
           "costGrowth": 1.15,
-          "baseProduction": 120,
+          "baseProduction": 320,
           "scenePosition": [
-            -0.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            1,
-            0.5,
-            0
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "stone_mammoth",
-          "asset": "bld_stone_mammoth",
-          "displayName": "Mamut Taşıyıcılar",
-          "produces": "stone",
-          "costResource": "food",
-          "baseCost": 15000,
-          "costGrowth": 1.15,
-          "baseProduction": 40,
-          "scenePosition": [
-            1,
+            6.4,
             -3.4
           ],
-          "sortingOrder": 1,
+          "sortingOrder": 4,
           "placeholderColor": [
-            0.45,
-            0.3,
-            0.25
+            1,
+            0.8,
+            0.1
           ],
           "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "stone_gallery",
-          "asset": "bld_stone_gallery",
-          "displayName": "Mağara Galerisi",
-          "produces": "food",
-          "costResource": "stone",
-          "baseCost": 9000,
-          "costGrowth": 1.15,
-          "baseProduction": 600,
-          "scenePosition": [
-            2.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.7,
-            0.4,
-            0.8
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         }
       ],
       "upgrades": [
         {
-          "id": "stone_click1",
-          "asset": "upg_stone_click1",
-          "displayName": "Daha Sivri Taş",
-          "description": "Sivri olan daha iyi toplar. Bu bilim.",
+          "id": "hell_1_click1",
+          "asset": "upg_hell_1_click1",
+          "displayName": "Daha Sert Bakış",
+          "description": "Ceza kesmeden önce kaşını çatmak verimi iki katına çıkarıyor.",
           "kind": "ClickMultiplier",
           "value": 2,
           "targetBuilding": null,
-          "costResource": "food",
+          "costResource": "sin",
           "cost": 100,
           "unlockBuilding": null,
           "unlockCount": 0,
           "prerequisite": null
         },
         {
-          "id": "stone_click2",
-          "asset": "upg_stone_click2",
-          "displayName": "Çift Elle Toplama",
-          "description": "İki el, iki kat verim. Matematik zor ama doğru.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "food",
-          "cost": 1500,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "stone_click1"
-        },
-        {
-          "id": "stone_click3",
-          "asset": "upg_stone_click3",
-          "displayName": "Toplama Teknikleri",
-          "description": "Ustalar işi böyle yapar. Kimse ustaların kim olduğunu bilmiyor.",
-          "kind": "ClickProductionShare",
-          "value": 0.01,
-          "targetBuilding": null,
-          "costResource": "food",
-          "cost": 12000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "stone_click2"
-        },
-        {
-          "id": "stone_click4",
-          "asset": "upg_stone_click4",
-          "displayName": "Kas Hafızası",
-          "description": "Kollar düşünmeden topluyor. Beyin tatilde.",
+          "id": "hell_1_click2",
+          "asset": "upg_hell_1_click2",
+          "displayName": "Kırmızı Kalem",
+          "description": "Formu yanlış dolduran herkes ekstra cezalanıyor. Adalet bu.",
           "kind": "ClickMultiplier",
           "value": 3,
           "targetBuilding": null,
-          "costResource": "food",
-          "cost": 90000,
+          "costResource": "sin",
+          "cost": 2500,
           "unlockBuilding": null,
           "unlockCount": 0,
-          "prerequisite": "stone_click3"
+          "prerequisite": "hell_1_click1"
         },
         {
-          "id": "stone_gatherer_a",
-          "asset": "upg_stone_gatherer_a",
-          "displayName": "Sepet Örmek",
-          "description": "İlk sepet. Kimse nasıl yapıldığını hatırlamıyor ama herkes çok gururlu.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_gatherer",
-          "costResource": "food",
-          "cost": 180,
-          "unlockBuilding": "stone_gatherer",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_gatherer_b",
-          "asset": "upg_stone_gatherer_b",
-          "displayName": "Meyve Haritası",
-          "description": "Hangi çalıdan ne çıktığını duvara çizdik. Duvar artık bizim arama motoru.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_gatherer",
-          "costResource": "food",
-          "cost": 2700,
-          "unlockBuilding": "stone_gatherer",
-          "unlockCount": 20,
-          "prerequisite": "stone_gatherer_a"
-        },
-        {
-          "id": "stone_woodcamp_a",
-          "asset": "upg_stone_woodcamp_a",
-          "displayName": "Sivri Sopa",
-          "description": "Her sopa bir ağaç söker. Teoride.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_woodcamp",
-          "costResource": "food",
-          "cost": 1200,
-          "unlockBuilding": "stone_woodcamp",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_woodcamp_b",
-          "asset": "upg_stone_woodcamp_b",
-          "displayName": "Odun Sendikası",
-          "description": "Mesai saati icat edildi. Kimse ne olduğunu anlamadı.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_woodcamp",
-          "costResource": "food",
-          "cost": 18000,
-          "unlockBuilding": "stone_woodcamp",
-          "unlockCount": 20,
-          "prerequisite": "stone_woodcamp_a"
-        },
-        {
-          "id": "stone_hunter_a",
-          "asset": "upg_stone_hunter_a",
-          "displayName": "Mızrak Ucu",
-          "description": "Eskiden elimizdeki sopaya mızrak derdik. Şimdi ucu var, çok profesyonel.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_hunter",
-          "costResource": "wood",
-          "cost": 3600,
-          "unlockBuilding": "stone_hunter",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_hunter_b",
-          "asset": "upg_stone_hunter_b",
-          "displayName": "Av Stratejisi",
-          "description": "Önce bağırmayı, sonra koşmayı öğrendik. Sıra önemli.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_hunter",
-          "costResource": "wood",
-          "cost": 54000,
-          "unlockBuilding": "stone_hunter",
-          "unlockCount": 20,
-          "prerequisite": "stone_hunter_a"
-        },
-        {
-          "id": "stone_quarry_a",
-          "asset": "upg_stone_quarry_a",
-          "displayName": "Daha İyi Kazma",
-          "description": "Taşla taş kazmak mantıklı mı? Çalışıyor, soru sorma.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_quarry",
-          "costResource": "wood",
-          "cost": 13200,
-          "unlockBuilding": "stone_quarry",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_quarry_b",
-          "asset": "upg_stone_quarry_b",
-          "displayName": "Taşa Yazı Yazmak",
-          "description": "Kimse okuyamıyor ama çok şık duruyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_quarry",
-          "costResource": "wood",
-          "cost": 198000,
-          "unlockBuilding": "stone_quarry",
-          "unlockCount": 20,
-          "prerequisite": "stone_quarry_a"
-        },
-        {
-          "id": "stone_axeshop_a",
-          "asset": "upg_stone_axeshop_a",
-          "displayName": "Bileme Taşı",
-          "description": "Taşı bilemek için taş. Evrenin ironisi.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_axeshop",
-          "costResource": "stone",
-          "cost": 3600,
-          "unlockBuilding": "stone_axeshop",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_axeshop_b",
-          "asset": "upg_stone_axeshop_b",
-          "displayName": "Çırak Alımı",
-          "description": "Çırak bedava çalışıyor. Buna 'tecrübe' diyoruz.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_axeshop",
-          "costResource": "stone",
-          "cost": 54000,
-          "unlockBuilding": "stone_axeshop",
-          "unlockCount": 20,
-          "prerequisite": "stone_axeshop_a"
-        },
-        {
-          "id": "stone_firepit_a",
-          "asset": "upg_stone_firepit_a",
-          "displayName": "Kuru Odun Kuralı",
-          "description": "Islak odun yanmaz. Üç kişi yanarak öğrendi.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_firepit",
-          "costResource": "stone",
-          "cost": 18000,
-          "unlockBuilding": "stone_firepit",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_firepit_b",
-          "asset": "upg_stone_firepit_b",
-          "displayName": "Baharat Keşfi",
-          "description": "Bir ot ateşe düştü, koku harika çıktı. Mutfak doğdu.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_firepit",
-          "costResource": "stone",
-          "cost": 270000,
-          "unlockBuilding": "stone_firepit",
-          "unlockCount": 20,
-          "prerequisite": "stone_firepit_a"
-        },
-        {
-          "id": "stone_mammoth_a",
-          "asset": "upg_stone_mammoth_a",
-          "displayName": "Mamut Eğitimi",
-          "description": "Mamutlar 'otur' komutunu öğrenmedi ama taşıyorlar.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_mammoth",
-          "costResource": "food",
-          "cost": 180000,
-          "unlockBuilding": "stone_mammoth",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_mammoth_b",
-          "asset": "upg_stone_mammoth_b",
-          "displayName": "Mamut Sendikası",
-          "description": "Mamutlar zam istiyor. Yaprakla değil, gerçek zam.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_mammoth",
-          "costResource": "food",
-          "cost": 2700000,
-          "unlockBuilding": "stone_mammoth",
-          "unlockCount": 20,
-          "prerequisite": "stone_mammoth_a"
-        },
-        {
-          "id": "stone_gallery_a",
-          "asset": "upg_stone_gallery_a",
-          "displayName": "Parmak Boyası",
-          "description": "İlk eleştirmen: 'Benim çocuğum da yapar.'",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_gallery",
-          "costResource": "stone",
-          "cost": 108000,
-          "unlockBuilding": "stone_gallery",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "stone_gallery_b",
-          "asset": "upg_stone_gallery_b",
-          "displayName": "Sanat Turu",
-          "description": "Komşu kabileden turistler geliyor. Rehber: 'Yiyecek ayrıca.'",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "stone_gallery",
-          "costResource": "stone",
-          "cost": 1620000,
-          "unlockBuilding": "stone_gallery",
-          "unlockCount": 20,
-          "prerequisite": "stone_gallery_a"
-        },
-        {
-          "id": "stone_global1",
-          "asset": "upg_stone_global1",
-          "displayName": "Ateşi Evcilleştirmek",
-          "description": "Artık yakmıyor da ısıtıyor. Büyük ilerleme.",
-          "kind": "GlobalMultiplier",
-          "value": 1.5,
+          "id": "hell_1_click3",
+          "asset": "upg_hell_1_click3",
+          "displayName": "Kıdemli İmp Rozeti",
+          "description": "Rozet takınca insanlar daha çok korkuyor. Bilim bu.",
+          "kind": "ClickMultiplier",
+          "value": 5,
           "targetBuilding": null,
-          "costResource": "food",
-          "cost": 2500,
-          "unlockBuilding": "stone_hunter",
+          "costResource": "sin",
+          "cost": 60000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "hell_1_click2"
+        },
+        {
+          "id": "hell_1_share",
+          "asset": "upg_hell_1_share",
+          "displayName": "Mesai Bitmez",
+          "description": "Her ceza, saniyelik üretimin bir kısmını ekler. Paydos yok.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "sin",
+          "cost": 5000,
+          "unlockBuilding": "hell_1_korna",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_1_bm0",
+          "asset": "upg_hell_1_bm0",
+          "displayName": "Korna Delisi Sertifikası",
+          "description": "Kornaya basanlar artık iki kez cezalanıyor: bir trafikte, bir burada.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_1_korna",
+          "costResource": "sin",
+          "cost": 600,
+          "unlockBuilding": "hell_1_korna",
           "unlockCount": 10,
           "prerequisite": null
         },
         {
-          "id": "stone_global2",
-          "asset": "upg_stone_global2",
-          "displayName": "Tekerlek Fikri",
-          "description": "Henüz tekerlek yok ama fikir var. Fikri bile ağır.",
+          "id": "hell_1_bm1",
+          "asset": "upg_hell_1_bm1",
+          "displayName": "Üç Nüsha Zorunlu",
+          "description": "Her form üç nüsha, her nüsha üç imza. Cehennemin amacı zaten bu.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_1_bant",
+          "costResource": "sin",
+          "cost": 4800,
+          "unlockBuilding": "hell_1_bant",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_1_bm2",
+          "asset": "upg_hell_1_bm2",
+          "displayName": "Toner Bitti (Yalan)",
+          "description": "Makine “toner bitti” diyor ama aslında sizinle dalga geçiyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_1_fotokopi",
+          "costResource": "sin",
+          "cost": 48000,
+          "unlockBuilding": "hell_1_fotokopi",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_1_bm3",
+          "asset": "upg_hell_1_bm3",
+          "displayName": "Yine Aynı Şarkı",
+          "description": "Aynı 8 saniyelik şarkı, sonsuz döngü. Ruhlar yalvarıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_1_asansor",
+          "costResource": "sin",
+          "cost": 560000,
+          "unlockBuilding": "hell_1_asansor",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_1_bm4",
+          "asset": "upg_hell_1_bm4",
+          "displayName": "Lütfen Bekleyiniz (Yine)",
+          "description": "Tabela artık kendi kendine “bekleyiniz” diyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_1_tabela",
+          "costResource": "sin",
+          "cost": 6800000,
+          "unlockBuilding": "hell_1_tabela",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_1_global",
+          "asset": "upg_hell_1_global",
+          "displayName": "Sonsuz Mesai",
+          "description": "Kimse eve gitmiyor. Zaten ev de cehennem.",
           "kind": "GlobalMultiplier",
           "value": 2,
           "targetBuilding": null,
-          "costResource": "food",
-          "cost": 40000,
-          "unlockBuilding": "stone_quarry",
-          "unlockCount": 15,
+          "costResource": "sin",
+          "cost": 400000,
+          "unlockBuilding": "hell_1_tabela",
+          "unlockCount": 5,
           "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "hell_1_q1",
+          "text": "Trafikte kornaya basanları cezalandır (25 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 25,
+          "rewardFlat": 40,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_1_q2",
+          "text": "Kornacı Ceza Kulübesi aç: korna çalan kurtulamasın (5 adet)",
+          "kind": "Building",
+          "building": "hell_1_korna",
+          "amount": 5,
+          "rewardFlat": 100,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_1_q3",
+          "text": "150 kez cezalandır: İK şikâyet dosyası açtı",
+          "kind": "Click",
+          "building": null,
+          "amount": 150,
+          "rewardFlat": 0,
+          "rewardSeconds": 60,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_1_q4",
+          "text": "5 Kırmızı Bant Memuru işe al: formu doldurmayan yanar",
+          "kind": "Building",
+          "building": "hell_1_bant",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 120,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_1_q5",
+          "text": "5 yükseltme al: yönetim “verimlilik” dedi, kimse itiraz etmedi",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "hell_1_q6",
+          "text": "10 Fotokopi Makinesi: kimse bir şey okumuyor ama hepsi 3 nüsha",
+          "kind": "Building",
+          "building": "hell_1_fotokopi",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_1_q7",
+          "text": "100.000 Günah Fişi kes: Nuri ilk kez kaşını kaldırdı",
+          "kind": "Earn",
+          "building": null,
+          "amount": 100000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "hell_1_q8",
+          "text": "Nuri’nin canının yarısını götür: “Sıra bende değil” diyor",
+          "kind": "Earn",
+          "building": null,
+          "amount": 1000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
         }
       ]
     },
     {
-      "id": "farm",
-      "asset": "age_farm",
-      "displayName": "Tarım Çağı",
-      "clickResource": "wheat",
-      "advanceResource": "wheat",
-      "advanceCost": 5000000000.0,
-      "knowledgeReward": 1,
+      "id": "heaven_1",
+      "asset": "age_heaven_1",
+      "displayName": "Cennet 1. Kat: Bulut Kafe",
+      "side": "heaven",
+      "clickLabel": "İYİLİK YAP",
+      "goalTitle": "Huzur Seviyesi: Bulut Kafe",
+      "clickResource": "good",
+      "advanceResource": "good",
+      "advanceCost": 2000000,
+      "knowledgeReward": 3,
       "resources": [
-        "wheat",
-        "milk",
-        "flour"
+        "good"
       ],
       "skyColor": [
-        0.60898006,
-        0.7956447,
-        0.8018868
+        0.55,
+        0.8,
+        1
       ],
       "groundColor": [
-        0.9245283,
-        0.6126731,
-        0.2747419
+        0.9,
+        0.95,
+        1
       ],
       "buildings": [
         {
-          "id": "farm_field",
-          "asset": "bld_farm",
-          "displayName": "Buğday Tarlası",
-          "produces": "wheat",
-          "costResource": "wheat",
-          "baseCost": 10,
+          "id": "heaven_1_teyze",
+          "asset": "bld_heaven_1_teyze",
+          "displayName": "Teyzeye Yol Gösterme Tezgâhı",
+          "produces": "good",
+          "costResource": "good",
+          "baseCost": 15,
           "costGrowth": 1.15,
-          "baseProduction": 1,
+          "baseProduction": 0.2,
           "scenePosition": [
-            -8,
+            -8.0,
+            -3.4
+          ],
+          "sortingOrder": 0,
+          "placeholderColor": [
+            1,
+            1,
+            1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_1_barista",
+          "asset": "bld_heaven_1_barista",
+          "displayName": "Bulut Kafe Baristası",
+          "produces": "good",
+          "costResource": "good",
+          "baseCost": 120,
+          "costGrowth": 1.15,
+          "baseProduction": 1.5,
+          "scenePosition": [
+            -4.4,
             -3.4
           ],
           "sortingOrder": 1,
           "placeholderColor": [
-            1,
-            0.92,
-            0.016
+            0.9,
+            0.95,
+            1
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         },
         {
-          "id": "farm_cows",
-          "asset": "bld_farm_cows",
-          "displayName": "İnek Ahırı",
-          "produces": "milk",
-          "costResource": "wheat",
-          "baseCost": 120,
-          "costGrowth": 1.15,
-          "baseProduction": 2,
-          "scenePosition": [
-            -6.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.9,
-            0.9,
-            0.9
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_mill",
-          "asset": "bld_farm_mill",
-          "displayName": "Yel Değirmeni",
-          "produces": "flour",
-          "costResource": "wheat",
+          "id": "heaven_1_corba",
+          "asset": "bld_heaven_1_corba",
+          "displayName": "Komşuya Çorba Servisi",
+          "produces": "good",
+          "costResource": "good",
           "baseCost": 1200,
           "costGrowth": 1.15,
-          "baseProduction": 6,
+          "baseProduction": 9,
           "scenePosition": [
-            -5,
+            -0.7999999999999998,
             -3.4
           ],
-          "sortingOrder": 1,
+          "sortingOrder": 2,
           "placeholderColor": [
-            0.8,
-            0.7,
-            0.5
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_scarecrow",
-          "asset": "bld_farm_scarecrow",
-          "displayName": "Korkuluk Birliği",
-          "produces": "wheat",
-          "costResource": "milk",
-          "baseCost": 900,
-          "costGrowth": 1.15,
-          "baseProduction": 40,
-          "scenePosition": [
-            -3.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.8,
-            0.6,
-            0.2
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_market",
-          "asset": "bld_farm_market",
-          "displayName": "Pazar Tezgâhı",
-          "produces": "milk",
-          "costResource": "flour",
-          "baseCost": 9000,
-          "costGrowth": 1.15,
-          "baseProduction": 90,
-          "scenePosition": [
-            -2,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.3,
-            0.6,
-            0.9
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_bakery",
-          "asset": "bld_farm_bakery",
-          "displayName": "Köy Fırını",
-          "produces": "flour",
-          "costResource": "milk",
-          "baseCost": 40000,
-          "costGrowth": 1.15,
-          "baseProduction": 250,
-          "scenePosition": [
-            -0.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.85,
-            0.45,
-            0.2
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_canal",
-          "asset": "bld_farm_canal",
-          "displayName": "Sulama Kanalı",
-          "produces": "wheat",
-          "costResource": "flour",
-          "baseCost": 300000,
-          "costGrowth": 1.15,
-          "baseProduction": 2500,
-          "scenePosition": [
             1,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.2,
-            0.5,
-            0.8
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "farm_square",
-          "asset": "bld_farm_square",
-          "displayName": "Dedikodu Meydanı",
-          "produces": "flour",
-          "costResource": "milk",
-          "baseCost": 2500000,
-          "costGrowth": 1.15,
-          "baseProduction": 5000,
-          "scenePosition": [
-            2.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.6,
-            0.6,
-            0.3
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        }
-      ],
-      "upgrades": [
-        {
-          "id": "farm_click1",
-          "asset": "upg_farm_click1",
-          "displayName": "Daha İyi Orak",
-          "description": "Orak keskin. Parmaklar da.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 150,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_click2",
-          "asset": "upg_farm_click2",
-          "displayName": "Çift Orak",
-          "description": "Biri yeterliydi ama iki tane daha havalı.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 4000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "farm_click1"
-        },
-        {
-          "id": "farm_click3",
-          "asset": "upg_farm_click3",
-          "displayName": "Bereket Duası",
-          "description": "Dua ediyoruz. Sonuç: biraz daha fazla buğday.",
-          "kind": "ClickProductionShare",
-          "value": 0.01,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 50000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "farm_click2"
-        },
-        {
-          "id": "farm_click4",
-          "asset": "upg_farm_click4",
-          "displayName": "Sabah Antrenmanı",
-          "description": "Horoz ötmeden kalkıyoruz. Horoz küstü.",
-          "kind": "ClickMultiplier",
-          "value": 3,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 700000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "farm_click3"
-        },
-        {
-          "id": "farm_field_a",
-          "asset": "upg_farm_field_a",
-          "displayName": "Demir Saban",
-          "description": "Tahta saban kırılıyordu. Demir diye bir şey keşfettik.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_field",
-          "costResource": "wheat",
-          "cost": 120,
-          "unlockBuilding": "farm_field",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_field_b",
-          "asset": "upg_farm_field_b",
-          "displayName": "Ürün Rotasyonu",
-          "description": "Aynı tarlaya aynı şeyi ekme. Ya da ek, bakalım.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_field",
-          "costResource": "wheat",
-          "cost": 1800,
-          "unlockBuilding": "farm_field",
-          "unlockCount": 20,
-          "prerequisite": "farm_field_a"
-        },
-        {
-          "id": "farm_cows_a",
-          "asset": "upg_farm_cows_a",
-          "displayName": "Yonca Menüsü",
-          "description": "İnekler artık yonca istiyor. 'Ot' demek hakaret sayılıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_cows",
-          "costResource": "wheat",
-          "cost": 1440,
-          "unlockBuilding": "farm_cows",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_cows_b",
-          "asset": "upg_farm_cows_b",
-          "displayName": "Sabah Sağımı",
-          "description": "İnekler sabah insanı değil ama idare ediyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_cows",
-          "costResource": "wheat",
-          "cost": 21600,
-          "unlockBuilding": "farm_cows",
-          "unlockCount": 20,
-          "prerequisite": "farm_cows_a"
-        },
-        {
-          "id": "farm_mill_a",
-          "asset": "upg_farm_mill_a",
-          "displayName": "Daha Büyük Kanatlar",
-          "description": "Rüzgâr çıkınca çalışıyor. Çıkmayınca toplantı yapıyoruz.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_mill",
-          "costResource": "wheat",
-          "cost": 14400,
-          "unlockBuilding": "farm_mill",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_mill_b",
-          "asset": "upg_farm_mill_b",
-          "displayName": "Değirmen Ustası",
-          "description": "'Ben bilirim' deyip her şeyi bozdu. Sonra tamir etti.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_mill",
-          "costResource": "wheat",
-          "cost": 216000,
-          "unlockBuilding": "farm_mill",
-          "unlockCount": 20,
-          "prerequisite": "farm_mill_a"
-        },
-        {
-          "id": "farm_scarecrow_a",
-          "asset": "upg_farm_scarecrow_a",
-          "displayName": "Ürkütücü Yüzler",
-          "description": "Kargalar bile ürküyor. Komşu da.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_scarecrow",
-          "costResource": "milk",
-          "cost": 10800,
-          "unlockBuilding": "farm_scarecrow",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_scarecrow_b",
-          "asset": "upg_farm_scarecrow_b",
-          "displayName": "Korkuluk Tatbikatı",
-          "description": "Düşman yok, tatbikat var. Ama hazırlıklıyız.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_scarecrow",
-          "costResource": "milk",
-          "cost": 162000,
-          "unlockBuilding": "farm_scarecrow",
-          "unlockCount": 20,
-          "prerequisite": "farm_scarecrow_a"
-        },
-        {
-          "id": "farm_market_a",
-          "asset": "upg_farm_market_a",
-          "displayName": "Pazarlık Sanatı",
-          "description": "'Son fiyat' ilk fiyatın yarısı. Herkes biliyor ama oynuyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_market",
-          "costResource": "flour",
-          "cost": 108000,
-          "unlockBuilding": "farm_market",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_market_b",
-          "asset": "upg_farm_market_b",
-          "displayName": "Bağırarak Satış",
-          "description": "En yüksek ses en çok satar. Bilimsel olarak kanıtlandı: biri bağırdı.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_market",
-          "costResource": "flour",
-          "cost": 1620000,
-          "unlockBuilding": "farm_market",
-          "unlockCount": 20,
-          "prerequisite": "farm_market_a"
-        },
-        {
-          "id": "farm_bakery_a",
-          "asset": "upg_farm_bakery_a",
-          "displayName": "Taş Fırın",
-          "description": "Ekmek kabarıyor. Neden kabarıyor? Kimse bilmiyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_bakery",
-          "costResource": "milk",
-          "cost": 480000,
-          "unlockBuilding": "farm_bakery",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_bakery_b",
-          "asset": "upg_farm_bakery_b",
-          "displayName": "Maya Bekçisi",
-          "description": "Mayanın bakımını biri yapıyor. Maya ona teşekkür etmiyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_bakery",
-          "costResource": "milk",
-          "cost": 7200000,
-          "unlockBuilding": "farm_bakery",
-          "unlockCount": 20,
-          "prerequisite": "farm_bakery_a"
-        },
-        {
-          "id": "farm_canal_a",
-          "asset": "upg_farm_canal_a",
-          "displayName": "Daha Derin Hendek",
-          "description": "Su akıyor. Neredeyse istediğimiz yere.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_canal",
-          "costResource": "flour",
-          "cost": 3600000,
-          "unlockBuilding": "farm_canal",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_canal_b",
-          "asset": "upg_farm_canal_b",
-          "displayName": "Kanal Bekçisi",
-          "description": "Biri suyu çalıyor. Komşu mu? Evet, komşu.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_canal",
-          "costResource": "flour",
-          "cost": 54000000,
-          "unlockBuilding": "farm_canal",
-          "unlockCount": 20,
-          "prerequisite": "farm_canal_a"
-        },
-        {
-          "id": "farm_square_a",
-          "asset": "upg_farm_square_a",
-          "displayName": "Çeşme Başı",
-          "description": "Su alırken konuşuyoruz. Konu: başkaları.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_square",
-          "costResource": "milk",
-          "cost": 30000000,
-          "unlockBuilding": "farm_square",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_square_b",
-          "asset": "upg_farm_square_b",
-          "displayName": "Meydan Muhabbeti",
-          "description": "Haberler sözlü. Çoğu yanlış. Hepsi eğlenceli.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "farm_square",
-          "costResource": "milk",
-          "cost": 450000000,
-          "unlockBuilding": "farm_square",
-          "unlockCount": 20,
-          "prerequisite": "farm_square_a"
-        },
-        {
-          "id": "farm_global1",
-          "asset": "upg_farm_global1",
-          "displayName": "Takvim İcadı",
-          "description": "Ne zaman ekeceğimizi biliyoruz. Çiftçiler 'zaten biliyorduk' diyor.",
-          "kind": "GlobalMultiplier",
-          "value": 1.5,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 25000,
-          "unlockBuilding": "farm_mill",
-          "unlockCount": 10,
-          "prerequisite": null
-        },
-        {
-          "id": "farm_global2",
-          "asset": "upg_farm_global2",
-          "displayName": "Çit Çekmek",
-          "description": "Çit koyduk. Komşunun ineği 'sınır nerede' diye soruyor.",
-          "kind": "GlobalMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "wheat",
-          "cost": 600000,
-          "unlockBuilding": "farm_canal",
-          "unlockCount": 10,
-          "prerequisite": null
-        }
-      ]
-    },
-    {
-      "id": "bronze",
-      "asset": "age_bronze",
-      "displayName": "Bronz Çağı",
-      "clickResource": "bronze",
-      "advanceResource": "bronze",
-      "advanceCost": 1200000000000.0,
-      "knowledgeReward": 0,
-      "resources": [
-        "bronze",
-        "coin",
-        "knowledge"
-      ],
-      "skyColor": [
-        0.36,
-        0.64,
-        0.72
-      ],
-      "groundColor": [
-        0.42,
-        0.53,
-        0.31
-      ],
-      "buildings": [
-        {
-          "id": "bronze_smelter",
-          "asset": "bld_bronze_smelter",
-          "displayName": "Bronz Dökümhanesi",
-          "produces": "bronze",
-          "costResource": "bronze",
-          "baseCost": 100,
-          "costGrowth": 1.15,
-          "baseProduction": 18000,
-          "scenePosition": [
-            -8,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.72,
-            0.35,
-            0.18
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_mint",
-          "asset": "bld_bronze_mint",
-          "displayName": "Sikke Darphanesi",
-          "produces": "coin",
-          "costResource": "bronze",
-          "baseCost": 90000000,
-          "costGrowth": 1.15,
-          "baseProduction": 7000,
-          "scenePosition": [
-            -6,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.86,
-            0.68,
-            0.28
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_library",
-          "asset": "bld_bronze_library",
-          "displayName": "Kil Tablet Arşivi",
-          "produces": "knowledge",
-          "costResource": "coin",
-          "baseCost": 300000000,
-          "costGrowth": 1.15,
-          "baseProduction": 2500,
-          "scenePosition": [
-            -4,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.55,
-            0.38,
-            0.22
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_cart",
-          "asset": "bld_bronze_cart",
-          "displayName": "Tekerlekli Kervan",
-          "produces": "coin",
-          "costResource": "bronze",
-          "baseCost": 900000000,
-          "costGrowth": 1.15,
-          "baseProduction": 80000,
-          "scenePosition": [
-            -2,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.48,
-            0.3,
-            0.16
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_aqueduct",
-          "asset": "bld_bronze_aqueduct",
-          "displayName": "Su Kemeri",
-          "produces": "knowledge",
-          "costResource": "coin",
-          "baseCost": 5000000000,
-          "costGrowth": 1.15,
-          "baseProduction": 24000,
-          "scenePosition": [
-            0,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.42,
-            0.67,
-            0.72
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_workshop",
-          "asset": "bld_bronze_workshop",
-          "displayName": "Zanaat Atölyesi",
-          "produces": "bronze",
-          "costResource": "knowledge",
-          "baseCost": 18000000000,
-          "costGrowth": 1.15,
-          "baseProduction": 350000,
-          "scenePosition": [
-            2,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.72,
-            0.48,
-            0.25
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_observatory",
-          "asset": "bld_bronze_observatory",
-          "displayName": "Gözlemevi",
-          "produces": "knowledge",
-          "costResource": "bronze",
-          "baseCost": 70000000000,
-          "costGrowth": 1.15,
-          "baseProduction": 180000,
-          "scenePosition": [
-            4,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.24,
-            0.32,
-            0.55
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "bronze_forum",
-          "asset": "bld_bronze_forum",
-          "displayName": "Şehir Forumu",
-          "produces": "coin",
-          "costResource": "knowledge",
-          "baseCost": 250000000000,
-          "costGrowth": 1.15,
-          "baseProduction": 1800000,
-          "scenePosition": [
-            6,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.78,
-            0.58,
-            0.32
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        }
-      ],
-      "upgrades": [
-        {
-          "id": "bronze_click1",
-          "asset": "upg_bronze_click1",
-          "displayName": "Döküm Kalıbı",
-          "description": "Aynı baltayı tekrar tekrar dökmek artık mümkün.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "bronze",
-          "cost": 25000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_click2",
-          "asset": "upg_bronze_click2",
-          "displayName": "Usta Çekiç",
-          "description": "Çekiç daha ağır. Başparmak daha dikkatli.",
-          "kind": "ClickMultiplier",
-          "value": 3,
-          "targetBuilding": null,
-          "costResource": "bronze",
-          "cost": 900000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "bronze_click1"
-        },
-        {
-          "id": "bronze_click3",
-          "asset": "upg_bronze_click3",
-          "displayName": "Yazılı Tarifler",
-          "description": "Tablete yazdık. Tablet ağır, tarif kısa.",
-          "kind": "ClickProductionShare",
-          "value": 0.015,
-          "targetBuilding": null,
-          "costResource": "bronze",
-          "cost": 250000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "bronze_click2"
-        },
-        {
-          "id": "bronze_click4",
-          "asset": "upg_bronze_click4",
-          "displayName": "Atölye Nöbeti",
-          "description": "Vardiya sistemi icat edildi. Usta hâlâ uyumuyor.",
-          "kind": "ClickMultiplier",
-          "value": 4,
-          "targetBuilding": null,
-          "costResource": "bronze",
-          "cost": 8000000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "bronze_click3"
-        },
-        {
-          "id": "bronze_smelter_a",
-          "asset": "upg_bronze_smelter_a",
-          "displayName": "Fırın Tuğlaları",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_smelter",
-          "costResource": "bronze",
-          "cost": 100000,
-          "unlockBuilding": "bronze_smelter",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_smelter_b",
-          "asset": "upg_bronze_smelter_b",
-          "displayName": "Fırın Tuğlaları II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_smelter",
-          "costResource": "bronze",
-          "cost": 10000000,
-          "unlockBuilding": "bronze_smelter",
-          "unlockCount": 20,
-          "prerequisite": "bronze_smelter_a"
-        },
-        {
-          "id": "bronze_mint_a",
-          "asset": "upg_bronze_mint_a",
-          "displayName": "Düzenli Sikke",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_mint",
-          "costResource": "coin",
-          "cost": 450000,
-          "unlockBuilding": "bronze_mint",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_mint_b",
-          "asset": "upg_bronze_mint_b",
-          "displayName": "Düzenli Sikke II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_mint",
-          "costResource": "coin",
-          "cost": 45000000,
-          "unlockBuilding": "bronze_mint",
-          "unlockCount": 20,
-          "prerequisite": "bronze_mint_a"
-        },
-        {
-          "id": "bronze_library_a",
-          "asset": "upg_bronze_library_a",
-          "displayName": "Tablet Kataloğu",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_library",
-          "costResource": "knowledge",
-          "cost": 1500000,
-          "unlockBuilding": "bronze_library",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_library_b",
-          "asset": "upg_bronze_library_b",
-          "displayName": "Tablet Kataloğu II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_library",
-          "costResource": "knowledge",
-          "cost": 150000000,
-          "unlockBuilding": "bronze_library",
-          "unlockCount": 20,
-          "prerequisite": "bronze_library_a"
-        },
-        {
-          "id": "bronze_cart_a",
-          "asset": "upg_bronze_cart_a",
-          "displayName": "Tekerlek Gresi",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_cart",
-          "costResource": "coin",
-          "cost": 4500000,
-          "unlockBuilding": "bronze_cart",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_cart_b",
-          "asset": "upg_bronze_cart_b",
-          "displayName": "Tekerlek Gresi II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_cart",
-          "costResource": "coin",
-          "cost": 450000000,
-          "unlockBuilding": "bronze_cart",
-          "unlockCount": 20,
-          "prerequisite": "bronze_cart_a"
-        },
-        {
-          "id": "bronze_aqueduct_a",
-          "asset": "upg_bronze_aqueduct_a",
-          "displayName": "Çift Kemer",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_aqueduct",
-          "costResource": "knowledge",
-          "cost": 15000000,
-          "unlockBuilding": "bronze_aqueduct",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_aqueduct_b",
-          "asset": "upg_bronze_aqueduct_b",
-          "displayName": "Çift Kemer II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_aqueduct",
-          "costResource": "knowledge",
-          "cost": 1500000000,
-          "unlockBuilding": "bronze_aqueduct",
-          "unlockCount": 20,
-          "prerequisite": "bronze_aqueduct_a"
-        },
-        {
-          "id": "bronze_workshop_a",
-          "asset": "upg_bronze_workshop_a",
-          "displayName": "Usta Çıraklığı",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_workshop",
-          "costResource": "bronze",
-          "cost": 45000000,
-          "unlockBuilding": "bronze_workshop",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_workshop_b",
-          "asset": "upg_bronze_workshop_b",
-          "displayName": "Usta Çıraklığı II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_workshop",
-          "costResource": "bronze",
-          "cost": 4500000000,
-          "unlockBuilding": "bronze_workshop",
-          "unlockCount": 20,
-          "prerequisite": "bronze_workshop_a"
-        },
-        {
-          "id": "bronze_observatory_a",
-          "asset": "upg_bronze_observatory_a",
-          "displayName": "Yıldız Cetveli",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_observatory",
-          "costResource": "knowledge",
-          "cost": 150000000,
-          "unlockBuilding": "bronze_observatory",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_observatory_b",
-          "asset": "upg_bronze_observatory_b",
-          "displayName": "Yıldız Cetveli II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_observatory",
-          "costResource": "knowledge",
-          "cost": 15000000000,
-          "unlockBuilding": "bronze_observatory",
-          "unlockCount": 20,
-          "prerequisite": "bronze_observatory_a"
-        },
-        {
-          "id": "bronze_forum_a",
-          "asset": "upg_bronze_forum_a",
-          "displayName": "Açık Forum",
-          "description": "Daha iyi araçlar, daha düzenli üretim.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_forum",
-          "costResource": "coin",
-          "cost": 450000000,
-          "unlockBuilding": "bronze_forum",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_forum_b",
-          "asset": "upg_bronze_forum_b",
-          "displayName": "Açık Forum II",
-          "description": "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "bronze_forum",
-          "costResource": "coin",
-          "cost": 45000000000,
-          "unlockBuilding": "bronze_forum",
-          "unlockCount": 20,
-          "prerequisite": "bronze_forum_a"
-        },
-        {
-          "id": "bronze_global1",
-          "asset": "upg_bronze_global1",
-          "displayName": "Standart Ölçüler",
-          "description": "Herkes aynı ölçü kabını kullanıyor. Neredeyse.",
-          "kind": "GlobalMultiplier",
-          "value": 1.5,
-          "targetBuilding": null,
-          "costResource": "coin",
-          "cost": 3000000,
-          "unlockBuilding": "bronze_mint",
-          "unlockCount": 10,
-          "prerequisite": null
-        },
-        {
-          "id": "bronze_global2",
-          "asset": "upg_bronze_global2",
-          "displayName": "Yazılı Kanunlar",
-          "description": "Kurallar tablete yazıldı; artık kimse okuyamıyor.",
-          "kind": "GlobalMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "knowledge",
-          "cost": 100000000,
-          "unlockBuilding": "bronze_forum",
-          "unlockCount": 10,
-          "prerequisite": null
-        }
-      ]
-    },
-    {
-      "id": "antique",
-      "asset": "age_antique",
-      "displayName": "Antik Çağ",
-      "clickResource": "papyrus",
-      "advanceResource": "drachma",
-      "advanceCost": 1800000000.0,
-      "knowledgeReward": 1,
-      "resources": [
-        "papyrus",
-        "marble",
-        "drachma",
-        "knowledge"
-      ],
-      "skyColor": [
-        0.88,
-        0.72,
-        0.51
-      ],
-      "groundColor": [
-        0.45,
-        0.34,
-        0.25
-      ],
-      "buildings": [
-        {
-          "id": "antique_field",
-          "asset": "bld_antique_field",
-          "displayName": "Papirüs Tarlası",
-          "produces": "papyrus",
-          "costResource": "papyrus",
-          "baseCost": 10,
-          "costGrowth": 1.15,
-          "baseProduction": 1,
-          "scenePosition": [
-            -8,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.56,
-            0.67,
-            0.35
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_masonry",
-          "asset": "bld_antique_masonry",
-          "displayName": "Mermer Ocağı",
-          "produces": "marble",
-          "costResource": "papyrus",
-          "baseCost": 120,
-          "costGrowth": 1.15,
-          "baseProduction": 2,
-          "scenePosition": [
-            -6,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.78,
-            0.75,
-            0.65
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_scribes",
-          "asset": "bld_antique_scribes",
-          "displayName": "Kâtipler Birliği",
-          "produces": "knowledge",
-          "costResource": "papyrus",
-          "baseCost": 450,
-          "costGrowth": 1.15,
-          "baseProduction": 5,
-          "scenePosition": [
-            -4,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.75,
-            0.63,
-            0.42
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_market",
-          "asset": "bld_antique_market",
-          "displayName": "Agora Pazarı",
-          "produces": "drachma",
-          "costResource": "papyrus",
-          "baseCost": 1800,
-          "costGrowth": 1.15,
-          "baseProduction": 16,
-          "scenePosition": [
-            -2,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.75,
-            0.48,
-            0.28
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_academy",
-          "asset": "bld_antique_academy",
-          "displayName": "Felsefe Akademisi",
-          "produces": "knowledge",
-          "costResource": "drachma",
-          "baseCost": 14000,
-          "costGrowth": 1.15,
-          "baseProduction": 90,
-          "scenePosition": [
-            0,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.42,
-            0.55,
-            0.72
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_theater",
-          "asset": "bld_antique_theater",
-          "displayName": "Amfitiyatro",
-          "produces": "drachma",
-          "costResource": "marble",
-          "baseCost": 50000,
-          "costGrowth": 1.15,
-          "baseProduction": 450,
-          "scenePosition": [
-            2,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.68,
-            0.32,
-            0.25
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_aqueduct",
-          "asset": "bld_antique_aqueduct",
-          "displayName": "Su Kemeri",
-          "produces": "papyrus",
-          "costResource": "marble",
-          "baseCost": 350000,
-          "costGrowth": 1.15,
-          "baseProduction": 3200,
-          "scenePosition": [
-            4,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.37,
-            0.58,
-            0.66
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "antique_lighthouse",
-          "asset": "bld_antique_lighthouse",
-          "displayName": "İskenderiye Feneri",
-          "produces": "knowledge",
-          "costResource": "drachma",
-          "baseCost": 3000000,
-          "costGrowth": 1.15,
-          "baseProduction": 10000,
-          "scenePosition": [
-            6,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.92,
-            0.73,
-            0.38
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        }
-      ],
-      "upgrades": [
-        {
-          "id": "antique_click1",
-          "asset": "upg_antique_click1",
-          "displayName": "Keskin Kamış Kalem",
-          "description": "Yazı hızlandı. Okunabilirlik aynı kaldı.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "papyrus",
-          "cost": 250,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_click2",
-          "asset": "upg_antique_click2",
-          "displayName": "Çift Taraflı Tablet",
-          "description": "Önü dolunca arkasına yazdık. Deha böyle bir şey.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "papyrus",
-          "cost": 8000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "antique_click1"
-        },
-        {
-          "id": "antique_click3",
-          "asset": "upg_antique_click3",
-          "displayName": "Kamusal Tartışma",
-          "description": "Birisi konuşuyor, herkes üretimi bırakıp dinliyor.",
-          "kind": "ClickProductionShare",
-          "value": 0.015,
-          "targetBuilding": null,
-          "costResource": "papyrus",
-          "cost": 120000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "antique_click2"
-        },
-        {
-          "id": "antique_click4",
-          "asset": "upg_antique_click4",
-          "displayName": "Retorik Dersi",
-          "description": "Aynı şeyi daha uzun anlatınca daha ikna edici oluyor.",
-          "kind": "ClickMultiplier",
-          "value": 3,
-          "targetBuilding": null,
-          "costResource": "papyrus",
-          "cost": 1800000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "antique_click3"
-        },
-        {
-          "id": "antique_field_a",
-          "asset": "upg_antique_field_a",
-          "displayName": "Daha Verimli Kamışlık",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_field",
-          "costResource": "papyrus",
-          "cost": 120,
-          "unlockBuilding": "antique_field",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_field_b",
-          "asset": "upg_antique_field_b",
-          "displayName": "Daha Verimli Kamışlık II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_field",
-          "costResource": "papyrus",
-          "cost": 1800,
-          "unlockBuilding": "antique_field",
-          "unlockCount": 20,
-          "prerequisite": "antique_field_a"
-        },
-        {
-          "id": "antique_masonry_a",
-          "asset": "upg_antique_masonry_a",
-          "displayName": "Düzgün Kesilmiş Mermer",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_masonry",
-          "costResource": "papyrus",
-          "cost": 1440,
-          "unlockBuilding": "antique_masonry",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_masonry_b",
-          "asset": "upg_antique_masonry_b",
-          "displayName": "Düzgün Kesilmiş Mermer II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_masonry",
-          "costResource": "papyrus",
-          "cost": 21600,
-          "unlockBuilding": "antique_masonry",
-          "unlockCount": 20,
-          "prerequisite": "antique_masonry_a"
-        },
-        {
-          "id": "antique_scribes_a",
-          "asset": "upg_antique_scribes_a",
-          "displayName": "Kopya Kâtipler",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_scribes",
-          "costResource": "papyrus",
-          "cost": 5400,
-          "unlockBuilding": "antique_scribes",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_scribes_b",
-          "asset": "upg_antique_scribes_b",
-          "displayName": "Kopya Kâtipler II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_scribes",
-          "costResource": "papyrus",
-          "cost": 81000,
-          "unlockBuilding": "antique_scribes",
-          "unlockCount": 20,
-          "prerequisite": "antique_scribes_a"
-        },
-        {
-          "id": "antique_market_a",
-          "asset": "upg_antique_market_a",
-          "displayName": "Agora İndirimi",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_market",
-          "costResource": "papyrus",
-          "cost": 21600,
-          "unlockBuilding": "antique_market",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_market_b",
-          "asset": "upg_antique_market_b",
-          "displayName": "Agora İndirimi II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_market",
-          "costResource": "papyrus",
-          "cost": 324000,
-          "unlockBuilding": "antique_market",
-          "unlockCount": 20,
-          "prerequisite": "antique_market_a"
-        },
-        {
-          "id": "antique_academy_a",
-          "asset": "upg_antique_academy_a",
-          "displayName": "Düşünce Molası",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_academy",
-          "costResource": "drachma",
-          "cost": 168000,
-          "unlockBuilding": "antique_academy",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_academy_b",
-          "asset": "upg_antique_academy_b",
-          "displayName": "Düşünce Molası II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_academy",
-          "costResource": "drachma",
-          "cost": 2520000,
-          "unlockBuilding": "antique_academy",
-          "unlockCount": 20,
-          "prerequisite": "antique_academy_a"
-        },
-        {
-          "id": "antique_theater_a",
-          "asset": "upg_antique_theater_a",
-          "displayName": "Ucuz Koltuklar",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_theater",
-          "costResource": "marble",
-          "cost": 600000,
-          "unlockBuilding": "antique_theater",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_theater_b",
-          "asset": "upg_antique_theater_b",
-          "displayName": "Ucuz Koltuklar II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_theater",
-          "costResource": "marble",
-          "cost": 9000000,
-          "unlockBuilding": "antique_theater",
-          "unlockCount": 20,
-          "prerequisite": "antique_theater_a"
-        },
-        {
-          "id": "antique_aqueduct_a",
-          "asset": "upg_antique_aqueduct_a",
-          "displayName": "İkinci Su Hattı",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_aqueduct",
-          "costResource": "marble",
-          "cost": 4200000,
-          "unlockBuilding": "antique_aqueduct",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_aqueduct_b",
-          "asset": "upg_antique_aqueduct_b",
-          "displayName": "İkinci Su Hattı II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_aqueduct",
-          "costResource": "marble",
-          "cost": 63000000,
-          "unlockBuilding": "antique_aqueduct",
-          "unlockCount": 20,
-          "prerequisite": "antique_aqueduct_a"
-        },
-        {
-          "id": "antique_lighthouse_a",
-          "asset": "upg_antique_lighthouse_a",
-          "displayName": "Daha Güçlü Ayna",
-          "description": "Üretim arttı. Toplantı tutanağı kayıp.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_lighthouse",
-          "costResource": "drachma",
-          "cost": 36000000,
-          "unlockBuilding": "antique_lighthouse",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_lighthouse_b",
-          "asset": "upg_antique_lighthouse_b",
-          "displayName": "Daha Güçlü Ayna II",
-          "description": "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "antique_lighthouse",
-          "costResource": "drachma",
-          "cost": 540000000,
-          "unlockBuilding": "antique_lighthouse",
-          "unlockCount": 20,
-          "prerequisite": "antique_lighthouse_a"
-        },
-        {
-          "id": "antique_global1",
-          "asset": "upg_antique_global1",
-          "displayName": "Standart Drahmi",
-          "description": "Artık herkes aynı parayı tartışıyor.",
-          "kind": "GlobalMultiplier",
-          "value": 1.5,
-          "targetBuilding": null,
-          "costResource": "drachma",
-          "cost": 25000,
-          "unlockBuilding": "antique_market",
-          "unlockCount": 10,
-          "prerequisite": null
-        },
-        {
-          "id": "antique_global2",
-          "asset": "upg_antique_global2",
-          "displayName": "Büyük Kütüphane",
-          "description": "Bilginin merkezi. Yangın söndürücü bütçesi yok.",
-          "kind": "GlobalMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "knowledge",
-          "cost": 8000000,
-          "unlockBuilding": "antique_academy",
-          "unlockCount": 10,
-          "prerequisite": null
-        }
-      ]
-    },
-    {
-      "id": "medieval",
-      "asset": "age_medieval",
-      "displayName": "Orta Çağ",
-      "clickResource": "wool",
-      "advanceResource": "faith",
-      "advanceCost": 350000000.0,
-      "knowledgeReward": 2,
-      "resources": [
-        "wool",
-        "cloth",
-        "iron",
-        "faith"
-      ],
-      "skyColor": [
-        0.62,
-        0.68,
-        0.75
-      ],
-      "groundColor": [
-        0.3,
-        0.42,
-        0.22
-      ],
-      "buildings": [
-        {
-          "id": "medieval_sheep",
-          "asset": "bld_medieval_sheep",
-          "displayName": "Koyun Ağılı",
-          "produces": "wool",
-          "costResource": "wool",
-          "baseCost": 10,
-          "costGrowth": 1.15,
-          "baseProduction": 1,
-          "scenePosition": [
-            -8,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.9,
-            0.88,
-            0.8
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "medieval_loom",
-          "asset": "bld_medieval_loom",
-          "displayName": "Dokuma Tezgâhı",
-          "produces": "cloth",
-          "costResource": "wool",
-          "baseCost": 120,
-          "costGrowth": 1.15,
-          "baseProduction": 2,
-          "scenePosition": [
-            -6.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.72,
-            0.55,
-            0.35
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "medieval_blacksmith",
-          "asset": "bld_medieval_blacksmith",
-          "displayName": "Demirci Ocağı",
-          "produces": "iron",
-          "costResource": "cloth",
-          "baseCost": 900,
-          "costGrowth": 1.15,
-          "baseProduction": 6,
-          "scenePosition": [
-            -5,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.45,
-            0.45,
-            0.5
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "medieval_chapel",
-          "asset": "bld_medieval_chapel",
-          "displayName": "Şapel",
-          "produces": "faith",
-          "costResource": "cloth",
-          "baseCost": 9000,
-          "costGrowth": 1.15,
-          "baseProduction": 40,
-          "scenePosition": [
-            -3.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.8,
-            0.72,
-            0.55
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "medieval_market",
-          "asset": "bld_medieval_market",
-          "displayName": "Lonca Pazarı",
-          "produces": "cloth",
-          "costResource": "iron",
-          "baseCost": 40000,
-          "costGrowth": 1.15,
-          "baseProduction": 90,
-          "scenePosition": [
-            -2,
-            -3.4
-          ],
-          "sortingOrder": 1,
-          "placeholderColor": [
-            0.6,
-            0.45,
-            0.25
-          ],
-          "placeholderSize": [
-            1.2,
-            1.2
-          ]
-        },
-        {
-          "id": "medieval_castle",
-          "asset": "bld_medieval_castle",
-          "displayName": "Kale",
-          "produces": "faith",
-          "costResource": "iron",
-          "baseCost": 300000,
-          "costGrowth": 1.15,
-          "baseProduction": 250,
-          "scenePosition": [
-            -0.5,
-            -2.7
-          ],
-          "sortingOrder": 0,
-          "placeholderColor": [
-            0.55,
-            0.55,
+            0.95,
             0.6
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         },
         {
-          "id": "medieval_monastery",
-          "asset": "bld_medieval_monastery",
-          "displayName": "Manastır",
-          "produces": "faith",
-          "costResource": "cloth",
-          "baseCost": 2500000,
+          "id": "heaven_1_arp",
+          "asset": "bld_heaven_1_arp",
+          "displayName": "Arp Çalma Kursu",
+          "produces": "good",
+          "costResource": "good",
+          "baseCost": 14000,
           "costGrowth": 1.15,
-          "baseProduction": 2500,
+          "baseProduction": 55,
           "scenePosition": [
-            1,
+            2.8000000000000007,
             -3.4
           ],
-          "sortingOrder": 1,
+          "sortingOrder": 3,
           "placeholderColor": [
             0.7,
-            0.62,
-            0.45
+            0.85,
+            1
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         },
         {
-          "id": "medieval_cathedral",
-          "asset": "bld_medieval_cathedral",
-          "displayName": "Katedral",
-          "produces": "faith",
-          "costResource": "iron",
-          "baseCost": 15000000,
+          "id": "heaven_1_sarilma",
+          "asset": "bld_heaven_1_sarilma",
+          "displayName": "Ücretsiz Sarılma Standı",
+          "produces": "good",
+          "costResource": "good",
+          "baseCost": 170000,
           "costGrowth": 1.15,
-          "baseProduction": 5000,
+          "baseProduction": 320,
           "scenePosition": [
-            2.5,
-            -2.7
+            6.4,
+            -3.4
           ],
-          "sortingOrder": 0,
+          "sortingOrder": 4,
           "placeholderColor": [
-            0.82,
-            0.75,
-            0.55
+            1,
+            0.8,
+            0.9
           ],
           "placeholderSize": [
-            1.2,
-            1.2
+            1.4,
+            1.8
           ]
         }
       ],
       "upgrades": [
         {
-          "id": "medieval_click1",
-          "asset": "upg_medieval_click1",
-          "displayName": "Daha Kalın Yün",
-          "description": "Yün kalınlaştı. Koyunlar aynı ifadeyle bakmaya devam ediyor.",
+          "id": "heaven_1_click1",
+          "asset": "upg_heaven_1_click1",
+          "displayName": "Daha Sıcak Gülümseme",
+          "description": "Gülümsemek bedava ama etkisi iki kat. Enflasyon burada işlemiyor.",
           "kind": "ClickMultiplier",
           "value": 2,
           "targetBuilding": null,
-          "costResource": "wool",
-          "cost": 150,
+          "costResource": "good",
+          "cost": 100,
           "unlockBuilding": null,
           "unlockCount": 0,
           "prerequisite": null
         },
         {
-          "id": "medieval_click2",
-          "asset": "upg_medieval_click2",
-          "displayName": "Çift El Makası",
-          "description": "İki el, iki makas. Koyunlar artık koşuyor.",
-          "kind": "ClickMultiplier",
-          "value": 2,
-          "targetBuilding": null,
-          "costResource": "wool",
-          "cost": 4000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "medieval_click1"
-        },
-        {
-          "id": "medieval_click3",
-          "asset": "upg_medieval_click3",
-          "displayName": "Dokuma Şarkısı",
-          "description": "Şarkı söylerken daha hızlı dokuyoruz. Kulaklar biraz acıyor.",
-          "kind": "ClickProductionShare",
-          "value": 0.01,
-          "targetBuilding": null,
-          "costResource": "wool",
-          "cost": 50000,
-          "unlockBuilding": null,
-          "unlockCount": 0,
-          "prerequisite": "medieval_click2"
-        },
-        {
-          "id": "medieval_click4",
-          "asset": "upg_medieval_click4",
-          "displayName": "Lonca Yemini",
-          "description": "Loncaya yemin ettik. Neye yemin ettiğimizi unuttuk ama ciddiyiz.",
+          "id": "heaven_1_click2",
+          "asset": "upg_heaven_1_click2",
+          "displayName": "Pembe Not Kağıdı",
+          "description": "“Günaydın, harikasın” notu bırakmak puanı üç katlıyor.",
           "kind": "ClickMultiplier",
           "value": 3,
           "targetBuilding": null,
-          "costResource": "wool",
-          "cost": 700000,
+          "costResource": "good",
+          "cost": 2500,
           "unlockBuilding": null,
           "unlockCount": 0,
-          "prerequisite": "medieval_click3"
+          "prerequisite": "heaven_1_click1"
         },
         {
-          "id": "medieval_sheep_a",
-          "asset": "upg_medieval_sheep_a",
-          "displayName": "Koyun Sayımı",
-          "description": "Koyunları saydık. Sonuç: uyuduk.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_sheep",
-          "costResource": "wool",
-          "cost": 120,
-          "unlockBuilding": "medieval_sheep",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_sheep_b",
-          "asset": "upg_medieval_sheep_b",
-          "displayName": "Koyun Sendikası",
-          "description": "Koyunlar zam istiyor. Yün olarak ödüyoruz.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_sheep",
-          "costResource": "wool",
-          "cost": 1800,
-          "unlockBuilding": "medieval_sheep",
-          "unlockCount": 20,
-          "prerequisite": "medieval_sheep_a"
-        },
-        {
-          "id": "medieval_loom_a",
-          "asset": "upg_medieval_loom_a",
-          "displayName": "Sıkı Dokuma",
-          "description": "Dokuma sıklaştı. Çorap artık iki kişilik.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_loom",
-          "costResource": "wool",
-          "cost": 1440,
-          "unlockBuilding": "medieval_loom",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_loom_b",
-          "asset": "upg_medieval_loom_b",
-          "displayName": "Çırak Dokumacı",
-          "description": "Çırak işi öğrendi. Usta hâlâ anlatıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_loom",
-          "costResource": "wool",
-          "cost": 21600,
-          "unlockBuilding": "medieval_loom",
-          "unlockCount": 20,
-          "prerequisite": "medieval_loom_a"
-        },
-        {
-          "id": "medieval_blacksmith_a",
-          "asset": "upg_medieval_blacksmith_a",
-          "displayName": "Körük Isıtma",
-          "description": "Körük daha güçlü. Demirci daha az terliyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_blacksmith",
-          "costResource": "cloth",
-          "cost": 10800,
-          "unlockBuilding": "medieval_blacksmith",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_blacksmith_b",
-          "asset": "upg_medieval_blacksmith_b",
-          "displayName": "Usta Demirci",
-          "description": "Usta \"ben yaparım\" dedi. Yaptı. Herkes şaşırdı.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_blacksmith",
-          "costResource": "cloth",
-          "cost": 162000,
-          "unlockBuilding": "medieval_blacksmith",
-          "unlockCount": 20,
-          "prerequisite": "medieval_blacksmith_a"
-        },
-        {
-          "id": "medieval_chapel_a",
-          "asset": "upg_medieval_chapel_a",
-          "displayName": "Daha Yüksek Çan",
-          "description": "Çan yükseldi. Sabah erken çalıyor, kimse memnun değil.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_chapel",
-          "costResource": "cloth",
-          "cost": 108000,
-          "unlockBuilding": "medieval_chapel",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_chapel_b",
-          "asset": "upg_medieval_chapel_b",
-          "displayName": "Çan Ustası",
-          "description": "Çan ustası geldi. Çan hâlâ aynı sesi çıkarıyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_chapel",
-          "costResource": "cloth",
-          "cost": 1620000,
-          "unlockBuilding": "medieval_chapel",
-          "unlockCount": 20,
-          "prerequisite": "medieval_chapel_a"
-        },
-        {
-          "id": "medieval_market_a",
-          "asset": "upg_medieval_market_a",
-          "displayName": "Pazarlık Tezgâhı",
-          "description": "İlk fiyat iki katı. Herkes biliyor, kimse söylemiyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_market",
-          "costResource": "iron",
-          "cost": 480000,
-          "unlockBuilding": "medieval_market",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_market_b",
-          "asset": "upg_medieval_market_b",
-          "displayName": "Lonca Fiyat Anlaşması",
-          "description": "Lonca fiyatı belirledi. Pazar da belirledi. İkisi de aynı.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_market",
-          "costResource": "iron",
-          "cost": 7200000,
-          "unlockBuilding": "medieval_market",
-          "unlockCount": 20,
-          "prerequisite": "medieval_market_a"
-        },
-        {
-          "id": "medieval_castle_a",
-          "asset": "upg_medieval_castle_a",
-          "displayName": "Mazgallı Sur",
-          "description": "Sur yükseldi. Düşman yok ama manzara güzel.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_castle",
-          "costResource": "iron",
-          "cost": 3600000,
-          "unlockBuilding": "medieval_castle",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_castle_b",
-          "asset": "upg_medieval_castle_b",
-          "displayName": "Kraliyet Mührü",
-          "description": "Mühür basıldı. Ne olduğunu kimse bilmiyor ama resmi.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_castle",
-          "costResource": "iron",
-          "cost": 54000000,
-          "unlockBuilding": "medieval_castle",
-          "unlockCount": 20,
-          "prerequisite": "medieval_castle_a"
-        },
-        {
-          "id": "medieval_monastery_a",
-          "asset": "upg_medieval_monastery_a",
-          "displayName": "Kopya Kitaplar",
-          "description": "Kitapları kopyaladık. Mürekkep bitti, keşişler uyuyor.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_monastery",
-          "costResource": "cloth",
-          "cost": 30000000,
-          "unlockBuilding": "medieval_monastery",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_monastery_b",
-          "asset": "upg_medieval_monastery_b",
-          "displayName": "Sessizlik Kuralı",
-          "description": "Kural: sessizlik. Uygulama: tartışma.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_monastery",
-          "costResource": "cloth",
-          "cost": 450000000,
-          "unlockBuilding": "medieval_monastery",
-          "unlockCount": 20,
-          "prerequisite": "medieval_monastery_a"
-        },
-        {
-          "id": "medieval_cathedral_a",
-          "asset": "upg_medieval_cathedral_a",
-          "displayName": "Daha Yüksek Kubbe",
-          "description": "Kubbe yükseldi. İskele 200 yıl daha kalacak.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_cathedral",
-          "costResource": "iron",
-          "cost": 180000000,
-          "unlockBuilding": "medieval_cathedral",
-          "unlockCount": 5,
-          "prerequisite": null
-        },
-        {
-          "id": "medieval_cathedral_b",
-          "asset": "upg_medieval_cathedral_b",
-          "displayName": "İskele Ustası",
-          "description": "İskele ustası \"bitti\" dedi. İskele hâlâ orada.",
-          "kind": "BuildingMultiplier",
-          "value": 2,
-          "targetBuilding": "medieval_cathedral",
-          "costResource": "iron",
-          "cost": 2700000000,
-          "unlockBuilding": "medieval_cathedral",
-          "unlockCount": 20,
-          "prerequisite": "medieval_cathedral_a"
-        },
-        {
-          "id": "medieval_global1",
-          "asset": "upg_medieval_global1",
-          "displayName": "Lonca Sistemi",
-          "description": "Her meslek kendi loncasını kurdu. Kimse diğerinin ne yaptığını bilmiyor.",
-          "kind": "GlobalMultiplier",
-          "value": 1.5,
+          "id": "heaven_1_click3",
+          "asset": "upg_heaven_1_click3",
+          "displayName": "Kıdemli Melek Rozeti",
+          "description": "Rozeti takınca herkes yol veriyor, hatta teyzeler bile.",
+          "kind": "ClickMultiplier",
+          "value": 5,
           "targetBuilding": null,
-          "costResource": "cloth",
-          "cost": 25000,
-          "unlockBuilding": "medieval_market",
+          "costResource": "good",
+          "cost": 60000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "heaven_1_click2"
+        },
+        {
+          "id": "heaven_1_share",
+          "asset": "upg_heaven_1_share",
+          "displayName": "Gönül Mesaisi",
+          "description": "Her iyilik, saniyelik üretimin bir kısmını ekler. Yorulmak yok.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "good",
+          "cost": 5000,
+          "unlockBuilding": "heaven_1_teyze",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_1_bm0",
+          "asset": "upg_heaven_1_bm0",
+          "displayName": "Harita + Sabır",
+          "description": "Teyze “ben bulurum” dedi ama hâlâ kayıp. Yine de verim iki katına çıktı.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_1_teyze",
+          "costResource": "good",
+          "cost": 600,
+          "unlockBuilding": "heaven_1_teyze",
           "unlockCount": 10,
           "prerequisite": null
         },
         {
-          "id": "medieval_global2",
-          "asset": "upg_medieval_global2",
-          "displayName": "Kraliyet Fermanı",
-          "description": "Kral \"üretim artacak\" diye ferman yazdı. Ekonomi buna inanmak zorunda.",
+          "id": "heaven_1_bm1",
+          "asset": "upg_heaven_1_bm1",
+          "displayName": "Köpüklü Bulut Latte",
+          "description": "Köpüğü gerçekten bulut. Müşteriler uçarak geliyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_1_barista",
+          "costResource": "good",
+          "cost": 4800,
+          "unlockBuilding": "heaven_1_barista",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_1_bm2",
+          "asset": "upg_heaven_1_bm2",
+          "displayName": "Fazladan Nane",
+          "description": "Nane serpince ruhlar daha çok ısınıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_1_corba",
+          "costResource": "good",
+          "cost": 48000,
+          "unlockBuilding": "heaven_1_corba",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_1_bm3",
+          "asset": "upg_heaven_1_bm3",
+          "displayName": "Üç Akor Yeter",
+          "description": "Herkes aynı üç akoru çalıyor ama herkes güzel güzel ağlıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_1_arp",
+          "costResource": "good",
+          "cost": 560000,
+          "unlockBuilding": "heaven_1_arp",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_1_bm4",
+          "asset": "upg_heaven_1_bm4",
+          "displayName": "Sarılma Kotası Kalktı",
+          "description": "Artık kimse sarılma hesabı tutmuyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_1_sarilma",
+          "costResource": "good",
+          "cost": 6800000,
+          "unlockBuilding": "heaven_1_sarilma",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_1_global",
+          "asset": "upg_heaven_1_global",
+          "displayName": "Sonsuz Huzur",
+          "description": "Wi-Fi şifresi sevgi. Hız sınırsız.",
           "kind": "GlobalMultiplier",
           "value": 2,
           "targetBuilding": null,
-          "costResource": "iron",
-          "cost": 8000000,
-          "unlockBuilding": "medieval_castle",
-          "unlockCount": 10,
+          "costResource": "good",
+          "cost": 400000,
+          "unlockBuilding": "heaven_1_sarilma",
+          "unlockCount": 5,
           "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "heaven_1_q1",
+          "text": "Teyzeye yol göster: harita ters tutuluyor ama olsun (25 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 25,
+          "rewardFlat": 40,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_1_q2",
+          "text": "Teyze Tezgâhı aç: herkes yolunu bulsun (5 adet)",
+          "kind": "Building",
+          "building": "heaven_1_teyze",
+          "amount": 5,
+          "rewardFlat": 100,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_1_q3",
+          "text": "150 iyilik yap: bulutlar seni “komşu” ilan etti",
+          "kind": "Click",
+          "building": null,
+          "amount": 150,
+          "rewardFlat": 0,
+          "rewardSeconds": 60,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_1_q4",
+          "text": "5 Bulut Kafe Baristası: kimse sipariş vermedi ama herkes mutlu",
+          "kind": "Building",
+          "building": "heaven_1_barista",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 120,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_1_q5",
+          "text": "5 yükseltme al: Başmelek “harikasın” notu bıraktı",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "heaven_1_q6",
+          "text": "10 Çorba Servisi: nane fazla, sevgi daha fazla",
+          "kind": "Building",
+          "building": "heaven_1_corba",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_1_q7",
+          "text": "100.000 Sevap topla: Bulut Kafe’nin Wi-Fi’si yenilendi",
+          "kind": "Earn",
+          "building": null,
+          "amount": 100000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "heaven_1_q8",
+          "text": "Huzur çubuğunun yarısı: müdavimler el ele tutuştu",
+          "kind": "Earn",
+          "building": null,
+          "amount": 1000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
         }
       ]
     }

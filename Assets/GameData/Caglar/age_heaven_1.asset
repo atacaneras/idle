@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
+  m_Name: age_heaven_1
+  m_EditorClassIdentifier: Assembly-CSharp::AgeData
+  id: heaven_1
+  displayName: 'Cennet 1. Kat: Bulut Kafe'
+  side: 2
+  clickLabel: "\u0130Y\u0130L\u0130K YAP"
+  goalTitle: 'Huzur Seviyesi: Bulut Kafe'
+  quests:
+  - id: heaven_1_q1
+    text: "Teyzeye yol g\xF6ster: harita ters tutuluyor ama olsun (25 kez)"
+    kind: 0
+    building: {fileID: 0}
+    amount: 25
+    rewardFlat: 40
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: heaven_1_q2
+    text: "Teyze Tezg\xE2h\u0131 a\xE7: herkes yolunu bulsun (5 adet)"
+    kind: 1
+    building: {fileID: 11400000, guid: 4000f517b74d11445aa65b887f34bc73, type: 2}
+    amount: 5
+    rewardFlat: 100
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: heaven_1_q3
+    text: "150 iyilik yap: bulutlar seni \u201Ckom\u015Fu\u201D ilan etti"
+    kind: 0
+    building: {fileID: 0}
+    amount: 150
+    rewardFlat: 0
+    rewardSeconds: 60
+    rewardKnowledge: 0
+  - id: heaven_1_q4
+    text: "5 Bulut Kafe Baristas\u0131: kimse sipari\u015F vermedi ama herkes mutlu"
+    kind: 1
+    building: {fileID: 11400000, guid: fa610fd7aac63d040b50fdf56c9b924d, type: 2}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 120
+    rewardKnowledge: 0
+  - id: heaven_1_q5
+    text: "5 y\xFCkseltme al: Ba\u015Fmelek \u201Charikas\u0131n\u201D notu b\u0131rakt\u0131"
+    kind: 3
+    building: {fileID: 0}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 0
+    rewardKnowledge: 1
+  - id: heaven_1_q6
+    text: "10 \xC7orba Servisi: nane fazla, sevgi daha fazla"
+    kind: 1
+    building: {fileID: 11400000, guid: 00184569001fb4549a73f529eac71a47, type: 2}
+    amount: 10
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 0
+  - id: heaven_1_q7
+    text: "100.000 Sevap topla: Bulut Kafe\u2019nin Wi-Fi\u2019si yenilendi"
+    kind: 2
+    building: {fileID: 0}
+    amount: 100000
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 1
+  - id: heaven_1_q8
+    text: "Huzur \xE7ubu\u011Funun yar\u0131s\u0131: m\xFCdavimler el ele tutu\u015Ftu"
+    kind: 2
+    building: {fileID: 0}
+    amount: 1000000
+    rewardFlat: 0
+    rewardSeconds: 600
+    rewardKnowledge: 2
+  resources:
+  - {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  buildings:
+  - {fileID: 11400000, guid: 4000f517b74d11445aa65b887f34bc73, type: 2}
+  - {fileID: 11400000, guid: fa610fd7aac63d040b50fdf56c9b924d, type: 2}
+  - {fileID: 11400000, guid: 00184569001fb4549a73f529eac71a47, type: 2}
+  - {fileID: 11400000, guid: f7da41f57e9fbfd4780abc0c1e0c0832, type: 2}
+  - {fileID: 11400000, guid: 860d6c7802e7db7488e366d2e6dfd8ea, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: c394f3db06fe0da4a86cd26d0f90c97a, type: 2}
+  - {fileID: 11400000, guid: 3b9990bcf648a4f44b9e8feeb9d322ac, type: 2}
+  - {fileID: 11400000, guid: 010f471762e8e9845b055e3501f74c3b, type: 2}
+  - {fileID: 11400000, guid: db0e42902ba03ec4aa74056b77915d9b, type: 2}
+  - {fileID: 11400000, guid: ed5a03d3a7eea494990088f2373e23cc, type: 2}
+  - {fileID: 11400000, guid: cd89e3e0f98b72e40ba976fd995d2ded, type: 2}
+  - {fileID: 11400000, guid: 6b3a2a9e797aaf64a91a35232458c485, type: 2}
+  - {fileID: 11400000, guid: d2fd1f336acf83044a0e627f186c4605, type: 2}
+  - {fileID: 11400000, guid: 1045d41fa021759448ab3714f1428693, type: 2}
+  - {fileID: 11400000, guid: 79dbd6f056da53e44b2ad45426af6e8b, type: 2}
+  clickResource: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  advanceResource: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  advanceCost: 2000000
+  knowledgeReward: 3
+  skyColor: {r: 0.55, g: 0.8, b: 1, a: 1}
+  groundColor: {r: 0.9, g: 0.95, b: 1, a: 1}

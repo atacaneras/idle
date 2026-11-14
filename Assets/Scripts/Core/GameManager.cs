@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     // ---- Istatistikler (basarim ekrani ve basarim kosullari icin) ----
     public double TotalClicks { get; private set; }
+    public double RunClicks { get; private set; }
     public double TotalBuildingsBought { get; private set; }
     public double TotalUpgradesBought { get; private set; }
     public double PlaySeconds { get; private set; }
@@ -60,6 +61,69 @@ public class GameManager : MonoBehaviour
     public double MaxOfflineHours { get { return maxOfflineHours + permOfflineHours; } }
 
     public event Action OnStateChanged;   // saniyede ~10 kez + her tiklama/satin almada
+    public Side CurrentSide { get; private set; }
+    public event Action<Side> OnSideChosen;
+    public void ChooseSide(Side s)
+    {
+        CurrentSide = s;
+        ResetRun();
+        CurrentAge = FirstAge();
+        RecalcCaches();
+        SaveGame();
+        if (OnSideChosen != null) OnSideChosen(s);
+        if (OnAgeChanged != null) OnAgeChanged();
+        if (OnUpgradesChanged != null) OnUpgradesChanged();
+        RaiseStateChanged();
+    }
+
+    // ---- Gorevler ----
+    public event Action<QuestDef> OnQuestClaimed;
+    public bool IsQuestClaimed(QuestDef q) { return claimedQuests.Contains(q.id); }
+
+    public double QuestProgress(QuestDef q)
+    {
+        switch (q.kind)
+        {
+            case QuestKind.Click: return RunClicks;
+            case QuestKind.Building: return q.building != null ? GetCount(q.building) : 0;
+            case QuestKind.Earn: return GetRunEarned(CurrentAge.clickResource);
+            case QuestKind.Upgrades: return purchased.Count;
+        }
+        return 0;
+    }
+
+    public bool ClaimQuest(QuestDef q)
+    {
+        if (CurrentAge == null || IsQuestClaimed(q) || QuestProgress(q) < q.amount) return false;
+        var res = CurrentAge.clickResource;
+        double grant = q.rewardFlat + q.rewardSeconds * GetProductionPerSecond(res);
+        if (grant > 0) AddResource(res, grant);
+        if (q.rewardKnowledge > 0) GrantKnowledge(q.rewardKnowledge);
+        claimedQuests.Add(q.id);
+        SaveGame();
+        RaiseStateChanged();
+        if (OnQuestClaimed != null) OnQuestClaimed(q);
+        return true;
+    }
+
+    // Secilen tarafin ilk kati (taraf yoksa listenin ilki)
+    AgeData FirstAge()
+    {
+        foreach (var a in ages) if (CurrentSide == Side.None || a.side == CurrentSide) return a;
+        return ages[0];
+    }
+
+    // Tarafin icinde kacinci kat (1..7)
+    public int FloorNumber
+    {
+        get
+        {
+            int n = 0;
+            foreach (var a in ages) { if (a.side == CurrentAge.side) n++; if (a == CurrentAge) break; }
+            return Mathf.Max(1, n);
+        }
+    }
+
     public event Action OnAgeChanged;     // cag degisince / ilk yukleme
     public event Action<BuildingData, int> OnBuildingBought;   // basarili satin almadan sonra (bina, adet): animasyon ve ses icin
     public event Action OnGathered;       // topla butonuna her basista (ses icin)
@@ -80,6 +144,7 @@ public class GameManager : MonoBehaviour
     readonly Dictionary<string, double> runEarned = new Dictionary<string, double>();
     readonly Dictionary<string, int> counts = new Dictionary<string, int>();
     readonly HashSet<string> purchased = new HashSet<string>();
+    readonly HashSet<string> claimedQuests = new HashSet<string>();
     readonly Dictionary<string, int> permLevels = new Dictionary<string, int>();
     readonly HashSet<string> unlockedAchievements = new HashSet<string>();
 
@@ -255,6 +320,7 @@ public class GameManager : MonoBehaviour
         if (CurrentAge == null || CurrentAge.clickResource == null) return;
         AddResource(CurrentAge.clickResource, ClickValue);
         TotalClicks++;
+        RunClicks++;
         RaiseStateChanged();
         if (OnGathered != null) OnGathered();
     }
@@ -340,7 +406,8 @@ public class GameManager : MonoBehaviour
         get
         {
             int i = Array.IndexOf(ages, CurrentAge);
-            return (i >= 0 && i + 1 < ages.Length) ? ages[i + 1] : null;
+            for (int j = i + 1; i >= 0 && j < ages.Length; j++) if (ages[j].side == CurrentAge.side) return ages[j];
+            return null;
         }
     }
 
@@ -377,7 +444,7 @@ public class GameManager : MonoBehaviour
         resources.Clear();
         runEarned.Clear();
         counts.Clear();
-        purchased.Clear();
+        purchased.Clear(); claimedQuests.Clear(); RunClicks = 0;
     }
 
     // Ayarlar > "Kaydi Sifirla": her seyi bastan baslatir (kalici yukseltmeler ve Bilgi dahil).
@@ -394,9 +461,9 @@ public class GameManager : MonoBehaviour
         resources.Clear();
         runEarned.Clear();
         counts.Clear();
-        purchased.Clear();
+        purchased.Clear(); claimedQuests.Clear(); RunClicks = 0;
         permLevels.Clear();
-        CurrentAge = ages[0];
+        CurrentAge = FirstAge();
         RecalcCaches();
         SaveGame();
         if (OnAgeChanged != null) OnAgeChanged();
@@ -588,7 +655,7 @@ public class GameManager : MonoBehaviour
         LifetimeKnowledge += reward;
         TimeLoops++;
         ResetRun();
-        CurrentAge = ages[0];
+        CurrentAge = FirstAge();
         RecalcCaches();
         SaveGame();
         if (OnAgeChanged != null) OnAgeChanged();
@@ -612,8 +679,11 @@ public class GameManager : MonoBehaviour
             totalBuildingsBought = TotalBuildingsBought,
             totalUpgradesBought = TotalUpgradesBought,
             playSeconds = PlaySeconds,
-            agesAdvanced = AgesAdvanced
+            agesAdvanced = AgesAdvanced,
+            side = (int)CurrentSide,
+            runClicks = RunClicks
         };
+        foreach (var id in claimedQuests) s.claimedQuests.Add(id);
         foreach (var id in unlockedAchievements) s.achievements.Add(id);
         foreach (var kv in resources) s.resources.Add(new NamedDouble { id = kv.Key, value = kv.Value });
         foreach (var kv in runEarned) s.runEarned.Add(new NamedDouble { id = kv.Key, value = kv.Value });
@@ -625,17 +695,21 @@ public class GameManager : MonoBehaviour
 
     void LoadGame()
     {
-        CurrentAge = ages[0];
+        CurrentAge = FirstAge();
         var s = SaveSystem.Load();
         if (s == null) { RecalcCaches(); return; }
 
         MigrateSave(s);
+        CurrentSide = (Side)s.side;
+        CurrentAge = FirstAge();
 
         foreach (var a in ages) if (a.id == s.ageId) CurrentAge = a;
         Knowledge = s.knowledge;
         LifetimeKnowledge = s.lifetimeKnowledge;
         TimeLoops = s.timeLoops;
         TotalClicks = s.totalClicks;
+        RunClicks = s.runClicks;
+        if (s.claimedQuests != null) foreach (var id in s.claimedQuests) claimedQuests.Add(id);
         TotalBuildingsBought = s.totalBuildingsBought;
         TotalUpgradesBought = s.totalUpgradesBought;
         PlaySeconds = s.playSeconds;

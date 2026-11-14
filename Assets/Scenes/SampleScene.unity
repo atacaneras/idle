@@ -1398,11 +1398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ages:
-  - {fileID: 11400000, guid: 0da7ddae89c7cf94eb83820fa00169a7, type: 2}
-  - {fileID: 11400000, guid: f7a590dd19e93174997960739b8bb9bf, type: 2}
-  - {fileID: 11400000, guid: c9b58fd5e9694ab8b0ccf43189a5404a, type: 2}
-  - {fileID: 11400000, guid: 7d31bc70850c4c6795c4c338ebf88e0c, type: 2}
-  - {fileID: 11400000, guid: 10bd4540a8b35e9aefc162a46adfb70c, type: 2}
+  - {fileID: 11400000, guid: 05303f4ea43fa704b8d090947e17a137, type: 2}
+  - {fileID: 11400000, guid: 11c8d00c3c993be49b6d6d2364bedeeb, type: 2}
   permanentUpgrades:
   - {fileID: 11400000, guid: 05a8a3ef41e47524c9b1e2c54d0c3a1e, type: 2}
   - {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}
@@ -1411,6 +1408,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f50a55ad462171543b34373fdcd0580f, type: 2}
   - {fileID: 11400000, guid: 68e5dec61b0d32041841bbcc3312beb2, type: 2}
   - {fileID: 11400000, guid: b48842700870f524bb8604066108c7c2, type: 2}
+  - {fileID: 11400000, guid: 08be7a12f79d47340baa6f41f148cd0b, type: 2}
+  - {fileID: 11400000, guid: 52e0b03f7ab6b9f4fa872c3958743350, type: 2}
   clickPower: 1
   autosaveInterval: 30
   maxOfflineHours: 8

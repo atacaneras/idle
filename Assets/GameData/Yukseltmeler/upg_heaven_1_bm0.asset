@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_heaven_1_bm0
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: heaven_1_bm0
+  displayName: "Harita + Sab\u0131r"
+  description: "Teyze \u201Cben bulurum\u201D dedi ama h\xE2l\xE2 kay\u0131p. Yine de verim iki kat\u0131na \xE7\u0131kt\u0131."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: 4000f517b74d11445aa65b887f34bc73, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  cost: 600
+  unlockBuilding: {fileID: 11400000, guid: 4000f517b74d11445aa65b887f34bc73, type: 2}
+  unlockCount: 10
+  prerequisite: {fileID: 0}

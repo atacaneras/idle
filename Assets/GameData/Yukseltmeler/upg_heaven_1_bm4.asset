@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_heaven_1_bm4
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: heaven_1_bm4
+  displayName: "Sar\u0131lma Kotas\u0131 Kalkt\u0131"
+  description: "Art\u0131k kimse sar\u0131lma hesab\u0131 tutmuyor."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: 860d6c7802e7db7488e366d2e6dfd8ea, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: 288d24976dd471a45996a5e886a88d96, type: 2}
+  cost: 6800000
+  unlockBuilding: {fileID: 11400000, guid: 860d6c7802e7db7488e366d2e6dfd8ea, type: 2}
+  unlockCount: 10
+  prerequisite: {fileID: 0}
