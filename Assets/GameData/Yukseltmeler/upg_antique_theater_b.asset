@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_antique_theater_b
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: antique_theater_b
+  displayName: Ucuz Koltuklar II
+  description: "\u0130lk y\xF6ntemi geli\u015Ftirdik. Komite h\xE2l\xE2 toplan\u0131yor."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: bc962a0464b8f7b4180222035e19966f, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: cc05639b00445e745bd00607109d9fcc, type: 2}
+  cost: 9000000
+  unlockBuilding: {fileID: 11400000, guid: bc962a0464b8f7b4180222035e19966f, type: 2}
+  unlockCount: 20
+  prerequisite: {fileID: 11400000, guid: 5cc00b9d09ccbc78771eb8668e4b3e04, type: 2}

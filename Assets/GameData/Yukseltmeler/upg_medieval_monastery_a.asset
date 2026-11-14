@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_medieval_monastery_a
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: medieval_monastery_a
+  displayName: Kopya Kitaplar
+  description: "Kitaplar\u0131 kopyalad\u0131k. M\xFCrekkep bitti, ke\u015Fi\u015Fler uyuyor."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: 22c982cf76c1d26e654eff87cc8afe37, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: b2cfea8563f7f8d9c0ca9bb39c73b469, type: 2}
+  cost: 30000000
+  unlockBuilding: {fileID: 11400000, guid: 22c982cf76c1d26e654eff87cc8afe37, type: 2}
+  unlockCount: 5
+  prerequisite: {fileID: 0}

@@ -1402,14 +1402,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7a590dd19e93174997960739b8bb9bf, type: 2}
   - {fileID: 11400000, guid: c9b58fd5e9694ab8b0ccf43189a5404a, type: 2}
   - {fileID: 11400000, guid: 7d31bc70850c4c6795c4c338ebf88e0c, type: 2}
+  - {fileID: 11400000, guid: 10bd4540a8b35e9aefc162a46adfb70c, type: 2}
   permanentUpgrades:
-  - {fileID: 11400000, guid: b93f096bbffcd3d40a8ce36678096601, type: 2}
+  - {fileID: 11400000, guid: 05a8a3ef41e47524c9b1e2c54d0c3a1e, type: 2}
   - {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}
   - {fileID: 11400000, guid: e4acae7899d8ba3438c10e47a6d053c7, type: 2}
-  - {fileID: 11400000, guid: 05a8a3ef41e47524c9b1e2c54d0c3a1e, type: 2}
-  - {fileID: 11400000, guid: b48842700870f524bb8604066108c7c2, type: 2}
+  - {fileID: 11400000, guid: b93f096bbffcd3d40a8ce36678096601, type: 2}
   - {fileID: 11400000, guid: f50a55ad462171543b34373fdcd0580f, type: 2}
   - {fileID: 11400000, guid: 68e5dec61b0d32041841bbcc3312beb2, type: 2}
+  - {fileID: 11400000, guid: b48842700870f524bb8604066108c7c2, type: 2}
   clickPower: 1
   autosaveInterval: 30
   maxOfflineHours: 8

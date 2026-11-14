@@ -20,7 +20,7 @@ MonoBehaviour:
   targetBuilding: {fileID: 11400000, guid: 6ac2fc003389cbf49bf8d392b22b38f8, type: 2}
   value: 2
   costResource: {fileID: 11400000, guid: afdcaf46dbd7bbc42a05bdb729d449e8, type: 2}
-  cost: 22000
+  cost: 21600
   unlockBuilding: {fileID: 11400000, guid: 6ac2fc003389cbf49bf8d392b22b38f8, type: 2}
   unlockCount: 20
   prerequisite: {fileID: 11400000, guid: addaac07125e9bc48a82f05326923cf6, type: 2}

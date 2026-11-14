@@ -32,27 +32,27 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 390df049ff71d4a4a84dac9972c044dd, type: 2}
   - {fileID: 11400000, guid: feb7f73a3ace949439e97d2d398d12bb, type: 2}
   - {fileID: 11400000, guid: a28c2ae5afe627f46afd096be187116c, type: 2}
+  - {fileID: 11400000, guid: 490108736ec821c828f0e27ea31a3d4d, type: 2}
+  - {fileID: 11400000, guid: c1d56639286d9143aeb41a157a6a28e1, type: 2}
+  - {fileID: 11400000, guid: b660130dc33f02c8c277fdaf6b0261b8, type: 2}
+  - {fileID: 11400000, guid: 9d063f48de7e72f923d87adbf33a90f5, type: 2}
+  - {fileID: 11400000, guid: 84dcfd4a455790a18b12d6ad68a05fc8, type: 2}
+  - {fileID: 11400000, guid: f07fcbea4cdf84cf57d06bcc8b920b35, type: 2}
+  - {fileID: 11400000, guid: 1fb127d96fc8ac3b07f8f3024b9d736c, type: 2}
+  - {fileID: 11400000, guid: 4e6864bdf73fc71e1404805362008c9e, type: 2}
+  - {fileID: 11400000, guid: 4729f65d4befbd7ec8c9caaea35e1040, type: 2}
+  - {fileID: 11400000, guid: c77a9da946b49c307f9892142403a632, type: 2}
+  - {fileID: 11400000, guid: fcb1c7f994ddf8ebf8e9fea2699bd6fa, type: 2}
+  - {fileID: 11400000, guid: c445073afc19c8dc4bd6d1ed9f4b78f5, type: 2}
+  - {fileID: 11400000, guid: 37ee3fec31fc90c8da132c1d6d69fb37, type: 2}
+  - {fileID: 11400000, guid: 1420d6992c4d646ede03272465afcff1, type: 2}
+  - {fileID: 11400000, guid: d88d1118c8c62bc97d0e18eba45b1720, type: 2}
+  - {fileID: 11400000, guid: 67e45ab38da0eadd0e0cf491fd2cdb5d, type: 2}
   - {fileID: 11400000, guid: 5b9557ae538d2c14db681861b69e823a, type: 2}
   - {fileID: 11400000, guid: 08c05a4e73eca634a9ffb654243fd532, type: 2}
-  - {fileID: 11400000, guid: 17a21a46ba691ed48ac90dbbb8bf8799, type: 2}
-  - {fileID: 11400000, guid: 931df7ae20413584badf4d2a7cd28e74, type: 2}
-  - {fileID: 11400000, guid: 13e2f9dd6aa57bd44a3d76977b4c6e45, type: 2}
-  - {fileID: 11400000, guid: 928083c980e85c6469fcf8d6b6d7b3e7, type: 2}
-  - {fileID: 11400000, guid: e5a937b6f463c554b92418baa8fd45b6, type: 2}
-  - {fileID: 11400000, guid: f60da92d5b118b44ab4a808d46aa90ef, type: 2}
-  - {fileID: 11400000, guid: b4dbd6947331a0e4fbac38c0f71e4a23, type: 2}
-  - {fileID: 11400000, guid: aa3a9a31a4e013b4ba1129cf09104717, type: 2}
-  - {fileID: 11400000, guid: 8004f9b1c4826504a9934a63e6b8ae40, type: 2}
-  - {fileID: 11400000, guid: 3bfa765a8f1265a40b8042d3c7525a67, type: 2}
-  - {fileID: 11400000, guid: e5568b742d2f160489ea99d343f29307, type: 2}
-  - {fileID: 11400000, guid: 1e62533062e0f0944b07294a906dda35, type: 2}
-  - {fileID: 11400000, guid: d269d1dab0d928645b6c9e6aa8b4098d, type: 2}
-  - {fileID: 11400000, guid: 4ba85039ae84fcf45b2604923699cb78, type: 2}
-  - {fileID: 11400000, guid: 94e2c6f3b8100754ea06218fd5e73dd0, type: 2}
-  - {fileID: 11400000, guid: 79e20eed525201b418a9c1ddcc0ea605, type: 2}
   clickResource: {fileID: 11400000, guid: 49ee512220185db488ff5cf19d02ef03, type: 2}
   advanceResource: {fileID: 11400000, guid: 49ee512220185db488ff5cf19d02ef03, type: 2}
-  advanceCost: 1000000000000
+  advanceCost: 1200000000000
   knowledgeReward: 0
   skyColor: {r: 0.36, g: 0.64, b: 0.72, a: 1}
   groundColor: {r: 0.42, g: 0.53, b: 0.31, a: 1}

@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 051c13c15b2371a45bdfd4d1ad269015, type: 2}
   clickResource: {fileID: 11400000, guid: caf2fe570a335804f93f92251e0ce005, type: 2}
   advanceResource: {fileID: 11400000, guid: 50dbeab9c90730a428c4fb693ef04cd5, type: 2}
-  advanceCost: 3800000
+  advanceCost: 90000000
   knowledgeReward: 3
   skyColor: {r: 0.98, g: 0.8, b: 0.65, a: 1}
   groundColor: {r: 0.45, g: 0.3, b: 0.2, a: 1}

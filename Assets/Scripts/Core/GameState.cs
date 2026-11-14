@@ -4,11 +4,13 @@ using System.Collections.Generic;
 [Serializable]
 public class GameState
 {
-    public const int CurrentVersion = 2;
+    public const int CurrentVersion = 3;
 
     // v1: ilk surum (knowledge = tek Bilgi sayaci)
     // v2: yukseltmeler, kalici yukseltmeler, Zaman Makinesi. knowledge artik harcanabilir bakiye,
     //     lifetimeKnowledge toplam kazanilan (v1'den gelen kayitta knowledge'a esitlenir).
+    // v3: runEarned = bu turda toplam kazanilan kaynak. Cag atlama ve Zaman Makinesi eldeki
+    //     bakiyeye degil bu toplama bakar; boylece bina almak ilerlemeyi cezalandirmaz.
     public int version = CurrentVersion;
     public long lastSaveUnix;
     public string ageId;
@@ -16,6 +18,7 @@ public class GameState
     public double lifetimeKnowledge;   // bugune kadar kazanilan toplam Bilgi (pasif carpan buna bagli)
     public int timeLoops;              // kac kez Zaman Makinesi kullanildi
     public List<NamedDouble> resources = new List<NamedDouble>();
+    public List<NamedDouble> runEarned = new List<NamedDouble>();   // v3: bu turda toplam kazanilan
     public List<NamedInt> buildings = new List<NamedInt>();
     public List<string> upgrades = new List<string>();          // bu turda alinan cag ici yukseltmeler
     public List<NamedInt> permanents = new List<NamedInt>();    // kalici yukseltme seviyeleri

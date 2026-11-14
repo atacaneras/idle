@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_medieval_market_b
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: medieval_market_b
+  displayName: "Lonca Fiyat Anla\u015Fmas\u0131"
+  description: "Lonca fiyat\u0131 belirledi. Pazar da belirledi. \u0130kisi de ayn\u0131."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: bb229224a224bf17fd5a5a154188eec0, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: 1d4dbf6e37d683ae4dee158eff029e52, type: 2}
+  cost: 7200000
+  unlockBuilding: {fileID: 11400000, guid: bb229224a224bf17fd5a5a154188eec0, type: 2}
+  unlockCount: 20
+  prerequisite: {fileID: 11400000, guid: 675f16b1c025285c9032ae6ecbba2837, type: 2}

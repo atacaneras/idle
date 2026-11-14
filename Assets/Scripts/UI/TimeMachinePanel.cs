@@ -270,18 +270,20 @@ public class TimeMachinePanel : MonoBehaviour
         }
 
         string res = age.advanceResource != null ? age.advanceResource.displayName : "?";
+        string earned = NumberFormatter.Format(gm.GetRunEarned(age.advanceResource));
         if (!gm.CanUseTimeMachine)
         {
-            tmInfoText.text = "<b>Zaman Makinesi</b>\nÇalıştırmak için " + NumberFormatter.Format(gm.AdvanceCost) + " " + res
-                + " gerekiyor. Daha fazla biriktirirsen daha çok Bilgi kazanırsın.";
+            tmInfoText.text = "<b>Zaman Makinesi</b>\nBu turda toplam " + NumberFormatter.Format(gm.AdvanceCost) + " " + res
+                + " kazanman gerekiyor. Şu an: " + earned + ". Daha fazla üretirsen daha çok Bilgi kazanırsın.";
             tmLabel.text = "Zaman Makinesi (Kilitli)";
             tmButton.interactable = false;
             return;
         }
 
-        tmInfoText.text = "<b>Zaman Makinesi hazır.</b>\nŞu an çalıştırırsan <color=#" + ColorUtility.ToHtmlStringRGB(GoldColor) + ">+"
-            + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi</color> kazanırsın. " + res
-            + " biriktikçe ödül büyür (karekökle). Bina, kaynak ve yükseltmelerin sıfırlanır.";
+        tmInfoText.text = "<b>Zaman Makinesi hazır.</b>\nBu turda " + earned + " " + res + " kazandın. Şu an çalıştırırsan <color=#"
+            + ColorUtility.ToHtmlStringRGB(GoldColor) + ">+" + NumberFormatter.Format(gm.TimeMachineReward)
+            + " Bilgi</color> kazanırsın. Daha fazla üretirsen ödül büyür (karekökle). "
+            + "Bina, kaynak ve yükseltmelerin sıfırlanır.";
         tmButton.interactable = true;
         tmLabel.text = confirmTimer >= 0f ? "Emin misin? Her şey sıfırlanır. Tekrar bas!" : "Zaman Makinesi'ni Çalıştır";
     }

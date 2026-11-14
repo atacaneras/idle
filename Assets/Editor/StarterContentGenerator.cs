@@ -1,328 +1,384 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-// Menu: Evrim > Baslangic Icerigini Olustur
-// Tas ve Tarim caglarini 8'er binaya cikarir, cag ici yukseltmeleri ve Bilgi Agaci'ni (kalici yukseltmeler) olusturur.
-// Tekrar tekrar calistirilabilir: ayni id'li asset varsa uzerine yazar, yenisini uretmez.
-// DIKKAT: bina ekonomisi (maliyet/uretim), sahne konumu ve placeholder renkleri bu verilere gore yeniden yazilir.
-// Sprite / ikon alanlarina dokunmaz.
-// Yeni cag eklerken bu dosyayi kopyalayip ayni deseni kullanabilirsin ya da asset'leri elle olusturabilirsin.
+// Menu: Evrim > Icerik Uret (JSON)
+// Tek kaynak: Assets/GameData/Content/content.json
+// Bu script JSON'u okur, ScriptableObject asset'lerini gunceller/olusturur ve
+// sahnedeki GameManager listelerini JSON sirasina gore yeniden baglar.
+// Sprite / ikon alanlarina dokunmaz; grafikci atadiktan sonra da calistirilabilir.
 public static class StarterContentGenerator
 {
     const string Root = "Assets/GameData";
+    const string ContentPath = Root + "/Content/content.json";
+    const string ScenePath = "Assets/Scenes/SampleScene.unity";
 
-    static readonly Dictionary<string, ResourceData> resources = new Dictionary<string, ResourceData>();
-    static readonly Dictionary<string, BuildingData> buildings = new Dictionary<string, BuildingData>();
-    static readonly Dictionary<string, UpgradeData> upgrades = new Dictionary<string, UpgradeData>();
-    static readonly Dictionary<string, PermanentUpgradeData> perms = new Dictionary<string, PermanentUpgradeData>();
-    static readonly List<KeyValuePair<string, string>> pendingPrereq = new List<KeyValuePair<string, string>>();
-    static readonly List<KeyValuePair<string, string>> pendingPermReq = new List<KeyValuePair<string, string>>();
-
-    [MenuItem("Evrim/Başlangıç İçeriğini Oluştur")]
+    [MenuItem("Evrim/İçerik Üret (JSON)")]
     public static void Generate()
     {
-        resources.Clear(); buildings.Clear(); upgrades.Clear(); perms.Clear();
-        pendingPrereq.Clear(); pendingPermReq.Clear();
-
-        // Mevcut kaynaklar
-        ExistingResource("food", "res_food"); ExistingResource("wood", "res_wood");
-        ExistingResource("stone", "res_stone"); ExistingResource("wheat", "res_wheat");
-
-        // Yeni kaynaklar
-        Resource("milk", "Süt", "res_milk");
-        Resource("flour", "Un", "res_flour");
-        Resource("bronze", "Bronz", "res_bronze");
-        Resource("coin", "Sikke", "res_coin");
-        Resource("knowledge", "Bilgelik", "res_wisdom");
-        AddAncientResources();
-
-        // Binalar
-        Building("stone_gatherer", "bld_gatherer", "Toplayıcı Alanı", "food", "food", 15.0, 0.5, -8f, -3.4f, 1, 0f, 1f, 0f);
-        Building("stone_woodcamp", "bld_woodcamp", "Odun Kampı", "wood", "food", 100.0, 1.0, -6.5f, -2.7f, 0, 0.545f, 0.27f, 0.075f);
-        Building("stone_hunter", "bld_hunter", "Avcı Kampı", "food", "wood", 300.0, 8.0, -5f, -3.4f, 1, 1f, 0f, 0f);
-        Building("stone_quarry", "bld_quarry", "Taş Ocağı", "stone", "wood", 1100.0, 1.0, -3.5f, -2.7f, 0, 0.3f, 0.3f, 0.3f);
-        Building("stone_axeshop", "bld_stone_axeshop", "Balta Atölyesi", "wood", "stone", 300.0, 30.0, -2f, -3.4f, 1, 0.6f, 0.45f, 0.3f);
-        Building("stone_firepit", "bld_stone_firepit", "Ateş Çukuru", "food", "stone", 1500.0, 120.0, -0.5f, -2.7f, 0, 1f, 0.5f, 0f);
-        Building("stone_mammoth", "bld_stone_mammoth", "Mamut Taşıyıcılar", "stone", "food", 15000.0, 40.0, 1f, -3.4f, 1, 0.45f, 0.3f, 0.25f);
-        Building("stone_gallery", "bld_stone_gallery", "Mağara Galerisi", "food", "stone", 9000.0, 600.0, 2.5f, -2.7f, 0, 0.7f, 0.4f, 0.8f);
-        Building("farm_field", "bld_farm", "Buğday Tarlası", "wheat", "wheat", 10.0, 1.0, -8f, -3.4f, 1, 1f, 0.92f, 0.016f);
-        Building("farm_cows", "bld_farm_cows", "İnek Ahırı", "milk", "wheat", 120.0, 2.0, -6.5f, -2.7f, 0, 0.9f, 0.9f, 0.9f);
-        Building("farm_mill", "bld_farm_mill", "Yel Değirmeni", "flour", "wheat", 1200.0, 6.0, -5f, -3.4f, 1, 0.8f, 0.7f, 0.5f);
-        Building("farm_scarecrow", "bld_farm_scarecrow", "Korkuluk Birliği", "wheat", "milk", 900.0, 40.0, -3.5f, -2.7f, 0, 0.8f, 0.6f, 0.2f);
-        Building("farm_market", "bld_farm_market", "Pazar Tezgâhı", "milk", "flour", 9000.0, 90.0, -2f, -3.4f, 1, 0.3f, 0.6f, 0.9f);
-        Building("farm_bakery", "bld_farm_bakery", "Köy Fırını", "flour", "milk", 40000.0, 250.0, -0.5f, -2.7f, 0, 0.85f, 0.45f, 0.2f);
-        Building("farm_canal", "bld_farm_canal", "Sulama Kanalı", "wheat", "flour", 300000.0, 2500.0, 1f, -3.4f, 1, 0.2f, 0.5f, 0.8f);
-        Building("farm_square", "bld_farm_square", "Dedikodu Meydanı", "flour", "milk", 2500000.0, 5000.0, 2.5f, -2.7f, 0, 0.6f, 0.6f, 0.3f);
-        Building("bronze_smelter", "bld_bronze_smelter", "Bronz Dökümhanesi", "bronze", "bronze", 100, 18000, -8f, -3.4f, 1, 0.72f, 0.35f, 0.18f);
-        Building("bronze_mint", "bld_bronze_mint", "Sikke Darphanesi", "coin", "bronze", 90e6, 7000, -6f, -2.7f, 0, 0.86f, 0.68f, 0.28f);
-        Building("bronze_library", "bld_bronze_library", "Kil Tablet Arşivi", "knowledge", "coin", 300e6, 2500, -4f, -3.4f, 1, 0.55f, 0.38f, 0.22f);
-        Building("bronze_cart", "bld_bronze_cart", "Tekerlekli Kervan", "coin", "bronze", 900e6, 80000, -2f, -2.7f, 0, 0.48f, 0.3f, 0.16f);
-        Building("bronze_aqueduct", "bld_bronze_aqueduct", "Su Kemeri", "knowledge", "coin", 5e9, 24000, 0f, -3.4f, 1, 0.42f, 0.67f, 0.72f);
-        Building("bronze_workshop", "bld_bronze_workshop", "Zanaat Atölyesi", "bronze", "knowledge", 18e9, 350000, 2f, -2.7f, 0, 0.72f, 0.48f, 0.25f);
-        Building("bronze_observatory", "bld_bronze_observatory", "Gözlemevi", "knowledge", "bronze", 70e9, 180000, 4f, -3.4f, 1, 0.24f, 0.32f, 0.55f);
-        Building("bronze_forum", "bld_bronze_forum", "Şehir Forumu", "coin", "knowledge", 250e9, 1800000, 6f, -2.7f, 0, 0.78f, 0.58f, 0.32f);
-        CreateAncientBuildings();
-
-        // Cag ici yukseltmeler
-        Upgrade("stone_click1", "Daha Sivri Taş", "Sivri olan daha iyi toplar. Bu bilim.", UpgradeKind.ClickMultiplier, 2.0, null, "food", 100.0, null, 0, null);
-        Upgrade("stone_click2", "Çift Elle Toplama", "İki el, iki kat verim. Matematik zor ama doğru.", UpgradeKind.ClickMultiplier, 2.0, null, "food", 1500.0, null, 0, "stone_click1");
-        Upgrade("stone_click3", "Toplama Teknikleri", "Ustalar işi böyle yapar. Kimse ustaların kim olduğunu bilmiyor.", UpgradeKind.ClickProductionShare, 0.01, null, "food", 12000.0, null, 0, "stone_click2");
-        Upgrade("stone_click4", "Kas Hafızası", "Kollar düşünmeden topluyor. Beyin tatilde.", UpgradeKind.ClickMultiplier, 3.0, null, "food", 90000.0, null, 0, "stone_click3");
-        Upgrade("stone_gatherer_a", "Sepet Örmek", "İlk sepet. Kimse nasıl yapıldığını hatırlamıyor ama herkes çok gururlu.", UpgradeKind.BuildingMultiplier, 2.0, "stone_gatherer", "food", 180.0, "stone_gatherer", 5, null);
-        Upgrade("stone_gatherer_b", "Meyve Haritası", "Hangi çalıdan ne çıktığını duvara çizdik. Duvar artık bizim arama motoru.", UpgradeKind.BuildingMultiplier, 2.0, "stone_gatherer", "food", 2700.0, "stone_gatherer", 20, "stone_gatherer_a");
-        Upgrade("stone_woodcamp_a", "Sivri Sopa", "Her sopa bir ağaç söker. Teoride.", UpgradeKind.BuildingMultiplier, 2.0, "stone_woodcamp", "food", 1200.0, "stone_woodcamp", 5, null);
-        Upgrade("stone_woodcamp_b", "Odun Sendikası", "Mesai saati icat edildi. Kimse ne olduğunu anlamadı.", UpgradeKind.BuildingMultiplier, 2.0, "stone_woodcamp", "food", 18000.0, "stone_woodcamp", 20, "stone_woodcamp_a");
-        Upgrade("stone_hunter_a", "Mızrak Ucu", "Eskiden elimizdeki sopaya mızrak derdik. Şimdi ucu var, çok profesyonel.", UpgradeKind.BuildingMultiplier, 2.0, "stone_hunter", "wood", 3600.0, "stone_hunter", 5, null);
-        Upgrade("stone_hunter_b", "Av Stratejisi", "Önce bağırmayı, sonra koşmayı öğrendik. Sıra önemli.", UpgradeKind.BuildingMultiplier, 2.0, "stone_hunter", "wood", 54000.0, "stone_hunter", 20, "stone_hunter_a");
-        Upgrade("stone_quarry_a", "Daha İyi Kazma", "Taşla taş kazmak mantıklı mı? Çalışıyor, soru sorma.", UpgradeKind.BuildingMultiplier, 2.0, "stone_quarry", "wood", 13000.0, "stone_quarry", 5, null);
-        Upgrade("stone_quarry_b", "Taşa Yazı Yazmak", "Kimse okuyamıyor ama çok şık duruyor.", UpgradeKind.BuildingMultiplier, 2.0, "stone_quarry", "wood", 200000.0, "stone_quarry", 20, "stone_quarry_a");
-        Upgrade("stone_axeshop_a", "Bileme Taşı", "Taşı bilemek için taş. Evrenin ironisi.", UpgradeKind.BuildingMultiplier, 2.0, "stone_axeshop", "stone", 3600.0, "stone_axeshop", 5, null);
-        Upgrade("stone_axeshop_b", "Çırak Alımı", "Çırak bedava çalışıyor. Buna 'tecrübe' diyoruz.", UpgradeKind.BuildingMultiplier, 2.0, "stone_axeshop", "stone", 54000.0, "stone_axeshop", 20, "stone_axeshop_a");
-        Upgrade("stone_firepit_a", "Kuru Odun Kuralı", "Islak odun yanmaz. Üç kişi yanarak öğrendi.", UpgradeKind.BuildingMultiplier, 2.0, "stone_firepit", "stone", 18000.0, "stone_firepit", 5, null);
-        Upgrade("stone_firepit_b", "Baharat Keşfi", "Bir ot ateşe düştü, koku harika çıktı. Mutfak doğdu.", UpgradeKind.BuildingMultiplier, 2.0, "stone_firepit", "stone", 270000.0, "stone_firepit", 20, "stone_firepit_a");
-        Upgrade("stone_mammoth_a", "Mamut Eğitimi", "Mamutlar 'otur' komutunu öğrenmedi ama taşıyorlar.", UpgradeKind.BuildingMultiplier, 2.0, "stone_mammoth", "food", 180000.0, "stone_mammoth", 5, null);
-        Upgrade("stone_mammoth_b", "Mamut Sendikası", "Mamutlar zam istiyor. Yaprakla değil, gerçek zam.", UpgradeKind.BuildingMultiplier, 2.0, "stone_mammoth", "food", 2700000.0, "stone_mammoth", 20, "stone_mammoth_a");
-        Upgrade("stone_gallery_a", "Parmak Boyası", "İlk eleştirmen: 'Benim çocuğum da yapar.'", UpgradeKind.BuildingMultiplier, 2.0, "stone_gallery", "stone", 110000.0, "stone_gallery", 5, null);
-        Upgrade("stone_gallery_b", "Sanat Turu", "Komşu kabileden turistler geliyor. Rehber: 'Yiyecek ayrıca.'", UpgradeKind.BuildingMultiplier, 2.0, "stone_gallery", "stone", 1600000.0, "stone_gallery", 20, "stone_gallery_a");
-        Upgrade("stone_global1", "Ateşi Evcilleştirmek", "Artık yakmıyor da ısıtıyor. Büyük ilerleme.", UpgradeKind.GlobalMultiplier, 1.5, null, "food", 2500.0, "stone_hunter", 10, null);
-        Upgrade("stone_global2", "Tekerlek Fikri", "Henüz tekerlek yok ama fikir var. Fikri bile ağır.", UpgradeKind.GlobalMultiplier, 2.0, null, "food", 40000.0, "stone_quarry", 15, null);
-        Upgrade("farm_click1", "Daha İyi Orak", "Orak keskin. Parmaklar da.", UpgradeKind.ClickMultiplier, 2.0, null, "wheat", 150.0, null, 0, null);
-        Upgrade("farm_click2", "Çift Orak", "Biri yeterliydi ama iki tane daha havalı.", UpgradeKind.ClickMultiplier, 2.0, null, "wheat", 4000.0, null, 0, "farm_click1");
-        Upgrade("farm_click3", "Bereket Duası", "Dua ediyoruz. Sonuç: biraz daha fazla buğday.", UpgradeKind.ClickProductionShare, 0.01, null, "wheat", 50000.0, null, 0, "farm_click2");
-        Upgrade("farm_click4", "Sabah Antrenmanı", "Horoz ötmeden kalkıyoruz. Horoz küstü.", UpgradeKind.ClickMultiplier, 3.0, null, "wheat", 700000.0, null, 0, "farm_click3");
-        Upgrade("farm_field_a", "Demir Saban", "Tahta saban kırılıyordu. Demir diye bir şey keşfettik.", UpgradeKind.BuildingMultiplier, 2.0, "farm_field", "wheat", 120.0, "farm_field", 5, null);
-        Upgrade("farm_field_b", "Ürün Rotasyonu", "Aynı tarlaya aynı şeyi ekme. Ya da ek, bakalım.", UpgradeKind.BuildingMultiplier, 2.0, "farm_field", "wheat", 1800.0, "farm_field", 20, "farm_field_a");
-        Upgrade("farm_cows_a", "Yonca Menüsü", "İnekler artık yonca istiyor. 'Ot' demek hakaret sayılıyor.", UpgradeKind.BuildingMultiplier, 2.0, "farm_cows", "wheat", 1400.0, "farm_cows", 5, null);
-        Upgrade("farm_cows_b", "Sabah Sağımı", "İnekler sabah insanı değil ama idare ediyor.", UpgradeKind.BuildingMultiplier, 2.0, "farm_cows", "wheat", 22000.0, "farm_cows", 20, "farm_cows_a");
-        Upgrade("farm_mill_a", "Daha Büyük Kanatlar", "Rüzgâr çıkınca çalışıyor. Çıkmayınca toplantı yapıyoruz.", UpgradeKind.BuildingMultiplier, 2.0, "farm_mill", "wheat", 14000.0, "farm_mill", 5, null);
-        Upgrade("farm_mill_b", "Değirmen Ustası", "'Ben bilirim' deyip her şeyi bozdu. Sonra tamir etti.", UpgradeKind.BuildingMultiplier, 2.0, "farm_mill", "wheat", 220000.0, "farm_mill", 20, "farm_mill_a");
-        Upgrade("farm_scarecrow_a", "Ürkütücü Yüzler", "Kargalar bile ürküyor. Komşu da.", UpgradeKind.BuildingMultiplier, 2.0, "farm_scarecrow", "milk", 11000.0, "farm_scarecrow", 5, null);
-        Upgrade("farm_scarecrow_b", "Korkuluk Tatbikatı", "Düşman yok, tatbikat var. Ama hazırlıklıyız.", UpgradeKind.BuildingMultiplier, 2.0, "farm_scarecrow", "milk", 160000.0, "farm_scarecrow", 20, "farm_scarecrow_a");
-        Upgrade("farm_market_a", "Pazarlık Sanatı", "'Son fiyat' ilk fiyatın yarısı. Herkes biliyor ama oynuyor.", UpgradeKind.BuildingMultiplier, 2.0, "farm_market", "flour", 110000.0, "farm_market", 5, null);
-        Upgrade("farm_market_b", "Bağırarak Satış", "En yüksek ses en çok satar. Bilimsel olarak kanıtlandı: biri bağırdı.", UpgradeKind.BuildingMultiplier, 2.0, "farm_market", "flour", 1600000.0, "farm_market", 20, "farm_market_a");
-        Upgrade("farm_bakery_a", "Taş Fırın", "Ekmek kabarıyor. Neden kabarıyor? Kimse bilmiyor.", UpgradeKind.BuildingMultiplier, 2.0, "farm_bakery", "milk", 480000.0, "farm_bakery", 5, null);
-        Upgrade("farm_bakery_b", "Maya Bekçisi", "Mayanın bakımını biri yapıyor. Maya ona teşekkür etmiyor.", UpgradeKind.BuildingMultiplier, 2.0, "farm_bakery", "milk", 7200000.0, "farm_bakery", 20, "farm_bakery_a");
-        Upgrade("farm_canal_a", "Daha Derin Hendek", "Su akıyor. Neredeyse istediğimiz yere.", UpgradeKind.BuildingMultiplier, 2.0, "farm_canal", "flour", 3600000.0, "farm_canal", 5, null);
-        Upgrade("farm_canal_b", "Kanal Bekçisi", "Biri suyu çalıyor. Komşu mu? Evet, komşu.", UpgradeKind.BuildingMultiplier, 2.0, "farm_canal", "flour", 54000000.0, "farm_canal", 20, "farm_canal_a");
-        Upgrade("farm_square_a", "Çeşme Başı", "Su alırken konuşuyoruz. Konu: başkaları.", UpgradeKind.BuildingMultiplier, 2.0, "farm_square", "milk", 30000000.0, "farm_square", 5, null);
-        Upgrade("farm_square_b", "Meydan Muhabbeti", "Haberler sözlü. Çoğu yanlış. Hepsi eğlenceli.", UpgradeKind.BuildingMultiplier, 2.0, "farm_square", "milk", 450000000.0, "farm_square", 20, "farm_square_a");
-        Upgrade("farm_global1", "Takvim İcadı", "Ne zaman ekeceğimizi biliyoruz. Çiftçiler 'zaten biliyorduk' diyor.", UpgradeKind.GlobalMultiplier, 1.5, null, "wheat", 25000.0, "farm_mill", 10, null);
-        Upgrade("farm_global2", "Çit Çekmek", "Çit koyduk. Komşunun ineği 'sınır nerede' diye soruyor.", UpgradeKind.GlobalMultiplier, 2.0, null, "wheat", 600000.0, "farm_canal", 10, null);
-        Upgrade("bronze_click1", "Döküm Kalıbı", "Aynı baltayı tekrar tekrar dökmek artık mümkün.", UpgradeKind.ClickMultiplier, 2, null, "bronze", 25000, null, 0, null);
-        Upgrade("bronze_click2", "Usta Çekiç", "Çekiç daha ağır. Başparmak daha dikkatli.", UpgradeKind.ClickMultiplier, 3, null, "bronze", 900000, null, 0, "bronze_click1");
-        Upgrade("bronze_click3", "Yazılı Tarifler", "Tablete yazdık. Tablet ağır, tarif kısa.", UpgradeKind.ClickProductionShare, .015, null, "knowledge", 250000, null, 0, "bronze_click2");
-        Upgrade("bronze_click4", "Atölye Nöbeti", "Vardiya sistemi icat edildi. Usta hâlâ uyumuyor.", UpgradeKind.ClickMultiplier, 4, null, "coin", 8000000, null, 0, "bronze_click3");
-        string[] bb = { "bronze_smelter", "bronze_mint", "bronze_library", "bronze_cart", "bronze_aqueduct", "bronze_workshop", "bronze_observatory", "bronze_forum" };
-        string[] bn = { "Fırın Tuğlaları", "Düzenli Sikke", "Tablet Kataloğu", "Tekerlek Gresi", "Çift Kemer", "Usta Çıraklığı", "Yıldız Cetveli", "Açık Forum" };
-        string[] br = { "bronze", "coin", "knowledge", "coin", "knowledge", "bronze", "knowledge", "coin" };
-        double[] bc = { 100000, 450000, 1500000, 4500000, 15000000, 45000000, 150000000, 450000000 };
-        for (int i = 0; i < bb.Length; i++)
+        string fullPath = Path.Combine(Directory.GetCurrentDirectory(), ContentPath);
+        if (!File.Exists(fullPath))
         {
-            Upgrade("bronze_" + bb[i] + "_a", bn[i], "Daha iyi araçlar, daha düzenli üretim.", UpgradeKind.BuildingMultiplier, 2, bb[i], br[i], bc[i], bb[i], 5, null);
-            Upgrade("bronze_" + bb[i] + "_b", bn[i] + " II", "İlk yöntem işe yaradı. Biraz daha iyisini yaptık.", UpgradeKind.BuildingMultiplier, 2, bb[i], br[i], bc[i] * 100, bb[i], 20, "bronze_" + bb[i] + "_a");
+            Debug.LogError("Icerik dosyasi bulunamadi: " + ContentPath);
+            return;
         }
-        Upgrade("bronze_global1", "Standart Ölçüler", "Herkes aynı ölçü kabını kullanıyor. Neredeyse.", UpgradeKind.GlobalMultiplier, 1.5, null, "coin", 3000000, "bronze_mint", 10, null);
-        Upgrade("bronze_global2", "Yazılı Kanunlar", "Kurallar tablete yazıldı; artık kimse okuyamıyor.", UpgradeKind.GlobalMultiplier, 2, null, "knowledge", 100000000, "bronze_forum", 10, null);
-        CreateAncientUpgradesAndAge();
-        foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
 
-        // Kalici yukseltmeler (Bilgi Agaci)
-        Perm("perm_global", "Atalardan Notlar", "Kimse okuyamıyor ama duvarda çok şık duruyor.", PermanentKind.GlobalProduction, 0.1, 10, 3.0, 1.55, null);
-        Perm("perm_click", "Güçlü Bilekler", "Ellerin hafızası var. Zaman makinesi bunu silemedi.", PermanentKind.ClickPower, 0.25, 8, 2.0, 1.5, null);
-        Perm("perm_cost", "Pazarlık Ruhu", "Tüccarlar 'bu sefer fiyatı sen belirle' dedi. İlk kez.", PermanentKind.CostReduction, 0.03, 10, 5.0, 1.6, "perm_global");
-        Perm("perm_advance", "Kestirme Yol", "Haritada yok ama bir keçi yolu biliyoruz.", PermanentKind.AdvanceDiscount, 0.05, 8, 4.0, 1.6, "perm_click");
-        Perm("perm_knowledge", "Not Alma Alışkanlığı", "Zaman yolculuğundan her seferinde daha çok şey hatırlıyoruz.", PermanentKind.KnowledgeGain, 0.2, 5, 8.0, 2.0, "perm_global");
-        Perm("perm_offline", "Gözü Açık Uyku", "Sen yokken köy çalışıyor. Sana sormadan.", PermanentKind.OfflineHours, 1.0, 8, 3.0, 1.5, "perm_click");
-        Perm("perm_global2", "Paradoks Verimi", "Geçmişteki biz, gelecekteki bizi kıskanıyor.", PermanentKind.GlobalProduction, 0.25, 5, 25.0, 2.2, "perm_cost");
-        foreach (var kv in pendingPermReq) perms[kv.Key].requires = perms[kv.Value];
+        ContentFile content;
+        try { content = JsonUtility.FromJson<ContentFile>(File.ReadAllText(fullPath)); }
+        catch (Exception e) { Debug.LogError("JSON okunamadi: " + e.Message); return; }
+        if (content == null || content.ages == null || content.ages.Length == 0)
+        {
+            Debug.LogError("JSON bos ya da gecersiz: " + ContentPath);
+            return;
+        }
 
-        // Caglar
-        ConfigureAge("age_stone", new[] { "food", "wood", "stone" }, new[] { "stone_gatherer", "stone_woodcamp", "stone_hunter", "stone_quarry", "stone_axeshop", "stone_firepit", "stone_mammoth", "stone_gallery" }, new[] { "stone_click1", "stone_click2", "stone_click3", "stone_click4", "stone_gatherer_a", "stone_gatherer_b", "stone_woodcamp_a", "stone_woodcamp_b", "stone_hunter_a", "stone_hunter_b", "stone_quarry_a", "stone_quarry_b", "stone_axeshop_a", "stone_axeshop_b", "stone_firepit_a", "stone_firepit_b", "stone_mammoth_a", "stone_mammoth_b", "stone_gallery_a", "stone_gallery_b", "stone_global1", "stone_global2" }, 3800000.0, 3.0);
-        ConfigureAge("age_farm", new[] { "wheat", "milk", "flour" }, new[] { "farm_field", "farm_cows", "farm_mill", "farm_scarecrow", "farm_market", "farm_bakery", "farm_canal", "farm_square" }, new[] { "farm_click1", "farm_click2", "farm_click3", "farm_click4", "farm_field_a", "farm_field_b", "farm_cows_a", "farm_cows_b", "farm_mill_a", "farm_mill_b", "farm_scarecrow_a", "farm_scarecrow_b", "farm_market_a", "farm_market_b", "farm_bakery_a", "farm_bakery_b", "farm_canal_a", "farm_canal_b", "farm_square_a", "farm_square_b", "farm_global1", "farm_global2" }, 290000000.0, 0.0);
-        var bronzeUpgrades = new List<string> { "bronze_click1", "bronze_click2", "bronze_click3", "bronze_click4", "bronze_global1", "bronze_global2" };
-        foreach (var b in bb) { bronzeUpgrades.Add("bronze_" + b + "_a"); bronzeUpgrades.Add("bronze_" + b + "_b"); }
-        ConfigureAge("age_bronze", new[] { "bronze", "coin", "knowledge" }, bb, bronzeUpgrades.ToArray(), 1000000000000.0, 0);
+        Validate(content);
 
-        AssignPermanentsToScene();
+        var resources = new Dictionary<string, ResourceData>();
+        var buildings = new Dictionary<string, BuildingData>();
+        var upgrades = new Dictionary<string, UpgradeData>();
+        var perms = new Dictionary<string, PermanentUpgradeData>();
+        var ages = new List<AgeData>();
+
+        // 1) Kaynaklar
+        foreach (var r in content.resources)
+        {
+            var asset = LoadOrCreate<ResourceData>("Kaynaklar", r.asset);
+            asset.id = r.id;
+            asset.displayName = r.displayName;
+            EditorUtility.SetDirty(asset);
+            resources[r.id] = asset;
+        }
+
+        // 2) Binalar
+        foreach (var age in content.ages)
+        {
+            foreach (var b in age.buildings)
+            {
+                var asset = LoadOrCreate<BuildingData>("Binalar", b.asset);
+                asset.id = b.id;
+                asset.displayName = b.displayName;
+                asset.produces = Get(resources, b.produces, "bina " + b.id + " produces");
+                asset.costResource = Get(resources, b.costResource, "bina " + b.id + " costResource");
+                asset.baseCost = b.baseCost;
+                asset.costGrowth = b.costGrowth > 0 ? b.costGrowth : 1.15;
+                asset.baseProduction = b.baseProduction;
+                asset.scenePosition = new Vector2(b.scenePosition[0], b.scenePosition[1]);
+                asset.sortingOrder = b.sortingOrder;
+                asset.placeholderColor = new Color(b.placeholderColor[0], b.placeholderColor[1], b.placeholderColor[2], 1f);
+                asset.placeholderSize = b.placeholderSize != null && b.placeholderSize.Length >= 2
+                    ? new Vector2(b.placeholderSize[0], b.placeholderSize[1])
+                    : new Vector2(1.2f, 1.2f);
+                EditorUtility.SetDirty(asset);
+                buildings[b.id] = asset;
+            }
+        }
+
+        // 3) Cag ici yukseltmeler
+        foreach (var age in content.ages)
+        {
+            foreach (var u in age.upgrades)
+            {
+                var asset = LoadOrCreate<UpgradeData>("Yukseltmeler", u.asset);
+                asset.id = u.id;
+                asset.displayName = u.displayName;
+                asset.description = u.description;
+                asset.kind = (UpgradeKind)Enum.Parse(typeof(UpgradeKind), u.kind);
+                asset.value = u.value;
+                asset.targetBuilding = string.IsNullOrEmpty(u.targetBuilding) ? null : Get(buildings, u.targetBuilding, "yukseltme " + u.id + " targetBuilding");
+                asset.costResource = Get(resources, u.costResource, "yukseltme " + u.id + " costResource");
+                asset.cost = u.cost;
+                asset.unlockBuilding = string.IsNullOrEmpty(u.unlockBuilding) ? null : Get(buildings, u.unlockBuilding, "yukseltme " + u.id + " unlockBuilding");
+                asset.unlockCount = u.unlockCount;
+                asset.prerequisite = null;   // 4. adimda baglanir
+                EditorUtility.SetDirty(asset);
+                upgrades[u.id] = asset;
+            }
+        }
+
+        // 4) Onkosul baglantilari (tum asset'ler olustuktan sonra)
+        foreach (var age in content.ages)
+        {
+            foreach (var u in age.upgrades)
+            {
+                if (string.IsNullOrEmpty(u.prerequisite)) continue;
+                UpgradeData pre;
+                if (upgrades.TryGetValue(u.prerequisite, out pre)) upgrades[u.id].prerequisite = pre;
+                else Debug.LogError("Yukseltme onkosulu bulunamadi: " + u.id + " -> " + u.prerequisite);
+            }
+        }
+
+        // 5) Kalici yukseltmeler
+        foreach (var p in content.permanentUpgrades)
+        {
+            var asset = LoadOrCreate<PermanentUpgradeData>("Kalici", p.asset);
+            asset.id = p.id;
+            asset.displayName = p.displayName;
+            asset.description = p.description;
+            asset.kind = (PermanentKind)Enum.Parse(typeof(PermanentKind), p.kind);
+            asset.valuePerLevel = p.valuePerLevel;
+            asset.maxLevel = p.maxLevel;
+            asset.baseCost = p.baseCost;
+            asset.costGrowth = p.costGrowth;
+            asset.requires = null;
+            EditorUtility.SetDirty(asset);
+            perms[p.id] = asset;
+        }
+        foreach (var p in content.permanentUpgrades)
+        {
+            if (string.IsNullOrEmpty(p.requires)) continue;
+            PermanentUpgradeData req;
+            if (perms.TryGetValue(p.requires, out req)) perms[p.id].requires = req;
+            else Debug.LogError("Kalici onkosulu bulunamadi: " + p.id + " -> " + p.requires);
+        }
+
+        // 6) Caglar
+        foreach (var a in content.ages)
+        {
+            var asset = LoadOrCreate<AgeData>("Caglar", a.asset);
+            asset.id = a.id;
+            asset.displayName = a.displayName;
+            asset.resources = Map(a.resources, resources, "cag " + a.id + " resources");
+            asset.buildings = MapEntries(a.buildings, x => x.id, buildings, "cag " + a.id + " buildings");
+            asset.upgrades = MapEntries(a.upgrades, x => x.id, upgrades, "cag " + a.id + " upgrades");
+            asset.clickResource = Get(resources, a.clickResource, "cag " + a.id + " clickResource");
+            asset.advanceResource = Get(resources, a.advanceResource, "cag " + a.id + " advanceResource");
+            asset.advanceCost = a.advanceCost;
+            asset.knowledgeReward = a.knowledgeReward;   // 0 dahil her degeri yazar
+            asset.skyColor = new Color(a.skyColor[0], a.skyColor[1], a.skyColor[2], 1f);
+            asset.groundColor = new Color(a.groundColor[0], a.groundColor[1], a.groundColor[2], 1f);
+            EditorUtility.SetDirty(asset);
+            ages.Add(asset);
+        }
+
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        Debug.Log("Evrim: baslangic icerigi olusturuldu. Sahneyi kaydet (Ctrl+S).");
+
+        var permList = new List<PermanentUpgradeData>();
+        foreach (var p in content.permanentUpgrades) permList.Add(perms[p.id]);
+        AssignToGameManager(ages, permList, content.game);
+        Debug.Log("Icerik uretildi: " + ages.Count + " cag, " + buildings.Count + " bina, "
+            + upgrades.Count + " yukseltme, " + perms.Count + " kalici yukseltme.");
     }
 
-    [MenuItem("Evrim/Antik Çağ İçeriğini Oluştur")]
-    public static void GenerateAncientOnly()
-    {
-        resources.Clear(); buildings.Clear(); upgrades.Clear();
-        pendingPrereq.Clear();
-        ExistingResource("knowledge", "res_wisdom");
-        AddAncientResources();
-        CreateAncientBuildings();
-        CreateAncientUpgradesAndAge();
-        foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-        Debug.Log("Antik Çağ asset'leri oluşturuldu; mevcut çağ asset'leri yeniden yazılmadı.");
-    }
-
-    static void AddAncientResources()
-    {
-        Resource("papyrus", "Papir", "res_papyrus");
-        Resource("marble", "Mermer", "res_marble");
-        Resource("drachma", "Drahmi", "res_drachma");
-    }
-
-    static void CreateAncientBuildings()
-    {
-        Building("antique_field", "bld_antique_field", "Papirüs Tarlası", "papyrus", "papyrus", 10.0, 1.0, -8f, -3.4f, 1, 0.56f, 0.67f, 0.35f);
-        Building("antique_masonry", "bld_antique_masonry", "Mermer Ocağı", "marble", "papyrus", 120.0, 2.0, -6f, -2.7f, 0, 0.78f, 0.75f, 0.65f);
-        Building("antique_scribes", "bld_antique_scribes", "Kâtipler Birliği", "knowledge", "papyrus", 450.0, 5.0, -4f, -3.4f, 1, 0.75f, 0.63f, 0.42f);
-        Building("antique_market", "bld_antique_market", "Agora Pazarı", "drachma", "papyrus", 1800.0, 16.0, -2f, -2.7f, 0, 0.75f, 0.48f, 0.28f);
-        Building("antique_academy", "bld_antique_academy", "Felsefe Akademisi", "knowledge", "drachma", 14000.0, 90.0, 0f, -3.4f, 1, 0.42f, 0.55f, 0.72f);
-        Building("antique_theater", "bld_antique_theater", "Amfitiyatro", "drachma", "marble", 50000.0, 450.0, 2f, -2.7f, 0, 0.68f, 0.32f, 0.25f);
-        Building("antique_aqueduct", "bld_antique_aqueduct", "Su Kemeri", "papyrus", "marble", 350000.0, 3200.0, 4f, -3.4f, 1, 0.37f, 0.58f, 0.66f);
-        Building("antique_lighthouse", "bld_antique_lighthouse", "İskenderiye Feneri", "knowledge", "drachma", 3000000.0, 10000.0, 6f, -2.7f, 0, 0.92f, 0.73f, 0.38f);
-    }
-
-    static void CreateAncientUpgradesAndAge()
-    {
-        Upgrade("antique_click1", "Keskin Kamış Kalem", "Yazı hızlandı. Okunabilirlik aynı kaldı.", UpgradeKind.ClickMultiplier, 2, null, "papyrus", 250, null, 0, null);
-        Upgrade("antique_click2", "Çift Taraflı Tablet", "Önü dolunca arkasına yazdık. Deha böyle bir şey.", UpgradeKind.ClickMultiplier, 2, null, "papyrus", 8000, null, 0, "antique_click1");
-        Upgrade("antique_click3", "Kamusal Tartışma", "Birisi konuşuyor, herkes üretimi bırakıp dinliyor.", UpgradeKind.ClickProductionShare, 0.015, null, "drachma", 120000, null, 0, "antique_click2");
-        Upgrade("antique_click4", "Retorik Dersi", "Aynı şeyi daha uzun anlatınca daha ikna edici oluyor.", UpgradeKind.ClickMultiplier, 3, null, "marble", 1800000, null, 0, "antique_click3");
-        string[] ab = { "antique_field", "antique_masonry", "antique_scribes", "antique_market", "antique_academy", "antique_theater", "antique_aqueduct", "antique_lighthouse" };
-        string[] an = { "Daha Verimli Kamışlık", "Düzgün Kesilmiş Mermer", "Kopya Kâtipler", "Agora İndirimi", "Düşünce Molası", "Ucuz Koltuklar", "İkinci Su Hattı", "Daha Güçlü Ayna" };
-        string[] ar = { "papyrus", "marble", "knowledge", "drachma", "knowledge", "drachma", "papyrus", "knowledge" };
-        double[] ac = { 120, 1440, 5400, 21600, 168000, 600000, 4200000, 36000000 };
-        for (int i = 0; i < ab.Length; i++)
-        {
-            Upgrade("antique_" + ab[i] + "_a", an[i], "Üretim arttı. Toplantı tutanağı kayıp.", UpgradeKind.BuildingMultiplier, 2, ab[i], ar[i], ac[i], ab[i], 5, null);
-            Upgrade("antique_" + ab[i] + "_b", an[i] + " II", "İlk yöntemi geliştirdik. Komite hâlâ toplanıyor.", UpgradeKind.BuildingMultiplier, 2, ab[i], ar[i], ac[i] * 15, ab[i], 20, "antique_" + ab[i] + "_a");
-        }
-        Upgrade("antique_global1", "Standart Drahmi", "Artık herkes aynı parayı tartışıyor.", UpgradeKind.GlobalMultiplier, 1.5, null, "drachma", 25000, "antique_market", 10, null);
-        Upgrade("antique_global2", "Büyük Kütüphane", "Bilginin merkezi. Yangın söndürücü bütçesi yok.", UpgradeKind.GlobalMultiplier, 2, null, "knowledge", 8000000, "antique_academy", 10, null);
-        foreach (var kv in pendingPrereq) upgrades[kv.Key].prerequisite = upgrades[kv.Value];
-        var antiqueUpgrades = new List<string> { "antique_click1", "antique_click2", "antique_click3", "antique_click4", "antique_global1", "antique_global2" };
-        foreach (var b in ab) { antiqueUpgrades.Add("antique_" + b + "_a"); antiqueUpgrades.Add("antique_" + b + "_b"); }
-        ConfigureAge("age_antique", new[] { "papyrus", "marble", "drachma", "knowledge" }, ab, antiqueUpgrades.ToArray(), 8000000000000.0, 1, "drachma");
-    }
+    // Eski menu adi da ayni hatta baglansin.
+    [MenuItem("Evrim/Başlangıç İçeriğini Oluştur")]
+    static void GenerateLegacy() { Generate(); }
 
     // ---- Yardimcilar ----
-    static T LoadOrCreate<T>(string folder, string file) where T : ScriptableObject
+    static T LoadOrCreate<T>(string folder, string assetName) where T : ScriptableObject
     {
-        string dir = Root + "/" + folder;
-        if (!AssetDatabase.IsValidFolder(dir)) AssetDatabase.CreateFolder(Root, folder);
-        string path = dir + "/" + file + ".asset";
-        var a = AssetDatabase.LoadAssetAtPath<T>(path);
-        if (a == null)
+        string path = Root + "/" + folder + "/" + assetName + ".asset";
+        var asset = AssetDatabase.LoadAssetAtPath<T>(path);
+        if (asset != null) return asset;
+        asset = ScriptableObject.CreateInstance<T>();
+        AssetDatabase.CreateAsset(asset, path);
+        return asset;
+    }
+
+    static T Get<T>(Dictionary<string, T> map, string id, string where) where T : UnityEngine.Object
+    {
+        T value;
+        if (map.TryGetValue(id, out value)) return value;
+        Debug.LogError("Referans bulunamadi (" + where + "): " + id);
+        return null;
+    }
+
+    static T[] Map<T>(string[] ids, Dictionary<string, T> map, string where) where T : UnityEngine.Object
+    {
+        return MapEntries(ids, x => x, map, where);
+    }
+
+    // BuildingEntry[] / UpgradeEntry[] gibi nesne dizilerinden id cikarip esler.
+    static T[] MapEntries<TEntry, T>(TEntry[] entries, Func<TEntry, string> idOf, Dictionary<string, T> map, string where)
+        where T : UnityEngine.Object
+    {
+        var list = new List<T>();
+        if (entries == null) return list.ToArray();
+        foreach (var entry in entries)
         {
-            a = ScriptableObject.CreateInstance<T>();
-            AssetDatabase.CreateAsset(a, path);
+            string id = idOf(entry);
+            T value;
+            if (map.TryGetValue(id, out value)) list.Add(value);
+            else Debug.LogError("Referans bulunamadi (" + where + "): " + id);
         }
-        return a;
+        return list.ToArray();
     }
 
-    static void ExistingResource(string id, string file)
+    static void AssignToGameManager(List<AgeData> ages, List<PermanentUpgradeData> permList, GameEntry game)
     {
-        var r = AssetDatabase.LoadAssetAtPath<ResourceData>(Root + "/Kaynaklar/" + file + ".asset");
-        if (r == null) { Debug.LogError("Kaynak bulunamadi: " + file); return; }
-        resources[id] = r;
-    }
-
-    static void Resource(string id, string displayName, string file)
-    {
-        var r = LoadOrCreate<ResourceData>("Kaynaklar", file);
-        r.id = id; r.displayName = displayName;
-        EditorUtility.SetDirty(r);
-        resources[id] = r;
-    }
-
-    static void Building(string id, string file, string displayName, string produces, string costRes,
-        double baseCost, double baseProd, float x, float y, int order, float cr, float cg, float cb)
-    {
-        var b = LoadOrCreate<BuildingData>("Binalar", file);
-        b.id = id; b.displayName = displayName;
-        b.produces = resources[produces]; b.costResource = resources[costRes];
-        b.baseCost = baseCost; b.costGrowth = 1.15; b.baseProduction = baseProd;
-        b.scenePosition = new Vector2(x, y); b.sortingOrder = order;
-        b.placeholderColor = new Color(cr, cg, cb, 1f);
-        if (b.placeholderSize == Vector2.zero) b.placeholderSize = new Vector2(1.2f, 1.2f);
-        EditorUtility.SetDirty(b);
-        buildings[id] = b;
-    }
-
-    static void Upgrade(string id, string displayName, string desc, UpgradeKind kind, double value, string target,
-        string costRes, double cost, string unlockBuilding, int unlockCount, string prereq)
-    {
-        var u = LoadOrCreate<UpgradeData>("Yukseltmeler", "upg_" + id);
-        u.id = id; u.displayName = displayName; u.description = desc; u.kind = kind; u.value = value;
-        u.targetBuilding = target != null ? buildings[target] : null;
-        u.costResource = resources[costRes]; u.cost = cost;
-        u.unlockBuilding = unlockBuilding != null ? buildings[unlockBuilding] : null;
-        u.unlockCount = unlockCount;
-        u.prerequisite = null;
-        if (prereq != null) pendingPrereq.Add(new KeyValuePair<string, string>(id, prereq));
-        EditorUtility.SetDirty(u);
-        upgrades[id] = u;
-    }
-
-    static void Perm(string id, string displayName, string desc, PermanentKind kind, double valuePerLevel, int maxLevel,
-        double baseCost, double growth, string requires)
-    {
-        var p = LoadOrCreate<PermanentUpgradeData>("Kalici", id);
-        p.id = id; p.displayName = displayName; p.description = desc; p.kind = kind;
-        p.valuePerLevel = valuePerLevel; p.maxLevel = maxLevel; p.baseCost = baseCost; p.costGrowth = growth;
-        p.requires = null;
-        if (requires != null) pendingPermReq.Add(new KeyValuePair<string, string>(id, requires));
-        EditorUtility.SetDirty(p);
-        perms[id] = p;
-    }
-
-    static void ConfigureAge(string file, string[] res, string[] blds, string[] upgs, double advanceCost, double knowledge, string advanceResourceId = null)
-    {
-        var age = AssetDatabase.LoadAssetAtPath<AgeData>(Root + "/Caglar/" + file + ".asset");
-        if (age == null) { Debug.LogError("Cag bulunamadi: " + file); return; }
-        age.resources = System.Array.ConvertAll(res, s => resources[s]);
-        age.buildings = System.Array.ConvertAll(blds, s => buildings[s]);
-        age.upgrades = System.Array.ConvertAll(upgs, s => upgrades[s]);
-        age.advanceCost = advanceCost;
-        if (age.clickResource == null) age.clickResource = resources[res[0]];
-        if (age.advanceResource == null) age.advanceResource = resources[res[0]];
-        if (advanceResourceId != null) age.advanceResource = resources[advanceResourceId];
-        if (knowledge > 0) age.knowledgeReward = knowledge;
-        EditorUtility.SetDirty(age);
-    }
-
-    // Sahnedeki GameManager'a kalici yukseltme listesini atar
-    static void AssignPermanentsToScene()
-    {
-        var gm = Object.FindFirstObjectByType<GameManager>();
+        var gm = UnityEngine.Object.FindAnyObjectByType<GameManager>();
         if (gm == null)
         {
-            const string scenePath = "Assets/Scenes/SampleScene.unity";
-            if (File.Exists(scenePath) && EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            if (File.Exists(ScenePath) && EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                EditorSceneManager.OpenScene(scenePath);
-                gm = Object.FindFirstObjectByType<GameManager>();
+                EditorSceneManager.OpenScene(ScenePath);
+                gm = UnityEngine.Object.FindAnyObjectByType<GameManager>();
             }
         }
         if (gm == null)
         {
-            Debug.LogWarning("GameManager bulunamadi. Sahneyi acip GameManager > Permanent Upgrades listesine Assets/GameData/Kalici icindeki asset'leri elle ata.");
+            Debug.LogWarning("GameManager bulunamadi. Ages ve permanentUpgrades listelerini elle bagla.");
             return;
         }
 
-        var list = new List<PermanentUpgradeData>(perms.Values);
-        list.Sort((a, b) => string.CompareOrdinal(a.name, b.name));
         var so = new SerializedObject(gm);
-        var prop = so.FindProperty("permanentUpgrades");
-        prop.arraySize = list.Count;
-        for (int i = 0; i < list.Count; i++) prop.GetArrayElementAtIndex(i).objectReferenceValue = list[i];
+        var agesProp = so.FindProperty("ages");
+        agesProp.arraySize = ages.Count;
+        for (int i = 0; i < ages.Count; i++) agesProp.GetArrayElementAtIndex(i).objectReferenceValue = ages[i];
+
+        var permsProp = so.FindProperty("permanentUpgrades");
+        permsProp.arraySize = permList.Count;
+        for (int i = 0; i < permList.Count; i++) permsProp.GetArrayElementAtIndex(i).objectReferenceValue = permList[i];
+
+        if (game != null)
+        {
+            var milestoneProp = so.FindProperty("milestoneCounts");
+            milestoneProp.arraySize = game.milestoneCounts.Length;
+            for (int i = 0; i < game.milestoneCounts.Length; i++)
+                milestoneProp.GetArrayElementAtIndex(i).intValue = game.milestoneCounts[i];
+            so.FindProperty("milestoneMultiplier").doubleValue = game.milestoneMultiplier;
+            so.FindProperty("timeMachineKnowledgeBase").doubleValue = game.timeMachineKnowledgeBase;
+            so.FindProperty("lifetimeKnowledgeBonus").doubleValue = game.lifetimeKnowledgeBonus;
+            so.FindProperty("maxOfflineHours").floatValue = game.maxOfflineHours;
+            so.FindProperty("autosaveInterval").floatValue = game.autosaveInterval;
+        }
+
         so.ApplyModifiedProperties();
         EditorSceneManager.MarkSceneDirty(gm.gameObject.scene);
+        EditorSceneManager.SaveScene(gm.gameObject.scene);
+    }
+
+    // ---- JSON semasi ----
+    [Serializable] public class ContentFile
+    {
+        public int version;
+        public GameEntry game;
+        public ResourceEntry[] resources;
+        public AgeEntry[] ages;
+        public PermEntry[] permanentUpgrades;
+    }
+
+    [Serializable] public class GameEntry
+    {
+        public int[] milestoneCounts;
+        public double milestoneMultiplier;
+        public double timeMachineKnowledgeBase;
+        public double lifetimeKnowledgeBonus;
+        public float maxOfflineHours;
+        public float autosaveInterval;
+    }
+
+    [Serializable] public class ResourceEntry
+    {
+        public string id;
+        public string displayName;
+        public string asset;
+    }
+
+    [Serializable] public class AgeEntry
+    {
+        public string id;
+        public string asset;
+        public string displayName;
+        public string clickResource;
+        public string advanceResource;
+        public double advanceCost;
+        public double knowledgeReward;
+        public string[] resources;
+        public float[] skyColor;
+        public float[] groundColor;
+        public BuildingEntry[] buildings;
+        public UpgradeEntry[] upgrades;
+    }
+
+    [Serializable] public class BuildingEntry
+    {
+        public string id;
+        public string asset;
+        public string displayName;
+        public string produces;
+        public string costResource;
+        public double baseCost;
+        public double costGrowth;
+        public double baseProduction;
+        public float[] scenePosition;
+        public int sortingOrder;
+        public float[] placeholderColor;
+        public float[] placeholderSize;
+    }
+
+    [Serializable] public class UpgradeEntry
+    {
+        public string id;
+        public string asset;
+        public string displayName;
+        public string description;
+        public string kind;
+        public double value;
+        public string targetBuilding;
+        public string costResource;
+        public double cost;
+        public string unlockBuilding;
+        public int unlockCount;
+        public string prerequisite;
+    }
+
+    [Serializable] public class PermEntry
+    {
+        public string id;
+        public string asset;
+        public string displayName;
+        public string description;
+        public string kind;
+        public double valuePerLevel;
+        public int maxLevel;
+        public double baseCost;
+        public double costGrowth;
+        public string requires;
+    }
+
+    // ---- Basit icerik dogrulama ----
+    static void Validate(ContentFile content)
+    {
+        var resourceIds = new HashSet<string>();
+        foreach (var r in content.resources)
+            if (!resourceIds.Add(r.id)) Debug.LogError("Kaynak id'si tekrar ediyor: " + r.id);
+
+        var buildingIds = new HashSet<string>();
+        var upgradeIds = new HashSet<string>();
+        var ageIds = new HashSet<string>();
+        var permIds = new HashSet<string>();
+
+        foreach (var a in content.ages)
+        {
+            if (!ageIds.Add(a.id)) Debug.LogError("Cag id'si tekrar ediyor: " + a.id);
+            var ageResources = new HashSet<string>(a.resources ?? new string[0]);
+            if (!ageResources.Contains(a.clickResource)) Debug.LogError("Cag " + a.id + ": clickResource cag kaynaklarinda yok.");
+            if (!ageResources.Contains(a.advanceResource)) Debug.LogError("Cag " + a.id + ": advanceResource cag kaynaklarinda yok.");
+            if (a.advanceCost <= 0) Debug.LogError("Cag " + a.id + ": advanceCost sifir/negatif.");
+
+            foreach (var b in a.buildings)
+            {
+                if (!buildingIds.Add(b.id)) Debug.LogError("Bina id'si tekrar ediyor: " + b.id);
+                if (!ageResources.Contains(b.produces)) Debug.LogError("Bina " + b.id + ": produces cag kaynaklarinda yok.");
+                if (!ageResources.Contains(b.costResource)) Debug.LogError("Bina " + b.id + ": costResource cag kaynaklarinda yok.");
+            }
+            foreach (var u in a.upgrades)
+            {
+                if (!upgradeIds.Add(u.id)) Debug.LogError("Yukseltme id'si tekrar ediyor: " + u.id);
+                if (!ageResources.Contains(u.costResource)) Debug.LogError("Yukseltme " + u.id + ": costResource cag kaynaklarinda yok.");
+            }
+        }
+
+        foreach (var p in content.permanentUpgrades)
+            if (!permIds.Add(p.id)) Debug.LogError("Kalici yukseltme id'si tekrar ediyor: " + p.id);
+
+        Debug.Log("Icerik dogrulama bitti: " + content.ages.Length + " cag.");
     }
 }
 #endif

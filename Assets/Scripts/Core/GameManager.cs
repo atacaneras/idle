@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     const float UiInterval = 0.1f;   // arayuz saniyede en fazla 10 kez yenilenir
 
     readonly Dictionary<string, double> resources = new Dictionary<string, double>();
+    readonly Dictionary<string, double> runEarned = new Dictionary<string, double>();
     readonly Dictionary<string, int> counts = new Dictionary<string, int>();
     readonly HashSet<string> purchased = new HashSet<string>();
     readonly Dictionary<string, int> permLevels = new Dictionary<string, int>();
@@ -131,6 +132,15 @@ public class GameManager : MonoBehaviour
 
     // ---- Sorgular ----
     public double GetResource(ResourceData r) { double v; return resources.TryGetValue(r.id, out v) ? v : 0; }
+
+    // Bu turda toplam kazanilan (harcamalar dusulmez). Cag atlama / Zaman Makinesi buna bakar.
+    public double GetRunEarned(ResourceData r)
+    {
+        if (r == null) return 0;
+        double v;
+        return runEarned.TryGetValue(r.id, out v) ? v : 0;
+    }
+
     public int GetCount(BuildingData b) { int v; return counts.TryGetValue(b.id, out v) ? v : 0; }
     public double GetCost(BuildingData b)
     {
@@ -205,6 +215,12 @@ public class GameManager : MonoBehaviour
     void AddResource(ResourceData r, double amount)
     {
         resources[r.id] = GetResource(r) + amount;
+        if (amount > 0)
+        {
+            double earned;
+            runEarned.TryGetValue(r.id, out earned);
+            runEarned[r.id] = earned + amount;
+        }
     }
 
     public void Gather()
@@ -307,7 +323,7 @@ public class GameManager : MonoBehaviour
         {
             return NextAge != null
                 && CurrentAge.advanceResource != null
-                && GetResource(CurrentAge.advanceResource) >= AdvanceCost;
+                && GetRunEarned(CurrentAge.advanceResource) >= AdvanceCost;
         }
     }
 
@@ -329,6 +345,7 @@ public class GameManager : MonoBehaviour
     void ResetRun()
     {
         resources.Clear();
+        runEarned.Clear();
         counts.Clear();
         purchased.Clear();
     }
@@ -465,7 +482,7 @@ public class GameManager : MonoBehaviour
         get
         {
             return IsFinalAge && CurrentAge.advanceResource != null
-                && AdvanceCost > 0 && GetResource(CurrentAge.advanceResource) >= AdvanceCost;
+                && AdvanceCost > 0 && GetRunEarned(CurrentAge.advanceResource) >= AdvanceCost;
         }
     }
 
@@ -475,7 +492,7 @@ public class GameManager : MonoBehaviour
         get
         {
             if (!IsFinalAge || CurrentAge.advanceResource == null || AdvanceCost <= 0) return 0;
-            double ratio = GetResource(CurrentAge.advanceResource) / AdvanceCost;
+            double ratio = GetRunEarned(CurrentAge.advanceResource) / AdvanceCost;
             if (ratio < 1) return 0;
             return Math.Floor(timeMachineKnowledgeBase * Math.Sqrt(ratio) * permKnowledgeGain + 1e-9);
         }
@@ -511,6 +528,7 @@ public class GameManager : MonoBehaviour
             timeLoops = TimeLoops
         };
         foreach (var kv in resources) s.resources.Add(new NamedDouble { id = kv.Key, value = kv.Value });
+        foreach (var kv in runEarned) s.runEarned.Add(new NamedDouble { id = kv.Key, value = kv.Value });
         foreach (var kv in counts) s.buildings.Add(new NamedInt { id = kv.Key, value = kv.Value });
         foreach (var id in purchased) s.upgrades.Add(id);
         foreach (var kv in permLevels) s.permanents.Add(new NamedInt { id = kv.Key, value = kv.Value });
@@ -529,10 +547,16 @@ public class GameManager : MonoBehaviour
         Knowledge = s.knowledge;
         LifetimeKnowledge = s.lifetimeKnowledge;
         TimeLoops = s.timeLoops;
-        foreach (var r in s.resources) resources[r.id] = r.value;
-        foreach (var b in s.buildings) counts[b.id] = b.value;
-        foreach (var id in s.upgrades) purchased.Add(id);
-        foreach (var p in s.permanents) permLevels[p.id] = p.value;
+        if (s.resources != null)
+            foreach (var r in s.resources) resources[r.id] = r.value;
+        if (s.runEarned != null)
+            foreach (var r in s.runEarned) runEarned[r.id] = r.value;
+        if (s.buildings != null)
+            foreach (var b in s.buildings) counts[b.id] = b.value;
+        if (s.upgrades != null)
+            foreach (var id in s.upgrades) purchased.Add(id);
+        if (s.permanents != null)
+            foreach (var p in s.permanents) permLevels[p.id] = p.value;
         RecalcCaches();
 
         double elapsed = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - s.lastSaveUnix;
@@ -547,6 +571,16 @@ public class GameManager : MonoBehaviour
         {
             s.lifetimeKnowledge = s.knowledge;   // v1'de Bilgi hem toplam hem bakiyeydi
             s.version = 2;
+        }
+        if (s.version < 3)
+        {
+            // Eski kayitta runEarned yok. Mevcut bakiyeyi "bu turda kazanilmis" sayiyoruz;
+            // boylece eski oyuncu ilerlemesini kaybetmez.
+            s.runEarned = new List<NamedDouble>();
+            if (s.resources != null)
+                foreach (var r in s.resources)
+                    s.runEarned.Add(new NamedDouble { id = r.id, value = r.value });
+            s.version = 3;
         }
     }
 

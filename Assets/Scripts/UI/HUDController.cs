@@ -250,7 +250,9 @@ public class HUDController : MonoBehaviour
         {
             advanceButton.interactable = gm.CanAdvance;
             if (advanceButtonLabel != null)
-                advanceButtonLabel.text = next.displayName + "'na Geç (" + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName + ")";
+                advanceButtonLabel.text = next.displayName + "'na Geç\n"
+                    + NumberFormatter.Format(gm.GetRunEarned(age.advanceResource)) + " / "
+                    + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName;
         }
         else
         {
@@ -258,8 +260,9 @@ public class HUDController : MonoBehaviour
             advanceButton.interactable = gm.CanUseTimeMachine;
             if (advanceButtonLabel != null)
                 advanceButtonLabel.text = gm.CanUseTimeMachine
-                    ? "Zaman Makinesi (+" + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi)"
-                    : "Zaman Makinesi (" + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName + ")";
+                    ? "Zaman Makinesi\n+" + NumberFormatter.Format(gm.TimeMachineReward) + " Bilgi"
+                    : "Zaman Makinesi\n" + NumberFormatter.Format(gm.GetRunEarned(age.advanceResource)) + " / "
+                        + NumberFormatter.Format(gm.AdvanceCost) + " " + age.advanceResource.displayName;
         }
 
         bool canProgress = advanceButton.interactable;

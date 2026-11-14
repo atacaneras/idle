@@ -11,8 +11,8 @@ def tune(age,target_min,cps=0.5):
     t,c=run(age,ups,clicks_per_sec=cps,maxt=16*3600)
     return lo,(t/60 if t is not None else None),c
 
-# Ilk tur hedefleri: 2.5-3 saat/cag. Maliyetleri oyun asset'lerine elle aktar.
-TARGET_MINUTES={"stone":150,"farm":150,"bronze":180,"antique":180}
+# Ilk tur hedefleri (dakika). Maliyetleri content.json'a elle aktar.
+TARGET_MINUTES={"stone":45,"farm":90,"bronze":175,"antique":210,"medieval":200}
 for age in AGES:
     current=age['advanceCost']
     current_time,_=run(age,upgrades_for(age),clicks_per_sec=0.5,maxt=16*3600)
