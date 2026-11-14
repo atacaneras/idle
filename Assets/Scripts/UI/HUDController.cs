@@ -17,7 +17,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] Button gatherButton;
     [SerializeField] Button advanceButton;
     [SerializeField] TMP_Text advanceButtonLabel;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
     Button fastTestButton;
     TMP_Text fastTestButtonLabel;
 #endif
@@ -55,7 +55,7 @@ public class HUDController : MonoBehaviour
         GetOrAdd<BuyModeSelector>();
         GetOrAdd<SoundManager>();
         GetOrAdd<AgeTransition>();
-        sceneSpawner = FindFirstObjectByType<SceneBuildingSpawner>();
+        sceneSpawner = FindAnyObjectByType<SceneBuildingSpawner>();
         gm.OnMilestoneReached += OnMilestone;
         GetOrAdd<PassiveIncomeBubbles>().Init(floatingText, sceneSpawner);
         GetOrAdd<UpgradePanel>();
@@ -106,7 +106,7 @@ public class HUDController : MonoBehaviour
     void BuildFastTestButton()
     {
         // Test modu sadece editorde ve development build'lerde gorunur; oyuncu build'inde yok.
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         var canvas = GetComponentInParent<Canvas>();
         if (canvas == null) return;
 
@@ -124,7 +124,7 @@ public class HUDController : MonoBehaviour
 
     void RefreshFastTestButton()
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         if (fastTestButton == null || GameManager.Instance == null) return;
         bool enabled = GameManager.Instance.FastTestMode;
         fastTestButtonLabel.text = enabled ? "TEST MODU AÇIK\nTık x1M • Üret x1K" : "HIZLI TEST: KAPALI";
@@ -248,7 +248,7 @@ public class HUDController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         var age = gm.CurrentAge;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEBUG
         RefreshFastTestButton();
 #endif
 

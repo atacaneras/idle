@@ -475,3 +475,63 @@ Yirmi Saat|Twenty Hours
 20 saat oyna.|Play for 20 hours.
 Elli Saat|Fifty Hours
 50 saat oyna.|Play for 50 hours.
+
+# ---- Basarimlar, ipuclari, yeni kalici yukseltmeler ----
+Açıldı|Unlocked
+Kilitli|Locked
+İlk Dokunuş|First Touch
+Tarihin ilk tıklaması. Alkışlayan olmadı.|History's first click. Nobody applauded.
+Parmak Isınması|Finger Warm-up
+100 tıklama. Parmaklar henüz şikâyet etmiyor.|100 clicks. Fingers aren't complaining yet.
+Tırnak Sorunu|Nail Trouble
+1.000 tıklama. Taş Devri'nde manikür yok.|1,000 clicks. No manicures in the Stone Age.
+Tendon Sendikası|Tendon Union
+10.000 tıklama. Bileğin bir avukata ihtiyacı var.|10,000 clicks. Your wrist needs a lawyer.
+Ev Sahibi|Homeowner
+İlk binan. Kira yok, komşu da yok.|Your first building. No rent, no neighbors.
+Köy Kurucusu|Village Founder
+100 bina. Muhtarlık seçimi yakında.|100 buildings. Village elder elections soon.
+Şehir Planlayıcı|City Planner
+1.000 bina. Plan yok ama bina çok.|1,000 buildings. No plan, but plenty of buildings.
+Fikir Adamı|Idea Person
+İlk yükseltme. Düşünmek bedava değilmiş.|Your first upgrade. Thinking isn't free after all.
+Ar-Ge Departmanı|R&D Department
+25 yükseltme. Kimse ne yaptığını bilmiyor.|25 upgrades. Nobody knows what they do.
+Kilometre Taşı|Milestone
+Tek binadan 25 adet. Üretim ikiye katlandı, gurur üçe.|25 of one building. Output doubled, pride tripled.
+Tam Yüz|Perfect Hundred
+Tek binadan 100 adet. Artık hobi değil, takıntı.|100 of one building. No longer a hobby, an obsession.
+Çağ Atladım|Age Jumper
+İlk çağ geçişi. Geçmiş geride kaldı, mamutlar da.|First age change. The past is behind you, and so are the mammoths.
+Zaman Yolcusu|Time Traveler
+3 çağ atladın. Tarih kitabı yazılıyor.|3 ages passed. A history book is being written.
+Son Çağ|Final Age
+Son çağa vardın. Burası bitiş çizgisi değil, geri dönüş kapısı.|You reached the last age. Not a finish line, a door back.
+Geri Dönüş|Return Trip
+İlk Zaman Makinesi. Paradoks yok, sadece biraz baş dönmesi.|First Time Machine. No paradox, just a little dizziness.
+Döngü Bağımlısı|Loop Addict
+5 zaman döngüsü. Aynı mamutu beşinci kez görüyorsun.|5 time loops. You're seeing the same mammoth for the fifth time.
+Bilgi Kurdu|Knowledge Wolf
+10 Bilgi. Duvara not almak işe yarıyor.|10 Knowledge. Taking notes on the wall works.
+100 Bilgi. Kimse okumuyor ama kitaplık dolu.|100 Knowledge. Nobody reads them but the shelves are full.
+Ağaç Dikici|Tree Planter
+İlk kalıcı yükseltme. Gölgesi sonra.|First permanent upgrade. The shade comes later.
+Orman Bakıcısı|Forest Keeper
+10 kalıcı yükseltme seviyesi. Ağaç artık orman.|10 permanent upgrade levels. The tree is now a forest.
+Bir Saat Geçti|An Hour Passed
+1 saat oynadın. Su içtin mi?|You played for 1 hour. Did you drink water?
+Vazgeçmeyen|Never Giving Up
+10 saat. Dışarıda hava güzelmiş.|10 hours. Apparently the weather is nice outside.
+Sen Yokken|While You Were Away
+Bir saatten uzun çevrimdışı ilerleme. Köy seni beklemeden çalıştı.|Over an hour of offline progress. The village worked without you.
+TOPLA düğmesine tıkla (ya da Boşluk tuşuna bas).|Click the GATHER button (or press Space).
+Sağdaki listeden bir bina al. Binalar sen tıklamasan da üretir.|Buy a building from the list on the right. Buildings produce even when you don't click.
+Soldaki Yükseltmeler paneli tıklamayı ve üretimi güçlendirir.|The Upgrades panel on the left boosts clicking and production.
+Bir binadan 25 adet alırsan o binanın üretimi ikiye katlanır.|Own 25 of a building and its output doubles.
+Çağ atlayabilirsin! Binaların sıfırlanır ama Bilgi kalır.|You can advance an age! Buildings reset but Knowledge stays.
+Bilgi Ağacı'nda Bilgi harcayarak kalıcı olarak güçlenebilirsin.|Spend Knowledge in the Knowledge Tree to get permanently stronger.
+Zaman Makinesi hazır: her şey sıfırlanır ama Bilgi ve kalıcı yükseltmeler kalır.|The Time Machine is ready: everything resets but Knowledge and permanent upgrades stay.
+Uyuyan Parmaklar|Sleeping Fingers
+Sen uyurken bile biri tıklıyor. Kim olduğunu sorma.|Someone clicks even while you sleep. Don't ask who.
+Dönüm Noktası Ustası|Milestone Master
+Kilometre taşları artık biraz daha gösterişli.|Milestones are a little flashier now.

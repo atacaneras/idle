@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
         return -1;
     }
 
-    public double MilestoneMultiplier { get { return milestoneMultiplier; } }
+    public double MilestoneMultiplier { get { return milestoneMultiplier + permMilestoneBoost; } }
 
     // Tiklama basina kazanc: temel guc x carpanlar + (varsa) uretimin yuzdesi
     public double ClickValue
@@ -254,6 +254,7 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentAge == null || CurrentAge.clickResource == null) return;
         AddResource(CurrentAge.clickResource, ClickValue);
+        TotalClicks++;
         RaiseStateChanged();
         if (OnGathered != null) OnGathered();
     }
@@ -323,6 +324,7 @@ public class GameManager : MonoBehaviour
         resources[b.costResource.id] = GetResource(b.costResource) - cost;
         int before = GetCount(b);
         counts[b.id] = before + qty;
+        TotalBuildingsBought += qty;
         RecalcCaches();
         RaiseStateChanged();   // once gorunumler guncellensin, sonra animasyon baslasin
         if (OnBuildingBought != null) OnBuildingBought(b, qty);
@@ -359,6 +361,7 @@ public class GameManager : MonoBehaviour
         if (!CanAdvance) return;
         var next = NextAge;
         GrantKnowledge(CurrentAge.knowledgeReward);
+        AgesAdvanced++;
         ResetRun();
         CurrentAge = next;
         RecalcCaches();
@@ -384,6 +387,9 @@ public class GameManager : MonoBehaviour
         Knowledge = 0;
         LifetimeKnowledge = 0;
         TimeLoops = 0;
+        TotalClicks = TotalBuildingsBought = TotalUpgradesBought = PlaySeconds = 0;
+        AgesAdvanced = 0;
+        unlockedAchievements.Clear();
         OfflineSecondsApplied = 0;
         resources.Clear();
         runEarned.Clear();
@@ -443,6 +449,7 @@ public class GameManager : MonoBehaviour
         if (u == null || !IsUpgradeVisible(u) || !CanAffordUpgrade(u)) return false;
         resources[u.costResource.id] = GetResource(u.costResource) - GetUpgradeCost(u);
         purchased.Add(u.id);
+        TotalUpgradesBought++;
         RecalcCaches();
         if (OnUpgradeBought != null) OnUpgradeBought(u);
         if (OnUpgradesChanged != null) OnUpgradesChanged();
@@ -526,6 +533,28 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    // ---- Basarimlar (kosullari AchievementSystem kontrol eder; durum burada tutulur ve kaydedilir) ----
+    public bool IsAchievementUnlocked(string id) { return unlockedAchievements.Contains(id); }
+
+    public bool UnlockAchievement(string id)
+    {
+        if (string.IsNullOrEmpty(id) || !unlockedAchievements.Add(id)) return false;
+        SaveGame();   // basarim kaybolmasin
+        if (OnAchievementUnlocked != null) OnAchievementUnlocked(id);
+        return true;
+    }
+
+    // Tum kalici yukseltmelerin toplam seviyesi (basarim / ipucu kosullari icin)
+    public int TotalPermanentLevels
+    {
+        get
+        {
+            int n = 0;
+            foreach (var kv in permLevels) n += kv.Value;
+            return n;
+        }
+    }
+
     // ---- Zaman Makinesi ----
     public bool IsFinalAge { get { return NextAge == null; } }
 
@@ -578,8 +607,14 @@ public class GameManager : MonoBehaviour
             ageId = CurrentAge.id,
             knowledge = Knowledge,
             lifetimeKnowledge = LifetimeKnowledge,
-            timeLoops = TimeLoops
+            timeLoops = TimeLoops,
+            totalClicks = TotalClicks,
+            totalBuildingsBought = TotalBuildingsBought,
+            totalUpgradesBought = TotalUpgradesBought,
+            playSeconds = PlaySeconds,
+            agesAdvanced = AgesAdvanced
         };
+        foreach (var id in unlockedAchievements) s.achievements.Add(id);
         foreach (var kv in resources) s.resources.Add(new NamedDouble { id = kv.Key, value = kv.Value });
         foreach (var kv in runEarned) s.runEarned.Add(new NamedDouble { id = kv.Key, value = kv.Value });
         foreach (var kv in counts) s.buildings.Add(new NamedInt { id = kv.Key, value = kv.Value });
@@ -600,6 +635,13 @@ public class GameManager : MonoBehaviour
         Knowledge = s.knowledge;
         LifetimeKnowledge = s.lifetimeKnowledge;
         TimeLoops = s.timeLoops;
+        TotalClicks = s.totalClicks;
+        TotalBuildingsBought = s.totalBuildingsBought;
+        TotalUpgradesBought = s.totalUpgradesBought;
+        PlaySeconds = s.playSeconds;
+        AgesAdvanced = s.agesAdvanced;
+        if (s.achievements != null)
+            foreach (var id in s.achievements) unlockedAchievements.Add(id);
         if (s.resources != null)
             foreach (var r in s.resources) resources[r.id] = r.value;
         if (s.runEarned != null)
@@ -634,6 +676,12 @@ public class GameManager : MonoBehaviour
                 foreach (var r in s.resources)
                     s.runEarned.Add(new NamedDouble { id = r.id, value = r.value });
             s.version = 3;
+        }
+        if (s.version < 4)
+        {
+            // v4 alanlari (istatistik, basarim) eski kayitta yok; varsayilan 0 / bos liste dogru baslangic.
+            if (s.achievements == null) s.achievements = new List<string>();
+            s.version = 4;
         }
     }
 

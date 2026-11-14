@@ -9,11 +9,13 @@ public class Hotkeys : MonoBehaviour
 {
     SettingsPanel settings;
     TimeMachinePanel tree;
+    AchievementPanel achievements;
 
     void Start()
     {
         settings = GetComponent<SettingsPanel>();
         tree = GetComponent<TimeMachinePanel>();
+        achievements = GetComponent<AchievementPanel>();
     }
 
     void Update()
@@ -28,11 +30,13 @@ public class Hotkeys : MonoBehaviour
         {
             if (settings != null && settings.IsOpen) settings.Close();
             else if (tree != null && tree.IsOpen) tree.Close();
+            else if (achievements != null && achievements.IsOpen) achievements.Close();
             else if (settings != null) settings.Open();
             return;
         }
 
-        bool panelOpen = (settings != null && settings.IsOpen) || (tree != null && tree.IsOpen);
+        bool panelOpen = (settings != null && settings.IsOpen) || (tree != null && tree.IsOpen)
+            || (achievements != null && achievements.IsOpen);
         if (panelOpen) return;
 
         if (keyboard.spaceKey.wasPressedThisFrame)

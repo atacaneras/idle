@@ -2826,6 +2826,30 @@
       "baseCost": 25,
       "costGrowth": 2.2,
       "requires": "perm_cost"
+    },
+    {
+      "id": "perm_auto",
+      "asset": "perm_auto",
+      "displayName": "Uyuyan Parmaklar",
+      "description": "Sen uyurken bile biri tıklıyor. Kim olduğunu sorma.",
+      "kind": "AutoClick",
+      "valuePerLevel": 0.2,
+      "maxLevel": 10,
+      "baseCost": 10,
+      "costGrowth": 1.8,
+      "requires": "perm_click"
+    },
+    {
+      "id": "perm_milestone",
+      "asset": "perm_milestone",
+      "displayName": "Dönüm Noktası Ustası",
+      "description": "Kilometre taşları artık biraz daha gösterişli.",
+      "kind": "MilestoneBoost",
+      "valuePerLevel": 0.1,
+      "maxLevel": 10,
+      "baseCost": 15,
+      "costGrowth": 1.9,
+      "requires": "perm_global2"
     }
   ]
 }

@@ -7,7 +7,9 @@ public enum PermanentKind
     CostReduction,      // bina maliyetleri -%value (seviye basina, en fazla %75)
     OfflineHours,       // cevrimdisi ilerleme siniri +value saat (seviye basina)
     AdvanceDiscount,    // cag atlama maliyeti -%value (seviye basina, en fazla %75)
-    KnowledgeGain       // kazanilan Bilgi +%value (seviye basina)
+    KnowledgeGain,      // kazanilan Bilgi +%value (seviye basina)
+    AutoClick,          // saniyede +value otomatik tiklama (seviye basina)
+    MilestoneBoost      // kilometre tasi carpanina +value (seviye basina; 0.1 = x2 yerine x2.1)
 }
 
 // Bilgi ile alinan KALICI yukseltme. Zaman Makinesi'nde sifirlanmaz.
