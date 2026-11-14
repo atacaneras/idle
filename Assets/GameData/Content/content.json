@@ -26,6 +26,16 @@
       "id": "good",
       "displayName": "Sevap",
       "asset": "res_good"
+    },
+    {
+      "id": "complaint",
+      "displayName": "Şikâyet Dosyası",
+      "asset": "res_complaint"
+    },
+    {
+      "id": "thanks",
+      "displayName": "Teşekkür",
+      "asset": "res_thanks"
     }
   ],
   "ages": [
@@ -765,6 +775,748 @@
           "kind": "Earn",
           "building": null,
           "amount": 1000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
+        }
+      ]
+    },
+    {
+      "id": "hell_2",
+      "asset": "age_hell_2",
+      "displayName": "Cehennem 2. Kat: Şikâyet Departmanı",
+      "side": "hell",
+      "clickLabel": "REDDET",
+      "goalTitle": "BOSS: Şikâyet Müdürü Bay Hayır",
+      "clickResource": "complaint",
+      "advanceResource": "complaint",
+      "advanceCost": 8000000,
+      "knowledgeReward": 5,
+      "resources": [
+        "complaint"
+      ],
+      "skyColor": [
+        0.38,
+        0.04,
+        0.03
+      ],
+      "groundColor": [
+        0.17,
+        0.02,
+        0.02
+      ],
+      "buildings": [
+        {
+          "id": "hell_2_damga",
+          "asset": "bld_hell_2_damga",
+          "displayName": "Damga Makinesi (Hep REDDEDİLDİ)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 20,
+          "costGrowth": 1.15,
+          "baseProduction": 0.2,
+          "scenePosition": [
+            -8.0,
+            -3.4
+          ],
+          "sortingOrder": 0,
+          "placeholderColor": [
+            0.9,
+            0.2,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_2_telefon",
+          "asset": "bld_hell_2_telefon",
+          "displayName": "Telefon Bekletme Hattı",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 160,
+          "costGrowth": 1.15,
+          "baseProduction": 1.5,
+          "scenePosition": [
+            -4.4,
+            -3.4
+          ],
+          "sortingOrder": 1,
+          "placeholderColor": [
+            0.8,
+            0.5,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_2_gise",
+          "asset": "bld_hell_2_gise",
+          "displayName": "Gişe Camı (Kapalı)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 1600,
+          "costGrowth": 1.15,
+          "baseProduction": 9,
+          "scenePosition": [
+            -0.7999999999999998,
+            -3.4
+          ],
+          "sortingOrder": 2,
+          "placeholderColor": [
+            0.6,
+            0.1,
+            0.3
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_2_dosya",
+          "asset": "bld_hell_2_dosya",
+          "displayName": "Şikâyet Dosyası Dağı",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 18000,
+          "costGrowth": 1.15,
+          "baseProduction": 55,
+          "scenePosition": [
+            2.8000000000000007,
+            -3.4
+          ],
+          "sortingOrder": 3,
+          "placeholderColor": [
+            1,
+            0.3,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_2_yarin",
+          "asset": "bld_hell_2_yarin",
+          "displayName": "“Yarın Gel” Panosu",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 220000,
+          "costGrowth": 1.15,
+          "baseProduction": 320,
+          "scenePosition": [
+            6.4,
+            -3.4
+          ],
+          "sortingOrder": 4,
+          "placeholderColor": [
+            1,
+            0.8,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        }
+      ],
+      "upgrades": [
+        {
+          "id": "hell_2_click1",
+          "asset": "upg_hell_2_click1",
+          "displayName": "Dilekçe Reddi Şablonu",
+          "description": "Her dilekçeye aynı cevap: “Eksik evrak.”",
+          "kind": "ClickMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 150,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_click2",
+          "asset": "upg_hell_2_click2",
+          "displayName": "Kauçuk Damga",
+          "description": "Daha sert basılıyor, daha çok reddediliyor.",
+          "kind": "ClickMultiplier",
+          "value": 3,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 3500,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "hell_2_click1"
+        },
+        {
+          "id": "hell_2_click3",
+          "asset": "upg_hell_2_click3",
+          "displayName": "Şef Rozeti",
+          "description": "Rozeti görünce şikâyetçi vazgeçiyor. Mutlu son.",
+          "kind": "ClickMultiplier",
+          "value": 5,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 90000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "hell_2_click2"
+        },
+        {
+          "id": "hell_2_share",
+          "asset": "upg_hell_2_share",
+          "displayName": "Mesai Sonrası Mesai",
+          "description": "Her reddediş, saniyelik üretimin bir kısmını ekler. Eve gidilmez.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 8000,
+          "unlockBuilding": "hell_2_damga",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_bm0",
+          "asset": "upg_hell_2_bm0",
+          "displayName": "Çift Taraflı Mürekkep",
+          "description": "Hem iki yüzü reddediyor hem de emin olmuyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_2_damga",
+          "costResource": "complaint",
+          "cost": 800,
+          "unlockBuilding": "hell_2_damga",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_bm1",
+          "asset": "upg_hell_2_bm1",
+          "displayName": "Müzik Bozuk, Bu İyi",
+          "description": "Aynı 5 saniye çalıyor, müşteri artık şarkıyı ezberledi.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_2_telefon",
+          "costResource": "complaint",
+          "cost": 6400,
+          "unlockBuilding": "hell_2_telefon",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_bm2",
+          "asset": "upg_hell_2_bm2",
+          "displayName": "Cam Kalınlaştırıldı",
+          "description": "Artık ne duyuluyor ne görülüyor. Verim iki katına çıktı.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_2_gise",
+          "costResource": "complaint",
+          "cost": 64000,
+          "unlockBuilding": "hell_2_gise",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_bm3",
+          "asset": "upg_hell_2_bm3",
+          "displayName": "Dağ Yüksek, Dosya Fazla",
+          "description": "Zirveye ulaşan dosya sahibine ulaşamıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_2_dosya",
+          "costResource": "complaint",
+          "cost": 720000,
+          "unlockBuilding": "hell_2_dosya",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_bm4",
+          "asset": "upg_hell_2_bm4",
+          "displayName": "Yarın Gel (Yeni Sürüm)",
+          "description": "“Yarın gel” artık üç dilde.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "hell_2_yarin",
+          "costResource": "complaint",
+          "cost": 8800000,
+          "unlockBuilding": "hell_2_yarin",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_2_global",
+          "asset": "upg_hell_2_global",
+          "displayName": "Prosedür Bayramı",
+          "description": "Bütün prosedürler aynı anda geçerli, hiçbiri uygulanmıyor.",
+          "kind": "GlobalMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 600000,
+          "unlockBuilding": "hell_2_yarin",
+          "unlockCount": 5,
+          "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "hell_2_q1",
+          "text": "Şikâyetçiyi reddet: “Dilekçeniz yanlış sıraya girdi” (30 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 30,
+          "rewardFlat": 60,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_2_q2",
+          "text": "5 Damga Makinesi kur: hepsi “REDDEDİLDİ” basıyor",
+          "kind": "Building",
+          "building": "hell_2_damga",
+          "amount": 5,
+          "rewardFlat": 150,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_2_q3",
+          "text": "200 kez reddet: “Yarın gel” cümlesi telif aldı",
+          "kind": "Click",
+          "building": null,
+          "amount": 200,
+          "rewardFlat": 0,
+          "rewardSeconds": 60,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_2_q4",
+          "text": "5 Bekletme Hattı: müşteri bekleme müziğiyle evlendi",
+          "kind": "Building",
+          "building": "hell_2_telefon",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 120,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_2_q5",
+          "text": "5 yükseltme al: Müdür “prosedür” dedi ve çay içti",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "hell_2_q6",
+          "text": "10 Gişe Camı: hepsinde “öğle arası” yazıyor",
+          "kind": "Building",
+          "building": "hell_2_gise",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_2_q7",
+          "text": "400.000 Şikâyet Dosyası: arşiv odası artık bir yaşam tarzı",
+          "kind": "Earn",
+          "building": null,
+          "amount": 400000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "hell_2_q8",
+          "text": "Bay Hayır’ın canının yarısını götür: “Dilekçeniz eksik” diyor",
+          "kind": "Earn",
+          "building": null,
+          "amount": 4000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
+        }
+      ]
+    },
+    {
+      "id": "heaven_2",
+      "asset": "age_heaven_2",
+      "displayName": "Cennet 2. Kat: Teyze Danışma Masası",
+      "side": "heaven",
+      "clickLabel": "YARDIM ET",
+      "goalTitle": "Memnuniyet Seviyesi: Danışma Masası",
+      "clickResource": "thanks",
+      "advanceResource": "thanks",
+      "advanceCost": 8000000,
+      "knowledgeReward": 5,
+      "resources": [
+        "thanks"
+      ],
+      "skyColor": [
+        0.6,
+        0.82,
+        1
+      ],
+      "groundColor": [
+        0.88,
+        0.94,
+        1
+      ],
+      "buildings": [
+        {
+          "id": "heaven_2_levha",
+          "asset": "bld_heaven_2_levha",
+          "displayName": "Yol Tarifi Levhası",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 20,
+          "costGrowth": 1.15,
+          "baseProduction": 0.2,
+          "scenePosition": [
+            -8.0,
+            -3.4
+          ],
+          "sortingOrder": 0,
+          "placeholderColor": [
+            1,
+            0.95,
+            0.9
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_2_demlik",
+          "asset": "bld_heaven_2_demlik",
+          "displayName": "Çay Servisi (İnce Belli)",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 160,
+          "costGrowth": 1.15,
+          "baseProduction": 1.5,
+          "scenePosition": [
+            -4.4,
+            -3.4
+          ],
+          "sortingOrder": 1,
+          "placeholderColor": [
+            0.8,
+            0.95,
+            1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_2_kayip",
+          "asset": "bld_heaven_2_kayip",
+          "displayName": "Kayıp Eşya Bürosu",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 1600,
+          "costGrowth": 1.15,
+          "baseProduction": 9,
+          "scenePosition": [
+            -0.7999999999999998,
+            -3.4
+          ],
+          "sortingOrder": 2,
+          "placeholderColor": [
+            1,
+            0.9,
+            0.6
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_2_torun",
+          "asset": "bld_heaven_2_torun",
+          "displayName": "Torun Fotoğrafı Galerisi",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 18000,
+          "costGrowth": 1.15,
+          "baseProduction": 55,
+          "scenePosition": [
+            2.8000000000000007,
+            -3.4
+          ],
+          "sortingOrder": 3,
+          "placeholderColor": [
+            0.9,
+            0.8,
+            1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_2_tavsiye",
+          "asset": "bld_heaven_2_tavsiye",
+          "displayName": "Teyze Tavsiye Hattı",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 220000,
+          "costGrowth": 1.15,
+          "baseProduction": 320,
+          "scenePosition": [
+            6.4,
+            -3.4
+          ],
+          "sortingOrder": 4,
+          "placeholderColor": [
+            1,
+            0.8,
+            0.8
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        }
+      ],
+      "upgrades": [
+        {
+          "id": "heaven_2_click1",
+          "asset": "upg_heaven_2_click1",
+          "displayName": "Güleç Yüzlü Danışman",
+          "description": "Gülümseyen danışmana herkes soru soruyor.",
+          "kind": "ClickMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 150,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_click2",
+          "asset": "upg_heaven_2_click2",
+          "displayName": "Kalem Kâğıt Hazır",
+          "description": "Yol tarifi çizime döküldü, çizim de kayboldu.",
+          "kind": "ClickMultiplier",
+          "value": 3,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 3500,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "heaven_2_click1"
+        },
+        {
+          "id": "heaven_2_click3",
+          "asset": "upg_heaven_2_click3",
+          "displayName": "Baş Teyze Rozeti",
+          "description": "Rozeti takınca herkes sıraya girdi. Sıra bile kendiliğinden düzeldi.",
+          "kind": "ClickMultiplier",
+          "value": 5,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 90000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "heaven_2_click2"
+        },
+        {
+          "id": "heaven_2_share",
+          "asset": "upg_heaven_2_share",
+          "displayName": "Gönüllü Mesai",
+          "description": "Her yardım, saniyelik üretimin bir kısmını ekler. Mesai aşkla.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 8000,
+          "unlockBuilding": "heaven_2_levha",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_bm0",
+          "asset": "upg_heaven_2_bm0",
+          "displayName": "Okları Düzelttik",
+          "description": "Artık oklar aynı yöne bakıyor. Mucize.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_2_levha",
+          "costResource": "thanks",
+          "cost": 800,
+          "unlockBuilding": "heaven_2_levha",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_bm1",
+          "asset": "upg_heaven_2_bm1",
+          "displayName": "Taze Demlik",
+          "description": "Çay tavşan kanı olunca teşekkür iki katına çıkıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_2_demlik",
+          "costResource": "thanks",
+          "cost": 6400,
+          "unlockBuilding": "heaven_2_demlik",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_bm2",
+          "asset": "upg_heaven_2_bm2",
+          "displayName": "Kayıp Eşya Kayıp Eşyası",
+          "description": "Bürosu kayıp ama herkes seve seve yardım ediyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_2_kayip",
+          "costResource": "thanks",
+          "cost": 64000,
+          "unlockBuilding": "heaven_2_kayip",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_bm3",
+          "asset": "upg_heaven_2_bm3",
+          "displayName": "Torun Videosu Yüklendi",
+          "description": "Herkes izliyor, kimse atlamıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_2_torun",
+          "costResource": "thanks",
+          "cost": 720000,
+          "unlockBuilding": "heaven_2_torun",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_bm4",
+          "asset": "upg_heaven_2_bm4",
+          "displayName": "Hat Hep Açık",
+          "description": "Tavsiye yediyüzyirmi dört saat; sorulmadan da veriliyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": "heaven_2_tavsiye",
+          "costResource": "thanks",
+          "cost": 8800000,
+          "unlockBuilding": "heaven_2_tavsiye",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_2_global",
+          "asset": "upg_heaven_2_global",
+          "displayName": "Sonsuz Hayır Duası",
+          "description": "Herkesin işi rast gidiyor, kimse nedenini bilmiyor.",
+          "kind": "GlobalMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 600000,
+          "unlockBuilding": "heaven_2_tavsiye",
+          "unlockCount": 5,
+          "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "heaven_2_q1",
+          "text": "Yolunu şaşıran teyzeye yardım et (30 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 30,
+          "rewardFlat": 60,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_2_q2",
+          "text": "5 Yol Tarifi Levhası: oklar hâlâ birbirine bakıyor",
+          "kind": "Building",
+          "building": "heaven_2_levha",
+          "amount": 5,
+          "rewardFlat": 150,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_2_q3",
+          "text": "200 kez yardım et: “Sağ ol evladım” demekten yoruldular, yine de dediler",
+          "kind": "Click",
+          "building": null,
+          "amount": 200,
+          "rewardFlat": 0,
+          "rewardSeconds": 60,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_2_q4",
+          "text": "5 Çay Servisi: şeker iki mi üç mü tartışması sürüyor",
+          "kind": "Building",
+          "building": "heaven_2_demlik",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 120,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_2_q5",
+          "text": "5 yükseltme al: teyze “ben de bilirim” dedi ama bilmiyordu",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "heaven_2_q6",
+          "text": "10 Kayıp Eşya Bürosu: kayıp olanın kendisi de kayıp",
+          "kind": "Building",
+          "building": "heaven_2_kayip",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_2_q7",
+          "text": "400.000 Teşekkür topla: komşular balkondan el salladı",
+          "kind": "Earn",
+          "building": null,
+          "amount": 400000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "heaven_2_q8",
+          "text": "Memnuniyet çubuğunun yarısı: teyzeler fotoğraf göstermeye başladı",
+          "kind": "Earn",
+          "building": null,
+          "amount": 4000000,
           "rewardFlat": 0,
           "rewardSeconds": 600,
           "rewardKnowledge": 2

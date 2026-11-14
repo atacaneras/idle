@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_hell_2_bm2
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: hell_2_bm2
+  displayName: "Cam Kal\u0131nla\u015Ft\u0131r\u0131ld\u0131"
+  description: "Art\u0131k ne duyuluyor ne g\xF6r\xFCl\xFCyor. Verim iki kat\u0131na \xE7\u0131kt\u0131."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: d358ecaca098f1247aa8af7a369e25f4, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  cost: 64000
+  unlockBuilding: {fileID: 11400000, guid: d358ecaca098f1247aa8af7a369e25f4, type: 2}
+  unlockCount: 10
+  prerequisite: {fileID: 0}

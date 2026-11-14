@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463226b404ca49f41af037aa00f72ca2, type: 3}
+  m_Name: bld_hell_2_telefon
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingData
+  artFolder: hell_2
+  id: hell_2_telefon
+  displayName: "Telefon Bekletme Hatt\u0131"
+  icon: {fileID: 0}
+  produces: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  costResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  baseCost: 160
+  costGrowth: 1.15
+  baseProduction: 1.5
+  levelSprites: []
+  scenePosition: {x: -4.4, y: -3.4}
+  sortingOrder: 1
+  placeholderColor: {r: 0.8, g: 0.5, b: 0.2, a: 1}
+  placeholderSize: {x: 1.4, y: 1.8}

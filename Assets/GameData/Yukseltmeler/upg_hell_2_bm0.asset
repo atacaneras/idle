@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_hell_2_bm0
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: hell_2_bm0
+  displayName: "\xC7ift Tarafl\u0131 M\xFCrekkep"
+  description: "Hem iki y\xFCz\xFC reddediyor hem de emin olmuyor."
+  icon: {fileID: 0}
+  kind: 2
+  targetBuilding: {fileID: 11400000, guid: d0b1c9dab805fae4b9b8e80a37f98cb6, type: 2}
+  value: 2
+  costResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  cost: 800
+  unlockBuilding: {fileID: 11400000, guid: d0b1c9dab805fae4b9b8e80a37f98cb6, type: 2}
+  unlockCount: 10
+  prerequisite: {fileID: 0}

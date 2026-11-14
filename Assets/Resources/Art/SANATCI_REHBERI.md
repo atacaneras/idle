@@ -28,12 +28,17 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 | `hell_1_asansor_lv1.png` | Asansör Müziği Hoparlörü |
 | `hell_1_tabela_lv1.png` | “Lütfen Bekleyiniz” Tabelası |
 
-## hell_2 (içerik henüz yok)  —  `Assets/Resources/Art/hell_2/`
+## Cehennem 2. Kat: Şikâyet Departmanı  —  `Assets/Resources/Art/hell_2/`
 
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
 | `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `hell_2_damga_lv1.png` | Damga Makinesi (Hep REDDEDİLDİ) |
+| `hell_2_telefon_lv1.png` | Telefon Bekletme Hattı |
+| `hell_2_gise_lv1.png` | Gişe Camı (Kapalı) |
+| `hell_2_dosya_lv1.png` | Şikâyet Dosyası Dağı |
+| `hell_2_yarin_lv1.png` | “Yarın Gel” Panosu |
 
 ## hell_3 (içerik henüz yok)  —  `Assets/Resources/Art/hell_3/`
 
@@ -82,12 +87,17 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 | `heaven_1_arp_lv1.png` | Arp Çalma Kursu |
 | `heaven_1_sarilma_lv1.png` | Ücretsiz Sarılma Standı |
 
-## heaven_2 (içerik henüz yok)  —  `Assets/Resources/Art/heaven_2/`
+## Cennet 2. Kat: Teyze Danışma Masası  —  `Assets/Resources/Art/heaven_2/`
 
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
 | `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `heaven_2_levha_lv1.png` | Yol Tarifi Levhası |
+| `heaven_2_demlik_lv1.png` | Çay Servisi (İnce Belli) |
+| `heaven_2_kayip_lv1.png` | Kayıp Eşya Bürosu |
+| `heaven_2_torun_lv1.png` | Torun Fotoğrafı Galerisi |
+| `heaven_2_tavsiye_lv1.png` | Teyze Tavsiye Hattı |
 
 ## heaven_3 (içerik henüz yok)  —  `Assets/Resources/Art/heaven_3/`
 

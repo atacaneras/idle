@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_hell_2_click2
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: hell_2_click2
+  displayName: "Kau\xE7uk Damga"
+  description: "Daha sert bas\u0131l\u0131yor, daha \xE7ok reddediliyor."
+  icon: {fileID: 0}
+  kind: 0
+  targetBuilding: {fileID: 0}
+  value: 3
+  costResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  cost: 3500
+  unlockBuilding: {fileID: 0}
+  unlockCount: 0
+  prerequisite: {fileID: 11400000, guid: 6bacb35774537c54aa481b620a26fbfe, type: 2}
