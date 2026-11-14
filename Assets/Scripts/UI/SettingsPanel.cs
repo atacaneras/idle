@@ -44,8 +44,8 @@ public class SettingsPanel : MonoBehaviour
         rt.SetAsLastSibling();
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
         rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-30f, -150f);
-        rt.sizeDelta = new Vector2(260f, 54f);
+        rt.anchoredPosition = new Vector2(-30f, -86f);   // ust sira: Basarimlar | Bilgi Agaci | Ayarlar
+        rt.sizeDelta = new Vector2(200f, 54f);
         label.fontSize = 22f;
         label.fontSizeMin = 17f;
         label.fontSizeMax = 22f;

@@ -64,8 +64,8 @@ public class AchievementPanel : MonoBehaviour
         rt.SetAsLastSibling();
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
         rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-300f, -86f);   // Bilgi Agaci butonunun soluna
-        rt.sizeDelta = new Vector2(250f, 54f);
+        rt.anchoredPosition = new Vector2(-450f, -86f);   // ust sira: Basarimlar | Bilgi Agaci | Ayarlar
+        rt.sizeDelta = new Vector2(200f, 54f);
         openLabel.fontSizeMin = 16f;
         openLabel.fontSizeMax = 22f;
         openLabel.enableAutoSizing = true;
