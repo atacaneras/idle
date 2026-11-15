@@ -15,9 +15,11 @@ public class FloorBar : MonoBehaviour
 
     public static FloorBar Create(Canvas canvas)
     {
-        var rt = UIFactory.CreatePanel(canvas.transform, "FloorBar", new Color(0, 0, 0, 0.45f), false);
-        rt.anchorMin = new Vector2(0.31f, 0.80f); rt.anchorMax = new Vector2(0.63f, 0.885f);
-        rt.offsetMin = rt.offsetMax = Vector2.zero;
+        var rt = UIFactory.CreatePanel(canvas.transform, "FloorBar", HudLayout.Panel, false);
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0.5f, 1f);
+        rt.anchoredPosition = new Vector2(HudLayout.CenterOffsetX, -HudLayout.ColumnTop);   // orta sutunun ustu
+        rt.sizeDelta = new Vector2(HudLayout.CenterWidth - 20f, 84f);
         var bar = rt.gameObject.AddComponent<FloorBar>();
         bar.Build(rt);
         return bar;

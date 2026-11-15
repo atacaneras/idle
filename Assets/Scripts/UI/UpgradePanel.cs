@@ -15,7 +15,7 @@ public class UpgradePanel : MonoBehaviour
     const float DropdownMaxHeight = 460f;
     const float DropdownPadding = 8f;
 
-    static readonly Color PanelColor = new Color(0.08f, 0.07f, 0.1f, 0.55f);
+    static readonly Color PanelColor = HudLayout.Panel;
     static readonly Color EffectColor = new Color(0.62f, 0.93f, 0.62f);
     static readonly Color FlavorColor = new Color(0.85f, 0.85f, 0.88f);
     static readonly Color CostColor = new Color(1f, 0.85f, 0.35f);
@@ -51,8 +51,8 @@ public class UpgradePanel : MonoBehaviour
         root.SetAsFirstSibling();   // yuzen yazilarin arkasinda kalsin
         root.anchorMin = root.anchorMax = new Vector2(0f, 1f);
         root.pivot = new Vector2(0f, 1f);
-        root.anchoredPosition = new Vector2(30f, -250f);
-        root.sizeDelta = new Vector2(560f, HeaderHeight);
+        root.anchoredPosition = new Vector2(HudLayout.Margin, -HudLayout.ColumnTop);   // sol sutunun en ustu
+        root.sizeDelta = new Vector2(HudLayout.LeftW, HeaderHeight);
 
         headerLabel = UIFactory.CreateText(root, "HeaderLabel", Loc.T("YÜKSELTMELER"), 22f, TextAlignmentOptions.MidlineLeft, Color.white,
             Vector2.zero, Vector2.one, new Vector2(14f, 0f), new Vector2(-62f, 0f), true);
@@ -105,8 +105,11 @@ public class UpgradePanel : MonoBehaviour
         var gm = GameManager.Instance;
         gm.OnUpgradesChanged += Rebuild;
         gm.OnStateChanged += Refresh;
+        HudLayout.LeftPanelOpened += OnOtherPanelOpened;
         Rebuild();
     }
+
+    void OnOtherPanelOpened(object sender) { if (sender != (object)this && expanded) ClosePopup(); }
 
     void OnDestroy()
     {
@@ -114,6 +117,7 @@ public class UpgradePanel : MonoBehaviour
         if (gm == null) return;
         gm.OnUpgradesChanged -= Rebuild;
         gm.OnStateChanged -= Refresh;
+        HudLayout.LeftPanelOpened -= OnOtherPanelOpened;
     }
 
     // Gorunur liste degistiyse satirlari yeniden kurar, degismediyse sadece tiklanabilirligi gunceller.
@@ -167,7 +171,7 @@ public class UpgradePanel : MonoBehaviour
     {
         expanded = !expanded;
         dropdown.gameObject.SetActive(expanded);
-        if (expanded) root.SetAsLastSibling();
+        if (expanded) { root.SetAsLastSibling(); HudLayout.RaiseLeftPanelOpened(this); }
         UpdateHeader();
     }
 

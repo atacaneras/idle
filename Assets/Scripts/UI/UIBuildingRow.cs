@@ -16,7 +16,7 @@ public class UIBuildingRow : MonoBehaviour
     {
         data = d;
         float textLeft = icon != null && d.icon != null ? 124f : 24f;
-        const float rightColumn = 226f;
+        const float rightColumn = 210f;
 
         // Keep the text column between the optional icon and the buy button.
         SetRect(nameText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f),

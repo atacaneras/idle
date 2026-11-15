@@ -55,6 +55,9 @@ public class SceneBuildingSpawner : MonoBehaviour
     }
 
     readonly Dictionary<string, View> views = new Dictionary<string, View>();
+    readonly Dictionary<string, float> stageX = new Dictionary<string, float>();   // bina id -> sahnedeki (yerel) x
+    int lastScreenW, lastScreenH;
+    Canvas hudCanvas;
     readonly List<Particle> particles = new List<Particle>();
     readonly Stack<Particle> particlePool = new Stack<Particle>();
     Transform fxRoot;
@@ -136,11 +139,13 @@ public class SceneBuildingSpawner : MonoBehaviour
         groundSr.sortingOrder = -10;
         ApplyColors();
 
+        ComputeStage(age);
         foreach (var b in age.buildings)
         {
             var go = new GameObject("bld_" + b.id);
             go.transform.SetParent(transform, false);
-            go.transform.localPosition = b.scenePosition;
+            Vector3 placed = Placed(b);
+            go.transform.localPosition = placed;
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sortingOrder = b.sortingOrder;
 
@@ -158,7 +163,7 @@ public class SceneBuildingSpawner : MonoBehaviour
                 sr = sr,
                 glow = gsr,
                 glowT = glowGo.transform,
-                basePos = b.scenePosition,
+                basePos = placed,
                 phase = (b.id.GetHashCode() & 0x7fffffff) % 1000 * 0.00628f,
                 ambientTimer = Random.Range(0.3f, 1.6f)
             };
@@ -214,7 +219,7 @@ public class SceneBuildingSpawner : MonoBehaviour
             if (v.glow != null)
             {
                 v.glow.enabled = level >= 1;
-                v.glowT.localPosition = new Vector3(b.scenePosition.x, b.scenePosition.y + v.height * 0.5f, 0.01f);
+                v.glowT.localPosition = new Vector3(v.basePos.x, v.basePos.y + v.height * 0.5f, 0.01f);
                 v.glowT.localScale = new Vector3(v.width * 1.9f, v.height * 1.2f, 1f);
             }
 
@@ -258,7 +263,7 @@ public class SceneBuildingSpawner : MonoBehaviour
         View v;
         if (views.TryGetValue(b.id, out v) && v.sr.enabled)
         {
-            world = transform.TransformPoint(new Vector3(b.scenePosition.x, b.scenePosition.y + v.height + 0.1f, 0f));
+            world = transform.TransformPoint(new Vector3(v.basePos.x, v.basePos.y + v.height + 0.1f, 0f));
             return true;
         }
         world = Vector3.zero;
@@ -314,9 +319,79 @@ public class SceneBuildingSpawner : MonoBehaviour
         return 1f + c3 * x * x * x + c1 * x * x;
     }
 
+    // Binalar panellerin arasindaki bos orta sahneye sigsin diye x konumlari yeniden hesaplanir.
+    // Sol/sag sutun genislikleri HudLayout'tan gelir; en/boy orani degisse de dogru kalir.
+    void ComputeStage(AgeData age)
+    {
+        stageX.Clear();
+        var list = age.buildings;
+        if (list == null || list.Length == 0) return;
+
+        float minX = float.MaxValue, maxX = float.MinValue;
+        foreach (var b in list) { minX = Mathf.Min(minX, b.scenePosition.x); maxX = Mathf.Max(maxX, b.scenePosition.x); }
+
+        float left, right;
+        if (!TryGetStageRange(out left, out right))
+        {
+            foreach (var b in list) stageX[b.id] = b.scenePosition.x;   // kamera/canvas yoksa eski konum
+            return;
+        }
+
+        const float halfBuilding = 1.0f;   // bina yarim genisligi + pay (dunya birimi)
+        float avail = Mathf.Max(0.5f, (right - left) - 2f * halfBuilding);
+        float span = maxX - minX;
+        float scale = (span > 0.001f && span > avail) ? avail / span : 1f;   // sadece sigmiyorsa sik
+        float center = (left + right) * 0.5f;
+        float mid = (minX + maxX) * 0.5f;
+        foreach (var b in list) stageX[b.id] = center + (b.scenePosition.x - mid) * scale;
+    }
+
+    // Sahne alani = sol kenar boslugu ile sag sutun (bina listesi) arasi, spawner'in yerel x'i olarak
+    bool TryGetStageRange(out float left, out float right)
+    {
+        left = right = 0f;
+        if (cam == null) return false;
+        if (hudCanvas == null)
+        {
+            var hud = FindAnyObjectByType<HUDController>();
+            if (hud != null) { var c = hud.GetComponentInParent<Canvas>(); if (c != null) hudCanvas = c.rootCanvas; }
+        }
+        float w = HudLayout.RefWidth;
+        if (hudCanvas != null)
+        {
+            float cw = ((RectTransform)hudCanvas.transform).rect.width;
+            if (cw > 1f) w = cw;
+        }
+        float lf = (HudLayout.Margin + 8f) / w;
+        float rf = (w - HudLayout.RightW - HudLayout.Margin - 16f) / w;
+        if (rf <= lf + 0.1f) return false;
+        float z = Mathf.Abs(cam.transform.position.z);
+        left = transform.InverseTransformPoint(cam.ViewportToWorldPoint(new Vector3(lf, 0.5f, z))).x;
+        right = transform.InverseTransformPoint(cam.ViewportToWorldPoint(new Vector3(rf, 0.5f, z))).x;
+        return right > left;
+    }
+
+    Vector3 Placed(BuildingData b)
+    {
+        float x;
+        if (!stageX.TryGetValue(b.id, out x)) x = b.scenePosition.x;
+        return new Vector3(x, b.scenePosition.y, 0f);
+    }
+
+    void RelayoutIfScreenChanged()
+    {
+        if (Screen.width == lastScreenW && Screen.height == lastScreenH) return;
+        lastScreenW = Screen.width; lastScreenH = Screen.height;
+        var gm = GameManager.Instance;
+        if (gm == null || gm.CurrentAge == null) return;
+        ComputeStage(gm.CurrentAge);
+        foreach (var kv in views) kv.Value.basePos = Placed(kv.Value.data);
+    }
+
     void Update()
     {
         float dt = Time.unscaledDeltaTime;
+        RelayoutIfScreenChanged();
 
         if (colorT < 1f)
         {
@@ -389,8 +464,8 @@ public class SceneBuildingSpawner : MonoBehaviour
     // ---- Parcaciklar (toz ve kivilcim). Ek asset gerekmez: beyaz kare kullanilir. ----
     void SpawnDust(View v, int count)
     {
-        float baseY = v.data.scenePosition.y;
-        float cx = v.data.scenePosition.x;
+        float baseY = v.basePos.y;
+        float cx = v.basePos.x;
         float half = Mathf.Max(0.3f, v.width * 0.5f);
 
         for (int i = 0; i < count; i++)
@@ -412,8 +487,8 @@ public class SceneBuildingSpawner : MonoBehaviour
 
     void SpawnSparkles(View v, int count)
     {
-        float baseY = v.data.scenePosition.y;
-        float cx = v.data.scenePosition.x;
+        float baseY = v.basePos.y;
+        float cx = v.basePos.x;
         float half = Mathf.Max(0.3f, v.width * 0.5f);
 
         for (int i = 0; i < count; i++)
@@ -437,8 +512,8 @@ public class SceneBuildingSpawner : MonoBehaviour
         var p = GetParticle();
         if (p == null) return;
         float half = Mathf.Max(0.3f, v.width * 0.4f);
-        p.pos = new Vector2(v.data.scenePosition.x + Random.Range(-half, half),
-            v.data.scenePosition.y + Random.Range(0.1f, v.height * 0.9f));
+        p.pos = new Vector2(v.basePos.x + Random.Range(-half, half),
+            v.basePos.y + Random.Range(0.1f, v.height * 0.9f));
         p.vel = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(0.3f, 0.7f));
         p.gravity = 0.06f;
         p.size = Random.Range(0.04f, 0.1f);

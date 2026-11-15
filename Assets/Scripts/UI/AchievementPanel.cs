@@ -62,10 +62,7 @@ public class AchievementPanel : MonoBehaviour
         openButton = UIFactory.CreateButton(canvas, "OpenAchievementsButton", Loc.T("Başarımlar"), 22f, out openLabel);
         var rt = (RectTransform)openButton.transform;
         rt.SetAsLastSibling();
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
-        rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-450f, -86f);   // ust sira: Basarimlar | Bilgi Agaci | Ayarlar
-        rt.sizeDelta = new Vector2(200f, 54f);
+        HudLayout.PlaceTopButton(rt, 2);   // ust bar: Basarimlar | Bilgi Agaci | Ayarlar
         openLabel.fontSizeMin = 16f;
         openLabel.fontSizeMax = 22f;
         openLabel.enableAutoSizing = true;

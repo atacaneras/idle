@@ -22,10 +22,12 @@ public class BuyModeSelector : MonoBehaviour
         var rt = (RectTransform)bar.transform;
         rt.SetParent(canvas.transform, false);
         rt.SetAsFirstSibling();   // diger arayuzun arkasinda kalsin, yuzen yazilari engellemesin
+        // Alt barin sag tarafi: [x1 x10 x100 Max] solda, Ses butonu en sagda
+        const float muteW = 216f;
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
         rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-20f, 180f);   // bina listesinin hemen alti
-        rt.sizeDelta = new Vector2(560f, 60f);
+        rt.anchoredPosition = new Vector2(-(HudLayout.Margin + muteW + HudLayout.Gap), (HudLayout.BottomBarH - 80f) * 0.5f);
+        rt.sizeDelta = new Vector2(HudLayout.RightW - muteW - HudLayout.Gap, 80f);
 
         var layout = bar.GetComponent<HorizontalLayoutGroup>();
         layout.spacing = 10f;

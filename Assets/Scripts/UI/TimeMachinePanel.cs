@@ -72,10 +72,7 @@ public class TimeMachinePanel : MonoBehaviour
         var rt = (RectTransform)openButton.transform;
         rt.SetAsLastSibling();
         // Kaynak/bilgi satirinin altinda, sag ustte; yukseltme panelinden ayri dursun.
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
-        rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-240f, -86f);   // ust sira: Basarimlar | Bilgi Agaci | Ayarlar
-        rt.sizeDelta = new Vector2(200f, 54f);
+        HudLayout.PlaceTopButton(rt, 1);   // ust bar: Basarimlar | Bilgi Agaci | Ayarlar
         openLabel.fontSize = 22f;
         openLabel.fontSizeMin = 17f;
         openLabel.fontSizeMax = 22f;

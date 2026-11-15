@@ -148,8 +148,8 @@ public class SoundManager : MonoBehaviour
         rt.SetAsFirstSibling();
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
         rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-20f, 100f);
-        rt.sizeDelta = new Vector2(220f, 60f);
+        rt.anchoredPosition = new Vector2(-HudLayout.Margin, (HudLayout.BottomBarH - 80f) * 0.5f);   // alt bar, en sag
+        rt.sizeDelta = new Vector2(216f, 80f);
         btn.onClick.AddListener(ToggleMute);
         MuteChanged += UpdateMuteLabel;
         UpdateMuteLabel();

@@ -15,8 +15,8 @@ public class TowerView : MonoBehaviour
 {
     public const int MaxFloor = 7;
     public const int TowerSortingOrder = -5;
-    // Boss, HUD panellerinin arasinda kalan bos orta alana oturur (sol panel < %31, bina listesi > %60)
-    const float BossX = 0.45f, BossY = 0.56f, BossH = 0.40f;
+    // Boss, sol sutun ile sag sutun arasindaki orta alana oturur (HudLayout.CenterLeft..W-CenterRightInset)
+    const float BossX = 0.47f, BossY = 0.56f, BossH = 0.34f;
     public int CurrentFloor { get; private set; }
     public bool Busy { get; private set; }
 
@@ -66,6 +66,8 @@ public class TowerView : MonoBehaviour
         root.anchorMin = root.anchorMax = new Vector2(0.5f, 0.5f);
         root.sizeDelta = new Vector2(W, H);
 
+        HudLayout.BuildBars(tcRt);   // ust / alt bar: katlarin ustunde, HUD'un ve binalarin altinda
+
         for (int f = -MaxFloor; f <= MaxFloor; f++) BuildFloor(f);
         SnapTo(0);
     }
@@ -108,11 +110,11 @@ public class TowerView : MonoBehaviour
             var edge = UIFactory.CreatePanel(p, "Edge", f < 0 ? new Color(0f, 0f, 0f, 0.55f) : new Color(1f, 1f, 1f, 0.45f), false);
             edge.anchorMin = new Vector2(0f, 1f); edge.anchorMax = new Vector2(1f, 1f);
             edge.pivot = new Vector2(0.5f, 1f);
-            edge.offsetMin = new Vector2(0f, -70f); edge.offsetMax = Vector2.zero;
+            edge.offsetMin = new Vector2(0f, -HudLayout.TopBarH); edge.offsetMax = Vector2.zero;
             var line = UIFactory.CreatePanel(p, "EdgeLine", f < 0 ? new Color(1f, 0.45f, 0.1f, 0.9f) : new Color(1f, 0.95f, 0.6f, 0.9f), false);
             line.anchorMin = new Vector2(0f, 1f); line.anchorMax = new Vector2(1f, 1f);
             line.pivot = new Vector2(0.5f, 1f);
-            line.offsetMin = new Vector2(0f, -76f); line.offsetMax = new Vector2(0f, -70f);
+            line.offsetMin = new Vector2(0f, -HudLayout.TopBarH - 6f); line.offsetMax = new Vector2(0f, -HudLayout.TopBarH);
             return;
         }
         // Yer yuzu (Windows XP arka plani): Assets/Resources/Art/earth/background.png

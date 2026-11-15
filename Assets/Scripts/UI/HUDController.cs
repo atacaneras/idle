@@ -114,9 +114,9 @@ public class HUDController : MonoBehaviour
         fastTestButtonLabel = label;
         var rt = (RectTransform)fastTestButton.transform;
         rt.anchorMin = rt.anchorMax = Vector2.zero;
-        rt.pivot = new Vector2(0f, 0.5f);
-        rt.anchoredPosition = new Vector2(365f, 150f);
-        rt.sizeDelta = new Vector2(240f, 76f);
+        rt.pivot = Vector2.zero;
+        rt.anchoredPosition = new Vector2(HudLayout.Margin + 320f + HudLayout.Gap, 24f);   // TOPLA'nin sagi
+        rt.sizeDelta = new Vector2(200f, HudLayout.BottomBarH - 48f);
         fastTestButton.onClick.AddListener(GameManager.Instance.ToggleFastTestMode);
         RefreshFastTestButton();
 #endif
@@ -141,42 +141,94 @@ public class HUDController : MonoBehaviour
 
     void PolishHud()
     {
-        SetTopText(resourcesText, new Vector2(0f, 1f), new Vector2(30f, -24f), new Vector2(620f, 150f), TextAlignmentOptions.TopLeft);
-        SetTopText(ageText, new Vector2(0.5f, 1f), new Vector2(0f, -20f), new Vector2(780f, 88f), TextAlignmentOptions.Midline);
-        SetTopText(knowledgeText, new Vector2(1f, 1f), new Vector2(-30f, -24f), new Vector2(500f, 56f), TextAlignmentOptions.MidlineRight);
+        // UST BAR: sol kaynaklar | orta kat adi | sag Bilgi (altinda Basarimlar / Bilgi Agaci / Ayarlar)
+        SetTopText(resourcesText, new Vector2(0f, 1f), new Vector2(HudLayout.Margin, -8f),
+            new Vector2(540f, HudLayout.TopBarH - 16f), TextAlignmentOptions.MidlineLeft);
+        SetTopText(ageText, new Vector2(0.5f, 1f), new Vector2(HudLayout.CenterOffsetX, -8f),
+            new Vector2(HudLayout.CenterWidth - 40f, HudLayout.TopBarH - 16f), TextAlignmentOptions.Midline);
+        SetTopText(knowledgeText, new Vector2(1f, 1f), new Vector2(-HudLayout.Margin, -6f),
+            new Vector2(560f, 38f), TextAlignmentOptions.MidlineRight);
+        // Cevrimdisi mesaji: orta sutunda, boss cubugu ve ipucu bandinin altinda
+        SetTopText(offlineText, new Vector2(0.5f, 1f), new Vector2(HudLayout.CenterOffsetX, -296f),
+            new Vector2(HudLayout.CenterWidth - 20f, 56f), TextAlignmentOptions.Midline);
 
         if (resourcesText != null)
         {
             resourcesText.enableAutoSizing = true;
-            resourcesText.fontSizeMin = 26f;
-            resourcesText.fontSizeMax = 36f;
-            resourcesText.color = new Color(0.16f, 0.13f, 0.12f);
+            resourcesText.fontSizeMin = 20f;
+            resourcesText.fontSizeMax = 32f;
+            resourcesText.fontStyle = FontStyles.Bold;
+            resourcesText.color = HudLayout.TextLight;
         }
         if (ageText != null)
         {
             ageText.enableAutoSizing = true;
-            ageText.fontSizeMin = 38f;
-            ageText.fontSizeMax = 54f;
-            ageText.color = new Color(0.17f, 0.13f, 0.11f);
+            ageText.fontSizeMin = 22f;
+            ageText.fontSizeMax = 36f;
+            ageText.fontStyle = FontStyles.Bold;
+            ageText.color = HudLayout.TextLight;
         }
         if (knowledgeText != null)
         {
             knowledgeText.enableAutoSizing = true;
-            knowledgeText.fontSizeMin = 22f;
-            knowledgeText.fontSizeMax = 30f;
-            knowledgeText.color = new Color(0.22f, 0.16f, 0.12f);
+            knowledgeText.fontSizeMin = 18f;
+            knowledgeText.fontSizeMax = 28f;
+            knowledgeText.fontStyle = FontStyles.Bold;
+            knowledgeText.color = new Color(1f, 0.88f, 0.55f);
             knowledgeText.textWrappingMode = TextWrappingModes.NoWrap;
+        }
+        if (offlineText != null)
+        {
+            offlineText.enableAutoSizing = true;
+            offlineText.fontSizeMin = 18f;
+            offlineText.fontSizeMax = 26f;
+            offlineText.fontStyle = FontStyles.Bold;
+            offlineText.color = HudLayout.TextLight;
+            offlineText.outlineWidth = 0.25f;
+            offlineText.outlineColor = HudLayout.TextOutline;
+        }
+
+        // SAG SUTUN: bina listesi ust bar ile alt bar arasinda, sagda sabit genislikte
+        var scroll = rowParent != null ? rowParent.GetComponentInParent<ScrollRect>() : null;
+        if (scroll != null)
+        {
+            var srt = (RectTransform)scroll.transform;
+            srt.anchorMin = new Vector2(1f, 0f);
+            srt.anchorMax = new Vector2(1f, 1f);
+            srt.pivot = new Vector2(1f, 0.5f);
+            srt.offsetMin = new Vector2(-(HudLayout.Margin + HudLayout.RightW), HudLayout.ColumnBottom);
+            srt.offsetMax = new Vector2(-HudLayout.Margin, -HudLayout.ColumnTop);
+            var simg = scroll.GetComponent<Image>();
+            if (simg != null) simg.color = HudLayout.PanelSoft;   // magara arka plani kartlarla karismasin
+        }
+
+        // ALT BAR: TOPLA (sol) | test (editor) | kat atla (orta sutun)
+        if (gatherButton != null)
+        {
+            var grt = (RectTransform)gatherButton.transform;
+            grt.anchorMin = grt.anchorMax = Vector2.zero;
+            grt.pivot = Vector2.zero;
+            grt.anchoredPosition = new Vector2(HudLayout.Margin, 16f);
+            grt.sizeDelta = new Vector2(320f, HudLayout.BottomBarH - 32f);
+        }
+        if (advanceButton != null)
+        {
+            var art = (RectTransform)advanceButton.transform;
+            art.anchorMin = art.anchorMax = new Vector2(0.5f, 0f);
+            art.pivot = new Vector2(0.5f, 0f);
+            art.anchoredPosition = new Vector2(HudLayout.CenterOffsetX, 24f);
+            art.sizeDelta = new Vector2(600f, HudLayout.BottomBarH - 48f);
         }
 
         var gatherImage = gatherButton != null ? gatherButton.GetComponent<Image>() : null;
-        if (gatherImage != null) gatherImage.color = new Color(0.96f, 0.73f, 0.28f);
+        if (gatherImage != null) gatherImage.color = HudLayout.Accent;
         var gatherLabel = gatherButton != null ? gatherButton.GetComponentInChildren<TMP_Text>() : null;
         if (gatherLabel != null)
         {
             gatherLabel.text = Loc.T("TOPLA");
             gatherLabel.fontStyle = FontStyles.Bold;
-            gatherLabel.fontSize = 28f;
-            gatherLabel.color = new Color(0.24f, 0.17f, 0.1f);
+            gatherLabel.fontSize = 34f;
+            gatherLabel.color = HudLayout.AccentInk;
         }
         if (advanceButtonLabel != null)
         {

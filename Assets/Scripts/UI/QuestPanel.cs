@@ -12,11 +12,17 @@ public class QuestPanel : MonoBehaviour
     class Row { public QuestDef q; public RectTransform rt; public TextMeshProUGUI text, prog; public Button btn; public Image bg; }
 
     const int Slots = 4;
+    const float HeaderH = 50f, RowH = 92f, RowGap = 6f, Pad = 8f;
+
     RectTransform popup;
     Button toggle;
-    TextMeshProUGUI toggleLabel, header;
+    TextMeshProUGUI toggleLabel, plusLabel;
     Image toggleImg;
+    bool expanded;
     readonly List<Row> rows = new List<Row>();
+
+    static readonly Color IdleColor = HudLayout.Panel;
+    static readonly Color ReadyColor = new Color(0.96f, 0.73f, 0.28f, 0.98f);
 
     public static QuestPanel Create(Canvas canvas)
     {
@@ -29,53 +35,80 @@ public class QuestPanel : MonoBehaviour
         return qp;
     }
 
+    // Sol sutunda, Yukseltmeler basliginin hemen altinda ayni stilde bir baslik; tiklayinca asagiya acilir.
     void Build(RectTransform r)
     {
-        toggle = UIFactory.CreateButton(r, "QuestToggle", "", 20, out toggleLabel);
+        toggle = UIFactory.CreateButton(r, "QuestHeader", "", 22f, out toggleLabel);
         var trt = (RectTransform)toggle.transform;
-        trt.anchorMin = new Vector2(0.31f, 0.735f); trt.anchorMax = new Vector2(0.47f, 0.795f);
-        trt.offsetMin = trt.offsetMax = Vector2.zero;
+        trt.anchorMin = trt.anchorMax = new Vector2(0f, 1f);
+        trt.pivot = new Vector2(0f, 1f);
+        trt.anchoredPosition = new Vector2(HudLayout.Margin, -(HudLayout.ColumnTop + HeaderH + 8f));
+        trt.sizeDelta = new Vector2(HudLayout.LeftW, HeaderH);
         toggleImg = toggle.GetComponent<Image>();
-        toggle.onClick.AddListener(() => { popup.gameObject.SetActive(!popup.gameObject.activeSelf); Refresh(); });
+        toggleLabel.alignment = TextAlignmentOptions.MidlineLeft;
+        var lrt = toggleLabel.rectTransform;
+        lrt.offsetMin = new Vector2(14f, 0f); lrt.offsetMax = new Vector2(-56f, 0f);
+        plusLabel = UIFactory.CreateText(trt, "Plus", "+", 26f, TextAlignmentOptions.Center, Color.white,
+            new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(-50f, 0f), new Vector2(-4f, 0f), true);
+        toggle.onClick.AddListener(Toggle);
 
-        popup = UIFactory.CreatePanel(r, "QuestPopup", new Color(0.05f, 0.05f, 0.08f, 0.92f), true);
-        popup.anchorMin = new Vector2(0.30f, 0.30f); popup.anchorMax = new Vector2(0.60f, 0.73f);
-        popup.offsetMin = popup.offsetMax = Vector2.zero;
-        header = UIFactory.CreateText(popup, "Header", "", 22, TextAlignmentOptions.Center, new Color(1f, 0.9f, 0.5f),
-            new Vector2(0, 0.88f), new Vector2(1, 1), Vector2.zero, Vector2.zero, true, true);
+        popup = UIFactory.CreatePanel(r, "QuestPopup", new Color(0.12f, 0.1f, 0.12f, 0.97f), true);
+        popup.anchorMin = popup.anchorMax = new Vector2(0f, 1f);
+        popup.pivot = new Vector2(0f, 1f);
+        popup.anchoredPosition = new Vector2(HudLayout.Margin, -(HudLayout.ColumnTop + HeaderH * 2f + 8f));
+        popup.sizeDelta = new Vector2(HudLayout.LeftW, Pad * 2f + Slots * RowH + (Slots - 1) * RowGap);
 
-        float rowH = 0.86f / Slots;
         for (int i = 0; i < Slots; i++)
         {
             var row = new Row();
             row.rt = UIFactory.CreatePanel(popup, "Quest" + i, new Color(1, 1, 1, 0.08f), false);
             row.bg = row.rt.GetComponent<Image>();
-            row.rt.anchorMin = new Vector2(0.02f, 0.86f - (i + 1) * rowH + 0.008f);
-            row.rt.anchorMax = new Vector2(0.98f, 0.86f - i * rowH - 0.008f);
-            row.rt.offsetMin = row.rt.offsetMax = Vector2.zero;
-            row.text = UIFactory.CreateText(row.rt, "Text", "", 17, TextAlignmentOptions.TopLeft, Color.white,
-                new Vector2(0.03f, 0.40f), new Vector2(0.76f, 0.98f), Vector2.zero, Vector2.zero, false, true);
-            row.prog = UIFactory.CreateText(row.rt, "Prog", "", 14, TextAlignmentOptions.BottomLeft, new Color(1, 1, 1, 0.75f),
-                new Vector2(0.03f, 0.02f), new Vector2(0.76f, 0.42f), Vector2.zero, Vector2.zero, false, true);
+            row.rt.anchorMin = new Vector2(0f, 1f); row.rt.anchorMax = new Vector2(1f, 1f);
+            row.rt.pivot = new Vector2(0.5f, 1f);
+            row.rt.anchoredPosition = new Vector2(0f, -(Pad + i * (RowH + RowGap)));
+            row.rt.sizeDelta = new Vector2(-2f * Pad, RowH);
+            row.text = UIFactory.CreateText(row.rt, "Text", "", 20, TextAlignmentOptions.TopLeft, Color.white,
+                new Vector2(0.03f, 0.42f), new Vector2(0.74f, 0.98f), Vector2.zero, Vector2.zero, false, true);
+            row.prog = UIFactory.CreateText(row.rt, "Prog", "", 16, TextAlignmentOptions.BottomLeft, HudLayout.TextDim,
+                new Vector2(0.03f, 0.02f), new Vector2(0.74f, 0.42f), Vector2.zero, Vector2.zero, false, true);
             TextMeshProUGUI lbl;
-            row.btn = UIFactory.CreateButton(row.rt, "Claim", Loc.T("AL"), 18, out lbl);
+            row.btn = UIFactory.CreateButton(row.rt, "Claim", Loc.T("AL"), 22, out lbl);
             var brt = (RectTransform)row.btn.transform;
-            brt.anchorMin = new Vector2(0.79f, 0.2f); brt.anchorMax = new Vector2(0.97f, 0.8f);
+            brt.anchorMin = new Vector2(0.77f, 0.2f); brt.anchorMax = new Vector2(0.97f, 0.8f);
             brt.offsetMin = brt.offsetMax = Vector2.zero;
-            row.btn.GetComponent<Image>().color = new Color(0.9f, 0.7f, 0.1f);
+            row.btn.GetComponent<Image>().color = HudLayout.Accent;
+            lbl.color = HudLayout.AccentInk;
             var captured = row;   // satirin o anki gorevini AL tiklayinca oku
             row.btn.onClick.AddListener(() => { if (captured.q != null) GameManager.Instance.ClaimQuest(captured.q); });
             rows.Add(row);
         }
         popup.gameObject.SetActive(false);
 
+        HudLayout.LeftPanelOpened += OnOtherPanelOpened;
         var gm = GameManager.Instance;
         gm.OnAgeChanged += Refresh; gm.OnStateChanged += Refresh;
         Refresh();
     }
 
+    void Toggle()
+    {
+        expanded = !expanded;
+        popup.gameObject.SetActive(expanded);
+        if (expanded) { popup.SetAsLastSibling(); HudLayout.RaiseLeftPanelOpened(this); }
+        Refresh();
+    }
+
+    void OnOtherPanelOpened(object sender)
+    {
+        if (sender == (object)this || !expanded) return;
+        expanded = false;
+        popup.gameObject.SetActive(false);
+        Refresh();
+    }
+
     void OnDestroy()
     {
+        HudLayout.LeftPanelOpened -= OnOtherPanelOpened;
         var gm = GameManager.Instance;
         if (gm != null) { gm.OnAgeChanged -= Refresh; gm.OnStateChanged -= Refresh; }
     }
@@ -104,10 +137,15 @@ public class QuestPanel : MonoBehaviour
         });
 
         string name = Loc.T(age.side == Side.Hell ? "İŞ EMİRLERİ" : "İYİLİK LİSTESİ");
-        toggleLabel.text = name + (claimable > 0 ? "  (" + claimable + ")" : "");
-        toggleImg.color = claimable > 0 ? new Color(0.9f, 0.7f, 0.1f, 0.95f) : new Color(0.2f, 0.2f, 0.25f, 0.9f);
+        bool ready = claimable > 0;
+        toggleLabel.text = name + "  " + claimedCount + "/" + quests.Length + (ready ? "  (" + claimable + ")" : "");
+        toggleLabel.fontStyle = FontStyles.Bold;
+        toggleLabel.color = ready ? HudLayout.AccentInk : Color.white;
+        plusLabel.text = expanded ? "−" : "+";
+        plusLabel.color = ready ? HudLayout.AccentInk : Color.white;
+        toggleImg.color = ready ? ReadyColor : IdleColor;
         toggle.gameObject.SetActive(quests.Length > 0);
-        header.text = name + "  " + claimedCount + "/" + quests.Length;
+        if (quests.Length == 0 && popup != null) popup.gameObject.SetActive(false);
 
         for (int i = 0; i < rows.Count; i++)
         {
@@ -121,7 +159,7 @@ public class QuestPanel : MonoBehaviour
             r.text.text = Loc.T(q.text);
             r.prog.text = NumberFormatter.Format(Math.Min(p, q.amount)) + " / " + NumberFormatter.Format(q.amount) + "  •  " + RewardText(gm, q);
             r.btn.gameObject.SetActive(done);
-            r.bg.color = done ? new Color(1f, 0.85f, 0.2f, 0.25f) : new Color(1, 1, 1, 0.08f);
+            r.bg.color = done ? new Color(0.96f, 0.73f, 0.28f, 0.28f) : new Color(1, 1, 1, 0.08f);
         }
     }
 

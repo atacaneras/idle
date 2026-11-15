@@ -39,11 +39,11 @@ public class TutorialHints : MonoBehaviour
 
     void BuildBanner(Transform canvas)
     {
-        var rt = UIFactory.CreatePanel(canvas, "HintBanner", new Color(0.08f, 0.07f, 0.1f, 0.88f), false);
-        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
-        rt.pivot = new Vector2(0.5f, 0f);
-        rt.anchoredPosition = new Vector2(0f, 290f);
-        rt.sizeDelta = new Vector2(960f, 92f);
+        var rt = UIFactory.CreatePanel(canvas, "HintBanner", HudLayout.Panel, false);
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0.5f, 1f);
+        rt.anchoredPosition = new Vector2(HudLayout.CenterOffsetX, -(HudLayout.ColumnTop + 84f + 8f));   // boss cubugunun altinda
+        rt.sizeDelta = new Vector2(HudLayout.CenterWidth - 20f, 84f);
         group = rt.gameObject.AddComponent<CanvasGroup>();
         group.alpha = 0f;
         group.blocksRaycasts = false;

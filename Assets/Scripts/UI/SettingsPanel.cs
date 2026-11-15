@@ -42,10 +42,7 @@ public class SettingsPanel : MonoBehaviour
         var btn = UIFactory.CreateButton(canvas, "OpenSettingsButton", Loc.T("Ayarlar"), 28f, out label);
         var rt = (RectTransform)btn.transform;
         rt.SetAsLastSibling();
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 1f);
-        rt.pivot = new Vector2(1f, 1f);
-        rt.anchoredPosition = new Vector2(-30f, -86f);   // ust sira: Basarimlar | Bilgi Agaci | Ayarlar
-        rt.sizeDelta = new Vector2(200f, 54f);
+        HudLayout.PlaceTopButton(rt, 0);   // ust bar: Basarimlar | Bilgi Agaci | Ayarlar
         label.fontSize = 22f;
         label.fontSizeMin = 17f;
         label.fontSizeMax = 22f;
