@@ -72,12 +72,13 @@ public class TimeMachinePanel : MonoBehaviour
         var rt = (RectTransform)openButton.transform;
         rt.SetAsLastSibling();
         // Kaynak/bilgi satirinin altinda, sag ustte; yukseltme panelinden ayri dursun.
-        HudLayout.PlaceTopButton(rt, 1);   // ust bar: Basarimlar | Bilgi Agaci | Ayarlar
+        HudLayout.PlaceTreeButton(rt);   // sol sutun: Yukseltmeler yaninda
         openLabel.fontSize = 22f;
         openLabel.fontSizeMin = 17f;
         openLabel.fontSizeMax = 22f;
         openLabel.enableAutoSizing = true;
         openButton.onClick.AddListener(Open);
+        UIArt.StyleButton(openButton, openLabel);
     }
 
     void BuildWindow(Transform canvas, GameManager gm)

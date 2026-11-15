@@ -11,7 +11,7 @@ public class UpgradePanel : MonoBehaviour
     const int MaxShown = 4;
     const float RowHeight = 100f;
     const float RowGap = 8f;
-    const float HeaderHeight = 50f;
+    const float HeaderHeight = HudLayout.LeftButtonH;
     const float DropdownMaxHeight = 460f;
     const float DropdownPadding = 8f;
 
@@ -51,23 +51,27 @@ public class UpgradePanel : MonoBehaviour
         root.SetAsFirstSibling();   // yuzen yazilarin arkasinda kalsin
         root.anchorMin = root.anchorMax = new Vector2(0f, 1f);
         root.pivot = new Vector2(0f, 1f);
-        root.anchoredPosition = new Vector2(HudLayout.Margin, -HudLayout.ColumnTop);   // sol sutunun en ustu
-        root.sizeDelta = new Vector2(HudLayout.LeftW, HeaderHeight);
+        root.anchoredPosition = new Vector2(HudLayout.LeftInset, -HudLayout.LeftButtonsTop);   // kaynak haplerinin altinda, Bilgi Agaci ile ayni satir
+        root.sizeDelta = new Vector2(HudLayout.UpgradeHeaderW, HeaderHeight);
 
         headerLabel = UIFactory.CreateText(root, "HeaderLabel", Loc.T("YÜKSELTMELER"), 22f, TextAlignmentOptions.MidlineLeft, Color.white,
             Vector2.zero, Vector2.one, new Vector2(14f, 0f), new Vector2(-62f, 0f), true);
         headerButton = UIFactory.CreateButton(root, "ExpandButton", "+", 26f, out plusLabel);
         var headerRt = (RectTransform)headerButton.transform;
-        headerRt.anchorMin = headerRt.anchorMax = new Vector2(1f, 1f);
-        headerRt.pivot = new Vector2(1f, 1f);
-        headerRt.anchoredPosition = new Vector2(-4f, -4f);
-        headerRt.sizeDelta = new Vector2(46f, HeaderHeight - 8f);
-        headerButton.GetComponent<Image>().color = new Color(0.27f, 0.21f, 0.2f, 0.96f);
+        // Tum baslik tiklanir; "+" yazisi sagda, buton gorunmez
+        headerRt.anchorMin = Vector2.zero; headerRt.anchorMax = Vector2.one;
+        headerRt.offsetMin = headerRt.offsetMax = Vector2.zero;
+        headerButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+        plusLabel.alignment = TextAlignmentOptions.MidlineRight;
+        plusLabel.rectTransform.offsetMax = new Vector2(-16f, 0f);
+        plusLabel.color = UIArt.ButtonText;
+        bool skinned = UIArt.ApplySliced(root.GetComponent<Image>(), UIArt.ModeOff, 34f, 14f, PanelColor);
+        if (skinned) headerLabel.color = UIArt.ButtonText;
         headerButton.onClick.AddListener(ToggleExpanded);
 
         dropdown = UIFactory.CreatePanel(root, "UpgradeDropdown", new Color(0.12f, 0.1f, 0.12f, 0.97f), true);
         dropdown.anchorMin = new Vector2(0f, 1f);
-        dropdown.anchorMax = new Vector2(1f, 1f);
+        dropdown.anchorMax = new Vector2(0f, 1f);   // baslik dar (340); acilir liste LeftW genisliginde
         dropdown.pivot = new Vector2(0f, 1f);
         dropdown.anchoredPosition = new Vector2(0f, -HeaderHeight);
         dropdown.sizeDelta = new Vector2(0f, 0f);
@@ -151,7 +155,7 @@ public class UpgradePanel : MonoBehaviour
         int shown = Mathf.Min(MaxShown, visible.Count);
         float contentHeight = Mathf.Max(1, shown) * (RowHeight + RowGap);
         float dropdownHeight = Mathf.Min(DropdownMaxHeight, contentHeight + DropdownPadding * 2f);
-        dropdown.sizeDelta = new Vector2(0f, dropdownHeight);
+        dropdown.sizeDelta = new Vector2(HudLayout.LeftW, dropdownHeight);
         content.sizeDelta = new Vector2(0f, contentHeight);
         scrollRect.vertical = contentHeight + DropdownPadding * 2f > dropdownHeight;
         UpdateHeader();

@@ -42,8 +42,8 @@ public class TutorialHints : MonoBehaviour
         var rt = UIFactory.CreatePanel(canvas, "HintBanner", HudLayout.Panel, false);
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
         rt.pivot = new Vector2(0.5f, 1f);
-        rt.anchoredPosition = new Vector2(HudLayout.CenterOffsetX, -(HudLayout.ColumnTop + 84f + 8f));   // boss cubugunun altinda
-        rt.sizeDelta = new Vector2(HudLayout.CenterWidth - 20f, 84f);
+        rt.anchoredPosition = new Vector2(HudLayout.CenterOffsetX, -(HudLayout.CenterTop + HudLayout.FloorBarH + 8f));   // boss cubugunun altinda
+        rt.sizeDelta = new Vector2(HudLayout.CenterWidth - 20f, HudLayout.HintH);
         group = rt.gameObject.AddComponent<CanvasGroup>();
         group.alpha = 0f;
         group.blocksRaycasts = false;
@@ -54,7 +54,7 @@ public class TutorialHints : MonoBehaviour
 
     void BuildHints()
     {
-        Add("gather", "TOPLA düğmesine tıkla (ya da Boşluk tuşuna bas).",
+        Add("gather", "Alttaki büyük düğmeye tıkla (ya da Boşluk tuşuna bas).",
             g => g.PlaySeconds >= 3 && g.TotalClicks == 0,
             g => g.TotalClicks > 0);
 
@@ -70,9 +70,6 @@ public class TutorialHints : MonoBehaviour
             g => MaxCount(g) >= 15 && MaxCount(g) < 25,
             g => MaxCount(g) >= 25);
 
-        Add("advance", "Çağ atlayabilirsin! Binaların sıfırlanır ama Bilgi kalır.",
-            g => g.AgesAdvanced == 0 && g.CanAdvance,
-            g => g.AgesAdvanced > 0);
 
         Add("tree", "Bilgi Ağacı'nda Bilgi harcayarak kalıcı olarak güçlenebilirsin.",
             g => g.TotalPermanentLevels == 0 && AnyAffordablePerm(g),

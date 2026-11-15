@@ -62,6 +62,9 @@ public class SceneBuildingSpawner : MonoBehaviour
     readonly Stack<Particle> particlePool = new Stack<Particle>();
     Transform fxRoot;
     Camera cam;
+    // true: <bina_id>_lv1.png olmayan binalar sahnede cizilmez. Dev sirasinda eski kutular icin false yap.
+    const bool HidePlaceholders = true;
+
     SpriteRenderer groundSr;
     bool hasColors;
     float colorT = 1f;
@@ -206,6 +209,16 @@ public class SceneBuildingSpawner : MonoBehaviour
             }
             else
             {
+                // Sanatci sprite'i henuz eklemediyse sahnede renkli placeholder kutu cizme (profesyonel gorunum).
+                if (HidePlaceholders)
+                {
+                    sr.enabled = false;
+                    if (v.glow != null) v.glow.enabled = false;
+                    v.baseScale = new Vector3(b.placeholderSize.x, b.placeholderSize.y, 1f);
+                    v.width = v.baseScale.x;
+                    v.height = v.baseScale.y;
+                    continue;
+                }
                 // Sprite'larin arasinda bosluk kalsin; yuksek kademeler komsu binalara tasmasin.
                 float grow = 1f + 0.06f * level;
                 sr.sprite = BuildingSprite(b, level);

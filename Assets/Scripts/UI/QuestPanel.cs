@@ -12,13 +12,13 @@ public class QuestPanel : MonoBehaviour
     class Row { public QuestDef q; public RectTransform rt; public TextMeshProUGUI text, prog; public Button btn; public Image bg; }
 
     const int Slots = 4;
-    const float HeaderH = 50f, RowH = 92f, RowGap = 6f, Pad = 8f;
+    const float HeaderH = HudLayout.LeftButtonH, RowH = 92f, RowGap = 6f, Pad = 8f;
 
     RectTransform popup;
     Button toggle;
     TextMeshProUGUI toggleLabel, plusLabel;
     Image toggleImg;
-    bool expanded;
+    bool expanded, skinned;
     readonly List<Row> rows = new List<Row>();
 
     static readonly Color IdleColor = HudLayout.Panel;
@@ -42,8 +42,8 @@ public class QuestPanel : MonoBehaviour
         var trt = (RectTransform)toggle.transform;
         trt.anchorMin = trt.anchorMax = new Vector2(0f, 1f);
         trt.pivot = new Vector2(0f, 1f);
-        trt.anchoredPosition = new Vector2(HudLayout.Margin, -(HudLayout.ColumnTop + HeaderH + 8f));
-        trt.sizeDelta = new Vector2(HudLayout.LeftW, HeaderH);
+        trt.anchoredPosition = new Vector2(HudLayout.LeftInset, -(HudLayout.LeftButtonsTop + HeaderH + 8f));
+        trt.sizeDelta = new Vector2(HudLayout.UpgradeHeaderW, HeaderH);
         toggleImg = toggle.GetComponent<Image>();
         toggleLabel.alignment = TextAlignmentOptions.MidlineLeft;
         var lrt = toggleLabel.rectTransform;
@@ -51,11 +51,13 @@ public class QuestPanel : MonoBehaviour
         plusLabel = UIFactory.CreateText(trt, "Plus", "+", 26f, TextAlignmentOptions.Center, Color.white,
             new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(-50f, 0f), new Vector2(-4f, 0f), true);
         toggle.onClick.AddListener(Toggle);
+        skinned = UIArt.StyleButton(toggle, toggleLabel);
+        if (skinned) plusLabel.color = UIArt.ButtonText;
 
         popup = UIFactory.CreatePanel(r, "QuestPopup", new Color(0.12f, 0.1f, 0.12f, 0.97f), true);
         popup.anchorMin = popup.anchorMax = new Vector2(0f, 1f);
         popup.pivot = new Vector2(0f, 1f);
-        popup.anchoredPosition = new Vector2(HudLayout.Margin, -(HudLayout.ColumnTop + HeaderH * 2f + 8f));
+        popup.anchoredPosition = new Vector2(HudLayout.LeftInset, -(HudLayout.LeftButtonsTop + HeaderH * 2f + 16f));
         popup.sizeDelta = new Vector2(HudLayout.LeftW, Pad * 2f + Slots * RowH + (Slots - 1) * RowGap);
 
         for (int i = 0; i < Slots; i++)
@@ -140,10 +142,20 @@ public class QuestPanel : MonoBehaviour
         bool ready = claimable > 0;
         toggleLabel.text = name + "  " + claimedCount + "/" + quests.Length + (ready ? "  (" + claimable + ")" : "");
         toggleLabel.fontStyle = FontStyles.Bold;
-        toggleLabel.color = ready ? HudLayout.AccentInk : Color.white;
         plusLabel.text = expanded ? "−" : "+";
-        plusLabel.color = ready ? HudLayout.AccentInk : Color.white;
-        toggleImg.color = ready ? ReadyColor : IdleColor;
+        if (skinned)
+        {
+            // Cerceve sprite'i varsa: hazirken altin tonu, yazi hep krem
+            toggleLabel.color = UIArt.ButtonText;
+            plusLabel.color = UIArt.ButtonText;
+            toggleImg.color = ready ? new Color(1f, 0.8f, 0.35f) : Color.white;
+        }
+        else
+        {
+            toggleLabel.color = ready ? HudLayout.AccentInk : Color.white;
+            plusLabel.color = ready ? HudLayout.AccentInk : Color.white;
+            toggleImg.color = ready ? ReadyColor : IdleColor;
+        }
         toggle.gameObject.SetActive(quests.Length > 0);
         if (quests.Length == 0 && popup != null) popup.gameObject.SetActive(false);
 

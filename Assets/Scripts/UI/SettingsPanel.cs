@@ -42,12 +42,13 @@ public class SettingsPanel : MonoBehaviour
         var btn = UIFactory.CreateButton(canvas, "OpenSettingsButton", Loc.T("Ayarlar"), 28f, out label);
         var rt = (RectTransform)btn.transform;
         rt.SetAsLastSibling();
-        HudLayout.PlaceTopButton(rt, 0);   // ust bar: Basarimlar | Bilgi Agaci | Ayarlar
+        HudLayout.PlaceCornerButton(rt, 1);   // alt sol: Basarimlar | Ayarlar
         label.fontSize = 22f;
         label.fontSizeMin = 17f;
         label.fontSizeMax = 22f;
         label.enableAutoSizing = true;
         btn.onClick.AddListener(Toggle);
+        UIArt.StyleButton(btn, label);
     }
 
     void BuildWindow(Transform canvas)

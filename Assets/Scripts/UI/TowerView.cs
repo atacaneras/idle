@@ -110,11 +110,11 @@ public class TowerView : MonoBehaviour
             var edge = UIFactory.CreatePanel(p, "Edge", f < 0 ? new Color(0f, 0f, 0f, 0.55f) : new Color(1f, 1f, 1f, 0.45f), false);
             edge.anchorMin = new Vector2(0f, 1f); edge.anchorMax = new Vector2(1f, 1f);
             edge.pivot = new Vector2(0.5f, 1f);
-            edge.offsetMin = new Vector2(0f, -HudLayout.TopBarH); edge.offsetMax = Vector2.zero;
+            edge.offsetMin = new Vector2(0f, -HudLayout.FloorEdgeH); edge.offsetMax = Vector2.zero;
             var line = UIFactory.CreatePanel(p, "EdgeLine", f < 0 ? new Color(1f, 0.45f, 0.1f, 0.9f) : new Color(1f, 0.95f, 0.6f, 0.9f), false);
             line.anchorMin = new Vector2(0f, 1f); line.anchorMax = new Vector2(1f, 1f);
             line.pivot = new Vector2(0.5f, 1f);
-            line.offsetMin = new Vector2(0f, -HudLayout.TopBarH - 6f); line.offsetMax = new Vector2(0f, -HudLayout.TopBarH);
+            line.offsetMin = new Vector2(0f, -HudLayout.FloorEdgeH - 6f); line.offsetMax = new Vector2(0f, -HudLayout.FloorEdgeH);
             return;
         }
         // Yer yuzu (Windows XP arka plani): Assets/Resources/Art/earth/background.png

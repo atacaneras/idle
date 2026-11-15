@@ -22,15 +22,14 @@ public class BuyModeSelector : MonoBehaviour
         var rt = (RectTransform)bar.transform;
         rt.SetParent(canvas.transform, false);
         rt.SetAsFirstSibling();   // diger arayuzun arkasinda kalsin, yuzen yazilari engellemesin
-        // Alt barin sag tarafi: [x1 x10 x100 Max] solda, Ses butonu en sagda
-        const float muteW = 216f;
+        // Bina listesinin hemen altinda [x1 x10 x100 Max]; Ses butonu bunun altinda, en sagda
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
         rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-(HudLayout.Margin + muteW + HudLayout.Gap), (HudLayout.BottomBarH - 80f) * 0.5f);
-        rt.sizeDelta = new Vector2(HudLayout.RightW - muteW - HudLayout.Gap, 80f);
+        rt.anchoredPosition = new Vector2(-HudLayout.Margin, 28f + 60f + HudLayout.Gap);
+        rt.sizeDelta = new Vector2(HudLayout.RightW, 60f);
 
         var layout = bar.GetComponent<HorizontalLayoutGroup>();
-        layout.spacing = 10f;
+        layout.spacing = 12f;
         layout.childControlWidth = layout.childControlHeight = true;
         layout.childForceExpandWidth = layout.childForceExpandHeight = true;
 
@@ -38,7 +37,8 @@ public class BuyModeSelector : MonoBehaviour
         {
             int mode = i;
             TextMeshProUGUI lbl;
-            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 34f, out lbl);
+            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 32f, out lbl);
+            if (UIArt.ModeSpriteHasText) lbl.text = "";
             btn.onClick.AddListener(() => Select(mode));
             images[i] = btn.GetComponent<Image>();
             labels[i] = lbl;
@@ -68,7 +68,8 @@ public class BuyModeSelector : MonoBehaviour
         for (int i = 0; i < images.Length; i++)
         {
             bool on = i == current;
-            images[i].color = on ? OnColor : OffColor;
+            if (!UIArt.ApplySliced(images[i], on ? UIArt.ModeOn : UIArt.ModeOff, 34f, 16f, on ? OnColor : OffColor))
+                images[i].color = on ? OnColor : OffColor;
             labels[i].color = on ? new Color(0.2f, 0.12f, 0.02f) : Color.white;
         }
     }
