@@ -10,6 +10,24 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 - Hepsi şeffaf zeminli PNG olabilir.
 - Binaların tabanı ekranın altından yaklaşık 200 px yukarıda durur (1080 yükseklikte y=880). Arka plandaki zemin çizgisini oraya çiz. Bina PNG'sinin alt-orta noktası bu çizgiye oturur.
 
+## Ana Menü (taraf seçimi)  —  `Assets/Resources/Art/UI/`
+
+Hepsi opsiyonel: dosya yoksa oyun placeholder çizer. Fare imleci gizlenir, yerine hayalet gelir.
+
+| Dosya | Ne |
+|---|---|
+| `menu_bg.png` | Tam ekran arka plan (solda cehennem, ortada köprü, sağda cennet), 1920x1080 |
+| `Curtain_Frame.png` | Perde çerçevesi, tam ekran, ortası şeffaf |
+| `menu_title.png` | Üstteki tabela (oyun adı kodla üstüne yazılır) |
+| `menu_plaque_hell.png` | Sol alttaki CEHENNEM levhası (yazı kodla yazılır) |
+| `menu_plaque_heaven.png` | Sağ alttaki CENNET levhası (yazı kodla yazılır) |
+| `ghost.png` | Sade hayalet, imleç (ekranın ortasında / köprüde), yaklaşık 150x190 |
+| `ghost_angel.png` | Cennet tarafına gelince: kanatlı, haleli melek hayalet |
+| `ghost_demon.png` | Cehennem tarafına gelince: boynuzlu zebani hayalet |
+| `../Icons/Settings_Button_S.png` | Altta ortadaki ayarlar butonu |
+
+Hayaletin üç hâli aynı boyutta ve aynı merkezde çizilirse geçiş düzgün görünür. İmleç noktası hayaletin merkezidir.
+
 ## Yer Yüzü  —  `Assets/Resources/Art/earth/`
 
 | Dosya | Ne |

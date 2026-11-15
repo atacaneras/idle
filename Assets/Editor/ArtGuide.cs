@@ -42,6 +42,26 @@ public static class ArtGuide
         sb.AppendLine("- Binaların tabanı ekranın altından yaklaşık 200 px yukarıda durur (1080 yükseklikte y=880). Arka plandaki zemin çizgisini oraya çiz. Bina PNG'sinin alt-orta noktası bu çizgiye oturur.");
         sb.AppendLine();
 
+        EnsureFolder(Root, "UI");
+        sb.AppendLine("## Ana Menü (taraf seçimi)  —  `Assets/Resources/Art/UI/`");
+        sb.AppendLine();
+        sb.AppendLine("Hepsi opsiyonel: dosya yoksa oyun placeholder çizer. Fare imleci gizlenir, yerine hayalet gelir.");
+        sb.AppendLine();
+        sb.AppendLine("| Dosya | Ne |");
+        sb.AppendLine("|---|---|");
+        sb.AppendLine("| `menu_bg.png` | Tam ekran arka plan (solda cehennem, ortada köprü, sağda cennet), 1920x1080 |");
+        sb.AppendLine("| `Curtain_Frame.png` | Perde çerçevesi, tam ekran, ortası şeffaf |");
+        sb.AppendLine("| `menu_title.png` | Üstteki tabela (oyun adı kodla üstüne yazılır) |");
+        sb.AppendLine("| `menu_plaque_hell.png` | Sol alttaki CEHENNEM levhası (yazı kodla yazılır) |");
+        sb.AppendLine("| `menu_plaque_heaven.png` | Sağ alttaki CENNET levhası (yazı kodla yazılır) |");
+        sb.AppendLine("| `ghost.png` | Sade hayalet, imleç (ekranın ortasında / köprüde), yaklaşık 150x190 |");
+        sb.AppendLine("| `ghost_angel.png` | Cennet tarafına gelince: kanatlı, haleli melek hayalet |");
+        sb.AppendLine("| `ghost_demon.png` | Cehennem tarafına gelince: boynuzlu zebani hayalet |");
+        sb.AppendLine("| `../Icons/Settings_Button_S.png` | Altta ortadaki ayarlar butonu |");
+        sb.AppendLine();
+        sb.AppendLine("Hayaletin üç hâli aynı boyutta ve aynı merkezde çizilirse geçiş düzgün görünür. İmleç noktası hayaletin merkezidir.");
+        sb.AppendLine();
+
         foreach (var key in keys)
         {
             EnsureFolder(Root, key);

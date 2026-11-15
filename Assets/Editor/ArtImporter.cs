@@ -3,6 +3,7 @@ using UnityEditor;
 // Assets/Resources/Art altina atilan her gorsel otomatik Sprite olarak ice aktarilir (ilk iceri aktarmada).
 // Sanatci Unity ayarina dokunmadan PNG'yi klasore birakir, oyun bulur.
 //   background.png, boss.png  -> pivot ortada
+//   Art/UI ve Art/Icons       -> pivot ortada
 //   diger dosyalar (binalar)  -> pivot ALT-ORTA (bina tabani sahnedeki zemin noktasina oturur)
 public class ArtImporter : AssetPostprocessor
 {
@@ -18,7 +19,8 @@ public class ArtImporter : AssetPostprocessor
         ti.alphaIsTransparency = true;
 
         string file = System.IO.Path.GetFileNameWithoutExtension(assetPath);
-        bool building = file != "background" && file != "boss";
+        bool building = file != "background" && file != "boss"
+            && !assetPath.StartsWith("Assets/Resources/Art/UI/") && !assetPath.StartsWith("Assets/Resources/Art/Icons/");
         var s = new TextureImporterSettings();
         ti.ReadTextureSettings(s);
         s.spriteAlignment = (int)(building ? UnityEngine.SpriteAlignment.BottomCenter : UnityEngine.SpriteAlignment.Center);

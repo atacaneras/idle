@@ -57,6 +57,11 @@ public class SettingsPanel : MonoBehaviour
     {
         var dim = UIFactory.CreatePanel(canvas, "SettingsOverlay", DimColor, true);
         overlay = dim.gameObject;
+        // Ayarlar penceresi her ekranin (ornegin taraf secimi, sortingOrder 100) ustunde acilsin.
+        var overlayCanvas = overlay.AddComponent<Canvas>();
+        overlayCanvas.overrideSorting = true;
+        overlayCanvas.sortingOrder = 200;
+        overlay.AddComponent<GraphicRaycaster>();
         dim.anchorMin = Vector2.zero;
         dim.anchorMax = Vector2.one;
         dim.offsetMin = Vector2.zero;
