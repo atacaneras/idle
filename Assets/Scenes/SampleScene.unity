@@ -285,13 +285,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196b33a41e4fb8c4b8004e14e052b7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBuildingSpawner
-  levelThresholds: 010000000a00000019000000i
   enableAnimations: 1
   buildDuration: 0.55
   bounceDuration: 0.4
   levelUpDuration: 0.75
   dustCount: 8
   maxParticles: 150
+  enableIdleAnimations: 1
   colorFadeDuration: 1.2
 --- !u!4 &150104010
 Transform:
