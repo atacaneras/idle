@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Evrim/Resource", fileName = "res_")]
+[CreateAssetMenu(menuName = "Cennet ve Cehennem/Kaynak", fileName = "kaynak_")]
 public class ResourceData : ScriptableObject
 {
     public string id;            // ornek: food, wood, stone

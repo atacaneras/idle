@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Evrim/Building", fileName = "bld_")]
+[CreateAssetMenu(menuName = "Cennet ve Cehennem/Bina", fileName = "bina_")]
 public class BuildingData : ScriptableObject
 {
     [Header("Kimlik")]

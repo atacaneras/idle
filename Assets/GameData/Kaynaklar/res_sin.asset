@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: res_sin
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   id: sin
-  displayName: "G\xFCnah Fi\u015Fi"
+  displayName: "G\xFCnah"
   icon: {fileID: 0}

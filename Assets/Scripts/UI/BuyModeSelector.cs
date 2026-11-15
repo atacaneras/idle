@@ -25,8 +25,8 @@ public class BuyModeSelector : MonoBehaviour
         // Bina listesinin hemen altinda [x1 x10 x100 Max]; Ses butonu bunun altinda, en sagda
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
         rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-HudLayout.Margin, 28f + 60f + HudLayout.Gap);
-        rt.sizeDelta = new Vector2(HudLayout.RightW, 60f);
+        rt.anchoredPosition = new Vector2(-(HudLayout.Margin + 42f), HudLayout.BuyModeBottom);
+        rt.sizeDelta = new Vector2(HudLayout.RightW * 0.70f, HudLayout.BuyModeHeight);
 
         var layout = bar.GetComponent<HorizontalLayoutGroup>();
         layout.spacing = 12f;
@@ -37,7 +37,7 @@ public class BuyModeSelector : MonoBehaviour
         {
             int mode = i;
             TextMeshProUGUI lbl;
-            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 32f, out lbl);
+            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 42f, out lbl);
             if (UIArt.ModeSpriteHasText) lbl.text = "";
             btn.onClick.AddListener(() => Select(mode));
             images[i] = btn.GetComponent<Image>();

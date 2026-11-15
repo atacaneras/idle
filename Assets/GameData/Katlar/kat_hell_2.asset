@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
-  m_Name: age_hell_2
+  m_Name: kat_hell_2
   m_EditorClassIdentifier: Assembly-CSharp::AgeData
   id: hell_2
   displayName: "Cehennem 2. Kat: \u015Eik\xE2yet Departman\u0131"

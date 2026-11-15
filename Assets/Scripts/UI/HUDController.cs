@@ -191,12 +191,17 @@ public class HUDController : MonoBehaviour
             srt.anchorMin = new Vector2(1f, 0f);
             srt.anchorMax = new Vector2(1f, 1f);
             srt.pivot = new Vector2(1f, 0.5f);
-            srt.offsetMin = new Vector2(-(HudLayout.Margin + HudLayout.RightW), HudLayout.ColumnBottom);
-            srt.offsetMax = new Vector2(-HudLayout.Margin, -HudLayout.ColumnTop);
+            srt.offsetMin = new Vector2(-(HudLayout.Margin + HudLayout.RightW) + HudLayout.PanelRightShift, HudLayout.ColumnBottom);
+            srt.offsetMax = new Vector2(-HudLayout.Margin + HudLayout.PanelRightShift, -HudLayout.ColumnTop);
             var simg = scroll.GetComponent<Image>();
-            if (simg != null) UIArt.Skin(simg, UIArt.ListPanel, HudLayout.PanelSoft);   // magara arka plani kartlarla karismasin
+            if (simg != null) UIArt.Skin(simg, UIArt.ListPanel, HudLayout.PanelSoft);
             var layout = rowParent.GetComponent<VerticalLayoutGroup>();
-            if (layout != null) layout.spacing = 6f;
+            if (layout != null)
+            {
+                layout.spacing = 2f;
+                layout.padding.top = 4;
+                layout.padding.bottom = 4;
+            }
 
             // Kartlar parsomen cercevenin ICINDE kalsin: viewport'u icerden kucult, scrollbar'i gizle (fare tekeri / surukleme calisir)
             if (UIArt.Has(UIArt.ListPanel))
@@ -207,9 +212,20 @@ public class HUDController : MonoBehaviour
                 if (vp != null)
                 {
                     vp.anchorMin = Vector2.zero; vp.anchorMax = Vector2.one;
-                    vp.offsetMin = new Vector2(58f, 72f);
-                    vp.offsetMax = new Vector2(-58f, -72f);
+                    vp.offsetMin = new Vector2(106f, 112f);
+                    vp.offsetMax = new Vector2(-106f, -112f);
+                    var viewportImage = vp.GetComponent<Image>();
+                    if (viewportImage != null)
+                    {
+                        // Outer parchment belongs to the ScrollRect; the viewport only clips rows.
+                        viewportImage.enabled = false;
+                    }
+                    var mask = vp.GetComponent<Mask>();
+                    if (mask != null) mask.enabled = false;
+                    if (vp.GetComponent<RectMask2D>() == null) vp.gameObject.AddComponent<RectMask2D>();
                 }
+                scroll.vertical = false;
+                scroll.horizontal = false;
             }
         }
 

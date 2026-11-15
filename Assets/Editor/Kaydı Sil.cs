@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ResetSaveMenu
 {
-    [MenuItem("Evrim/Kaydı Sil")]
+    [MenuItem("Cennet ve Cehennem/Kaydı Sil")]
     static void DeleteSave()
     {
         SaveSystem.Delete();

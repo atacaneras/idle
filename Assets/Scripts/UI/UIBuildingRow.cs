@@ -12,8 +12,8 @@ public class UIBuildingRow : MonoBehaviour
 
     BuildingData data;
 
-    const float RowHeight = 134f;   // Panel_UI orani ~3.97, kart genisligi ~524
-    const float RightColumn = 190f;
+    const float RowHeight = 140f;   // Referanstaki geniş kartlar, beşi tek parşömene sığar.
+    const float RightColumn = 176f;
     Image buyImage;
     TMP_Text buyLabel;
 
@@ -21,7 +21,7 @@ public class UIBuildingRow : MonoBehaviour
     {
         data = d;
         var iconSprite = UIArt.BuildingIcon(d);
-        float textLeft = icon != null && iconSprite != null ? 136f : 36f;
+        float textLeft = icon != null && iconSprite != null ? 162f : 36f;
 
         // Kart yuksekligi: ekranda 5 kart gorunsun (mockup)
         var le = GetComponent<LayoutElement>();
@@ -31,39 +31,39 @@ public class UIBuildingRow : MonoBehaviour
 
         // Metin sutunu ikon ile AL butonu arasinda kalir.
         SetRect(nameText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f),
-            new Vector2(textLeft, -50f), new Vector2(-34f, -14f), new Vector2(0f, 1f));   // isim tum genislikte
+            new Vector2(textLeft, -48f), new Vector2(-RightColumn, -4f), new Vector2(0f, 1f));
         SetRect(infoText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f),
-            new Vector2(textLeft, -122f), new Vector2(-RightColumn, -52f), new Vector2(0f, 1f));
+            new Vector2(textLeft, -138f), new Vector2(-RightColumn, -48f), new Vector2(0f, 1f));
 
-        // AL butonu sag ustte, maliyet yazisi onun altinda
+        // AL butonu kartin saginda, maliyet hemen altinda.
         RectTransform buttonRt = buyButton.GetComponent<RectTransform>();
-        buttonRt.anchorMin = buttonRt.anchorMax = new Vector2(1f, 1f);
-        buttonRt.pivot = new Vector2(1f, 1f);
-        buttonRt.anchoredPosition = new Vector2(-36f, -52f);   // ismin altinda, sag tarafta (Claim sprite orani 3:1)
-        buttonRt.sizeDelta = new Vector2(138f, 46f);
+        buttonRt.anchorMin = buttonRt.anchorMax = new Vector2(1f, 0.5f);
+        buttonRt.pivot = new Vector2(1f, 0.5f);
+        buttonRt.anchoredPosition = new Vector2(-28f, 10f);
+        buttonRt.sizeDelta = new Vector2(150f, 56f);
         SetRect(costText.rectTransform, new Vector2(1f, 0f), new Vector2(1f, 0f),
             Vector2.zero, Vector2.zero, new Vector2(1f, 0f));
-        costText.rectTransform.anchoredPosition = new Vector2(-32f, 12f);
-        costText.rectTransform.sizeDelta = new Vector2(168f, 30f);
+        costText.rectTransform.anchoredPosition = new Vector2(-18f, 5f);
+        costText.rectTransform.sizeDelta = new Vector2(164f, 24f);
 
         nameText.enableAutoSizing = true;
-        nameText.fontSizeMin = 16f;
-        nameText.fontSizeMax = 26f;
+        nameText.fontSizeMin = 28f;
+        nameText.fontSizeMax = 42f;
         nameText.textWrappingMode = TextWrappingModes.NoWrap;
         nameText.overflowMode = TextOverflowModes.Ellipsis;
         nameText.alignment = TextAlignmentOptions.MidlineLeft;
         nameText.fontStyle = FontStyles.Bold;
         nameText.color = new Color(0.22f, 0.12f, 0.07f);
         infoText.enableAutoSizing = true;
-        infoText.fontSizeMin = 13f;
-        infoText.fontSizeMax = 19f;
+        infoText.fontSizeMin = 20f;
+        infoText.fontSizeMax = 28f;
         infoText.textWrappingMode = TextWrappingModes.Normal;
         infoText.alignment = TextAlignmentOptions.TopLeft;
         infoText.color = new Color(0.29f, 0.2f, 0.14f);
         costText.enableAutoSizing = true;
         costText.fontSizeMin = 11f;
-        costText.fontSizeMax = 16f;
-        costText.textWrappingMode = TextWrappingModes.Normal;
+        costText.fontSizeMax = 14f;
+        costText.textWrappingMode = TextWrappingModes.NoWrap;
         costText.overflowMode = TextOverflowModes.Ellipsis;
         costText.alignment = TextAlignmentOptions.Top;
         costText.fontStyle = FontStyles.Bold;
@@ -82,8 +82,8 @@ public class UIBuildingRow : MonoBehaviour
             RectTransform iconRt = icon.rectTransform;
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0f, 0.5f);
             iconRt.pivot = new Vector2(0f, 0.5f);
-            iconRt.anchoredPosition = new Vector2(36f, 0f);
-            iconRt.sizeDelta = new Vector2(88f, 88f);
+            iconRt.anchoredPosition = new Vector2(28f, 0f);
+            iconRt.sizeDelta = new Vector2(128f, 128f);
         }
 
         buyImage = buyButton.GetComponent<Image>();
@@ -140,7 +140,7 @@ public class UIBuildingRow : MonoBehaviour
 
         int next = gm.GetNextMilestone(data);
         string info = Loc.F("+{0}/sn {1}", NumberFormatter.Format(gm.GetUnitProduction(data)), Loc.T(data.produces.displayName));
-        if (owned > 0) info += "\n" + Loc.F("Toplam: {0}/sn", NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)));
+        info += "\n" + Loc.F("Toplam: {0}/sn", NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)));
         if (next > 0) info += "\n" + Loc.F("Sonraki x{0}: {1} adet", NumberFormatter.Format(gm.MilestoneMultiplier), next);
         else info += "\n" + Loc.T("MAKS SEVİYE");
         infoText.text = info;

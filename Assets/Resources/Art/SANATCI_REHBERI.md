@@ -34,17 +34,17 @@ Hayaletin üç hâli aynı boyutta ve aynı merkezde çizilirse geçiş düzgün
 |---|---|
 | `background.png` | Kat arka planı |
 
-## Cehennem 1. Kat: Bekleme Salonu  —  `Assets/Resources/Art/hell_1/`
+## Erebus  —  `Assets/Resources/Art/hell_1/`
 
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
 | `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
-| `hell_1_korna_lv1.png` | Kornacı Ceza Kulübesi |
-| `hell_1_bant_lv1.png` | Kırmızı Bant Memuru |
-| `hell_1_fotokopi_lv1.png` | Sonsuz Fotokopi Makinesi |
-| `hell_1_asansor_lv1.png` | Asansör Müziği Hoparlörü |
-| `hell_1_tabela_lv1.png` | “Lütfen Bekleyiniz” Tabelası |
+| `hell_1_korna_lv1.png` | Vesvese |
+| `hell_1_bant_lv1.png` | İtaat |
+| `hell_1_fotokopi_lv1.png` | Günah |
+| `hell_1_asansor_lv1.png` | Bekçilik |
+| `hell_1_tabela_lv1.png` | İşkence |
 
 ## Cehennem 2. Kat: Şikâyet Departmanı  —  `Assets/Resources/Art/hell_2/`
 

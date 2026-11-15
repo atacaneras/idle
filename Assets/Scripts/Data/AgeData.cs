@@ -17,7 +17,7 @@ public class QuestDef
     public double rewardKnowledge;    // + Bilgi
 }
 
-[CreateAssetMenu(menuName = "Evrim/Age", fileName = "age_")]
+[CreateAssetMenu(menuName = "Cennet ve Cehennem/Kat", fileName = "kat_")]
 public class AgeData : ScriptableObject
 {
     public string id;            // stone, farm, ...

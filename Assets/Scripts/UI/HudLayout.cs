@@ -28,13 +28,14 @@ public static class HudLayout
 
     // Ust / alt bolge yuksekligi: sag sutun ve orta sahne bu bolgelerin arasinda kalir.
     public const float TopBarH = 168f;
-    public const float BottomBarH = 176f;
-
     public const float LeftW = 520f;     // yukseltmeler + is emirleri acilir listeleri
-    public const float RightW = 640f;    // bina listesi + satin alma modu + ses
+    public const float RightW = 875f;    // bina parşömeni; görselin şeffaf kenarları hesaba katılmıştır
+    public const float PanelRightShift = 79f;
 
-    public const float ColumnTop = TopBarH;                 // sag sutun (bina listesi) ust bardan basliyor
-    public const float ColumnBottom = BottomBarH + Gap;     // ... ve alt bolgenin ustunde bitiyor
+    public const float ColumnTop = 120f;
+    public const float ColumnBottom = 8f;
+    public const float BuyModeBottom = -28f;
+    public const float BuyModeHeight = 76f;
 
     // Sol sutun: ust uste kaynak hapleri, sonra [Yukseltmeler][Bilgi Agaci] satiri, sonra Is Emirleri
     public const float PillW = 330f;   // kazanim_UI orani ~5.1
@@ -103,37 +104,4 @@ public static class HudLayout
         rt.sizeDelta = new Vector2(TreeButtonW, LeftButtonH);
     }
 
-    // Perde cercevesi (Art/UI/Curtain_Frame) varsa tum ekrani kaplar ve ust/alt bar cizilmez.
-    // Yoksa eski koyu ust/alt barlar yedek olarak cizilir.
-    // Kule canvas'inda (HUD'un arkasinda) cizilir, boylece siralama sorunu olmaz.
-    public static void BuildBars(Transform parent)
-    {
-        var frame = UIArt.Load(UIArt.Frame);
-        if (frame != null)
-        {
-            var fr = UIFactory.CreatePanel(parent, "CurtainFrame", Color.white, false);
-            fr.anchorMin = Vector2.zero; fr.anchorMax = Vector2.one;
-            fr.offsetMin = fr.offsetMax = Vector2.zero;
-            var fi = fr.GetComponent<Image>();
-            fi.sprite = frame; fi.type = Image.Type.Simple; fi.preserveAspect = false;
-            return;
-        }
-
-        const float fallbackTop = 96f, fallbackBottom = 148f;
-        var top = UIFactory.CreatePanel(parent, "TopBar", Panel, false);
-        top.anchorMin = new Vector2(0f, 1f); top.anchorMax = new Vector2(1f, 1f);
-        top.pivot = new Vector2(0.5f, 1f);
-        top.offsetMin = new Vector2(0f, -fallbackTop); top.offsetMax = Vector2.zero;
-        var topLine = UIFactory.CreatePanel(top, "AccentLine", Accent, false);
-        topLine.anchorMin = new Vector2(0f, 0f); topLine.anchorMax = new Vector2(1f, 0f);
-        topLine.offsetMin = Vector2.zero; topLine.offsetMax = new Vector2(0f, 3f);
-
-        var bottom = UIFactory.CreatePanel(parent, "BottomBar", Panel, false);
-        bottom.anchorMin = new Vector2(0f, 0f); bottom.anchorMax = new Vector2(1f, 0f);
-        bottom.pivot = new Vector2(0.5f, 0f);
-        bottom.offsetMin = Vector2.zero; bottom.offsetMax = new Vector2(0f, fallbackBottom);
-        var bottomLine = UIFactory.CreatePanel(bottom, "AccentLine", Accent, false);
-        bottomLine.anchorMin = new Vector2(0f, 1f); bottomLine.anchorMax = new Vector2(1f, 1f);
-        bottomLine.offsetMin = new Vector2(0f, -3f); bottomLine.offsetMax = Vector2.zero;
-    }
 }

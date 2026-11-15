@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
   artFolder: hell_1
   id: hell_1_asansor
-  displayName: "Asans\xF6r M\xFCzi\u011Fi Hoparl\xF6r\xFC"
+  displayName: "Bek\xE7ilik"
   icon: {fileID: 0}
   produces: {fileID: 11400000, guid: ef48950b2d4da884186e0e8f543d8203, type: 2}
   costResource: {fileID: 11400000, guid: ef48950b2d4da884186e0e8f543d8203, type: 2}

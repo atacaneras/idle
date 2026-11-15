@@ -18,7 +18,7 @@ public class SettingsPanel : MonoBehaviour
     static readonly Color DangerColor = new Color(0.62f, 0.2f, 0.2f, 1f);
 
     GameObject overlay;
-    TextMeshProUGUI volumeValue, fullscreenLabel, resetLabel, infoText, languageLabel;
+    TextMeshProUGUI volumeValue, muteLabel, fullscreenLabel, resetLabel, infoText, languageLabel;
     float resetTimer = -1f;
     bool open;
 
@@ -31,9 +31,13 @@ public class SettingsPanel : MonoBehaviour
 
         BuildOpenButton(canvas.rootCanvas.transform);
         BuildWindow(canvas.rootCanvas.transform);
+        SoundManager.MuteChanged += RefreshMuteLabel;
         overlay.SetActive(false);
         Refresh();
+        RefreshMuteLabel();
     }
+
+    void OnDestroy() { SoundManager.MuteChanged -= RefreshMuteLabel; }
 
     // ---- Kurulum ----
     void BuildOpenButton(Transform canvas)
@@ -43,12 +47,26 @@ public class SettingsPanel : MonoBehaviour
         var rt = (RectTransform)btn.transform;
         rt.SetAsLastSibling();
         HudLayout.PlaceCornerButton(rt, 1);   // alt sol: Basarimlar | Ayarlar
-        label.fontSize = 22f;
-        label.fontSizeMin = 17f;
-        label.fontSizeMax = 22f;
-        label.enableAutoSizing = true;
+        var icon = UIArt.Load(UIArt.IconSettings);
+        if (icon != null)
+        {
+            var image = btn.GetComponent<Image>();
+            image.sprite = icon;
+            image.type = Image.Type.Simple;
+            image.preserveAspect = true;
+            image.color = Color.white;
+            rt.sizeDelta = new Vector2(68f, 68f);
+            label.text = "";
+        }
+        else
+        {
+            label.fontSize = 22f;
+            label.fontSizeMin = 17f;
+            label.fontSizeMax = 22f;
+            label.enableAutoSizing = true;
+        }
         btn.onClick.AddListener(Toggle);
-        UIArt.StyleButton(btn, label);
+        if (icon == null) UIArt.StyleButton(btn, label);
     }
 
     void BuildWindow(Transform canvas)
@@ -59,6 +77,8 @@ public class SettingsPanel : MonoBehaviour
         var overlayCanvas = overlay.AddComponent<Canvas>();
         overlayCanvas.overrideSorting = true;
         overlayCanvas.sortingOrder = 200;
+        var overlayGroup = overlay.AddComponent<CanvasGroup>();
+        overlayGroup.ignoreParentGroups = true;
         overlay.AddComponent<GraphicRaycaster>();
         dim.anchorMin = Vector2.zero;
         dim.anchorMax = Vector2.one;
@@ -77,7 +97,10 @@ public class SettingsPanel : MonoBehaviour
         close.onClick.AddListener(Close);
 
         // 1) Ses
-        RowLabel(win, Loc.T("Ses"), -140f);
+        TextAt(win, "Label_Ses", Loc.T("Ses"), 28f, -140f, 190f, 56f, 30f,
+            TextAlignmentOptions.MidlineLeft, TextColor);
+        var mute = ButtonAt(win, "MuteToggle", "", 220f, -140f, 220f, 56f, 22f, out muteLabel);
+        mute.onClick.AddListener(SoundManager.ToggleMuted);
         volumeValue = TextAt(win, "VolumeValue", "60%", 468f, -140f, 110f, 56f, 30f,
             TextAlignmentOptions.MidlineRight, TextColor);
         ButtonAt(win, "VolumeDown", "-", 596f, -140f, 70f, 56f, 34f, out closeLabel)
@@ -129,6 +152,12 @@ public class SettingsPanel : MonoBehaviour
     {
         if (languageLabel != null)
             languageLabel.text = Loc.T("Dil") + ": " + (Loc.IsEnglish ? "English" : "Türkçe");
+    }
+
+    void RefreshMuteLabel()
+    {
+        if (muteLabel != null)
+            muteLabel.text = SoundManager.IsMuted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık");
     }
 
     TextMeshProUGUI RowLabel(RectTransform parent, string text, float y)

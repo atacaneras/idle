@@ -4,14 +4,14 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-// Menu: Evrim > Sanatçı Klasörlerini Hazırla
+// Menu: Cennet ve Cehennem > Sanatçı Klasörlerini Hazırla
 // 15 kat icin Assets/Resources/Art/<kat>/ klasorlerini acar ve SANATCI_REHBERI.md yazar:
 // hangi klasore hangi dosya adiyla ne atilacak. Icerik Uret calisinca bu da otomatik calisir.
 public static class ArtGuide
 {
     const string Root = "Assets/Resources/Art";
 
-    [MenuItem("Evrim/Sanatçı Klasörlerini Hazırla")]
+    [MenuItem("Cennet ve Cehennem/Sanatçı Klasörlerini Hazırla")]
     public static void Generate()
     {
         EnsureFolder("Assets", "Resources");

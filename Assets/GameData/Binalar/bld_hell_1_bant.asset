@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
   artFolder: hell_1
   id: hell_1_bant
-  displayName: "K\u0131rm\u0131z\u0131 Bant Memuru"
+  displayName: "\u0130taat"
   icon: {fileID: 0}
   produces: {fileID: 11400000, guid: ef48950b2d4da884186e0e8f543d8203, type: 2}
   costResource: {fileID: 11400000, guid: ef48950b2d4da884186e0e8f543d8203, type: 2}

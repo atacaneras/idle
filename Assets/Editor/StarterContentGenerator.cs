@@ -17,7 +17,7 @@ public static class StarterContentGenerator
     const string ContentPath = Root + "/Content/content.json";
     const string ScenePath = "Assets/Scenes/SampleScene.unity";
 
-    [MenuItem("Evrim/İçerik Üret (JSON)")]
+    [MenuItem("Cennet ve Cehennem/İçerik Üret (JSON)")]
     public static void Generate()
     {
         string fullPath = Path.Combine(Directory.GetCurrentDirectory(), ContentPath);
@@ -138,10 +138,10 @@ public static class StarterContentGenerator
             else Debug.LogError("Kalici onkosulu bulunamadi: " + p.id + " -> " + p.requires);
         }
 
-        // 6) Caglar
+        // 6) Katlar
         foreach (var a in content.ages)
         {
-            var asset = LoadOrCreate<AgeData>("Caglar", a.asset);
+            var asset = LoadOrCreate<AgeData>("Katlar", a.asset);
             asset.id = a.id;
             asset.displayName = a.displayName;
             asset.side = a.side == "hell" ? Side.Hell : a.side == "heaven" ? Side.Heaven : Side.None;
@@ -184,7 +184,7 @@ public static class StarterContentGenerator
     }
 
     // Eski menu adi da ayni hatta baglansin.
-    [MenuItem("Evrim/Başlangıç İçeriğini Oluştur")]
+    [MenuItem("Cennet ve Cehennem/Başlangıç İçeriğini Oluştur")]
     static void GenerateLegacy() { Generate(); }
 
     // ---- Yardimcilar ----
@@ -194,7 +194,7 @@ public static class StarterContentGenerator
     static void CleanOrphans()
     {
         int n = 0;
-        foreach (var folder in new[] { "Kaynaklar", "Binalar", "Yukseltmeler", "Caglar" })
+        foreach (var folder in new[] { "Kaynaklar", "Binalar", "Yukseltmeler", "Katlar" })
             foreach (var guid in AssetDatabase.FindAssets("t:ScriptableObject", new[] { Root + "/" + folder }))
             {
                 string p = AssetDatabase.GUIDToAssetPath(guid);

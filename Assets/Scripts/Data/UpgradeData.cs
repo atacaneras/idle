@@ -9,7 +9,7 @@ public enum UpgradeKind
 }
 
 // Cag ici tek seferlik yukleme. Cag atlayinca / Zaman Makinesi'nde sifirlanir.
-[CreateAssetMenu(menuName = "Evrim/Upgrade", fileName = "upg_")]
+[CreateAssetMenu(menuName = "Cennet ve Cehennem/Yukseltme", fileName = "yukseltme_")]
 public class UpgradeData : ScriptableObject
 {
     [Header("Kimlik")]

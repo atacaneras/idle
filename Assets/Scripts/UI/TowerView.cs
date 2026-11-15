@@ -66,8 +66,6 @@ public class TowerView : MonoBehaviour
         root.anchorMin = root.anchorMax = new Vector2(0.5f, 0.5f);
         root.sizeDelta = new Vector2(W, H);
 
-        HudLayout.BuildBars(tcRt);   // ust / alt bar: katlarin ustunde, HUD'un ve binalarin altinda
-
         for (int f = -MaxFloor; f <= MaxFloor; f++) BuildFloor(f);
         SnapTo(0);
     }
@@ -152,16 +150,17 @@ public class TowerView : MonoBehaviour
     }
 
     // Oyun basi: yer yuzu (XP arka plani) ekranda durur, sonra kamera dogrudan 1. kata iner (cehennem) / cikar (cennet)
-    public void PlayIntro(Side side, Action done)
+    public void PlayIntro(Side side, Action done, Action enteringFloor = null)
     {
         SnapTo(0);
-        StartCoroutine(Intro(side, done));
+        StartCoroutine(Intro(side, done, enteringFloor));
     }
 
-    IEnumerator Intro(Side side, Action done)
+    IEnumerator Intro(Side side, Action done, Action enteringFloor)
     {
         Busy = true;
         for (float t = 0; t < 0.8f; t += Time.unscaledDeltaTime) yield return null;   // yer yuzu bir an gorunsun
+        if (enteringFloor != null) enteringFloor();
         yield return Move(0, FloorIndex(side, 1), 2f);
         Busy = false;
         if (done != null) done();

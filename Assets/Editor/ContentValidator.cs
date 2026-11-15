@@ -5,7 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Menu: Evrim > Yayın Öncesi Kontrol (içerik + kayıt migrasyonu)
+// Menu: Cennet ve Cehennem > Yayın Öncesi Kontrol (içerik + kayıt migrasyonu)
 // Batch: -executeMethod ContentValidator.ValidateBatch
 public static class ContentValidator
 {
@@ -14,7 +14,7 @@ public static class ContentValidator
 
     static int errors;
 
-    [MenuItem("Evrim/Yayın Öncesi Kontrol")]
+    [MenuItem("Cennet ve Cehennem/Yayın Öncesi Kontrol")]
     public static void RunAll()
     {
         errors = 0;
@@ -24,16 +24,16 @@ public static class ContentValidator
         else Debug.LogError("YAYIN ÖNCESİ KONTROL: " + errors + " sorun bulundu.");
     }
 
-    [MenuItem("Evrim/İçeriği Doğrula")]
+    [MenuItem("Cennet ve Cehennem/İçeriği Doğrula")]
     public static void ValidateContent() { ValidateContent(true); }
 
-    [MenuItem("Evrim/Kayıt Migrasyonunu Test Et")]
+    [MenuItem("Cennet ve Cehennem/Kayıt Migrasyonunu Test Et")]
     public static void TestMigrations() { TestMigrations(true); }
 
     static void ValidateContent(bool resetErrors)
     {
         if (resetErrors) errors = 0;
-        var ages = LoadAll<AgeData>("Caglar");
+        var ages = LoadAll<AgeData>("Katlar");
         var resources = LoadAll<ResourceData>("Kaynaklar");
         var buildings = LoadAll<BuildingData>("Binalar");
         var upgrades = LoadAll<UpgradeData>("Yukseltmeler");

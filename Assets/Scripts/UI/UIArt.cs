@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public static class UIArt
 {
     // ---- Art/UI ----
-    public const string Frame = "Art/UI/Curtain_Frame";          // tam ekran perde cercevesi (ortasi seffaf)
     public const string TitlePlaque = "Art/UI/Level_UI";         // ust ortadaki kat adi tabelasi
     public const string ResourcePill = "Art/UI/kazanım_UI";      // sol ustteki kaynak hapi ve sag ustteki Bilgi hapi
     public const string ListPanel = "Art/UI/Panel";              // bina listesinin arkasindaki buyuk dikey parsomen (1424x1668)

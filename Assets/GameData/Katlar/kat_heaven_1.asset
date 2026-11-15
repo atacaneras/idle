@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
-  m_Name: age_heaven_1
+  m_Name: kat_heaven_1
   m_EditorClassIdentifier: Assembly-CSharp::AgeData
   id: heaven_1
   displayName: 'Cennet 1. Kat: Bulut Kafe'

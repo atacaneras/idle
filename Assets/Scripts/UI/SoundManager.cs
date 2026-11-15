@@ -1,13 +1,9 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum SoundId { Click, Buy, LevelUp, AgeUp }
 
 // Ses dosyasi gerektirmez: sesler acilista kodla sentezlenir (kisa sinus/harmonik notalar).
-// Ileride gercek ses dosyalarina gecmek icin clips[] dizisini AudioClip'lerle doldurmak yeterli.
-// Sag altta "Ses: Acik/Kapali" butonu da olusturur.
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -36,7 +32,6 @@ public class SoundManager : MonoBehaviour
     AudioClip[] clips;
     int next;
     bool muted;
-    TextMeshProUGUI muteLabel;
 
     public static event Action MuteChanged;
 
@@ -110,13 +105,11 @@ public class SoundManager : MonoBehaviour
         gm.OnGathered += OnGathered;
         gm.OnBuildingBought += OnBought;
         gm.OnAgeChanged += OnAge;
-        BuildMuteButton();
     }
 
     void OnDestroy()
     {
         if (Instance == this) Instance = null;
-        MuteChanged -= UpdateMuteLabel;
         var gm = GameManager.Instance;
         if (gm == null) return;
         gm.OnGathered -= OnGathered;
@@ -137,36 +130,13 @@ public class SoundManager : MonoBehaviour
         s.PlayOneShot(clips[(int)id], volume * gain);
     }
 
-    // ---- Ses ac/kapa butonu ----
-    void BuildMuteButton()
-    {
-        var canvas = GetComponentInParent<Canvas>();
-        if (canvas == null) return;
-
-        var btn = UIFactory.CreateButton(canvas.rootCanvas.transform, "MuteButton", "", 28f, out muteLabel);
-        var rt = (RectTransform)btn.transform;
-        rt.SetAsFirstSibling();
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
-        rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-HudLayout.Margin, 28f);   // sag alt kose, x1..Max satirinin altinda
-        rt.sizeDelta = new Vector2(230f, 60f);
-        btn.onClick.AddListener(ToggleMute);
-        UIArt.StyleButton(btn, muteLabel);
-        muteLabel.fontSize = 24f;
-        MuteChanged += UpdateMuteLabel;
-        UpdateMuteLabel();
-    }
-
     void ToggleMute()
     {
         muted = !muted;
         PlayerPrefs.SetInt(MuteKey, muted ? 1 : 0);
-        UpdateMuteLabel();
         if (!muted) PlayInternal(SoundId.Click, 1f, 1f);
         if (MuteChanged != null) MuteChanged();
     }
-
-    void UpdateMuteLabel() { if (muteLabel != null) muteLabel.text = muted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık"); }
 
     // ---- Sentez ----
     static AudioClip Synth(string clipName, float seconds, Func<float, float> sampler)

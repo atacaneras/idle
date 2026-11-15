@@ -140,13 +140,6 @@ Buğday|Wheat
 Odun|Wood
 Yün|Wool
 
-# ---- Caglar ----
-Taş Çağı|Stone Age
-Tarım Çağı|Farming Age
-Bronz Çağı|Bronze Age
-Antik Çağ|Classical Age
-Orta Çağ|Medieval Age
-
 # ---- Binalar ----
 Toplayıcı Alanı|Gathering Ground
 Odun Kampı|Wood Camp
@@ -558,7 +551,7 @@ CAN|HP
 HUZUR|PEACE
 Huzur tamam!|Peace complete!
 üretim|production
-Cehennem 1. Kat: Bekleme Salonu|Hell Floor 1: Waiting Room
+Erebus|Erebus
 Cehennem 2. Kat: Şikâyet Departmanı|Hell Floor 2: Complaints Department
 Cehennem 3. Kat: Trafik Cezası Şubesi|Hell Floor 3: Traffic Fine Office
 Cennet 1. Kat: Bulut Kafe|Heaven Floor 1: Cloud Café
@@ -576,15 +569,14 @@ BOSS: Trafik Şube Müdürü Kemal Bey|BOSS: Traffic Branch Manager Mr. Kemal
 Huzur Seviyesi: Bulut Kafe|Peace Level: Cloud Café
 Memnuniyet Seviyesi: Danışma Masası|Satisfaction Level: Help Desk
 Mutluluk Seviyesi: Huzur Mahallesi|Happiness Level: Peace Neighborhood
-Günah Fişi|Sin Slip
+Günah|Sin
 Sevap|Merit
 Şikâyet Dosyası|Complaint File
 Teşekkür|Thanks
-Kornacı Ceza Kulübesi|Honker Penalty Booth
-Kırmızı Bant Memuru|Red Tape Clerk
-Sonsuz Fotokopi Makinesi|Infinite Photocopier
-Asansör Müziği Hoparlörü|Elevator Music Speaker
-“Lütfen Bekleyiniz” Tabelası|“Please Wait” Sign
+Vesvese|Temptation
+İtaat|Obedience
+Bekçilik|Guard Duty
+İşkence|Torture
 Damga Makinesi (Hep REDDEDİLDİ)|Stamp Machine (Always DENIED)
 Telefon Bekletme Hattı|Phone Hold Line
 Gişe Camı (Kapalı)|Counter Glass (Closed)
@@ -611,13 +603,13 @@ Ortak Bahçe (Domates Serbest)|Community Garden (Tomatoes Free)
 Sokak Kedisi Besleme Noktası|Street Cat Feeding Spot
 Mahalle Çeşmesi (Dedikodu Dahil)|Neighborhood Fountain (Gossip Included)
 Trafikte kornaya basanları cezalandır (25 kez)|Punish the traffic honkers (25 times)
-Kornacı Ceza Kulübesi aç: korna çalan kurtulamasın (5 adet)|Open a Honker Penalty Booth: no honker escapes (5 total)
+Vesvese aç: korna çalan kurtulamasın (5 adet)|Open Temptation: no honker escapes (5 total)
 150 kez cezalandır: İK şikâyet dosyası açtı|Punish 150 times: HR opened a complaint file
-5 Kırmızı Bant Memuru işe al: formu doldurmayan yanar|Hire 5 Red Tape Clerks: those who skip the form burn
+5 İtaat işe al: formu doldurmayan yanar|Hire 5 Obedience clerks: those who skip the form burn
 5 yükseltme al: yönetim “verimlilik” dedi, kimse itiraz etmedi|Buy 5 upgrades: management said “efficiency,” nobody objected
 Nuri’nin canının yarısını götür: “Sıra bende değil” diyor|Take half of Nuri's HP: he says “it's not my turn”
-100.000 Günah Fişi kes: Nuri ilk kez kaşını kaldırdı|Issue 100,000 Sin Slips: Nuri raised an eyebrow for the first time
-10 Fotokopi Makinesi: kimse bir şey okumuyor ama hepsi 3 nüsha|10 Photocopiers: nobody reads anything, but everything is in triplicate
+100.000 Günah topla: Nuri ilk kez kaşını kaldırdı|Collect 100,000 Sin: Nuri raised an eyebrow for the first time
+10 Günah biriktir: kimse bir şey okumuyor ama hepsi 3 nüsha|Collect 10 Sin: nobody reads anything, but everything is in triplicate
 Yolunu şaşıran teyzeye yardım et (30 kez)|Help the lost auntie (30 times)
 Teyze Tezgâhı aç: herkes yolunu bulsun (5 adet)|Open an Auntie Booth: everyone finds their way (5 total)
 200 kez yardım et: “Sağ ol evladım” demekten yoruldular, yine de dediler|Help 200 times: they got tired of saying “Thanks, son,” but they said it anyway

@@ -14,7 +14,7 @@ public enum PermanentKind
 
 // Bilgi ile alinan KALICI yukseltme. Zaman Makinesi'nde sifirlanmaz.
 // Yuzde degerleri 0.10 = %10 seklinde girilir.
-[CreateAssetMenu(menuName = "Evrim/Permanent Upgrade", fileName = "perm_")]
+[CreateAssetMenu(menuName = "Cennet ve Cehennem/Kalici Yukseltme", fileName = "kalici_")]
 public class PermanentUpgradeData : ScriptableObject
 {
     [Header("Kimlik")]

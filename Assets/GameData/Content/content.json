@@ -19,7 +19,7 @@
   "resources": [
     {
       "id": "sin",
-      "displayName": "Günah Fişi",
+      "displayName": "Günah",
       "asset": "res_sin"
     },
     {
@@ -41,8 +41,8 @@
   "ages": [
     {
       "id": "hell_1",
-      "asset": "age_hell_1",
-      "displayName": "Cehennem 1. Kat: Bekleme Salonu",
+      "asset": "kat_hell_1",
+      "displayName": "Erebus",
       "side": "hell",
       "clickLabel": "CEZALANDIR",
       "goalTitle": "BOSS: Numaratör Nuri",
@@ -67,7 +67,7 @@
         {
           "id": "hell_1_korna",
           "asset": "bld_hell_1_korna",
-          "displayName": "Kornacı Ceza Kulübesi",
+          "displayName": "Vesvese",
           "produces": "sin",
           "costResource": "sin",
           "baseCost": 15,
@@ -91,7 +91,7 @@
         {
           "id": "hell_1_bant",
           "asset": "bld_hell_1_bant",
-          "displayName": "Kırmızı Bant Memuru",
+          "displayName": "İtaat",
           "produces": "sin",
           "costResource": "sin",
           "baseCost": 120,
@@ -115,7 +115,7 @@
         {
           "id": "hell_1_fotokopi",
           "asset": "bld_hell_1_fotokopi",
-          "displayName": "Sonsuz Fotokopi Makinesi",
+          "displayName": "Günah",
           "produces": "sin",
           "costResource": "sin",
           "baseCost": 1200,
@@ -139,7 +139,7 @@
         {
           "id": "hell_1_asansor",
           "asset": "bld_hell_1_asansor",
-          "displayName": "Asansör Müziği Hoparlörü",
+          "displayName": "Bekçilik",
           "produces": "sin",
           "costResource": "sin",
           "baseCost": 14000,
@@ -163,7 +163,7 @@
         {
           "id": "hell_1_tabela",
           "asset": "bld_hell_1_tabela",
-          "displayName": "“Lütfen Bekleyiniz” Tabelası",
+          "displayName": "İşkence",
           "produces": "sin",
           "costResource": "sin",
           "baseCost": 170000,
@@ -340,7 +340,7 @@
         },
         {
           "id": "hell_1_q2",
-          "text": "Kornacı Ceza Kulübesi aç: korna çalan kurtulamasın (5 adet)",
+          "text": "Vesvese aç: korna çalan kurtulamasın (5 adet)",
           "kind": "Building",
           "building": "hell_1_korna",
           "amount": 5,
@@ -360,7 +360,7 @@
         },
         {
           "id": "hell_1_q4",
-          "text": "5 Kırmızı Bant Memuru işe al: formu doldurmayan yanar",
+          "text": "5 İtaat işe al: formu doldurmayan yanar",
           "kind": "Building",
           "building": "hell_1_bant",
           "amount": 5,
@@ -380,7 +380,7 @@
         },
         {
           "id": "hell_1_q6",
-          "text": "10 Fotokopi Makinesi: kimse bir şey okumuyor ama hepsi 3 nüsha",
+          "text": "10 Günah biriktir: kimse bir şey okumuyor ama hepsi 3 nüsha",
           "kind": "Building",
           "building": "hell_1_fotokopi",
           "amount": 10,
@@ -390,7 +390,7 @@
         },
         {
           "id": "hell_1_q7",
-          "text": "100.000 Günah Fişi kes: Nuri ilk kez kaşını kaldırdı",
+          "text": "100.000 Günah topla: Nuri ilk kez kaşını kaldırdı",
           "kind": "Earn",
           "building": null,
           "amount": 100000,
@@ -412,7 +412,7 @@
     },
     {
       "id": "heaven_1",
-      "asset": "age_heaven_1",
+      "asset": "kat_heaven_1",
       "displayName": "Cennet 1. Kat: Bulut Kafe",
       "side": "heaven",
       "clickLabel": "İYİLİK YAP",
@@ -783,7 +783,7 @@
     },
     {
       "id": "hell_2",
-      "asset": "age_hell_2",
+      "asset": "kat_hell_2",
       "displayName": "Cehennem 2. Kat: Şikâyet Departmanı",
       "side": "hell",
       "clickLabel": "REDDET",
@@ -1154,7 +1154,7 @@
     },
     {
       "id": "heaven_2",
-      "asset": "age_heaven_2",
+      "asset": "kat_heaven_2",
       "displayName": "Cennet 2. Kat: Teyze Danışma Masası",
       "side": "heaven",
       "clickLabel": "YARDIM ET",

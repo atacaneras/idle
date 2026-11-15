@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
-  m_Name: age_hell_1
+  m_Name: kat_hell_1
   m_EditorClassIdentifier: Assembly-CSharp::AgeData
   id: hell_1
-  displayName: 'Cehennem 1. Kat: Bekleme Salonu'
+  displayName: Erebus
   side: 1
   clickLabel: CEZALANDIR
   goalTitle: "BOSS: Numarat\xF6r Nuri"
@@ -27,7 +27,7 @@ MonoBehaviour:
     rewardSeconds: 0
     rewardKnowledge: 0
   - id: hell_1_q2
-    text: "Kornac\u0131 Ceza Kul\xFCbesi a\xE7: korna \xE7alan kurtulamas\u0131n (5 adet)"
+    text: "Vesvese a\xE7: korna \xE7alan kurtulamas\u0131n (5 adet)"
     kind: 1
     building: {fileID: 11400000, guid: ccb3c7bac56fab940b8a175a130ec47a, type: 2}
     amount: 5
@@ -43,7 +43,7 @@ MonoBehaviour:
     rewardSeconds: 60
     rewardKnowledge: 0
   - id: hell_1_q4
-    text: "5 K\u0131rm\u0131z\u0131 Bant Memuru i\u015Fe al: formu doldurmayan yanar"
+    text: "5 \u0130taat i\u015Fe al: formu doldurmayan yanar"
     kind: 1
     building: {fileID: 11400000, guid: 2de43026534f1b94390c0fe28cf858e2, type: 2}
     amount: 5
@@ -59,7 +59,7 @@ MonoBehaviour:
     rewardSeconds: 0
     rewardKnowledge: 1
   - id: hell_1_q6
-    text: "10 Fotokopi Makinesi: kimse bir \u015Fey okumuyor ama hepsi 3 n\xFCsha"
+    text: "10 G\xFCnah biriktir: kimse bir \u015Fey okumuyor ama hepsi 3 n\xFCsha"
     kind: 1
     building: {fileID: 11400000, guid: fffe6b579b0ea7f4183bd96a990e5d03, type: 2}
     amount: 10
@@ -67,7 +67,7 @@ MonoBehaviour:
     rewardSeconds: 300
     rewardKnowledge: 0
   - id: hell_1_q7
-    text: "100.000 G\xFCnah Fi\u015Fi kes: Nuri ilk kez ka\u015F\u0131n\u0131 kald\u0131rd\u0131"
+    text: "100.000 G\xFCnah topla: Nuri ilk kez ka\u015F\u0131n\u0131 kald\u0131rd\u0131"
     kind: 2
     building: {fileID: 0}
     amount: 100000
