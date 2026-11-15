@@ -36,6 +36,8 @@ public class SideSelectScreen : MonoBehaviour
         public readonly List<Image> eyes = new List<Image>();
         public Image art;
         public Sprite sprNeutral, sprAngel, sprDemon;
+        public SkeletonGraphic spineGraphic;
+        public SkeletonAnimation spineAnimation;
         public Vector2 pos = new Vector2(0f, -120f);
         public float angel, demon, tilt, pop;
         public bool useArt;
@@ -45,7 +47,9 @@ public class SideSelectScreen : MonoBehaviour
     Image bg, hellImg, heavenImg;
     SkeletonGraphic spineBg;
     SkeletonAnimation spineAnimation;
-    float doorOpeningEndsAt;
+    Coroutine doorTransition;
+    int activeDoorSide;
+    float ghostFacingYaw, ghostFacingYawVelocity;
     Ghost ghost;
     CanvasGroup group;
     Canvas ownCanvas;
@@ -196,7 +200,7 @@ public class SideSelectScreen : MonoBehaviour
         {
             if (data.Animations != null && data.Animations.Count > 0)
             {
-                var ambient = data.FindAnimation("cehennnem_seçmeden_ıdle");
+                var ambient = data.FindAnimation("maın_menu_stabil") ?? data.FindAnimation("cehennnem_seçmeden_ıdle");
                 if (ambient != null) spineAnimation.AnimationState.SetAnimation(0, ambient, true);
             }
 
@@ -232,7 +236,33 @@ public class SideSelectScreen : MonoBehaviour
         }
     }
 
-    void OnDestroy() { SetCursorHidden(false); }
+    void OnDestroy()
+    {
+        if (ghost != null && ghost.spineAnimation != null)
+            ghost.spineAnimation.UpdateComplete -= ApplyDemonEyeTint;
+        SetCursorHidden(false);
+    }
+
+    void ApplyDemonEyeTint(ISkeletonRenderer renderer)
+    {
+        if (ghost == null || ghost.spineAnimation == null || ghost.spineAnimation.Skeleton == null) return;
+
+        var skeleton = ghost.spineAnimation.Skeleton;
+        float intensity = Mathf.Clamp01(ghost.demon);
+        Color eyeColor = Color.Lerp(Color.white, new Color(1f, 0.06f, 0.035f, 1f), intensity);
+        Color glowColor = new Color(1f, 0.015f, 0.01f, intensity);
+
+        TintSlot(skeleton, "goz_sagda", eyeColor);
+        TintSlot(skeleton, "goz_solda", eyeColor);
+        TintSlot(skeleton, "goz_sagda2", glowColor);
+        TintSlot(skeleton, "goz_solda2", glowColor);
+    }
+
+    static void TintSlot(Spine.Skeleton skeleton, string slotName, Color color)
+    {
+        var slot = skeleton.FindSlot(slotName);
+        if (slot != null) slot.Pose.SetColor(color);
+    }
     void OnDisable() { SetCursorHidden(false); }
     void OnEnable() { if (root != null && !settingsMode) SetCursorHidden(true); }
 
@@ -331,6 +361,54 @@ public class SideSelectScreen : MonoBehaviour
         g.root.sizeDelta = new Vector2(120f, 150f);
         g.root.anchoredPosition = g.pos;
 
+        var spineData = Resources.Load<SkeletonDataAsset>("Art/main_menu/Ghost_Animations/ghost_SkeletonData");
+        if (spineData != null)
+        {
+            var artObject = new GameObject("GhostSpine", typeof(RectTransform));
+            artObject.transform.SetParent(g.root, false);
+            var artRt = (RectTransform)artObject.transform;
+            artRt.anchorMin = artRt.anchorMax = new Vector2(0.5f, 0.5f);
+            artRt.pivot = new Vector2(0.5f, 0.5f);
+
+            g.spineGraphic = artObject.AddComponent<SkeletonGraphic>();
+            g.spineGraphic.skeletonDataAsset = spineData;
+            g.spineGraphic.raycastTarget = false;
+            g.spineGraphic.allowMultipleCanvasRenderers = true;
+            var straightMat = Resources.Load<Material>("Materials/UI-StraightAlphaTex/SkeletonGraphicDefault-Straight");
+            if (straightMat != null) g.spineGraphic.material = straightMat;
+            else
+            {
+                var shader = Shader.Find("Spine/SkeletonGraphic");
+                if (shader != null)
+                {
+                    var mat = new Material(shader);
+                    mat.EnableKeyword("_STRAIGHT_ALPHA_INPUT");
+                    g.spineGraphic.material = mat;
+                }
+            }
+            g.spineGraphic.Initialize(false);
+
+            // SkeletonGraphic çizimi yapar; eş bileşen animasyon durumunu ilerletir.
+            g.spineAnimation = artObject.AddComponent<SkeletonAnimation>();
+            g.spineAnimation.skeletonDataAsset = spineData;
+            g.spineAnimation.Initialize(false);
+            g.spineGraphic.Animation = g.spineAnimation;
+            g.spineAnimation.UpdateComplete += ApplyDemonEyeTint;
+            if (g.spineGraphic.MatchRectTransformWithBounds())
+            {
+                float artHeight = g.spineGraphic.rectTransform.rect.height;
+                if (artHeight > 0f)
+                {
+                    float artScale = 190f / artHeight;
+                    g.spineGraphic.rectTransform.localScale = new Vector3(artScale, artScale, 1f);
+                }
+            }
+
+            var idle = g.spineAnimation.Skeleton.Data.FindAnimation("ghost");
+            if (idle != null) g.spineAnimation.AnimationState.SetAnimation(0, idle, true);
+            return g;
+        }
+
         g.sprNeutral = Resources.Load<Sprite>("Art/UI/ghost");
         g.sprAngel = Resources.Load<Sprite>("Art/UI/ghost_angel");
         g.sprDemon = Resources.Load<Sprite>("Art/UI/ghost_demon");
@@ -400,38 +478,117 @@ public class SideSelectScreen : MonoBehaviour
     {
         zone = z;
         ghost.pop = 1f;
+        PlayGhostAnimation(z);
 
         audioSrc.Stop();
         var clip = z == 1 ? hellClip : z == 2 ? heavenClip : null;
         if (clip != null) { audioSrc.clip = clip; audioSrc.Play(); }
 
-        doorOpeningEndsAt = 0f;
-        if (spineAnimation != null && spineAnimation.Skeleton != null)
-        {
-            string ambientName = z == 2 ? "cennet_seçmeden_önce4" : "cehennnem_seçmeden_ıdle";
-            var ambient = spineAnimation.Skeleton.Data.FindAnimation(ambientName);
-            spineAnimation.Skeleton.SetupPose();
-            spineAnimation.AnimationState.ClearTracks();
+        if (spineAnimation != null && spineAnimation.Skeleton != null && doorTransition == null)
+            doorTransition = StartCoroutine(TransitionDoors());
+    }
 
-            if (z == 0)
+    IEnumerator TransitionDoors()
+    {
+        const float mixDuration = 0.3f;
+        const float closeSpeed = 2.5f;
+        yield return null; // Let StartCoroutine store its handle before this routine can finish.
+        while (true)
+        {
+            int target = zone;
+            var state = spineAnimation.AnimationState;
+
+            // Close the currently open side by playing its opening animation backwards.
+            if (activeDoorSide != 0 && activeDoorSide != target)
             {
-                if (ambient != null) spineAnimation.AnimationState.SetAnimation(0, ambient, true);
+                int closingSide = activeDoorSide;
+                activeDoorSide = 0;
+                var close = DoorOpening(closingSide);
+                if (close != null)
+                {
+                    var entry = state.SetAnimation(0, close, false);
+                    entry.Reverse = true;
+                    entry.TimeScale = closeSpeed;
+                    entry.MixDuration = mixDuration;
+                    var stable = spineAnimation.Skeleton.Data.FindAnimation("maın_menu_stabil");
+                    if (stable != null)
+                    {
+                        var stableEntry = state.AddAnimation(0, stable, true, 0f);
+                        stableEntry.SetMixDuration(mixDuration, 0f);
+                    }
+                    yield return WaitForZoneOrDuration(target, close.Duration / closeSpeed);
+                }
+                else
+                {
+                    var stable = spineAnimation.Skeleton.Data.FindAnimation("maın_menu_stabil");
+                    if (stable != null)
+                    {
+                        var stableEntry = state.SetAnimation(0, stable, true);
+                        stableEntry.MixDuration = mixDuration;
+                    }
+                    yield return WaitForZoneOrDuration(target, mixDuration);
+                }
+                continue;
             }
-            else
+
+            target = zone;
+            if (target != 0 && activeDoorSide == 0)
             {
-                string openingName = z == 1 ? "cehennnem_seçmeden_önce" : "cennet_seçmeden_önce3";
-                var opening = spineAnimation.Skeleton.Data.FindAnimation(openingName);
+                var opening = DoorOpening(target);
+                activeDoorSide = target;
                 if (opening != null)
                 {
-                    spineAnimation.AnimationState.SetAnimation(0, opening, false);
-                    doorOpeningEndsAt = Time.unscaledTime + opening.Duration;
-                    if (ambient != null) spineAnimation.AnimationState.AddAnimation(0, ambient, true, 0f);
+                    var entry = state.SetAnimation(0, opening, false);
+                    entry.MixDuration = mixDuration;
+                    var ambient = DoorAmbient(target);
+                    if (ambient != null)
+                    {
+                        var ambientEntry = state.AddAnimation(0, ambient, true, 0f);
+                        ambientEntry.SetMixDuration(mixDuration, 0f);
+                    }
+                    yield return WaitForZoneOrDuration(target, opening.Duration);
                 }
-                else if (ambient != null)
+                else
                 {
-                    spineAnimation.AnimationState.SetAnimation(0, ambient, true);
+                    yield return WaitForZoneOrDuration(target, mixDuration);
                 }
+
+                continue;
             }
+
+            doorTransition = null;
+            yield break;
+        }
+    }
+
+    IEnumerator WaitForZoneOrDuration(int expectedZone, float duration)
+    {
+        float end = Time.unscaledTime + duration;
+        while (zone == expectedZone && Time.unscaledTime < end) yield return null;
+    }
+
+    Spine.Animation DoorOpening(int side)
+    {
+        string name = side == 1 ? "cehennnem_seçmeden_önce" : "cennet_seçmeden_önce3";
+        return spineAnimation.Skeleton.Data.FindAnimation(name);
+    }
+
+    Spine.Animation DoorAmbient(int side)
+    {
+        string name = side == 1 ? "cehennnem_seçmeden_ıdle" : "cennet_seçmeden_önce4";
+        return spineAnimation.Skeleton.Data.FindAnimation(name);
+    }
+
+    void PlayGhostAnimation(int z)
+    {
+        if (ghost == null || ghost.spineAnimation == null || ghost.spineAnimation.Skeleton == null) return;
+        string name = z == 1 ? "evil_ghost" : z == 2 ? "angel_ghost" : "ghost";
+        var data = ghost.spineAnimation.Skeleton.Data;
+        var animation = data.FindAnimation(name) ?? data.FindAnimation("ghost");
+        if (animation != null)
+        {
+            var entry = ghost.spineAnimation.AnimationState.SetAnimation(0, animation, true);
+            entry.MixDuration = 0.22f;
         }
     }
 
@@ -453,8 +610,7 @@ public class SideSelectScreen : MonoBehaviour
 
     IEnumerator PlayDoorThenChoose(Side side)
     {
-        float remaining = Mathf.Max(0f, doorOpeningEndsAt - Time.unscaledTime);
-        if (remaining > 0f) yield return new WaitForSecondsRealtime(remaining);
+        while (doorTransition != null) yield return null;
 
         if (onChosen != null) onChosen(side);
     }
@@ -473,7 +629,8 @@ public class SideSelectScreen : MonoBehaviour
         settingsMode = open;
         ghost.root.gameObject.SetActive(!open);
         SetCursorHidden(!open);
-        if (open) { zone = 0; audioSrc.Stop(); }
+        if (open && zone != 0) SetZone(0);
+        else if (open) audioSrc.Stop();
     }
 
     // ---- Animasyon ----
@@ -491,7 +648,7 @@ public class SideSelectScreen : MonoBehaviour
         Vector2 screenPos = pointer != null ? pointer.position.ReadValue() : new Vector2(Screen.width * 0.5f, Screen.height * 0.3f);
 
         int z = settingsMode ? 0 : ComputeZone(screenPos);
-        if (z != zone) SetZone(z);
+        if (!chosen && z != zone) SetZone(z);
 
         AnimateBackground(dt);
         AnimateGhost(screenPos, dt);
@@ -519,13 +676,18 @@ public class SideSelectScreen : MonoBehaviour
         float bob = Mathf.Sin(Time.unscaledTime * 2.4f) * 6f;
 
         g.root.anchoredPosition = g.pos + new Vector2(0f, bob);
-        g.root.localRotation = Quaternion.Euler(0f, 0f, g.tilt);
+        float targetFacing = zone == 1 ? 180f : 0f;
+        ghostFacingYaw = Mathf.SmoothDampAngle(ghostFacingYaw, targetFacing,
+            ref ghostFacingYawVelocity, 0.22f, 900f, dt);
+        g.root.localRotation = Quaternion.Euler(0f, ghostFacingYaw, g.tilt);
         g.pop = Mathf.MoveTowards(g.pop, 0f, dt * 3.5f);
         float popScale = 1f + 0.14f * g.pop;
         g.root.localScale = new Vector3(popScale, popScale, 1f);
 
         g.angel = Mathf.MoveTowards(g.angel, zone == 2 ? 1f : 0f, dt * 4f);
         g.demon = Mathf.MoveTowards(g.demon, zone == 1 ? 1f : 0f, dt * 4f);
+
+        if (g.spineGraphic != null) return;
 
         if (g.useArt)
         {
