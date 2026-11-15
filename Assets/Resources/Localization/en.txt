@@ -535,3 +535,231 @@ Uyuyan Parmaklar|Sleeping Fingers
 Sen uyurken bile biri tıklıyor. Kim olduğunu sorma.|Someone clicks even while you sleep. Don't ask who.
 Dönüm Noktası Ustası|Milestone Master
 Kilometre taşları artık biraz daha gösterişli.|Milestones are a little flashier now.
+
+# ---- Kule icerigi: katlar, binalar, yukseltmeler, gorevler ----
+Boss devrildi!|Boss defeated!
+CAN|HP
+HUZUR|PEACE
+Huzur tamam!|Peace complete!
+üretim|production
+Cehennem 1. Kat: Bekleme Salonu|Hell Floor 1: Waiting Room
+Cehennem 2. Kat: Şikâyet Departmanı|Hell Floor 2: Complaints Department
+Cehennem 3. Kat: Trafik Cezası Şubesi|Hell Floor 3: Traffic Fine Office
+Cennet 1. Kat: Bulut Kafe|Heaven Floor 1: Cloud Café
+Cennet 2. Kat: Teyze Danışma Masası|Heaven Floor 2: Auntie Help Desk
+Cennet 3. Kat: Huzur Mahallesi|Heaven Floor 3: Peace Neighborhood
+CEZALANDIR|PUNISH
+REDDET|DENY
+CEZA KES|ISSUE FINE
+İYİLİK YAP|DO GOOD
+YARDIM ET|HELP
+HUZUR VER|GIVE PEACE
+BOSS: Numaratör Nuri|BOSS: Queue-Ticket Nuri
+BOSS: Şikâyet Müdürü Bay Hayır|BOSS: Complaints Manager Mr. No
+BOSS: Trafik Şube Müdürü Kemal Bey|BOSS: Traffic Branch Manager Mr. Kemal
+Huzur Seviyesi: Bulut Kafe|Peace Level: Cloud Café
+Memnuniyet Seviyesi: Danışma Masası|Satisfaction Level: Help Desk
+Mutluluk Seviyesi: Huzur Mahallesi|Happiness Level: Peace Neighborhood
+Günah Fişi|Sin Slip
+Sevap|Merit
+Şikâyet Dosyası|Complaint File
+Teşekkür|Thanks
+Kornacı Ceza Kulübesi|Honker Penalty Booth
+Kırmızı Bant Memuru|Red Tape Clerk
+Sonsuz Fotokopi Makinesi|Infinite Photocopier
+Asansör Müziği Hoparlörü|Elevator Music Speaker
+“Lütfen Bekleyiniz” Tabelası|“Please Wait” Sign
+Damga Makinesi (Hep REDDEDİLDİ)|Stamp Machine (Always DENIED)
+Telefon Bekletme Hattı|Phone Hold Line
+Gişe Camı (Kapalı)|Counter Glass (Closed)
+Şikâyet Dosyası Dağı|Mountain of Complaint Files
+“Yarın Gel” Panosu|“Come Back Tomorrow” Board
+Hız Kamerası (Flaş Bozuk)|Speed Camera (Flash Broken)
+Park Yeri Bulamama Alanı|No-Parking-Anywhere Zone
+Vezne (Kart Kabul Etmiyor)|Cashier (No Cards Accepted)
+Otopark Bariyeri (Hep Kapalı)|Parking Barrier (Always Down)
+Tek Yön Levhası (İki Yön)|One-Way Sign (Both Ways)
+Bulut Kafe Baristası|Cloud Café Barista
+Ücretsiz Sarılma Standı|Free Hug Stand
+Arp Çalma Kursu|Harp Playing Course
+Torun Fotoğrafı Galerisi|Grandkid Photo Gallery
+Sonsuz Hayır Duası|Endless Blessing
+Çay Servisi (İnce Belli)|Tea Service (Slim-Waisted Glass)
+Komşuya Çorba Servisi|Soup Service to Neighbors
+Teyze Tavsiye Hattı|Auntie Advice Line
+Kayıp Eşya Bürosu|Lost Property Office
+Teyzeye Yol Gösterme Tezgâhı|Auntie Directions Booth
+Mahalle Salıncağı|Neighborhood Swing
+Komşu Simit Fırını|Neighbor's Simit Bakery
+Ortak Bahçe (Domates Serbest)|Community Garden (Tomatoes Free)
+Sokak Kedisi Besleme Noktası|Street Cat Feeding Spot
+Mahalle Çeşmesi (Dedikodu Dahil)|Neighborhood Fountain (Gossip Included)
+Trafikte kornaya basanları cezalandır (25 kez)|Punish the traffic honkers (25 times)
+Kornacı Ceza Kulübesi aç: korna çalan kurtulamasın (5 adet)|Open a Honker Penalty Booth: no honker escapes (5 total)
+150 kez cezalandır: İK şikâyet dosyası açtı|Punish 150 times: HR opened a complaint file
+5 Kırmızı Bant Memuru işe al: formu doldurmayan yanar|Hire 5 Red Tape Clerks: those who skip the form burn
+5 yükseltme al: yönetim “verimlilik” dedi, kimse itiraz etmedi|Buy 5 upgrades: management said “efficiency,” nobody objected
+Nuri’nin canının yarısını götür: “Sıra bende değil” diyor|Take half of Nuri's HP: he says “it's not my turn”
+100.000 Günah Fişi kes: Nuri ilk kez kaşını kaldırdı|Issue 100,000 Sin Slips: Nuri raised an eyebrow for the first time
+10 Fotokopi Makinesi: kimse bir şey okumuyor ama hepsi 3 nüsha|10 Photocopiers: nobody reads anything, but everything is in triplicate
+Yolunu şaşıran teyzeye yardım et (30 kez)|Help the lost auntie (30 times)
+Teyze Tezgâhı aç: herkes yolunu bulsun (5 adet)|Open an Auntie Booth: everyone finds their way (5 total)
+200 kez yardım et: “Sağ ol evladım” demekten yoruldular, yine de dediler|Help 200 times: they got tired of saying “Thanks, son,” but they said it anyway
+5 Bulut Kafe Baristası: kimse sipariş vermedi ama herkes mutlu|5 Cloud Café Baristas: nobody ordered, but everyone is happy
+5 yükseltme al: Başmelek “harikasın” notu bıraktı|Buy 5 upgrades: the Archangel left a “you're great” note
+Huzur çubuğunun yarısı: müdavimler el ele tutuştu|Half of the peace bar: the regulars held hands
+100.000 Sevap topla: Bulut Kafe’nin Wi-Fi’si yenilendi|Collect 100,000 Merit: the Cloud Café's Wi-Fi was upgraded
+10 Çorba Servisi: nane fazla, sevgi daha fazla|10 Soup Services: too much mint, even more love
+Şikâyetçiyi reddet: “Dilekçeniz yanlış sıraya girdi” (30 kez)|Deny the complainer: “your petition joined the wrong queue” (30 times)
+5 Damga Makinesi kur: hepsi “REDDEDİLDİ” basıyor|Build 5 Stamp Machines: they all print “DENIED”
+200 kez reddet: “Yarın gel” cümlesi telif aldı|Deny 200 times: “Come back tomorrow” got copyrighted
+5 Bekletme Hattı: müşteri bekleme müziğiyle evlendi|5 Hold Lines: a customer married the hold music
+5 yükseltme al: Müdür “prosedür” dedi ve çay içti|Buy 5 upgrades: the Manager said “procedure” and sipped his tea
+Bay Hayır’ın canının yarısını götür: “Dilekçeniz eksik” diyor|Take half of Mr. No's HP: he says “your petition is incomplete”
+400.000 Şikâyet Dosyası: arşiv odası artık bir yaşam tarzı|400,000 Complaint Files: the archive room is now a lifestyle
+10 Gişe Camı: hepsinde “öğle arası” yazıyor|10 Counter Windows: every one says “lunch break”
+Teyzeye yol göster: harita ters tutuluyor ama olsun (25 kez)|Show the auntie the way: she holds the map upside down, but fine (25 times)
+5 Yol Tarifi Levhası: oklar hâlâ birbirine bakıyor|5 Direction Signs: the arrows still point at each other
+150 iyilik yap: bulutlar seni “komşu” ilan etti|Do 150 good deeds: the clouds declared you a “neighbor”
+5 Çay Servisi: şeker iki mi üç mü tartışması sürüyor|5 Tea Services: the two-or-three-sugars debate continues
+5 yükseltme al: teyze “ben de bilirim” dedi ama bilmiyordu|Buy 5 upgrades: the auntie said “I know that too,” but she didn't
+Memnuniyet çubuğunun yarısı: teyzeler fotoğraf göstermeye başladı|Half of the satisfaction bar: the aunties started showing photos
+400.000 Teşekkür topla: komşular balkondan el salladı|Collect 400,000 Thanks: the neighbors waved from their balconies
+10 Kayıp Eşya Bürosu: kayıp olanın kendisi de kayıp|10 Lost Property Offices: the lost item itself is missing
+Hız sınırını aşanları cezalandır (40 kez)|Punish the speeders (40 times)
+5 Hız Kamerası kur: flaş bozuk ama ceza sağlam|Set up 5 Speed Cameras: the flash is broken but the fine is solid
+250 ceza kes: şube müdürü “hedefi tuttuk” dedi|Issue 250 fines: the branch manager said “we hit the target”
+5 Park Yeri Bulamama Alanı: araç yok, yer yok|5 No-Parking-Anywhere Zones: no cars, no spaces
+5 yükseltme al: prosedür kitabı kalınlaştı|Buy 5 upgrades: the procedure book got thicker
+10 Vezne: kart kabul etmiyor, nakit de yok|10 Cashiers: no cards, and no cash either
+Komşulara huzur ver (40 kez)|Give peace to the neighbors (40 times)
+5 Mahalle Salıncağı kur: gıcırtı huzurun sesi|Set up 5 Neighborhood Swings: the squeak is the sound of peace
+250 kez huzur ver: muhtar yazılı teşekkür etti|Give peace 250 times: the neighborhood head sent a written thank-you
+5 Komşu Simit Fırını: koku sokağı sardı|5 Neighbor Simit Bakeries: the smell filled the street
+5 yükseltme al: mahalle toplantısı karar aldı|Buy 5 upgrades: the neighborhood meeting made a decision
+10 Ortak Bahçe: domatesler kimseye ait değil|10 Community Gardens: the tomatoes belong to no one
+Daha Sert Bakış|Harsher Stare
+Kırmızı Kalem|Red Pen
+Kıdemli İmp Rozeti|Senior Imp Badge
+Mesai Bitmez|Overtime Never Ends
+Korna Delisi Sertifikası|Honk Maniac Certificate
+Üç Nüsha Zorunlu|Triplicate Mandatory
+Toner Bitti (Yalan)|Out of Toner (A Lie)
+Yine Aynı Şarkı|Same Song Again
+Lütfen Bekleyiniz (Yine)|Please Wait (Again)
+Kauçuk Damga|Rubber Stamp
+Dilekçe Reddi Şablonu|Petition Denial Template
+Cam Kalınlaştırıldı|Thicker Glass
+Çift Taraflı Mürekkep|Double-Sided Ink
+Dağ Yüksek, Dosya Fazla|High Mountain, Huge File Stack
+Yarın Gel (Yeni Sürüm)|Come Back Tomorrow (New Version)
+Prosedür Bayramı|Procedure Holiday
+Müzik Bozuk, Bu İyi|Music Broken, That's Good
+Sonsuz Mesai|Endless Overtime
+Kıdemli Melek Rozeti|Senior Angel Badge
+Daha Sıcak Gülümseme|Warmer Smile
+Güleç Yüzlü Danışman|Smiling Advisor
+Pembe Not Kağıdı|Pink Sticky Note
+Sarılma Kotası Kalktı|Hug Quota Lifted
+Üç Akor Yeter|Three Chords Are Enough
+Torun Videosu Yüklendi|Grandkid Video Uploaded
+Köpüklü Bulut Latte|Foamy Cloud Latte
+Taze Demlik|Fresh Teapot
+Fazladan Nane|Extra Mint
+Baş Teyze Rozeti|Head Auntie Badge
+Harita + Sabır|Map + Patience
+Hat Hep Açık|Line Always Open
+Kalem Kâğıt Hazır|Pen and Paper Ready
+Gönüllü Mesai|Volunteer Overtime
+Kayıp Eşya Kayıp Eşyası|Lost Property's Lost Property
+Okları Düzelttik|We Fixed the Arrows
+Mesai Sonrası Mesai|After-Hours Overtime
+Gönül Mesaisi|Labor of Love Hours
+Şef Rozeti|Chef Badge
+Gönüllü Komşuluk|Volunteer Neighborliness
+Sert Fren|Hard Brake
+Radar Kalibrasyonu|Radar Calibration
+Şube Müdürü Rozeti|Branch Manager Badge
+Mesai Sonrası Ceza|After-Hours Fines
+Flaş Tamir Edildi|Flash Repaired
+Park Çizgileri Yenilendi|Parking Lines Repainted
+Kredi Kartı (Yeni)|Credit Card (New)
+Bariyer Daha Yavaş|Slower Barrier
+Levha Düzeltildi (Sanırım)|Sign Fixed (I Think)
+Trafik Haftası|Traffic Week
+Sıcak Bir “Hoş Geldin”|A Warm “Welcome”
+Simit İkramı|Simit Treat
+Mahalle Muhtarı Rozeti|Neighborhood Head's Badge
+Salıncak Yağlandı|Swing Oiled
+Fırın Daha Erken Açılıyor|Bakery Opens Earlier
+Domates Fidesi Bereketi|Tomato Seedling Abundance
+Kedi Artık Geliyor|The Cat Comes Now
+Çeşme Başı Sohbeti|Chat by the Fountain
+Mahalle Şenliği|Neighborhood Festival
+Sonsuz Huzur|Endless Peace
+Daha sert basılıyor, daha çok reddediliyor.|It stamps harder, so more gets denied.
+Her dilekçeye aynı cevap: “Eksik evrak.”|Same answer to every petition: “Incomplete paperwork.”
+Rozet takınca insanlar daha çok korkuyor. Bilim bu.|People get more scared when you wear the badge. That's science.
+Her ceza, saniyelik üretimin bir kısmını ekler. Mesai bitmez.|Every fine adds a slice of per-second production. The shift never ends.
+Kornaya basanlar artık iki kez cezalanıyor: bir trafikte, bir burada.|Honkers are now punished twice: once in traffic, once here.
+Her form üç nüsha, her nüsha üç imza. Cehennemin amacı zaten bu.|Every form in triplicate, every copy triple-signed. That's hell's whole point.
+Makine “toner bitti” diyor ama aslında sizinle dalga geçiyor.|The machine says “out of toner,” but it's actually mocking you.
+Aynı 5 saniye çalıyor, müşteri artık şarkıyı ezberledi.|The same 5 seconds loop; the customer has memorized the song.
+Artık ne duyuluyor ne görülüyor. Verim iki katına çıktı.|Now it's neither heard nor seen. Efficiency doubled.
+Cezayı anında kesiyorsun. Muhatap yok, itiraz yok.|You issue the fine instantly. No counterpart, no objection.
+Hız sınırını biz belirliyoruz. Adil olduğunu söylüyorlar.|We set the speed limit. They say it's fair.
+Rozeti görünce herkes yavaşlıyor. Ceza yazmaya gerek kalmıyor.|Everyone slows down when they see the badge. No fines needed.
+Her ceza, saniyelik üretimin bir kısmını ekler. Paydos yok.|Every fine adds a slice of per-second production. No clocking out.
+Artık herkes fotoğrafta yakalanıyor. Kimse gülümsemiyor.|Now everyone gets caught in the photo. Nobody is smiling.
+Çizgiler var, yer yok. Yine de düzenli görünüyor.|There are lines but no spaces. It still looks tidy.
+Sistem çalışıyor. Bazen. Yeterince.|The system works. Sometimes. Just enough.
+Kalkması dört dakika sürüyor. Beklemek cezanın parçası.|It takes four minutes to lift. Waiting is part of the punishment.
+Oklar artık aynı yönü gösteriyor. Sürücüler yine de tereddütte.|The arrows now point the same way. Drivers still hesitate.
+Tüm şube aynı anda ceza yazıyor. Kâğıt yetişmiyor.|The whole branch issues fines at once. They can't keep up with paper.
+Gülümsemek bedava ama etkisi iki kat. Enflasyon burada işlemiyor.|Smiling is free but twice as effective. Inflation doesn't apply here.
+Gülümseyen danışmana herkes soru soruyor.|Everyone asks the smiling advisor a question.
+“Günaydın, harikasın” notu bırakmak puanı üç katlıyor.|Leaving a “good morning, you're great” note triples the score.
+Artık kimse sarılma hesabı tutmuyor.|Nobody keeps a hug count anymore.
+Herkes aynı üç akoru çalıyor ama herkes güzel güzel ağlıyor.|Everyone plays the same three chords, but everyone cries beautifully.
+Herkes izliyor, kimse atlamıyor.|Everyone is watching; nobody skips.
+Köpüğü gerçekten bulut. Müşteriler uçarak geliyor.|The foam is actual cloud. Customers come flying in.
+Wi-Fi şifresi sevgi. Hız sınırsız.|The Wi-Fi password is love. Speed unlimited.
+Nane serpince ruhlar daha çok ısınıyor.|Sprinkle mint and the souls warm up more.
+Çay tavşan kanı olunca teşekkür iki katına çıkıyor.|When the tea is just right, thanks double.
+Rozet çıkınca herkes susuyor. Kısa süreliğine.|When the badge comes out, everyone goes quiet. Briefly.
+Rozeti takınca herkes yol veriyor, hatta teyzeler bile.|Everyone yields when you wear the badge, even the aunties.
+Tavsiye yediyüzyirmi dört saat; sorulmadan da veriliyor.|Advice 24/7; given even when not asked.
+Bürosu kayıp ama herkes seve seve yardım ediyor.|The office is missing, but everyone helps gladly.
+Teyze “ben bulurum” dedi ama hâlâ kayıp. Yine de verim iki katına çıktı.|The auntie said “I'll find it,” but it's still missing. Efficiency doubled anyway.
+Artık oklar aynı yöne bakıyor. Mucize.|Now the arrows point the same way. A miracle.
+Herkesin işi rast gidiyor, kimse nedenini bilmiyor.|Everyone's business runs smoothly; nobody knows why.
+Her reddediş, saniyelik üretimin bir kısmını ekler. Eve gidilmez.|Every denial adds a slice of per-second production. Nobody goes home.
+Kimse eve gitmiyor. Zaten ev de cehennem.|Nobody goes home. Home is hell anyway.
+Hem iki yüzü reddediyor hem de emin olmuyor.|It denies both sides and still isn't sure.
+Bütün prosedürler aynı anda geçerli, hiçbiri uygulanmıyor.|All procedures are valid at once, and none are applied.
+Aynı 8 saniyelik şarkı, sonsuz döngü. Ruhlar yalvarıyor.|The same 8-second song, on infinite loop. The souls are begging.
+Zirveye ulaşan dosya sahibine ulaşamıyor.|The file reaches the top but never reaches its owner.
+“Yarın gel” artık üç dilde.|“Come back tomorrow” is now in three languages.
+Rozeti görünce şikâyetçi vazgeçiyor. Mutlu son.|The complainer gives up when they see the badge. Happy ending.
+Kapıda herkesi güler yüzle karşılıyorsun. Postacı bile şaşkın.|You greet everyone at the door with a smile. Even the mailman is surprised.
+Simit verince huzur iki katına çıkıyor. Bilim böyle diyor.|Hand out simit and peace doubles. That's what science says.
+Rozeti takınca herkes sıraya girdi. Sıra bile kendiliğinden düzeldi.|Everyone lined up when you put on the badge. Even the queue fixed itself.
+Tabela artık kendi kendine “bekleyiniz” diyor.|The sign now says “please wait” all by itself.
+Gıcırdamıyor. Çocuklar biraz hayal kırıklığına uğradı.|It doesn't squeak. The kids are a little disappointed.
+Saat dörtte simit kokusu. Bütün mahalle erken kalkıyor.|Simit smell at four in the morning. The whole neighborhood gets up early.
+Kimse sulamıyor ama domates çıkıyor. Mahallenin sırrı.|Nobody waters them, yet tomatoes appear. The neighborhood's secret.
+Besleme noktası resmî oldu. Kedi hâlâ mesafeli.|The feeding spot is official now. The cat still keeps its distance.
+Dedikodu üretimi iki katına çıktı. Kimse kaynak göstermiyor.|Gossip production doubled. Nobody cites a source.
+Tüm mahalle aynı anda üretiyor. Kimse ne ürettiğini bilmiyor.|The whole neighborhood produces at once. Nobody knows what they're producing.
+Ceza kesmeden önce kaşını çatmak verimi iki katına çıkarıyor.|Frowning before issuing a fine doubles efficiency.
+Her iyilik, saniyelik üretimin bir kısmını ekler. Yorulmak yok.|Every good deed adds a slice of per-second production. No getting tired.
+Yol tarifi çizime döküldü, çizim de kayboldu.|The directions got drawn out, and the drawing got lost too.
+Rozet takınca herkes yavaşlıyor. Ceza yazmaya gerek kalmıyor.|Everyone slows down when you wear the badge. No fines needed.
+Her iyilik, saniyelik üretimin bir kısmını ekler.|Every good deed adds a slice of per-second production.
+Her yardım, saniyelik üretimin bir kısmını ekler. Mesai aşkla.|Every act of help adds a slice of per-second production. Overtime with love.
+Yol Tarifi Levhası|Directions Sign
+Formu yanlış dolduran herkes ekstra cezalanıyor. Adalet bu.|Everyone who fills the form wrong gets extra punishment. That is justice.
+1.600.000 ceza kes: şube rekoru kırdı, kimse sevinmedi|Issue 1,600,000 fines: the branch set a record, nobody celebrated
+Kemal Bey’in canının yarısını götür: “Bu radar değil, sanat” diyor|Take half of Mr. Kemal's HP: he says “this isn't radar, it's art”
+1.600.000 Teşekkür topla: mahalle defterini açtı, hesap kabardı|Collect 1,600,000 Thanks: the neighborhood opened its ledger and the bill grew
+Huzur çubuğunun yarısı: bütün mahalle çay demledi|Half of the peace bar: the whole neighborhood brewed tea

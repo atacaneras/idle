@@ -187,6 +187,13 @@ public static class StarterContentGenerator
     [MenuItem("Evrim/Başlangıç İçeriğini Oluştur")]
     static void GenerateLegacy() { Generate(); }
 
+    // CI / batch: once icerigi uret, sonra dogrula. Hata varsa Unity 1 koduyla kapanir.
+    public static void GenerateAndValidate()
+    {
+        Generate();
+        ContentValidator.ValidateBatch();
+    }
+
     // ---- Yardimcilar ----
     static readonly HashSet<string> used = new HashSet<string>();
 
@@ -263,11 +270,26 @@ public static class StarterContentGenerator
         var so = new SerializedObject(gm);
         var agesProp = so.FindProperty("ages");
         agesProp.arraySize = ages.Count;
-        for (int i = 0; i < ages.Count; i++) agesProp.GetArrayElementAtIndex(i).objectReferenceValue = ages[i];
+        // AssetDatabase.Refresh() yeni olusturulan asset'leri yeniden import eder; bu sirada
+        // elimizdeki C# nesneleri bayatlayabiliyor ve sahneye null olarak yazilabiliyor.
+        // Bu yuzden her referansi yazmadan hemen once diskteki asset'ten tekrar yukle.
+        for (int i = 0; i < ages.Count; i++)
+        {
+            var fresh = Reload(ages[i]);
+            agesProp.GetArrayElementAtIndex(i).objectReferenceValue = fresh;
+            if (fresh == null)
+                Debug.LogError("[Assign] age " + i + " null! path='" +
+                    (ages[i] != null ? AssetDatabase.GetAssetPath(ages[i]) : "<stale>") + "'");
+        }
 
         var permsProp = so.FindProperty("permanentUpgrades");
         permsProp.arraySize = permList.Count;
-        for (int i = 0; i < permList.Count; i++) permsProp.GetArrayElementAtIndex(i).objectReferenceValue = permList[i];
+        for (int i = 0; i < permList.Count; i++)
+        {
+            var fresh = Reload(permList[i]);
+            permsProp.GetArrayElementAtIndex(i).objectReferenceValue = fresh;
+            if (fresh == null) Debug.LogError("[Assign] perm " + i + " null!");
+        }
 
         if (game != null)
         {
@@ -283,8 +305,22 @@ public static class StarterContentGenerator
         }
 
         so.ApplyModifiedProperties();
+        for (int i = 0; i < ages.Count; i++)
+            if (agesProp.GetArrayElementAtIndex(i).objectReferenceValue == null)
+                Debug.LogError("[Assign] readback age " + i + " null");
+        Debug.Log("[Assign] sahne: '" + gm.gameObject.scene.path + "' ages=" + ages.Count + " perms=" + permList.Count);
         EditorSceneManager.MarkSceneDirty(gm.gameObject.scene);
         EditorSceneManager.SaveScene(gm.gameObject.scene);
+    }
+
+    // Sahneye yazmadan once asset'i diskten tazele (bayat C# nesnesi null referans uretiyor).
+    static T Reload<T>(T obj) where T : UnityEngine.Object
+    {
+        if (obj == null) return null;
+        string path = AssetDatabase.GetAssetPath(obj);
+        if (string.IsNullOrEmpty(path)) return obj;
+        var fresh = AssetDatabase.LoadAssetAtPath<T>(path);
+        return fresh != null ? fresh : obj;
     }
 
     // ---- JSON semasi ----

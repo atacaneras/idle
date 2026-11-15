@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
+  m_Name: age_heaven_3
+  m_EditorClassIdentifier: Assembly-CSharp::AgeData
+  id: heaven_3
+  displayName: 'Cennet 3. Kat: Huzur Mahallesi'
+  side: 2
+  clickLabel: HUZUR VER
+  goalTitle: 'Mutluluk Seviyesi: Huzur Mahallesi'
+  quests:
+  - id: heaven_3_q1
+    text: "Kom\u015Fulara huzur ver (40 kez)"
+    kind: 0
+    building: {fileID: 0}
+    amount: 40
+    rewardFlat: 90
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: heaven_3_q2
+    text: "5 Mahalle Sal\u0131nca\u011F\u0131 kur: g\u0131c\u0131rt\u0131 huzurun sesi"
+    kind: 1
+    building: {fileID: 11400000, guid: 0664026bca8607940af658e69c9e85f2, type: 2}
+    amount: 5
+    rewardFlat: 250
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: heaven_3_q3
+    text: "250 kez huzur ver: muhtar yaz\u0131l\u0131 te\u015Fekk\xFCr etti"
+    kind: 0
+    building: {fileID: 0}
+    amount: 250
+    rewardFlat: 0
+    rewardSeconds: 90
+    rewardKnowledge: 0
+  - id: heaven_3_q4
+    text: "5 Kom\u015Fu Simit F\u0131r\u0131n\u0131: koku soka\u011F\u0131 sard\u0131"
+    kind: 1
+    building: {fileID: 11400000, guid: b8540e10fe3f83347b455bb4cb455fe7, type: 2}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 180
+    rewardKnowledge: 0
+  - id: heaven_3_q5
+    text: "5 y\xFCkseltme al: mahalle toplant\u0131s\u0131 karar ald\u0131"
+    kind: 3
+    building: {fileID: 0}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 0
+    rewardKnowledge: 2
+  - id: heaven_3_q6
+    text: "10 Ortak Bah\xE7e: domatesler kimseye ait de\u011Fil"
+    kind: 1
+    building: {fileID: 11400000, guid: 74361b48c81ed5f4486bca1ccf9fed4d, type: 2}
+    amount: 10
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 0
+  - id: heaven_3_q7
+    text: "1.600.000 Te\u015Fekk\xFCr topla: mahalle defterini a\xE7t\u0131, hesap kabard\u0131"
+    kind: 2
+    building: {fileID: 0}
+    amount: 1600000
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 1
+  - id: heaven_3_q8
+    text: "Huzur \xE7ubu\u011Funun yar\u0131s\u0131: b\xFCt\xFCn mahalle \xE7ay demledi"
+    kind: 2
+    building: {fileID: 0}
+    amount: 16000000
+    rewardFlat: 0
+    rewardSeconds: 600
+    rewardKnowledge: 2
+  resources:
+  - {fileID: 11400000, guid: 6a82babe4c62a144183e8258117cbdb6, type: 2}
+  buildings:
+  - {fileID: 11400000, guid: 0664026bca8607940af658e69c9e85f2, type: 2}
+  - {fileID: 11400000, guid: b8540e10fe3f83347b455bb4cb455fe7, type: 2}
+  - {fileID: 11400000, guid: 74361b48c81ed5f4486bca1ccf9fed4d, type: 2}
+  - {fileID: 11400000, guid: 76419bf199421374a8fa950f68ffcef6, type: 2}
+  - {fileID: 11400000, guid: dd66c0ad64ac6e74187a3a5c5d8ae264, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: d825b83796d429846b71a1486c6c5841, type: 2}
+  - {fileID: 11400000, guid: dab95d9420d343e46bc2fd295a99cc9d, type: 2}
+  - {fileID: 11400000, guid: a0119db4c8118b442b75fa9694ae4a48, type: 2}
+  - {fileID: 11400000, guid: a0ca21ddbd5d42f46844b4ec5feb3506, type: 2}
+  - {fileID: 11400000, guid: bf837aeeb39450f4e91626457f8c558d, type: 2}
+  - {fileID: 11400000, guid: a773e694b68730b4993a3af7037e2dfe, type: 2}
+  - {fileID: 11400000, guid: c17261a31fe54fb489e7ad9a4ee6d5ec, type: 2}
+  - {fileID: 11400000, guid: ac8ad683f2b33eb42b10bcfd4c9df3d4, type: 2}
+  - {fileID: 11400000, guid: bc5ccef09bb0ae6419b990ff1d00ccb2, type: 2}
+  - {fileID: 11400000, guid: c033137588e03ac40a1ca1b0e341e996, type: 2}
+  clickResource: {fileID: 11400000, guid: 6a82babe4c62a144183e8258117cbdb6, type: 2}
+  advanceResource: {fileID: 11400000, guid: 6a82babe4c62a144183e8258117cbdb6, type: 2}
+  advanceCost: 32000000
+  knowledgeReward: 7
+  skyColor: {r: 0.62, g: 0.85, b: 1, a: 1}
+  groundColor: {r: 0.5, g: 0.8, b: 0.55, a: 1}

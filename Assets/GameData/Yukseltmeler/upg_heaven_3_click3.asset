@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c007ee57b681de42bcfae6ee007429e, type: 3}
+  m_Name: upg_heaven_3_click3
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: heaven_3_click3
+  displayName: "Mahalle Muhtar\u0131 Rozeti"
+  description: "Rozet \xE7\u0131k\u0131nca herkes susuyor. K\u0131sa s\xFCreli\u011Fine."
+  icon: {fileID: 0}
+  kind: 0
+  targetBuilding: {fileID: 0}
+  value: 5
+  costResource: {fileID: 11400000, guid: 6a82babe4c62a144183e8258117cbdb6, type: 2}
+  cost: 120000
+  unlockBuilding: {fileID: 0}
+  unlockCount: 0
+  prerequisite: {fileID: 11400000, guid: dab95d9420d343e46bc2fd295a99cc9d, type: 2}

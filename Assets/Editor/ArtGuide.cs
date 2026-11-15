@@ -53,7 +53,14 @@ public static class ArtGuide
             sb.AppendLine("| Dosya | Ne |");
             sb.AppendLine("|---|---|");
             sb.AppendLine("| `background.png` | Kat arka planı |");
-            if (key != "earth") sb.AppendLine("| `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |");
+            if (key != "earth")
+            {
+                // Cehennem katlarinda hedef bir boss; cennette kat karakteri. Rehberde adiyla yazalim.
+                string boss = "Boss (cehennem) / kat karakteri (cennet), ortada";
+                if (age != null && !string.IsNullOrEmpty(age.goalTitle) && age.goalTitle.StartsWith("BOSS: "))
+                    boss = "Boss: " + age.goalTitle.Substring(6).Trim() + ", ortada";
+                sb.AppendLine("| `boss.png` | " + boss + " |");
+            }
             if (age != null && age.buildings != null)
                 foreach (var b in age.buildings)
                     sb.AppendLine("| `" + b.id + "_lv1.png` | " + b.displayName + " |");

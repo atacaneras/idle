@@ -1402,6 +1402,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11c8d00c3c993be49b6d6d2364bedeeb, type: 2}
   - {fileID: 11400000, guid: 33e883bd4268db543a6b17e9d96734df, type: 2}
   - {fileID: 11400000, guid: 83224e3feef939f40b2cdac8b025fd3e, type: 2}
+  - {fileID: 11400000, guid: 8b3004e9dfda7aa4ca9f5a2a5be9b4ae, type: 2}
+  - {fileID: 11400000, guid: cc6aa1a95b1eccb4da99808b3f6b3b7c, type: 2}
   permanentUpgrades:
   - {fileID: 11400000, guid: 05a8a3ef41e47524c9b1e2c54d0c3a1e, type: 2}
   - {fileID: 11400000, guid: 5d8818355438cee44b075bdb406c0ec9, type: 2}

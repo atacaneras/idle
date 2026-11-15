@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ab2869040e360428780ad47804f328, type: 3}
+  m_Name: age_hell_3
+  m_EditorClassIdentifier: Assembly-CSharp::AgeData
+  id: hell_3
+  displayName: "Cehennem 3. Kat: Trafik Cezas\u0131 \u015Eubesi"
+  side: 1
+  clickLabel: CEZA KES
+  goalTitle: "BOSS: Trafik \u015Eube M\xFCd\xFCr\xFC Kemal Bey"
+  quests:
+  - id: hell_3_q1
+    text: "H\u0131z s\u0131n\u0131r\u0131n\u0131 a\u015Fanlar\u0131 cezaland\u0131r (40 kez)"
+    kind: 0
+    building: {fileID: 0}
+    amount: 40
+    rewardFlat: 90
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: hell_3_q2
+    text: "5 H\u0131z Kameras\u0131 kur: fla\u015F bozuk ama ceza sa\u011Flam"
+    kind: 1
+    building: {fileID: 11400000, guid: a744b17c14a1588498591150549fa95c, type: 2}
+    amount: 5
+    rewardFlat: 250
+    rewardSeconds: 0
+    rewardKnowledge: 0
+  - id: hell_3_q3
+    text: "250 ceza kes: \u015Fube m\xFCd\xFCr\xFC \u201Chedefi tuttuk\u201D dedi"
+    kind: 0
+    building: {fileID: 0}
+    amount: 250
+    rewardFlat: 0
+    rewardSeconds: 90
+    rewardKnowledge: 0
+  - id: hell_3_q4
+    text: "5 Park Yeri Bulamama Alan\u0131: ara\xE7 yok, yer yok"
+    kind: 1
+    building: {fileID: 11400000, guid: 5df4f63734c40e44eac6bee8850e7238, type: 2}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 180
+    rewardKnowledge: 0
+  - id: hell_3_q5
+    text: "5 y\xFCkseltme al: prosed\xFCr kitab\u0131 kal\u0131nla\u015Ft\u0131"
+    kind: 3
+    building: {fileID: 0}
+    amount: 5
+    rewardFlat: 0
+    rewardSeconds: 0
+    rewardKnowledge: 2
+  - id: hell_3_q6
+    text: '10 Vezne: kart kabul etmiyor, nakit de yok'
+    kind: 1
+    building: {fileID: 11400000, guid: 5b5a919076b5ee047b1af5eb7359438d, type: 2}
+    amount: 10
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 0
+  - id: hell_3_q7
+    text: "1.600.000 ceza kes: \u015Fube rekoru k\u0131rd\u0131, kimse sevinmedi"
+    kind: 2
+    building: {fileID: 0}
+    amount: 1600000
+    rewardFlat: 0
+    rewardSeconds: 300
+    rewardKnowledge: 1
+  - id: hell_3_q8
+    text: "Kemal Bey\u2019in can\u0131n\u0131n yar\u0131s\u0131n\u0131 g\xF6t\xFCr: \u201CBu radar de\u011Fil, sanat\u201D diyor"
+    kind: 2
+    building: {fileID: 0}
+    amount: 16000000
+    rewardFlat: 0
+    rewardSeconds: 600
+    rewardKnowledge: 2
+  resources:
+  - {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  buildings:
+  - {fileID: 11400000, guid: a744b17c14a1588498591150549fa95c, type: 2}
+  - {fileID: 11400000, guid: 5df4f63734c40e44eac6bee8850e7238, type: 2}
+  - {fileID: 11400000, guid: 5b5a919076b5ee047b1af5eb7359438d, type: 2}
+  - {fileID: 11400000, guid: ef74f4e306de7d04bb4c6dac6f3163ac, type: 2}
+  - {fileID: 11400000, guid: 00675d271867d244a81e5e8546d092e7, type: 2}
+  upgrades:
+  - {fileID: 11400000, guid: 4a868a9610f20e14fa532841ff2fa30f, type: 2}
+  - {fileID: 11400000, guid: af7756aa8edee48418277ea8637c4834, type: 2}
+  - {fileID: 11400000, guid: d6a3b9b29cb9bcf42a6a01870b84e7b5, type: 2}
+  - {fileID: 11400000, guid: e49f486c4f91c73488bf2a36b35c967d, type: 2}
+  - {fileID: 11400000, guid: 4caeb8403c89ee34aa5a5fd23e0731f6, type: 2}
+  - {fileID: 11400000, guid: 314918ccc04336b4fb066a7e5adff210, type: 2}
+  - {fileID: 11400000, guid: f05fc134269381846936cfdf51bcfee2, type: 2}
+  - {fileID: 11400000, guid: e118eafc72f8021429d8565c874b802d, type: 2}
+  - {fileID: 11400000, guid: 8ab64b6bbdc12b046b27e5787c7244ef, type: 2}
+  - {fileID: 11400000, guid: 8fdc571ecddca224f86030eb9a8cf723, type: 2}
+  clickResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  advanceResource: {fileID: 11400000, guid: b4d85bc90c5166c44831c5efd38a4ed9, type: 2}
+  advanceCost: 32000000
+  knowledgeReward: 7
+  skyColor: {r: 0.32, g: 0.03, b: 0.03, a: 1}
+  groundColor: {r: 0.13, g: 0.02, b: 0.02, a: 1}

@@ -21,7 +21,7 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
-| `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `boss.png` | Boss: Numaratör Nuri, ortada |
 | `hell_1_korna_lv1.png` | Kornacı Ceza Kulübesi |
 | `hell_1_bant_lv1.png` | Kırmızı Bant Memuru |
 | `hell_1_fotokopi_lv1.png` | Sonsuz Fotokopi Makinesi |
@@ -33,19 +33,24 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
-| `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `boss.png` | Boss: Şikâyet Müdürü Bay Hayır, ortada |
 | `hell_2_damga_lv1.png` | Damga Makinesi (Hep REDDEDİLDİ) |
 | `hell_2_telefon_lv1.png` | Telefon Bekletme Hattı |
 | `hell_2_gise_lv1.png` | Gişe Camı (Kapalı) |
 | `hell_2_dosya_lv1.png` | Şikâyet Dosyası Dağı |
 | `hell_2_yarin_lv1.png` | “Yarın Gel” Panosu |
 
-## hell_3 (içerik henüz yok)  —  `Assets/Resources/Art/hell_3/`
+## Cehennem 3. Kat: Trafik Cezası Şubesi  —  `Assets/Resources/Art/hell_3/`
 
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
-| `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `boss.png` | Boss: Trafik Şube Müdürü Kemal Bey, ortada |
+| `hell_3_kamera_lv1.png` | Hız Kamerası (Flaş Bozuk) |
+| `hell_3_park_lv1.png` | Park Yeri Bulamama Alanı |
+| `hell_3_vezne_lv1.png` | Vezne (Kart Kabul Etmiyor) |
+| `hell_3_bariyer_lv1.png` | Otopark Bariyeri (Hep Kapalı) |
+| `hell_3_levha_lv1.png` | Tek Yön Levhası (İki Yön) |
 
 ## hell_4 (içerik henüz yok)  —  `Assets/Resources/Art/hell_4/`
 
@@ -99,12 +104,17 @@ Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz).
 | `heaven_2_torun_lv1.png` | Torun Fotoğrafı Galerisi |
 | `heaven_2_tavsiye_lv1.png` | Teyze Tavsiye Hattı |
 
-## heaven_3 (içerik henüz yok)  —  `Assets/Resources/Art/heaven_3/`
+## Cennet 3. Kat: Huzur Mahallesi  —  `Assets/Resources/Art/heaven_3/`
 
 | Dosya | Ne |
 |---|---|
 | `background.png` | Kat arka planı |
 | `boss.png` | Boss (cehennem) / kat karakteri (cennet), ortada |
+| `heaven_3_salincak_lv1.png` | Mahalle Salıncağı |
+| `heaven_3_firin_lv1.png` | Komşu Simit Fırını |
+| `heaven_3_bahce_lv1.png` | Ortak Bahçe (Domates Serbest) |
+| `heaven_3_kedi_lv1.png` | Sokak Kedisi Besleme Noktası |
+| `heaven_3_cesme_lv1.png` | Mahalle Çeşmesi (Dedikodu Dahil) |
 
 ## heaven_4 (içerik henüz yok)  —  `Assets/Resources/Art/heaven_4/`
 

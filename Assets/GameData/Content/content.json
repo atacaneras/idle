@@ -1522,6 +1522,748 @@
           "rewardKnowledge": 2
         }
       ]
+    },
+    {
+      "id": "hell_3",
+      "asset": "age_hell_3",
+      "displayName": "Cehennem 3. Kat: Trafik Cezası Şubesi",
+      "side": "hell",
+      "clickLabel": "CEZA KES",
+      "goalTitle": "BOSS: Trafik Şube Müdürü Kemal Bey",
+      "clickResource": "complaint",
+      "advanceResource": "complaint",
+      "advanceCost": 32000000,
+      "knowledgeReward": 7,
+      "resources": [
+        "complaint"
+      ],
+      "skyColor": [
+        0.32,
+        0.03,
+        0.03
+      ],
+      "groundColor": [
+        0.13,
+        0.02,
+        0.02
+      ],
+      "buildings": [
+        {
+          "id": "hell_3_kamera",
+          "asset": "bld_hell_3_kamera",
+          "displayName": "Hız Kamerası (Flaş Bozuk)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 27,
+          "costGrowth": 1.15,
+          "baseProduction": 0.2,
+          "scenePosition": [
+            -8.0,
+            -3.4
+          ],
+          "sortingOrder": 0,
+          "placeholderColor": [
+            0.9,
+            0.2,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_3_park",
+          "asset": "bld_hell_3_park",
+          "displayName": "Park Yeri Bulamama Alanı",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 220,
+          "costGrowth": 1.15,
+          "baseProduction": 1.5,
+          "scenePosition": [
+            -4.4,
+            -3.4
+          ],
+          "sortingOrder": 1,
+          "placeholderColor": [
+            0.8,
+            0.5,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_3_vezne",
+          "asset": "bld_hell_3_vezne",
+          "displayName": "Vezne (Kart Kabul Etmiyor)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 2200,
+          "costGrowth": 1.15,
+          "baseProduction": 9,
+          "scenePosition": [
+            -0.8,
+            -3.4
+          ],
+          "sortingOrder": 2,
+          "placeholderColor": [
+            0.6,
+            0.1,
+            0.3
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_3_bariyer",
+          "asset": "bld_hell_3_bariyer",
+          "displayName": "Otopark Bariyeri (Hep Kapalı)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 25000,
+          "costGrowth": 1.15,
+          "baseProduction": 55,
+          "scenePosition": [
+            2.8,
+            -3.4
+          ],
+          "sortingOrder": 3,
+          "placeholderColor": [
+            1.0,
+            0.3,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "hell_3_levha",
+          "asset": "bld_hell_3_levha",
+          "displayName": "Tek Yön Levhası (İki Yön)",
+          "produces": "complaint",
+          "costResource": "complaint",
+          "baseCost": 300000,
+          "costGrowth": 1.15,
+          "baseProduction": 320,
+          "scenePosition": [
+            6.4,
+            -3.4
+          ],
+          "sortingOrder": 4,
+          "placeholderColor": [
+            1.0,
+            0.8,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        }
+      ],
+      "upgrades": [
+        {
+          "id": "hell_3_click1",
+          "asset": "upg_hell_3_click1",
+          "displayName": "Sert Fren",
+          "description": "Cezayı anında kesiyorsun. Muhatap yok, itiraz yok.",
+          "kind": "ClickMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 200,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_click2",
+          "asset": "upg_hell_3_click2",
+          "displayName": "Radar Kalibrasyonu",
+          "description": "Hız sınırını biz belirliyoruz. Adil olduğunu söylüyorlar.",
+          "kind": "ClickMultiplier",
+          "value": 3,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 4500,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "hell_3_click1"
+        },
+        {
+          "id": "hell_3_click3",
+          "asset": "upg_hell_3_click3",
+          "displayName": "Şube Müdürü Rozeti",
+          "description": "Rozeti görünce herkes yavaşlıyor. Ceza yazmaya gerek kalmıyor.",
+          "kind": "ClickMultiplier",
+          "value": 5,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 120000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "hell_3_click2"
+        },
+        {
+          "id": "hell_3_share",
+          "asset": "upg_hell_3_share",
+          "displayName": "Mesai Sonrası Ceza",
+          "description": "Her ceza, saniyelik üretimin bir kısmını ekler. Mesai bitmez.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 10000,
+          "unlockBuilding": "hell_3_kamera",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_bm0",
+          "asset": "upg_hell_3_bm0",
+          "displayName": "Flaş Tamir Edildi",
+          "description": "Artık herkes fotoğrafta yakalanıyor. Kimse gülümsemiyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 1000,
+          "unlockBuilding": "hell_3_kamera",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_bm1",
+          "asset": "upg_hell_3_bm1",
+          "displayName": "Park Çizgileri Yenilendi",
+          "description": "Çizgiler var, yer yok. Yine de düzenli görünüyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 8000,
+          "unlockBuilding": "hell_3_park",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_bm2",
+          "asset": "upg_hell_3_bm2",
+          "displayName": "Kredi Kartı (Yeni)",
+          "description": "Sistem çalışıyor. Bazen. Yeterince.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 80000,
+          "unlockBuilding": "hell_3_vezne",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_bm3",
+          "asset": "upg_hell_3_bm3",
+          "displayName": "Bariyer Daha Yavaş",
+          "description": "Kalkması dört dakika sürüyor. Beklemek cezanın parçası.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 900000,
+          "unlockBuilding": "hell_3_bariyer",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_bm4",
+          "asset": "upg_hell_3_bm4",
+          "displayName": "Levha Düzeltildi (Sanırım)",
+          "description": "Oklar artık aynı yönü gösteriyor. Sürücüler yine de tereddütte.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 11000000,
+          "unlockBuilding": "hell_3_levha",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "hell_3_global",
+          "asset": "upg_hell_3_global",
+          "displayName": "Trafik Haftası",
+          "description": "Tüm şube aynı anda ceza yazıyor. Kâğıt yetişmiyor.",
+          "kind": "GlobalMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "complaint",
+          "cost": 750000,
+          "unlockBuilding": "hell_3_levha",
+          "unlockCount": 5,
+          "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "hell_3_q1",
+          "text": "Hız sınırını aşanları cezalandır (40 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 40,
+          "rewardFlat": 90,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_3_q2",
+          "text": "5 Hız Kamerası kur: flaş bozuk ama ceza sağlam",
+          "kind": "Building",
+          "building": "hell_3_kamera",
+          "amount": 5,
+          "rewardFlat": 250,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_3_q3",
+          "text": "250 ceza kes: şube müdürü “hedefi tuttuk” dedi",
+          "kind": "Click",
+          "building": null,
+          "amount": 250,
+          "rewardFlat": 0,
+          "rewardSeconds": 90,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_3_q4",
+          "text": "5 Park Yeri Bulamama Alanı: araç yok, yer yok",
+          "kind": "Building",
+          "building": "hell_3_park",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 180,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_3_q5",
+          "text": "5 yükseltme al: prosedür kitabı kalınlaştı",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 2
+        },
+        {
+          "id": "hell_3_q6",
+          "text": "10 Vezne: kart kabul etmiyor, nakit de yok",
+          "kind": "Building",
+          "building": "hell_3_vezne",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "hell_3_q7",
+          "text": "1.600.000 ceza kes: şube rekoru kırdı, kimse sevinmedi",
+          "kind": "Earn",
+          "building": null,
+          "amount": 1600000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "hell_3_q8",
+          "text": "Kemal Bey’in canının yarısını götür: “Bu radar değil, sanat” diyor",
+          "kind": "Earn",
+          "building": null,
+          "amount": 16000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
+        }
+      ]
+    },
+    {
+      "id": "heaven_3",
+      "asset": "age_heaven_3",
+      "displayName": "Cennet 3. Kat: Huzur Mahallesi",
+      "side": "heaven",
+      "clickLabel": "HUZUR VER",
+      "goalTitle": "Mutluluk Seviyesi: Huzur Mahallesi",
+      "clickResource": "thanks",
+      "advanceResource": "thanks",
+      "advanceCost": 32000000,
+      "knowledgeReward": 7,
+      "resources": [
+        "thanks"
+      ],
+      "skyColor": [
+        0.62,
+        0.85,
+        1.0
+      ],
+      "groundColor": [
+        0.5,
+        0.8,
+        0.55
+      ],
+      "buildings": [
+        {
+          "id": "heaven_3_salincak",
+          "asset": "bld_heaven_3_salincak",
+          "displayName": "Mahalle Salıncağı",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 27,
+          "costGrowth": 1.15,
+          "baseProduction": 0.2,
+          "scenePosition": [
+            -8.0,
+            -3.4
+          ],
+          "sortingOrder": 0,
+          "placeholderColor": [
+            0.9,
+            0.2,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_3_firin",
+          "asset": "bld_heaven_3_firin",
+          "displayName": "Komşu Simit Fırını",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 220,
+          "costGrowth": 1.15,
+          "baseProduction": 1.5,
+          "scenePosition": [
+            -4.4,
+            -3.4
+          ],
+          "sortingOrder": 1,
+          "placeholderColor": [
+            0.8,
+            0.5,
+            0.2
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_3_bahce",
+          "asset": "bld_heaven_3_bahce",
+          "displayName": "Ortak Bahçe (Domates Serbest)",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 2200,
+          "costGrowth": 1.15,
+          "baseProduction": 9,
+          "scenePosition": [
+            -0.8,
+            -3.4
+          ],
+          "sortingOrder": 2,
+          "placeholderColor": [
+            0.6,
+            0.1,
+            0.3
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_3_kedi",
+          "asset": "bld_heaven_3_kedi",
+          "displayName": "Sokak Kedisi Besleme Noktası",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 25000,
+          "costGrowth": 1.15,
+          "baseProduction": 55,
+          "scenePosition": [
+            2.8,
+            -3.4
+          ],
+          "sortingOrder": 3,
+          "placeholderColor": [
+            1.0,
+            0.3,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        },
+        {
+          "id": "heaven_3_cesme",
+          "asset": "bld_heaven_3_cesme",
+          "displayName": "Mahalle Çeşmesi (Dedikodu Dahil)",
+          "produces": "thanks",
+          "costResource": "thanks",
+          "baseCost": 300000,
+          "costGrowth": 1.15,
+          "baseProduction": 320,
+          "scenePosition": [
+            6.4,
+            -3.4
+          ],
+          "sortingOrder": 4,
+          "placeholderColor": [
+            1.0,
+            0.8,
+            0.1
+          ],
+          "placeholderSize": [
+            1.4,
+            1.8
+          ]
+        }
+      ],
+      "upgrades": [
+        {
+          "id": "heaven_3_click1",
+          "asset": "upg_heaven_3_click1",
+          "displayName": "Sıcak Bir “Hoş Geldin”",
+          "description": "Kapıda herkesi güler yüzle karşılıyorsun. Postacı bile şaşkın.",
+          "kind": "ClickMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 200,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_click2",
+          "asset": "upg_heaven_3_click2",
+          "displayName": "Simit İkramı",
+          "description": "Simit verince huzur iki katına çıkıyor. Bilim böyle diyor.",
+          "kind": "ClickMultiplier",
+          "value": 3,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 4500,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "heaven_3_click1"
+        },
+        {
+          "id": "heaven_3_click3",
+          "asset": "upg_heaven_3_click3",
+          "displayName": "Mahalle Muhtarı Rozeti",
+          "description": "Rozet çıkınca herkes susuyor. Kısa süreliğine.",
+          "kind": "ClickMultiplier",
+          "value": 5,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 120000,
+          "unlockBuilding": null,
+          "unlockCount": 0,
+          "prerequisite": "heaven_3_click2"
+        },
+        {
+          "id": "heaven_3_share",
+          "asset": "upg_heaven_3_share",
+          "displayName": "Gönüllü Komşuluk",
+          "description": "Her iyilik, saniyelik üretimin bir kısmını ekler.",
+          "kind": "ClickProductionShare",
+          "value": 0.02,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 10000,
+          "unlockBuilding": "heaven_3_salincak",
+          "unlockCount": 5,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_bm0",
+          "asset": "upg_heaven_3_bm0",
+          "displayName": "Salıncak Yağlandı",
+          "description": "Gıcırdamıyor. Çocuklar biraz hayal kırıklığına uğradı.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 1000,
+          "unlockBuilding": "heaven_3_salincak",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_bm1",
+          "asset": "upg_heaven_3_bm1",
+          "displayName": "Fırın Daha Erken Açılıyor",
+          "description": "Saat dörtte simit kokusu. Bütün mahalle erken kalkıyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 8000,
+          "unlockBuilding": "heaven_3_firin",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_bm2",
+          "asset": "upg_heaven_3_bm2",
+          "displayName": "Domates Fidesi Bereketi",
+          "description": "Kimse sulamıyor ama domates çıkıyor. Mahallenin sırrı.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 80000,
+          "unlockBuilding": "heaven_3_bahce",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_bm3",
+          "asset": "upg_heaven_3_bm3",
+          "displayName": "Kedi Artık Geliyor",
+          "description": "Besleme noktası resmî oldu. Kedi hâlâ mesafeli.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 900000,
+          "unlockBuilding": "heaven_3_kedi",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_bm4",
+          "asset": "upg_heaven_3_bm4",
+          "displayName": "Çeşme Başı Sohbeti",
+          "description": "Dedikodu üretimi iki katına çıktı. Kimse kaynak göstermiyor.",
+          "kind": "BuildingMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 11000000,
+          "unlockBuilding": "heaven_3_cesme",
+          "unlockCount": 10,
+          "prerequisite": null
+        },
+        {
+          "id": "heaven_3_global",
+          "asset": "upg_heaven_3_global",
+          "displayName": "Mahalle Şenliği",
+          "description": "Tüm mahalle aynı anda üretiyor. Kimse ne ürettiğini bilmiyor.",
+          "kind": "GlobalMultiplier",
+          "value": 2,
+          "targetBuilding": null,
+          "costResource": "thanks",
+          "cost": 750000,
+          "unlockBuilding": "heaven_3_cesme",
+          "unlockCount": 5,
+          "prerequisite": null
+        }
+      ],
+      "quests": [
+        {
+          "id": "heaven_3_q1",
+          "text": "Komşulara huzur ver (40 kez)",
+          "kind": "Click",
+          "building": null,
+          "amount": 40,
+          "rewardFlat": 90,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_3_q2",
+          "text": "5 Mahalle Salıncağı kur: gıcırtı huzurun sesi",
+          "kind": "Building",
+          "building": "heaven_3_salincak",
+          "amount": 5,
+          "rewardFlat": 250,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_3_q3",
+          "text": "250 kez huzur ver: muhtar yazılı teşekkür etti",
+          "kind": "Click",
+          "building": null,
+          "amount": 250,
+          "rewardFlat": 0,
+          "rewardSeconds": 90,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_3_q4",
+          "text": "5 Komşu Simit Fırını: koku sokağı sardı",
+          "kind": "Building",
+          "building": "heaven_3_firin",
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 180,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_3_q5",
+          "text": "5 yükseltme al: mahalle toplantısı karar aldı",
+          "kind": "Upgrades",
+          "building": null,
+          "amount": 5,
+          "rewardFlat": 0,
+          "rewardSeconds": 0,
+          "rewardKnowledge": 2
+        },
+        {
+          "id": "heaven_3_q6",
+          "text": "10 Ortak Bahçe: domatesler kimseye ait değil",
+          "kind": "Building",
+          "building": "heaven_3_bahce",
+          "amount": 10,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 0
+        },
+        {
+          "id": "heaven_3_q7",
+          "text": "1.600.000 Teşekkür topla: mahalle defterini açtı, hesap kabardı",
+          "kind": "Earn",
+          "building": null,
+          "amount": 1600000,
+          "rewardFlat": 0,
+          "rewardSeconds": 300,
+          "rewardKnowledge": 1
+        },
+        {
+          "id": "heaven_3_q8",
+          "text": "Huzur çubuğunun yarısı: bütün mahalle çay demledi",
+          "kind": "Earn",
+          "building": null,
+          "amount": 16000000,
+          "rewardFlat": 0,
+          "rewardSeconds": 600,
+          "rewardKnowledge": 2
+        }
+      ]
     }
   ],
   "permanentUpgrades": [
