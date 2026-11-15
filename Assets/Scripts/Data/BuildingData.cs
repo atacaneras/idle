@@ -18,7 +18,7 @@ public class BuildingData : ScriptableObject
     public double baseProduction = 0.5;   // adet basina saniyede
 
     [Header("Sahne gorunumu")]
-    [Tooltip("Seviye 1, 2, 3 sprite'lari (stone_bld_xxx_lv1..3). Bos birakilirsa placeholder kutu cizilir.")]
+    [Tooltip("4 kademe sprite'i: 1-25, 26-50, 51-100, 101-200 adet (_lv1.._lv4). Bos birakilirsa dosyalar otomatik aranir, yoksa placeholder cizilir.")]
     public Sprite[] levelSprites;
     public Vector2 scenePosition = new Vector2(0, -3.2f);
     public int sortingOrder = 0;
@@ -30,7 +30,7 @@ public class BuildingData : ScriptableObject
     [System.NonSerialized] Sprite[] autoSprites;
     [System.NonSerialized] bool autoTried;
 
-    // Elle atanmis sprite yoksa Assets/Resources/Art/<kat>/<bina_id>_lv1..3.png (ya da <bina_id>.png) aranir.
+    // Elle atanmis sprite yoksa Assets/Resources/Art/<kat>/<bina_id>_lv1..4.png (ya da <bina_id>.png) aranir.
     public Sprite GetSprite(int level)
     {
         if (levelSprites != null && levelSprites.Length > 0)
@@ -44,7 +44,7 @@ public class BuildingData : ScriptableObject
     {
         if (string.IsNullOrEmpty(artFolder) || string.IsNullOrEmpty(id)) return;
         var list = new List<Sprite>();
-        for (int lv = 1; lv <= 3; lv++)
+        for (int lv = 1; lv <= BuildingTiers.Count; lv++)
         {
             var s = Resources.Load<Sprite>("Art/" + artFolder + "/" + id + "_lv" + lv);
             if (s == null) break;

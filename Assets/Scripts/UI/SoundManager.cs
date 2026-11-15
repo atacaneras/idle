@@ -38,6 +38,23 @@ public class SoundManager : MonoBehaviour
     bool muted;
     TextMeshProUGUI muteLabel;
 
+    public static event Action MuteChanged;
+
+    public static bool IsMuted
+    {
+        get { return Instance != null ? Instance.muted : PlayerPrefs.GetInt(MuteKey, 0) == 1; }
+    }
+
+    // Ana menu gibi baska ekranlardan ses ac/kapa icin
+    public static void ToggleMuted()
+    {
+        if (Instance != null) { Instance.ToggleMute(); return; }
+        bool muted = PlayerPrefs.GetInt(MuteKey, 0) == 1;
+        PlayerPrefs.SetInt(MuteKey, muted ? 0 : 1);
+        PlayerPrefs.Save();
+        if (MuteChanged != null) MuteChanged();
+    }
+
     public static void Play(SoundId id, float pitch = 1f, float gain = 1f)
     {
         if (Instance != null) Instance.PlayInternal(id, pitch, gain);
@@ -99,6 +116,7 @@ public class SoundManager : MonoBehaviour
     void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        MuteChanged -= UpdateMuteLabel;
         var gm = GameManager.Instance;
         if (gm == null) return;
         gm.OnGathered -= OnGathered;
@@ -133,6 +151,7 @@ public class SoundManager : MonoBehaviour
         rt.anchoredPosition = new Vector2(-20f, 100f);
         rt.sizeDelta = new Vector2(220f, 60f);
         btn.onClick.AddListener(ToggleMute);
+        MuteChanged += UpdateMuteLabel;
         UpdateMuteLabel();
     }
 
@@ -142,6 +161,7 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetInt(MuteKey, muted ? 1 : 0);
         UpdateMuteLabel();
         if (!muted) PlayInternal(SoundId.Click, 1f, 1f);
+        if (MuteChanged != null) MuteChanged();
     }
 
     void UpdateMuteLabel() { if (muteLabel != null) muteLabel.text = muted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık"); }

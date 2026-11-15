@@ -8,9 +8,6 @@ using UnityEngine;
 //   - Seviye atlama: buyuk ziplama + parlama + altin kivilcimlar
 public class SceneBuildingSpawner : MonoBehaviour
 {
-    [Tooltip("Bina adedi bu esiklere ulasinca gorunum lv1, lv2, lv3 olur.")]
-    [SerializeField] int[] levelThresholds = { 1, 10, 25 };
-
     [Header("Satin alma animasyonu")]
     [SerializeField] bool enableAnimations = true;
     [SerializeField] float buildDuration = 0.55f;
@@ -18,6 +15,10 @@ public class SceneBuildingSpawner : MonoBehaviour
     [SerializeField] float levelUpDuration = 0.75f;
     [SerializeField] int dustCount = 8;
     [SerializeField] int maxParticles = 150;
+
+    [Header("Kademe animasyonu")]
+    [Tooltip("Bina 26/51/101 adette gorunum degistirir; her kademede sallanma hizi ve parlamasi artar.")]
+    [SerializeField] bool enableIdleAnimations = true;
 
     [Header("Cag gecisi")]
     [SerializeField] float colorFadeDuration = 1.2f;   // gokyuzu ve zemin eski renkten yeniye bu surede gecer
@@ -28,6 +29,9 @@ public class SceneBuildingSpawner : MonoBehaviour
     {
         public BuildingData data;
         public SpriteRenderer sr;
+        public SpriteRenderer glow;
+        public Transform glowT;
+        public Vector3 basePos;
         public Vector3 baseScale = Vector3.one;
         public Color baseColor = Color.white;
         public float width = 1f;    // dunya biriminde, toz/kivilcim konumu icin
@@ -35,6 +39,10 @@ public class SceneBuildingSpawner : MonoBehaviour
         public float t = -1f;       // 0..1 arasi animasyon ilerlemesi, -1 = animasyon yok
         public float duration = 0.4f;
         public AnimKind kind;
+        public int tier;
+        public float phase;         // her bina farkli fazda sallansin
+        public float flash;         // kademe atlayinca parlama
+        public float ambientTimer;
     }
 
     class Particle
@@ -56,7 +64,9 @@ public class SceneBuildingSpawner : MonoBehaviour
     float colorT = 1f;
     Color curSky, curGround, fromSky, fromGround, toSky, toGround;
     Color dustColor = new Color(0.9f, 0.85f, 0.78f);
+    Color glowColor = new Color(1f, 0.55f, 0.2f);
     static Sprite whiteSprite;
+    static Sprite glowSprite;
     static readonly Dictionary<string, Sprite> buildingSprites = new Dictionary<string, Sprite>();
 
     void Start()
@@ -92,6 +102,9 @@ public class SceneBuildingSpawner : MonoBehaviour
 
         var age = GameManager.Instance.CurrentAge;
         dustColor = Color.Lerp(age.groundColor, Color.white, 0.55f);
+        glowColor = age.side == Side.Hell
+            ? new Color(1f, 0.42f, 0.12f)
+            : new Color(1f, 0.88f, 0.48f);
 
         cam = Camera.main;
         if (cam != null) cam.clearFlags = CameraClearFlags.SolidColor;
@@ -130,7 +143,25 @@ public class SceneBuildingSpawner : MonoBehaviour
             go.transform.localPosition = b.scenePosition;
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sortingOrder = b.sortingOrder;
-            views[b.id] = new View { data = b, sr = sr };
+
+            // Kademe 2+ icin yumusak isik halesi (ayni yerde, binanin arkasinda)
+            var glowGo = new GameObject("glow_" + b.id);
+            glowGo.transform.SetParent(transform, false);
+            var gsr = glowGo.AddComponent<SpriteRenderer>();
+            gsr.sprite = GlowSprite();
+            gsr.sortingOrder = b.sortingOrder - 1;
+            gsr.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0f);
+
+            views[b.id] = new View
+            {
+                data = b,
+                sr = sr,
+                glow = gsr,
+                glowT = glowGo.transform,
+                basePos = b.scenePosition,
+                phase = (b.id.GetHashCode() & 0x7fffffff) % 1000 * 0.00628f,
+                ambientTimer = Random.Range(0.3f, 1.6f)
+            };
         }
         Refresh();
     }
@@ -147,9 +178,16 @@ public class SceneBuildingSpawner : MonoBehaviour
             var sr = v.sr;
 
             int n = gm.GetCount(b);
-            if (n <= 0) { sr.enabled = false; v.t = -1f; continue; }
+            if (n <= 0)
+            {
+                sr.enabled = false;
+                if (v.glow != null) v.glow.enabled = false;
+                v.t = -1f;
+                continue;
+            }
 
-            int level = LevelFor(n);
+            int level = BuildingTiers.LevelFor(n);
+            v.tier = level;
             sr.enabled = true;
 
             var sprite = b.GetSprite(level);
@@ -163,23 +201,25 @@ public class SceneBuildingSpawner : MonoBehaviour
             }
             else
             {
-                // Sprite'larin arasinda bosluk kalsin; yuksek milestone seviyeleri komsu binalara tasmasin.
-                float grow = 1f + 0.07f * level;
-                sr.sprite = BuildingSprite(b);
+                // Sprite'larin arasinda bosluk kalsin; yuksek kademeler komsu binalara tasmasin.
+                float grow = 1f + 0.06f * level;
+                sr.sprite = BuildingSprite(b, level);
                 v.baseColor = Color.white; // Renkler sprite'in icine zaten uygulandi.
                 v.baseScale = new Vector3(b.placeholderSize.x * grow, b.placeholderSize.y * grow, 1f);
                 v.width = v.baseScale.x;
                 v.height = v.baseScale.y;
             }
+
+            // Isik halesi yalnizca 2. kademeden sonra gorunur.
+            if (v.glow != null)
+            {
+                v.glow.enabled = level >= 1;
+                v.glowT.localPosition = new Vector3(b.scenePosition.x, b.scenePosition.y + v.height * 0.5f, 0.01f);
+                v.glowT.localScale = new Vector3(v.width * 1.9f, v.height * 1.2f, 1f);
+            }
+
             Apply(v);
         }
-    }
-
-    int LevelFor(int count)
-    {
-        int level = 0;
-        for (int i = 0; i < levelThresholds.Length; i++) if (count >= levelThresholds[i]) level = i;
-        return level;
     }
 
     // ---- Satin alma animasyonu ----
@@ -191,18 +231,23 @@ public class SceneBuildingSpawner : MonoBehaviour
         int n = GameManager.Instance.GetCount(b);
         int before = n - qty;
         bool first = before <= 0;
-        bool levelUp = !first && LevelFor(n) > LevelFor(before);
+        bool levelUp = !first && BuildingTiers.LevelFor(n) > BuildingTiers.LevelFor(before);
 
         v.kind = first ? AnimKind.Build : (levelUp ? AnimKind.LevelUp : AnimKind.Bounce);
         v.duration = first ? buildDuration : (levelUp ? levelUpDuration : bounceDuration);
         v.t = 0f;
+        if (levelUp)
+        {
+            v.flash = 1f;
+            v.ambientTimer = 0.15f;
+        }
         Apply(v);
 
         bool big = first || levelUp || qty >= 10;   // toplu alimda daha cok toz
         SpawnDust(v, big ? dustCount * 2 : dustCount);
         if (levelUp)
         {
-            SpawnSparkles(v, 14);
+            SpawnSparkles(v, 14 + v.tier * 6);
             SoundManager.Play(SoundId.LevelUp);
         }
     }
@@ -249,6 +294,14 @@ public class SceneBuildingSpawner : MonoBehaviour
             }
         }
 
+        // Yuksek kademelerde cok hafif renk nabzi ve kademe atlama parlamasi
+        if (v.tier >= 2 || v.flash > 0f)
+        {
+            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * (1.3f + v.tier * 0.35f) + v.phase);
+            float tint = (v.tier >= 2 ? (0.025f + 0.02f * (v.tier - 2)) * pulse : 0f) + v.flash * 0.4f;
+            c = Color.Lerp(c, glowColor, Mathf.Clamp01(tint));
+        }
+
         v.sr.transform.localScale = s;
         v.sr.color = c;
     }
@@ -276,13 +329,61 @@ public class SceneBuildingSpawner : MonoBehaviour
 
         foreach (var v in views.Values)
         {
-            if (v.t < 0f) continue;
-            v.t += dt / v.duration;
-            if (v.t >= 1f) v.t = -1f;
-            Apply(v);
+            if (v.t >= 0f)
+            {
+                v.t += dt / v.duration;
+                if (v.t >= 1f) v.t = -1f;
+                Apply(v);
+            }
+            AnimateIdle(v, dt);
         }
 
         UpdateParticles(dt);
+    }
+
+    // Her bina surekli hafifce hareket eder. Kademe yukseldikce salinim hizlanir,
+    // isik halesi belirginlesir ve cevreye kivilcim sacar.
+    void AnimateIdle(View v, float dt)
+    {
+        if (!v.sr.enabled) return;
+        if (v.flash > 0f) v.flash = Mathf.Max(0f, v.flash - dt * 2.6f);
+
+        if (!enableIdleAnimations)
+        {
+            v.sr.transform.localPosition = v.basePos;
+            v.sr.transform.localRotation = Quaternion.identity;
+            if (v.glow != null) v.glow.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0f);
+            return;
+        }
+
+        float tier = v.tier;
+        float speed = 1.05f + tier * 0.55f;
+        float t = Time.time * speed + v.phase;
+        float bob = Mathf.Sin(t) * (0.012f + 0.014f * tier);
+        float sway = Mathf.Sin(t * 0.72f + 1.1f) * (0.8f + 1.25f * tier);
+        if (tier >= 2) sway += Mathf.Sin(t * 2.7f) * (0.35f * (tier - 1));   // ust kademeler daha canli
+
+        v.sr.transform.localPosition = v.basePos + new Vector3(0f, bob, 0f);
+        v.sr.transform.localRotation = Quaternion.Euler(0f, 0f, sway);
+        float breath = 1f + Mathf.Sin(t * 1.5f + 0.7f) * (0.006f + 0.004f * tier);
+        Vector3 sc = v.sr.transform.localScale;
+        v.sr.transform.localScale = new Vector3(sc.x * breath, sc.y * breath, sc.z);
+
+        if (v.glow == null) return;
+        if (v.tier >= 1)
+        {
+            v.glow.enabled = true;
+            float pulse = 0.5f + 0.5f * Mathf.Sin(t * 1.6f + v.phase * 0.7f);
+            float alpha = (0.06f + 0.035f * v.tier) * (0.72f + 0.28f * pulse) + v.flash * 0.35f;
+            v.glow.color = new Color(glowColor.r, glowColor.g, glowColor.b, Mathf.Clamp01(alpha));
+
+            v.ambientTimer -= dt;
+            if (v.ambientTimer <= 0f)
+            {
+                v.ambientTimer = Random.Range(0.9f, 2.0f);
+                SpawnAmbient(v);
+            }
+        }
     }
 
     // ---- Parcaciklar (toz ve kivilcim). Ek asset gerekmez: beyaz kare kullanilir. ----
@@ -328,6 +429,23 @@ public class SceneBuildingSpawner : MonoBehaviour
             p.color = new Color(1f, 0.85f, 0.25f);
             p.age = 0f;
         }
+    }
+
+    // Yuksek kademeli binalardan ara ara yukselen kor / isik parcaciklari
+    void SpawnAmbient(View v)
+    {
+        var p = GetParticle();
+        if (p == null) return;
+        float half = Mathf.Max(0.3f, v.width * 0.4f);
+        p.pos = new Vector2(v.data.scenePosition.x + Random.Range(-half, half),
+            v.data.scenePosition.y + Random.Range(0.1f, v.height * 0.9f));
+        p.vel = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(0.3f, 0.7f));
+        p.gravity = 0.06f;
+        p.size = Random.Range(0.04f, 0.1f);
+        p.grow = -0.45f;
+        p.life = Random.Range(0.9f, 1.7f);
+        p.color = glowColor;
+        p.age = 0f;
     }
 
     Particle GetParticle()
@@ -397,45 +515,171 @@ public class SceneBuildingSpawner : MonoBehaviour
         return whiteSprite;
     }
 
-    // Sprite atanmamis binalari duz kare yerine renkli, kucuk bir yapi siluetiyle goster.
-    static Sprite BuildingSprite(BuildingData data)
+    // Yumusak isik halesi: merkezi parlak, kenarlara dogru seffaf.
+    static Sprite GlowSprite()
     {
-        Sprite cached;
-        if (buildingSprites.TryGetValue(data.id, out cached)) return cached;
-
-        const int w = 24, h = 24;
-        var pixels = new Color32[w * h];
-        Color.RGBToHSV(data.placeholderColor, out float hue, out float saturation, out float value);
-        Color palette = Color.HSVToRGB(hue, Mathf.Min(saturation, 0.62f) * 0.72f, Mathf.Clamp(value * 0.82f + 0.12f, 0f, 0.9f));
-        Color32 wall = palette;
-        Color32 shade = Color.Lerp(palette, Color.black, 0.34f);
-        Color32 roof = Color.Lerp(palette, Color.white, 0.2f);
-        Color32 window = new Color32(255, 224, 139, 255);
-        int seed = Mathf.Abs(data.id.GetHashCode());
-        int left = 4 + seed % 3, right = 20 - seed % 3;
-        int roofTop = 14 + seed % 5;
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
+        if (glowSprite == null)
         {
-            Color32 c = new Color32(0, 0, 0, 0);
-            bool body = x >= left && x <= right && y >= 2 && y <= roofTop;
-            int roofHeight = Mathf.Max(1, roofTop / 3);
-            bool roofPixel = y > roofTop && y <= roofTop + roofHeight &&
-                x >= left - (y - roofTop) && x <= right + (y - roofTop);
-            if (body) c = x == left || x == right || y == 2 ? shade : wall;
-            if (roofPixel) c = roof;
-            if (body && y >= 7 && y <= 10 && (x == left + 3 || x == right - 3)) c = window;
-            if (body && x >= (left + right) / 2 - 1 && x <= (left + right) / 2 + 1 && y >= 2 && y <= 7) c = shade;
-            pixels[y * w + x] = c;
+            const int n = 64;
+            var tex = new Texture2D(n, n, TextureFormat.RGBA32, false);
+            var px = new Color32[n * n];
+            for (int y = 0; y < n; y++)
+            for (int x = 0; x < n; x++)
+            {
+                float dx = (x + 0.5f) / n * 2f - 1f;
+                float dy = (y + 0.5f) / n * 2f - 1f;
+                float r = Mathf.Sqrt(dx * dx + dy * dy);
+                float a = Mathf.Clamp01(1f - r);
+                a = a * a;
+                px[y * n + x] = new Color32(255, 255, 255, (byte)(a * 255f));
+            }
+            tex.SetPixels32(px);
+            tex.Apply();
+            tex.wrapMode = TextureWrapMode.Clamp;
+            tex.filterMode = FilterMode.Bilinear;
+            glowSprite = Sprite.Create(tex, new Rect(0, 0, n, n), new Vector2(0.5f, 0.5f), n);
+        }
+        return glowSprite;
+    }
+
+    // Sprite atanmamis binalari duz kare yerine renkli, kademeye gore buyuyen bir yapi siluetiyle goster.
+    // Kademe 1: kucuk kulube, 2: iki katli yapi, 3: kule, 4: hisar (altin suslu).
+    static Sprite BuildingSprite(BuildingData data, int tier)
+    {
+        tier = Mathf.Clamp(tier, 0, BuildingTiers.Count - 1);
+        string key = data.id + "#" + tier;
+        Sprite cached;
+        if (buildingSprites.TryGetValue(key, out cached)) return cached;
+
+        const int w = 32, h = 32;
+        var pixels = new Color32[w * h];
+
+        Color baseCol = Color.Lerp(data.placeholderColor, Color.white, 0.06f * tier);
+        Color.RGBToHSV(baseCol, out float hue, out float saturation, out float value);
+        Color palette = Color.HSVToRGB(hue, Mathf.Min(saturation, 0.62f) * 0.72f,
+            Mathf.Clamp(value * 0.8f + 0.12f + 0.03f * tier, 0f, 0.92f));
+        Color32 wall = palette;
+        Color32 shade = Color.Lerp(palette, Color.black, 0.36f);
+        Color32 roof = Color.Lerp(palette, Color.white, 0.24f);
+        Color32 window = new Color32(255, 226, 132, 255);
+        Color32 windowDark = new Color32(74, 54, 48, 255);
+        Color32 gold = new Color32(236, 186, 84, 255);
+
+        int seed = data.id.GetHashCode() & 0x7fffffff;
+        int inset = Mathf.Max(3, 10 - tier * 2) + seed % 2;   // kademe buyudukce daha genis
+        int left = inset;
+        int right = w - 1 - inset - (seed / 2) % 2;
+        int top = 16 + tier * 3;                             // govde yuksekligi
+        int center = (left + right) / 2;
+
+        // Temel / zemin
+        for (int x = Mathf.Max(0, left - 1); x <= Mathf.Min(w - 1, right + 1); x++)
+        {
+            Put(pixels, w, h, x, 1, shade);
+            Put(pixels, w, h, x, 2, Color.Lerp(palette, Color.black, 0.18f));
         }
 
+        // Govde
+        for (int y = 2; y <= top; y++)
+        for (int x = left; x <= right; x++)
+        {
+            Color32 c = wall;
+            if (x == left || x == right) c = shade;
+            if (y == top) c = Color.Lerp(palette, Color.white, 0.08f);
+            Put(pixels, w, h, x, y, c);
+        }
+
+        // Catı / mazgallar
+        if (tier <= 1)
+        {
+            int roofH = 3 + tier;
+            for (int i = 0; i < roofH; i++)
+            for (int x = left + i; x <= right - i; x++)
+                Put(pixels, w, h, x, top + 1 + i, i == roofH - 1 ? gold : roof);
+        }
+        else
+        {
+            for (int x = left; x <= right; x++)
+                Put(pixels, w, h, x, top + 1, gold);
+            for (int x = left; x <= right; x += 3)
+            for (int y = top + 2; y <= top + 3; y++)
+                Put(pixels, w, h, x, y, roof);
+        }
+
+        // 3. ve 4. kademede yan kuleler
+        if (tier >= 2)
+        {
+            int towerTop = top + 3;
+            for (int side = -1; side <= 1; side += 2)
+            {
+                int tx = side < 0 ? Mathf.Max(0, left - 2) : Mathf.Min(w - 2, right + 1);
+                for (int y = 2; y <= towerTop; y++)
+                for (int x = tx; x <= tx + 1; x++)
+                {
+                    Color32 c = x == tx && side < 0 ? shade : wall;
+                    if (y == towerTop) c = roof;
+                    Put(pixels, w, h, x, y, c);
+                }
+                Put(pixels, w, h, tx, towerTop + 1, gold);
+                Put(pixels, w, h, tx + 1, towerTop + 1, gold);
+            }
+        }
+
+        // 4. kademede ortada sivri kule ve altin tepe
+        if (tier >= 3)
+        {
+            int spireTop = Mathf.Min(h - 2, top + 6);
+            for (int y = top + 2; y <= spireTop; y++)
+            for (int x = center - 1; x <= center + 1; x++)
+                Put(pixels, w, h, x, y, y == spireTop ? gold : roof);
+            Put(pixels, w, h, center, spireTop + 1, gold);
+            Put(pixels, w, h, center, spireTop + 2, gold);
+        }
+
+        // Pencereler: kademe arttikca daha cok pencere yanar
+        int cols = 2 + Mathf.Min(2, tier);
+        int rows = 1 + (tier >= 2 ? 1 : 0);
+        int usable = right - left - 2;
+        for (int row = 0; row < rows; row++)
+        for (int col = 0; col < cols; col++)
+        {
+            int wx = left + 2 + Mathf.RoundToInt((col + 0.5f) / cols * usable) - 1;
+            int wy = top - 4 - row * 4;
+            bool lit = ((seed + col * 7 + row * 13) % 5) != 0 || tier >= 2;
+            Put(pixels, w, h, wx, wy, lit ? window : windowDark);
+            Put(pixels, w, h, wx, wy + 1, lit ? window : windowDark);
+            if (tier >= 2)
+            {
+                Put(pixels, w, h, wx + 1, wy, lit ? window : windowDark);
+                Put(pixels, w, h, wx + 1, wy + 1, lit ? window : windowDark);
+            }
+        }
+
+        // Kapi
+        int doorH = 4 + tier / 2;
+        for (int y = 2; y <= 2 + doorH; y++)
+        for (int x = center - 1; x <= center + 1; x++)
+            Put(pixels, w, h, x, y, shade);
+        Put(pixels, w, h, center, 3, gold);
+
+        // 3. kademe ve uzeri altin kusak
+        if (tier >= 2)
+            for (int x = left + 1; x <= right - 1; x++)
+                Put(pixels, w, h, x, 7, gold);
+
         var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
-        tex.name = "generated_" + data.id;
+        tex.name = "generated_" + key;
         tex.filterMode = FilterMode.Point;
         tex.SetPixels32(pixels);
         tex.Apply();
-        cached = Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0f), 24f);
-        buildingSprites[data.id] = cached;
+        cached = Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0f), 32f);
+        buildingSprites[key] = cached;
         return cached;
+    }
+
+    static void Put(Color32[] px, int w, int h, int x, int y, Color32 c)
+    {
+        if (x < 0 || x >= w || y < 0 || y >= h) return;
+        px[y * w + x] = c;
     }
 }

@@ -37,7 +37,9 @@ public static class ArtGuide
         sb.AppendLine("- Kat arka planı: 1920x1080 önerilir.");
         sb.AppendLine("- **Arayüz panelleri arka planın üstüne biner.** Ana çizimi (kapı, tezgâh, taht vb.) ortadaki alana koy: yaklaşık x 600–1150, y 170–720. Sol ~%30 (yükseltme paneli), sağ ~%40 (bina listesi), üst ~%14 ve alt ~%25 (butonlar) kısmı süs/dolgu olsun.");
         sb.AppendLine("- `boss.png` bu orta alanın ortasına konur (ekranda yaklaşık 430 px yükseklik). Aynı yerde HUD çubuğu üstte, binalar altta kalır.");
-        sb.AppendLine("- Bina: yaklaşık 140x180 px (placeholder 1.4x1.8 birim). `_lv1` / `_lv2` / `_lv3` seviye görünümleri, sadece `_lv1` yeterli.");
+        sb.AppendLine("- Bina: yaklaşık 140x180 px, alt-orta pivot otomatik ayarlanır. Her bina **4 kademe** görseli kullanır:");
+        sb.AppendLine("  `_lv1` = 1–25 adet, `_lv2` = 26–50, `_lv3` = 51–100, `_lv4` = 101–200. Kademeler aynı binanın belirgin şekilde değişmiş hali olmalı (ör. bağlı adam → dönen adam). Sadece `_lv1` de yeterli; eksik kademe bir öncekinin görselini kullanır.");
+        sb.AppendLine("- Animasyon: oyun binaları kodla hafifçe sallandırır/parlatır, kademe atlayınca ışık ve kıvılcım efekti oynatır. Ek kare animasyonu şimdilik gerekmiyor; tek kare PNG yeterli.");
         sb.AppendLine("- Hepsi şeffaf zeminli PNG olabilir.");
         sb.AppendLine("- Binaların tabanı ekranın altından yaklaşık 200 px yukarıda durur (1080 yükseklikte y=880). Arka plandaki zemin çizgisini oraya çiz. Bina PNG'sinin alt-orta noktası bu çizgiye oturur.");
         sb.AppendLine();
@@ -63,7 +65,12 @@ public static class ArtGuide
             }
             if (age != null && age.buildings != null)
                 foreach (var b in age.buildings)
-                    sb.AppendLine("| `" + b.id + "_lv1.png` | " + b.displayName + " |");
+                {
+                    sb.AppendLine("| `" + b.id + "_lv1.png` | " + b.displayName + " — 1–25 adet |");
+                    sb.AppendLine("| `" + b.id + "_lv2.png` | " + b.displayName + " — 26–50 adet (görsel değişir) |");
+                    sb.AppendLine("| `" + b.id + "_lv3.png` | " + b.displayName + " — 51–100 adet (görsel değişir) |");
+                    sb.AppendLine("| `" + b.id + "_lv4.png` | " + b.displayName + " — 101–200 adet (son görünüm) |");
+                }
             sb.AppendLine();
         }
 

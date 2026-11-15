@@ -96,16 +96,26 @@ public class UIBuildingRow : MonoBehaviour
     public void Refresh()
     {
         var gm = GameManager.Instance;
-        nameText.text = Loc.T(data.displayName) + "  x" + gm.GetCount(data);
         int owned = gm.GetCount(data);
+        int tier = BuildingTiers.LevelFor(owned);
+        nameText.text = Loc.T(data.displayName) + "  x" + owned;
+
         int next = gm.GetNextMilestone(data);
-        string info = Loc.F("+{0}/sn {1}", NumberFormatter.Format(gm.GetUnitProduction(data)), Loc.T(data.produces.displayName));
+        string info = Loc.F("Kademe {0}/{1}", tier + 1, BuildingTiers.Count)
+            + "  •  " + Loc.F("+{0}/sn {1}", NumberFormatter.Format(gm.GetUnitProduction(data)), Loc.T(data.produces.displayName));
         if (owned > 0) info += "\n" + Loc.F("Toplam: {0}/sn", NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)));
         if (next > 0) info += "\n" + Loc.F("Sonraki x{0}: {1} adet", NumberFormatter.Format(gm.MilestoneMultiplier), next);
+        else info += "\n" + Loc.T("MAKS SEVİYE");
         infoText.text = info;
 
         // x10 / x100 / Max modunda toplam maliyet ve adet gosterilir
         int qty = gm.GetBuyQuantity(data);
+        if (qty <= 0)
+        {
+            costText.text = Loc.T("MAKS SEVİYE");
+            buyButton.interactable = false;
+            return;
+        }
         costText.text = NumberFormatter.Format(gm.GetCostFor(data, qty)) + " " + Loc.T(data.costResource.displayName)
             + (qty > 1 ? Loc.F("  (x{0})", qty) : "");
         buyButton.interactable = gm.CanBuyCurrent(data);

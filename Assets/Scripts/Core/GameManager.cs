@@ -275,11 +275,12 @@ public class GameManager : MonoBehaviour
         return n;
     }
 
-    // Siradaki esik (yoksa -1)
+    // Siradaki esik (yoksa -1). 200 adet sinirinin ustundeki esikler gosterilmez.
     public int GetNextMilestone(BuildingData b)
     {
         int c = GetCount(b);
-        for (int i = 0; i < milestoneCounts.Length; i++) if (c < milestoneCounts[i]) return milestoneCounts[i];
+        for (int i = 0; i < milestoneCounts.Length; i++)
+            if (c < milestoneCounts[i] && milestoneCounts[i] <= BuildingTiers.MaxCount) return milestoneCounts[i];
         return -1;
     }
 
@@ -344,39 +345,48 @@ public class GameManager : MonoBehaviour
         return first * (Math.Pow(g, qty) - 1.0) / (g - 1.0);
     }
 
-    // Eldeki kaynakla en fazla kac tane alinabilir (0 olabilir)
+    // Eldeki kaynakla en fazla kac tane alinabilir (0 olabilir). Bina basina ust sinir 200.
     public int GetMaxAffordable(BuildingData b)
     {
+        int remaining = Mathf.Max(0, BuildingTiers.MaxCount - GetCount(b));
+        if (remaining <= 0) return 0;
+
         double r = GetResource(b.costResource);
         double first = GetCost(b);
         if (r < first) return 0;
 
+        int limit = Mathf.Min(MaxBulk, remaining);
         double g = b.costGrowth;
         double est = Math.Abs(g - 1.0) < 1e-9 ? r / first : Math.Log(1.0 + r * (g - 1.0) / first) / Math.Log(g);
         if (double.IsNaN(est) || double.IsInfinity(est)) est = 1;
-        int q = (int)Math.Max(0, Math.Min(Math.Floor(est), MaxBulk));
+        int q = (int)Math.Max(0, Math.Min(Math.Floor(est), limit));
 
         // Kayan nokta hatasini duzelt
         for (int i = 0; i < 8 && q > 0 && GetCostFor(b, q) > r; i++) q--;
-        for (int i = 0; i < 8 && q < MaxBulk && GetCostFor(b, q + 1) <= r; i++) q++;
+        for (int i = 0; i < 8 && q < limit && GetCostFor(b, q + 1) <= r; i++) q++;
         return q;
     }
 
-    // Su anki moda gore bir tiklamada alinacak adet (Max modunda en az 1: butonda maliyet gorunsun diye)
+    // Su anki moda gore bir tiklamada alinacak adet (Max modunda en az 1: butonda maliyet gorunsun diye).
+    // 200 adet sinirina yaklasinca istenen adet kalan kadar kirpilir.
     public int GetBuyQuantity(BuildingData b)
     {
+        int remaining = Mathf.Max(0, BuildingTiers.MaxCount - GetCount(b));
+        if (remaining <= 0) return 0;
+
         switch (CurrentBuyMode)
         {
-            case BuyMode.Ten: return 10;
-            case BuyMode.Hundred: return 100;
-            case BuyMode.Max: return Math.Max(1, GetMaxAffordable(b));
+            case BuyMode.Ten: return Mathf.Min(10, remaining);
+            case BuyMode.Hundred: return Mathf.Min(100, remaining);
+            case BuyMode.Max: return Math.Max(1, Math.Min(GetMaxAffordable(b), remaining));
             default: return 1;
         }
     }
 
     public bool CanBuyCurrent(BuildingData b)
     {
-        return GetResource(b.costResource) >= GetCostFor(b, GetBuyQuantity(b));
+        int qty = GetBuyQuantity(b);
+        return qty > 0 && GetResource(b.costResource) >= GetCostFor(b, qty);
     }
 
     public int TryBuyCurrent(BuildingData b) { return Buy(b, GetBuyQuantity(b)); }
@@ -384,6 +394,8 @@ public class GameManager : MonoBehaviour
 
     int Buy(BuildingData b, int qty)
     {
+        int remaining = Mathf.Max(0, BuildingTiers.MaxCount - GetCount(b));
+        qty = Mathf.Min(qty, remaining);
         if (qty <= 0) return 0;
         double cost = GetCostFor(b, qty);
         if (GetResource(b.costResource) < cost) return 0;
@@ -721,7 +733,7 @@ public class GameManager : MonoBehaviour
         if (s.runEarned != null)
             foreach (var r in s.runEarned) runEarned[r.id] = r.value;
         if (s.buildings != null)
-            foreach (var b in s.buildings) counts[b.id] = b.value;
+            foreach (var b in s.buildings) counts[b.id] = Mathf.Clamp(b.value, 0, BuildingTiers.MaxCount);
         if (s.upgrades != null)
             foreach (var id in s.upgrades) purchased.Add(id);
         if (s.permanents != null)
