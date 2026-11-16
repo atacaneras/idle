@@ -26,6 +26,15 @@ TextureImporter:
   - first:
       213: 1353279457525499693
     second: ghost_7
+  - first:
+      213: -2192938834016724446
+    second: ghost_8
+  - first:
+      213: -9150901423627980349
+    second: ghost_9
+  - first:
+      213: 599085326982099810
+    second: ghost_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,10 +148,10 @@ TextureImporter:
       name: ghost_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 279
-        height: 569
+        x: 2
+        y: 443
+        width: 138
+        height: 83
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +170,10 @@ TextureImporter:
       name: ghost_1
       rect:
         serializedVersion: 2
-        x: 281
-        y: 425
-        width: 83
-        height: 138
+        x: 142
+        y: 444
+        width: 91
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +192,10 @@ TextureImporter:
       name: ghost_2
       rect:
         serializedVersion: 2
-        x: 365
-        y: 424
-        width: 669
-        height: 131
+        x: 234
+        y: 444
+        width: 89
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +214,10 @@ TextureImporter:
       name: ghost_3
       rect:
         serializedVersion: 2
-        x: 1035
-        y: 543
-        width: 74
-        height: 28
+        x: 325
+        y: 444
+        width: 89
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,10 +236,10 @@ TextureImporter:
       name: ghost_4
       rect:
         serializedVersion: 2
-        x: 1035
-        y: 425
-        width: 622
-        height: 117
+        x: 416
+        y: 444
+        width: 85
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,10 +258,10 @@ TextureImporter:
       name: ghost_5
       rect:
         serializedVersion: 2
-        x: 281
-        y: 1
-        width: 1329
-        height: 423
+        x: 1300
+        y: 424
+        width: 669
+        height: 131
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +280,10 @@ TextureImporter:
       name: ghost_6
       rect:
         serializedVersion: 2
-        x: 1611
-        y: 94
-        width: 51
-        height: 85
+        x: 1970
+        y: 425
+        width: 622
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,10 +302,10 @@ TextureImporter:
       name: ghost_7
       rect:
         serializedVersion: 2
-        x: 1611
-        y: 1
-        width: 57
-        height: 91
+        x: 2593
+        y: 425
+        width: 28
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,6 +316,72 @@ TextureImporter:
       bones: []
       spriteID: d2704a32f70d7c210800000000000000
       internalID: 1353279457525499693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_8
+      rect:
+        serializedVersion: 2
+        x: 2628
+        y: 1
+        width: 279
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a1648cfbd1191e0800000000000000
+      internalID: -2192938834016724446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1
+        width: 1297
+        height: 442
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c1b90683a7710180800000000000000
+      internalID: -9150901423627980349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_10
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 1
+        width: 1329
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 263bae84ee0605800800000000000000
+      internalID: 599085326982099810
       vertices: []
       indices: 
       edges: []
