@@ -137,6 +137,11 @@ public class SideSelectScreen : MonoBehaviour
         hellRt.anchorMin = Vector2.zero; hellRt.anchorMax = new Vector2(0.5f, 1f);
         heavenRt.anchorMin = new Vector2(0.5f, 0f); heavenRt.anchorMax = Vector2.one;
         hellRt.offsetMin = hellRt.offsetMax = heavenRt.offsetMin = heavenRt.offsetMax = Vector2.zero;
+        // Keep each half clickable, but fade its color toward the center so no hard seam appears.
+        hellImg.sprite = CreateSideTintGradient(true);
+        heavenImg.sprite = CreateSideTintGradient(false);
+        hellImg.type = heavenImg.type = Image.Type.Simple;
+        hellImg.preserveAspect = heavenImg.preserveAspect = false;
 
         // Alt siyah fade barlari kaldirildi; arka plan ekrani tam kaplasin.
         var vig = Panel(r, "Vignette", new Color(0f, 0f, 0f, hasBgArt ? 0f : 0.8f), false);
@@ -425,6 +430,27 @@ public class SideSelectScreen : MonoBehaviour
             else color = Color.Lerp(cool, right, Mathf.SmoothStep(0f, 1f, (u - 0.68f) / 0.32f));
             texture.SetPixel(x, 0, color);
             texture.SetPixel(x, 1, color);
+        }
+        texture.Apply(false, true);
+        return Sprite.Create(texture, new Rect(0f, 0f, width, 2f), new Vector2(0.5f, 0.5f), 100f);
+    }
+
+    static Sprite CreateSideTintGradient(bool fadeToRight)
+    {
+        const int width = 256;
+        var texture = new Texture2D(width, 2, TextureFormat.RGBA32, false);
+        texture.name = fadeToRight ? "HellTintFadeTexture" : "HeavenTintFadeTexture";
+        texture.wrapMode = TextureWrapMode.Clamp;
+        texture.filterMode = FilterMode.Bilinear;
+        for (int x = 0; x < width; x++)
+        {
+            float u = x / (width - 1f);
+            float alpha = fadeToRight
+                ? 1f - Mathf.SmoothStep(0.12f, 1f, u)
+                : Mathf.SmoothStep(0f, 0.88f, u);
+            var pixel = new Color(1f, 1f, 1f, alpha);
+            texture.SetPixel(x, 0, pixel);
+            texture.SetPixel(x, 1, pixel);
         }
         texture.Apply(false, true);
         return Sprite.Create(texture, new Rect(0f, 0f, width, 2f), new Vector2(0.5f, 0.5f), 100f);
@@ -914,10 +940,11 @@ public class SideSelectScreen : MonoBehaviour
         }
 
         // Secili tarafin rengi hafifce tum yariyi yikar.
-        float hellTarget = zone == 1 ? 0.20f : 0f;
-        float heavenTarget = zone == 2 ? 0.20f : 0f;
-        hellTint = Mathf.MoveTowards(hellTint, hellTarget, dt * 2.4f);
-        heavenTint = Mathf.MoveTowards(heavenTint, heavenTarget, dt * 2.4f);
+        float hellTarget = zone == 1 ? 0.15f : 0f;
+        float heavenTarget = zone == 2 ? 0.15f : 0f;
+        float blend = 1f - Mathf.Exp(-dt * 2.2f);
+        hellTint = Mathf.Lerp(hellTint, hellTarget, blend);
+        heavenTint = Mathf.Lerp(heavenTint, heavenTarget, blend);
         if (hellImg != null) hellImg.color = new Color(HellHot.r, HellHot.g, HellHot.b, hellTint);
         if (heavenImg != null) heavenImg.color = new Color(HeavenHot.r, HeavenHot.g, HeavenHot.b, heavenTint);
     }
