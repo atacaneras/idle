@@ -39,10 +39,19 @@ public static class UIArt
     public static Sprite Load(string path)
     {
         Sprite s;
-        if (cache.TryGetValue(path, out s)) return s;
+        if (cache.TryGetValue(path, out s) && s != null) return s;
+        cache.Remove(path);
         s = Resources.Load<Sprite>(path);
         if (s == null) s = LoadFuzzy(path);   // dosya adinda Turkce karakter / buyuk-kucuk harf farki olsa da bul
-        cache[path] = s;
+        if (s == null)
+        {
+            // Tek sprite'li kaynak bazi import ayarlarinda yalniz Texture olarak doner.
+            var texture = Resources.Load<Texture2D>(path);
+            if (texture != null)
+                s = Sprite.Create(texture, new Rect(0f, 0f, texture.width, texture.height),
+                    new Vector2(0.5f, 0.5f), 100f, 0, SpriteMeshType.FullRect);
+        }
+        if (s != null) cache[path] = s; // basarisiz aramayi cache'leme; sonraki cagri yeniden deneyebilir
         return s;
     }
 
@@ -52,7 +61,13 @@ public static class UIArt
         if (slash < 0) return null;
         string folder = path.Substring(0, slash);
         Sprite[] all;
-        if (!folders.TryGetValue(folder, out all)) { all = Resources.LoadAll<Sprite>(folder); folders[folder] = all; }
+        if (!folders.TryGetValue(folder, out all) || all == null || all.Length == 0)
+        {
+            folders.Remove(folder);
+            all = Resources.LoadAll<Sprite>(folder);
+            if (all != null && all.Length > 0) folders[folder] = all;
+        }
+        if (all == null) return null;
         string want = Normalize(path.Substring(slash + 1));
         foreach (var sp in all)
         {
@@ -189,12 +204,13 @@ public static class UIArt
     {
         string key = path + "|" + border;
         Sprite ns;
-        if (sliced.TryGetValue(key, out ns)) return ns;
+        if (sliced.TryGetValue(key, out ns) && ns != null) return ns;
+        sliced.Remove(key);
         var s = Load(path);
         if (s != null)
             ns = Sprite.Create(s.texture, s.rect, new Vector2(0.5f, 0.5f), s.pixelsPerUnit, 0,
                 SpriteMeshType.FullRect, new Vector4(border, border, border, border));
-        sliced[key] = ns;
+        if (ns != null) sliced[key] = ns;
         return ns;
     }
 
