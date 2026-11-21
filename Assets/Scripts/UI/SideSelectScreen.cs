@@ -22,6 +22,7 @@ public class SideSelectScreen : MonoBehaviour
     const string GameTitle = "ARAF";
     const float DeadZone = 0.05f;          // ekranin ortasinda bu kadar genislik "kopru" sayilir
 
+    [System.Serializable]
     class Mote
     {
         public RectTransform rt;
@@ -31,6 +32,7 @@ public class SideSelectScreen : MonoBehaviour
         public Color color;
     }
 
+    [System.Serializable]
     class SideCard
     {
         public int side;
@@ -42,6 +44,7 @@ public class SideSelectScreen : MonoBehaviour
         public Color accent, accentBright, accentDim;
     }
 
+    [System.Serializable]
     class Ghost
     {
         public RectTransform root, wingL, wingR, halo, hornL, hornR;
@@ -56,22 +59,23 @@ public class SideSelectScreen : MonoBehaviour
         public bool useArt;
     }
 
-    RectTransform root, hellRt, heavenRt, bgRt, titleBlock;
+    [SerializeField] RectTransform root, hellRt, heavenRt, bgRt, titleBlock;
     Vector2 bgBasePos, bgBaseScale, titleBasePos;
-    Image bg, hellImg, heavenImg, flash;
-    SkeletonGraphic spineBg;
-    SkeletonAnimation spineAnimation;
+    [SerializeField] Image bg, hellImg, heavenImg, flash;
+    [SerializeField] SkeletonGraphic spineBg;
+    [SerializeField] SkeletonAnimation spineAnimation;
     Coroutine doorTransition;
     int activeDoorSide;
     float ghostFacingYaw, ghostFacingYawVelocity;
-    Ghost ghost;
-    CanvasGroup group;
-    Canvas ownCanvas;
-    SettingsPanel settings;
+    [SerializeField] Ghost ghost;
+    GameObject settingsOpenButton, achievementsOpenButton;
+    [SerializeField] CanvasGroup group;
+    [SerializeField] Canvas ownCanvas;
+    [SerializeField] SettingsPanel settings;
     readonly List<Mote> motes = new List<Mote>();
-    SideCard hellCard, heavenCard;
-    TextMeshProUGUI hintText;
-    AudioSource audioSrc;
+    [SerializeField] SideCard hellCard, heavenCard;
+    [SerializeField] TextMeshProUGUI hintText;
+    [SerializeField] AudioSource audioSrc;
     AudioClip hellClip, heavenClip;
     float introT, findTimer, hellTint, heavenTint;
     int zone;                               // 0 kopru, 1 cehennem, 2 cennet
@@ -123,7 +127,7 @@ public class SideSelectScreen : MonoBehaviour
         var bgSprite = spineData == null ? Resources.Load<Sprite>("Art/UI/menu_bg") : null;
         hasBgArt = spineData != null || bgSprite != null;
 
-        bg = Panel(r, "Bg", hasBgArt ? Color.black : Neutral, true);
+        bg = Panel(r, "Bg", hasBgArt ? Color.clear : Neutral, true);
         if (bgSprite != null)
         {
             bg.color = Color.white;
@@ -146,12 +150,8 @@ public class SideSelectScreen : MonoBehaviour
         heavenRt.anchorMin = new Vector2(0.5f, 0f); heavenRt.anchorMax = Vector2.one;
         hellRt.offsetMin = hellRt.offsetMax = heavenRt.offsetMin = heavenRt.offsetMax = Vector2.zero;
 
-        if (!hasBgArt)
-        {
-            AddFade(hellRt, new Color(0f, 0f, 0f, 0.55f));
-            AddFade(heavenRt, new Color(0f, 0f, 0f, 0.5f));
-        }
-        var vig = Panel(r, "Vignette", new Color(0f, 0f, 0f, hasBgArt ? 0.25f : 0.8f), false);
+        // Alt siyah fade barlari kaldirildi; arka plan ekrani tam kaplasin.
+        var vig = Panel(r, "Vignette", new Color(0f, 0f, 0f, hasBgArt ? 0f : 0.8f), false);
         vig.sprite = UIFactory.VignetteSprite();
         vig.type = Image.Type.Simple;
         vig.preserveAspect = false;
@@ -161,9 +161,16 @@ public class SideSelectScreen : MonoBehaviour
         BuildMotes(heavenRt, 18, new Color(1f, 0.95f, 0.7f), new Color(0.65f, 0.85f, 1f), 2);
 
         BuildTitle(r);
-        BuildSideCards(r);
+        // Yan kartlar (CEHENNEM/CENNET kutulari) kaldirildi.
         BuildHint(r);
         BuildSettingsButton(r);
+
+        // Ana menu acikken oyun ici Ayarlar/Basarimlar butonlari cakismasin.
+        settingsOpenButton = GameObject.Find("OpenSettingsButton");
+        if (settingsOpenButton != null) settingsOpenButton.SetActive(false);
+        achievementsOpenButton = GameObject.Find("OpenAchievementsButton");
+        if (achievementsOpenButton != null) achievementsOpenButton.SetActive(false);
+
         ghost = BuildGhost(r);
 
         // Secim yapilinca kisa bir renk parlamasi (en ustte, tiklamayi engellemez).
@@ -250,14 +257,15 @@ public class SideSelectScreen : MonoBehaviour
 
             float scaleX = refSize.x / backgroundW;
             float scaleY = refSize.y / backgroundH;
-            float scale = Mathf.Max(scaleX, scaleY);
+            float scale = Mathf.Max(scaleX, scaleY) * 1.06f;
 
             srt.localScale = new Vector3(scale, scale, 1f);
 
             // Center the actual background plane rather than the wider skeleton bounds.
+            // Arka plan alttan ekranin altina hizalanir; boylece altta siyah bar kalmaz.
             srt.anchoredPosition = new Vector2(
                 (refSize.x - backgroundW * scale) * 0.5f - backgroundX * scale,
-                (refSize.y - backgroundH * scale) * 0.5f - backgroundY * scale);
+                -backgroundY * scale - 200f);
 
             bgRt = srt;
             bgBaseScale = srt.localScale;
@@ -332,6 +340,8 @@ public class SideSelectScreen : MonoBehaviour
     {
         if (ghost != null && ghost.spineAnimation != null)
             ghost.spineAnimation.UpdateComplete -= ApplyDemonEyeTint;
+        if (settingsOpenButton != null) settingsOpenButton.SetActive(true);
+        if (achievementsOpenButton != null) achievementsOpenButton.SetActive(true);
         SetCursorHidden(false);
     }
 
@@ -386,16 +396,7 @@ public class SideSelectScreen : MonoBehaviour
         Ornament(titleBlock, -1f);
         Ornament(titleBlock, 1f);
 
-        // Kucuk koyu golge, altin basligi arka plandan ayirir.
-        var shadow = UIFactory.CreateText(titleBlock, "TitleShadow", Loc.T(GameTitle), 116f,
-            TextAlignmentOptions.Center, new Color(0.03f, 0.02f, 0.01f, 0.7f),
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -170f), new Vector2(0f, -50f), true);
-        shadow.characterSpacing = 16f;
-        shadow.enableAutoSizing = true;
-        shadow.fontSizeMin = 52f;
-        shadow.fontSizeMax = 116f;
-        shadow.rectTransform.anchoredPosition = new Vector2(4f, -4f);
-
+        // Tek baslik (golge kaldirildi, ortali).
         var title = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 116f,
             TextAlignmentOptions.Center, GoldBright,
             new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -170f), new Vector2(0f, -50f), true);
@@ -492,21 +493,7 @@ public class SideSelectScreen : MonoBehaviour
             new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(14f, -130f), new Vector2(-14f, -94f), false);
         card.motto.characterSpacing = 2f;
 
-        var pill = UIFactory.CreateRoundedPanel(card.root, "ActionPill", new Color(accent.r, accent.g, accent.b, 0f), false);
-        card.pill = pill.rectTransform;
-        card.pillImg = pill;
-        card.pill.anchorMin = card.pill.anchorMax = new Vector2(0.5f, 0f);
-        card.pill.pivot = new Vector2(0.5f, 0f);
-        card.pill.sizeDelta = new Vector2(280f, 56f);
-        card.pill.anchoredPosition = new Vector2(0f, 18f);
-
-        card.action = UIFactory.CreateText(card.pill, "ActionLabel", action, 25f,
-            TextAlignmentOptions.Center, new Color(Ink.r, Ink.g, Ink.b, 0.35f),
-            Vector2.zero, Vector2.one, new Vector2(8f, 4f), new Vector2(-8f, -4f), true);
-        card.action.characterSpacing = 2f;
-        card.action.enableAutoSizing = true;
-        card.action.fontSizeMin = 17f;
-        card.action.fontSizeMax = 25f;
+        // Cehenneme in / Cennete cik butonlari kaldirildi (gereksiz).
 
         return card;
     }
@@ -695,6 +682,7 @@ public class SideSelectScreen : MonoBehaviour
     void SetZone(int z)
     {
         zone = z;
+        if (ghost == null) return;
         ghost.pop = 1f;
         PlayGhostAnimation(z);
 
@@ -914,7 +902,7 @@ public class SideSelectScreen : MonoBehaviour
         SetSettingsMode(settings != null && settings.IsOpen);
 
         var pointer = Pointer.current;
-        Vector2 screenPos = pointer != null ? pointer.position.ReadValue() : new Vector2(Screen.width * 0.5f, Screen.height * 0.3f);
+        Vector2 screenPos = pointer != null ? pointer.position.ReadValue() : (Vector2)Input.mousePosition;
 
         int z = settingsMode || closing ? 0 : ComputeZone(screenPos);
         if (!chosen && !closing && z != zone) SetZone(z);
@@ -1002,7 +990,8 @@ public class SideSelectScreen : MonoBehaviour
             float ps = 0.94f + 0.06f * c.hover;
             c.pill.localScale = new Vector3(ps, ps, 1f);
         }
-        c.action.color = new Color(Ink.r, Ink.g, Ink.b, 0.30f + 0.68f * c.hover);
+        if (c.action != null)
+            c.action.color = new Color(Ink.r, Ink.g, Ink.b, 0.30f + 0.68f * c.hover);
     }
 
     void AnimateHint(float dt)
