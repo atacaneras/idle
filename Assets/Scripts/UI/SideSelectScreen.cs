@@ -609,6 +609,12 @@ public class SideSelectScreen : MonoBehaviour
                 {
                     float artScale = 230f / artHeight;
                     g.spineGraphic.rectTransform.localScale = new Vector3(artScale, artScale, 1f);
+
+                    // Spine iskelet kokunu (ayak) pivot yapar: hayalet imlecin ~115 px USTUNDE kalirdi.
+                    // Gorunen sinirlarin merkezini hayalet kokune (imlece) tasi.
+                    var artRect = g.spineGraphic.rectTransform;
+                    Vector3 centerInRoot = g.root.InverseTransformPoint(artRect.TransformPoint(artRect.rect.center));
+                    artRect.anchoredPosition -= new Vector2(centerInRoot.x, centerInRoot.y);
                 }
             }
             return g;
@@ -887,6 +893,28 @@ public class SideSelectScreen : MonoBehaviour
         else if (open) audioSrc.Stop();
     }
 
+    // Proje "Input System (New)" modunda: Input.mousePosition HATA firlatir ve Update'i yarida keser (hayalet donar).
+    // Pointer.current ise en son kullanilan cihaz olur (kalem / dokunmatik ekran fareyi golgeleyebilir).
+    // Bu yuzden once gercek fare, sonra dokunma, sonra son bilinen konum kullanilir.
+    Vector2 lastPointer = new Vector2(float.NaN, float.NaN);
+    Vector2 ReadPointerPosition()
+    {
+        var mouse = Mouse.current;
+        if (mouse != null) lastPointer = mouse.position.ReadValue();
+        else
+        {
+            var touch = Touchscreen.current;
+            if (touch != null && touch.primaryTouch.press.isPressed) lastPointer = touch.primaryTouch.position.ReadValue();
+            else
+            {
+                var pointer = Pointer.current;
+                if (pointer != null) lastPointer = pointer.position.ReadValue();
+            }
+        }
+        if (float.IsNaN(lastPointer.x)) lastPointer = new Vector2(Screen.width * 0.5f, Screen.height * 0.3f);
+        return lastPointer;
+    }
+
     // ---- Animasyon ----
     void Update()
     {
@@ -901,8 +929,7 @@ public class SideSelectScreen : MonoBehaviour
         ResolveSettings();
         SetSettingsMode(settings != null && settings.IsOpen);
 
-        var pointer = Pointer.current;
-        Vector2 screenPos = pointer != null ? pointer.position.ReadValue() : (Vector2)Input.mousePosition;
+        Vector2 screenPos = ReadPointerPosition();
 
         int z = settingsMode || closing ? 0 : ComputeZone(screenPos);
         if (!chosen && !closing && z != zone) SetZone(z);
@@ -1012,7 +1039,12 @@ public class SideSelectScreen : MonoBehaviour
         if (g == null || g.root == null || settingsMode || closing) return;
 
         Vector2 local;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screenPos, null, out local);
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screenPos, null, out local))
+        {
+            // Yedek: ekran merkezine gore, canvas olcegiyle bol
+            float sf = ownCanvas != null && ownCanvas.rootCanvas != null ? Mathf.Max(0.0001f, ownCanvas.rootCanvas.scaleFactor) : 1f;
+            local = (screenPos - new Vector2(Screen.width, Screen.height) * 0.5f) / sf;
+        }
         Vector2 prev = g.pos;
         g.pos = Vector2.Lerp(g.pos, local, 1f - Mathf.Exp(-20f * dt));
         float vx = dt > 0f ? (g.pos.x - prev.x) / dt : 0f;
