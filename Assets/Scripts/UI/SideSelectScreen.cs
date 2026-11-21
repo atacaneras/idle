@@ -156,7 +156,6 @@ public class SideSelectScreen : MonoBehaviour
         BuildTheaterFrame(r);
         BuildTitle(r);
         BuildHint(r);
-        BuildSettingsButton(r);
 
         // Ana menu acikken oyun ici Ayarlar/Basarimlar butonlari cakismasin.
         settingsOpenButton = GameObject.Find("OpenSettingsButton");
@@ -486,48 +485,6 @@ public class SideSelectScreen : MonoBehaviour
             TextAlignmentOptions.Center, new Color(0.9f, 0.86f, 0.78f, 0.92f),
             Vector2.zero, Vector2.one, new Vector2(18f, 4f), new Vector2(-18f, -4f), true, true);
         hintText.characterSpacing = 2f;
-    }
-
-    // ---- Alt orta: Ayarlar ----
-    void BuildSettingsButton(RectTransform r)
-    {
-        TextMeshProUGUI label;
-        var btn = UIFactory.CreateButton(r, "MenuSettingsButton", Loc.T("Ayarlar"), 26f, out label);
-        var img = btn.GetComponent<Image>();
-        var rt = (RectTransform)btn.transform;
-        // Alt sag kose: alt ortadaki ipucu metniyle cakismasin.
-        rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
-        rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-64f, 34f);
-
-        var art = UIArt.Load(UIArt.IconSettings);
-        if (art != null)
-        {
-            UIArt.StyleButton(btn, label, 14f);
-            var icon = Panel(rt, "SettingsIcon", Color.white, false);
-            icon.sprite = art;
-            icon.preserveAspect = true;
-            var iconRt = icon.rectTransform;
-            iconRt.anchorMin = Vector2.zero; iconRt.anchorMax = Vector2.one;
-            iconRt.offsetMin = new Vector2(14f, 14f); iconRt.offsetMax = new Vector2(-14f, -14f);
-            rt.sizeDelta = new Vector2(84f, 84f);
-            label.text = "";
-        }
-        else
-        {
-            UIFactory.MakeRounded(img);
-            img.color = new Color(0.14f, 0.1f, 0.08f, 0.92f);
-            rt.sizeDelta = new Vector2(260f, 60f);
-            label.color = new Color(0.96f, 0.88f, 0.7f);
-            label.enableAutoSizing = true;
-            label.fontSizeMin = 18f;
-            label.fontSizeMax = 26f;
-        }
-        btn.onClick.AddListener(() =>
-        {
-            ResolveSettings(true);
-            if (settings != null) settings.Open();
-        });
     }
 
     // ---- Hayalet imleci ----
