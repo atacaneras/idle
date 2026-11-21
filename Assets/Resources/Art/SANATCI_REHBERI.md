@@ -1,7 +1,7 @@
 # Sanatçı Rehberi
 
 PNG dosyasını ilgili kat klasörüne at, Unity'de hiçbir ayara dokunma. Oyun Play'e basınca dosyayı kendi bulur.
-Dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz). Dosya yoksa oyun placeholder çizer.
+Kat arka planı dosyasının adı `background.png` olmak zorunda değil (`Hell_01_background.png` gibi de olur; klasördeki en büyük yatay görsel alınır). Diğer dosya adları **birebir** aşağıdaki gibi olmalı (küçük harf, boşluksuz). Dosya yoksa oyun placeholder çizer.
 
 - Kat arka planı: 1920x1080 önerilir.
 - **Arayüz panelleri arka planın üstüne biner.** Ana çizimi (kapı, tezgâh, taht vb.) ortadaki alana koy: yaklaşık x 600–1150, y 170–720. Sol ~%30 (yükseltme paneli), sağ ~%40 (bina listesi), üst ~%14 ve alt ~%25 (butonlar) kısmı süs/dolgu olsun.

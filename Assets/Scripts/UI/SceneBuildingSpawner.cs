@@ -44,6 +44,10 @@ public class SceneBuildingSpawner : MonoBehaviour
         public float phase;         // her bina farkli fazda sallansin
         public float flash;         // kademe atlayinca parlama
         public float ambientTimer;
+        public bool locked;         // henuz alinmadi: soluk siluet olarak gosterilir
+        public Transform slotT, rimT;          // binanin durdugu yuvarlak zemin ve isik halkasi
+        public SpriteRenderer slotSr, rimSr;
+        public float lift;          // pivotu ortada olan ikonlar icin tabani yer cizgisine oturtan yukseklik
     }
 
     class Particle
@@ -65,6 +69,8 @@ public class SceneBuildingSpawner : MonoBehaviour
     Camera cam;
     // true: <bina_id>_lv1.png olmayan binalar sahnede cizilmez. Dev sirasinda eski kutular icin false yap.
     const bool HidePlaceholders = true;
+    // Bina sanati (_lv1.png) henuz yokken sahnede kutu yerine binanin ikonu cizilir; bu ikonun sahnedeki boyu (dunya birimi).
+    const float IconSceneHeight = 1.9f;
 
     SpriteRenderer groundSr;
     bool hasColors;
@@ -161,8 +167,23 @@ public class SceneBuildingSpawner : MonoBehaviour
             gsr.sortingOrder = b.sortingOrder - 1;
             gsr.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0f);
 
+            // Bina yuvasi: bos da olsa yeri gorunur; alininca isik halkasi yanar.
+            var slotGo = new GameObject("slot_" + b.id);
+            slotGo.transform.SetParent(transform, false);
+            var slotSr = slotGo.AddComponent<SpriteRenderer>();
+            slotSr.sprite = GlowSprite();
+            slotSr.sortingOrder = b.sortingOrder - 3;
+            slotSr.color = new Color(0f, 0f, 0f, 0.6f);
+            var rimGo = new GameObject("rim_" + b.id);
+            rimGo.transform.SetParent(transform, false);
+            var rimSr = rimGo.AddComponent<SpriteRenderer>();
+            rimSr.sprite = GlowSprite();
+            rimSr.sortingOrder = b.sortingOrder - 4;
+            rimSr.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0.15f);
+
             views[b.id] = new View
             {
+                slotT = slotGo.transform, slotSr = slotSr, rimT = rimGo.transform, rimSr = rimSr,
                 data = b,
                 sr = sr,
                 glow = gsr,
@@ -189,24 +210,30 @@ public class SceneBuildingSpawner : MonoBehaviour
             int n = gm.GetCount(b);
             if (n <= 0)
             {
+                // Alinmamis bina: sadece bos yuva gorunur (siluet yok); alininca bina uzerinde belirir.
                 sr.enabled = false;
                 if (v.glow != null) v.glow.enabled = false;
-                v.t = -1f;
+                v.locked = true; v.tier = 0; v.flash = 0f; v.t = -1f;
+                PlaceSlot(v, false);
                 continue;
             }
 
+            v.locked = false;
+            PlaceSlot(v, true);
             int level = BuildingTiers.LevelFor(n);
             v.tier = level;
             sr.enabled = true;
 
-            var sprite = b.GetSprite(level);
+            float scale, lift;
+            var sprite = SceneSprite(b, level, out scale, out lift);
             if (sprite != null)
             {
                 sr.sprite = sprite;
                 v.baseColor = Color.white;
-                v.baseScale = Vector3.one;
-                v.width = sprite.bounds.size.x;
-                v.height = sprite.bounds.size.y;
+                v.baseScale = new Vector3(scale, scale, 1f);
+                v.lift = lift;
+                v.width = sprite.bounds.size.x * scale;
+                v.height = sprite.bounds.size.y * scale;
             }
             else
             {
@@ -225,6 +252,7 @@ public class SceneBuildingSpawner : MonoBehaviour
                 sr.sprite = BuildingSprite(b, level);
                 v.baseColor = Color.white; // Renkler sprite'in icine zaten uygulandi.
                 v.baseScale = new Vector3(b.placeholderSize.x * grow, b.placeholderSize.y * grow, 1f);
+                v.lift = 0f;
                 v.width = v.baseScale.x;
                 v.height = v.baseScale.y;
             }
@@ -233,12 +261,36 @@ public class SceneBuildingSpawner : MonoBehaviour
             if (v.glow != null)
             {
                 v.glow.enabled = level >= 1;
-                v.glowT.localPosition = new Vector3(v.basePos.x, v.basePos.y + v.height * 0.5f, 0.01f);
+                v.glowT.localPosition = new Vector3(v.basePos.x, v.basePos.y + v.height * 0.5f, 0.01f);   // basePos = yer cizgisi
                 v.glowT.localScale = new Vector3(v.width * 1.9f, v.height * 1.2f, 1f);
             }
 
             Apply(v);
         }
+    }
+
+    void PlaceSlot(View v, bool owned)
+    {
+        if (v.slotT == null) return;
+        float w = Mathf.Max(2.3f, owned ? v.width * 1.25f : 2.3f);
+        v.slotT.localPosition = new Vector3(v.basePos.x, v.basePos.y + 0.04f, 0f);
+        v.slotT.localScale = new Vector3(w, 0.5f, 1f);
+        v.rimT.localPosition = new Vector3(v.basePos.x, v.basePos.y + 0.02f, 0f);
+        v.rimT.localScale = new Vector3(w * 1.3f, 0.7f, 1f);
+        v.rimSr.color = new Color(glowColor.r, glowColor.g, glowColor.b, owned ? 0.38f : 0.12f);
+    }
+
+    // Sahnede cizilecek sprite: once sanatcinin _lv sprite'i, yoksa binanin ikonu (olcekli, tabani yer cizgisinde).
+    Sprite SceneSprite(BuildingData b, int level, out float scale, out float lift)
+    {
+        scale = 1f; lift = 0f;
+        var sp = b.GetSprite(level);
+        if (sp != null) return sp;
+        sp = UIArt.BuildingIcon(b);
+        if (sp == null || sp.bounds.size.y < 0.01f) return null;
+        scale = IconSceneHeight / sp.bounds.size.y;
+        lift = IconSceneHeight * 0.5f;   // ikon pivotu ortada
+        return sp;
     }
 
     // ---- Satin alma animasyonu ----
@@ -275,7 +327,7 @@ public class SceneBuildingSpawner : MonoBehaviour
     public bool TryGetTopPosition(BuildingData b, out Vector3 world)
     {
         View v;
-        if (views.TryGetValue(b.id, out v) && v.sr.enabled)
+        if (views.TryGetValue(b.id, out v) && v.sr.enabled && !v.locked)
         {
             world = transform.TransformPoint(new Vector3(v.basePos.x, v.basePos.y + v.height + 0.1f, 0f));
             return true;
@@ -400,7 +452,7 @@ public class SceneBuildingSpawner : MonoBehaviour
         var gm = GameManager.Instance;
         if (gm == null || gm.CurrentAge == null) return;
         ComputeStage(gm.CurrentAge);
-        foreach (var kv in views) kv.Value.basePos = Placed(kv.Value.data);
+        foreach (var kv in views) { kv.Value.basePos = Placed(kv.Value.data); PlaceSlot(kv.Value, !kv.Value.locked); }
     }
 
     void Update()
@@ -435,12 +487,12 @@ public class SceneBuildingSpawner : MonoBehaviour
     // isik halesi belirginlesir ve cevreye kivilcim sacar.
     void AnimateIdle(View v, float dt)
     {
-        if (!v.sr.enabled) return;
+        if (!v.sr.enabled || v.locked) return;
         if (v.flash > 0f) v.flash = Mathf.Max(0f, v.flash - dt * 2.6f);
 
         if (!enableIdleAnimations)
         {
-            v.sr.transform.localPosition = v.basePos;
+            v.sr.transform.localPosition = v.basePos + new Vector3(0f, v.lift, 0f);
             v.sr.transform.localRotation = Quaternion.identity;
             v.sr.transform.localScale = v.animScale;
             if (v.glow != null) v.glow.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0f);
@@ -455,7 +507,7 @@ public class SceneBuildingSpawner : MonoBehaviour
         float sway = Mathf.Sin(t * 0.72f + 1.1f) * (2.2f + 1.6f * tier);
         if (tier >= 2) sway += Mathf.Sin(t * 2.7f) * (0.9f * (tier - 1));   // ust kademeler daha canli
 
-        v.sr.transform.localPosition = v.basePos + new Vector3(0f, bob, 0f);
+        v.sr.transform.localPosition = v.basePos + new Vector3(0f, v.lift + bob, 0f);
         v.sr.transform.localRotation = Quaternion.Euler(0f, 0f, sway);
         float breath = Mathf.Sin(t * 1.5f + 0.7f) * (0.012f + 0.008f * tier);
         v.sr.transform.localScale = new Vector3(

@@ -16,7 +16,10 @@ public class TowerView : MonoBehaviour
     public const int MaxFloor = 7;
     public const int TowerSortingOrder = -5;
     // Boss, sol sutun ile sag sutun arasindaki orta alana oturur (HudLayout.CenterLeft..W-CenterRightInset)
-    const float BossX = 0.47f, BossY = 0.56f, BossH = 0.34f;
+    // BossX = orta sutunun merkezi (kat adi tabelasi ve boss cubugu ile ayni dikey eksen)
+    const float BossX = 0.5f + HudLayout.CenterOffsetX / HudLayout.RefWidth, BossY = 0.56f, BossH = 0.34f;
+    // Spine karakter: ayaklari yer cizgisinde (ekran altindan oran), boyu ekran yuksekliginin bu orani
+    const float BossFeetY = 0.25f, BossSpineH = 0.38f;
     public int CurrentFloor { get; private set; }
     public bool Busy { get; private set; }
 
@@ -24,6 +27,12 @@ public class TowerView : MonoBehaviour
     RectTransform tcRt, root;
     readonly Dictionary<int, RectTransform> floors = new Dictionary<int, RectTransform>();
     readonly List<KeyValuePair<RectTransform, float>> bosses = new List<KeyValuePair<RectTransform, float>>();   // rect, en/boy
+    readonly Dictionary<int, RectTransform> bossAnchors = new Dictionary<int, RectTransform>();
+    readonly Dictionary<int, GameObject> bossSpines = new Dictionary<int, GameObject>();
+    readonly Dictionary<int, Vector3> bossBaseScale = new Dictionary<int, Vector3>();
+    readonly Dictionary<int, Vector2> bossBasePos = new Dictionary<int, Vector2>();
+    readonly List<KeyValuePair<RectTransform, float>> fogs = new List<KeyValuePair<RectTransform, float>>();   // sis katmani, faz
+    float hitT = -1f;
     float W = 1920f, H = 1080f;
 
     static readonly string[] HellNames = {
@@ -68,9 +77,14 @@ public class TowerView : MonoBehaviour
 
         for (int f = -MaxFloor; f <= MaxFloor; f++) BuildFloor(f);
         SnapTo(0);
+        GameManager.Instance.OnGathered += OnHit;
     }
 
-    void OnDestroy() { if (canvasGo != null) Destroy(canvasGo); }
+    void OnDestroy()
+    {
+        if (GameManager.Instance != null) GameManager.Instance.OnGathered -= OnHit;
+        if (canvasGo != null) Destroy(canvasGo);
+    }
 
     void BuildFloor(int f)
     {
@@ -86,10 +100,15 @@ public class TowerView : MonoBehaviour
         p.anchoredPosition = new Vector2(0, f * H);
         floors[f] = p;
 
-        // Sanatci: Assets/Resources/Art/<kat>/background.png ve boss.png otomatik gorunur
+        // Sanatci: Assets/Resources/Art/<kat>/ icindeki arka plan (adi "background" olmak zorunda degil) ve boss.png otomatik gorunur
         string key = f == 0 ? "earth" : (f < 0 ? "hell_" : "heaven_") + k;
-        var bgSprite = Resources.Load<Sprite>("Art/" + key + "/background");
-        if (bgSprite != null) { var im = p.GetComponent<Image>(); im.sprite = bgSprite; im.color = Color.white; }
+        var bgSprite = UIArt.FloorBackground(key);
+        if (bgSprite == null && f == 0)
+        {
+            bgSprite = Resources.Load<Sprite>("Art/earth/earth");
+            if (bgSprite == null) { var all = Resources.LoadAll<Sprite>("Art/earth"); if (all.Length > 0) bgSprite = all[0]; }
+        }
+        if (bgSprite != null) AddBackground(p, bgSprite);
         var bossSprite = Resources.Load<Sprite>("Art/" + key + "/boss");
         if (bossSprite != null)
         {
@@ -100,6 +119,7 @@ public class TowerView : MonoBehaviour
             b.sizeDelta = new Vector2(H * BossH * aspect, H * BossH);
             bosses.Add(new KeyValuePair<RectTransform, float>(b, aspect));
         }
+        else if (f < 0) bossAnchors[f] = CreateBossAnchor(p, k);
 
         if (f != 0)
         {
@@ -115,14 +135,122 @@ public class TowerView : MonoBehaviour
             line.offsetMin = new Vector2(0f, -HudLayout.FloorEdgeH - 6f); line.offsetMax = new Vector2(0f, -HudLayout.FloorEdgeH);
             return;
         }
-        // Yer yuzu (Windows XP arka plani): Assets/Resources/Art/earth/background.png
-        // (ya da earth.png / klasordeki ilk gorsel). Ayri bir acilma animasyonu yok;
-        // oyun basinda kamera dogrudan bu kattan 1. kata kayar.
-        if (bgSprite == null)
+    }
+
+    // Arka plan: oranini bozmadan ekrani doldurur (tasan kisim kirpilir), ustune hafif vinyet biner.
+    void AddBackground(RectTransform floor, Sprite sprite)
+    {
+        floor.gameObject.AddComponent<RectMask2D>();
+        var bg = UIFactory.CreatePanel(floor, "Bg", Color.white, false);
+        bg.SetAsFirstSibling();
+        var im = bg.GetComponent<Image>();
+        im.sprite = sprite;
+        im.preserveAspect = false;
+        var fit = bg.gameObject.AddComponent<AspectRatioFitter>();
+        fit.aspectMode = AspectRatioFitter.AspectMode.EnvelopeParent;
+        fit.aspectRatio = sprite.rect.width / Mathf.Max(1f, sprite.rect.height);
+
+        var vig = UIFactory.CreatePanel(floor, "Vignette", new Color(0f, 0f, 0f, 0.5f), false);
+        vig.SetSiblingIndex(1);
+        vig.GetComponent<Image>().sprite = UIFactory.VignetteSprite();
+        vig.anchorMin = Vector2.zero; vig.anchorMax = Vector2.one;
+        vig.offsetMin = vig.offsetMax = Vector2.zero;
+    }
+
+    // Cehennem katlarinda boss.png yoksa sahneye Spine seytan konur (kat numarasina gore Kukla_01..07 gorunumu).
+    RectTransform CreateBossAnchor(RectTransform floor, int hellFloor)
+    {
+        var a = UIFactory.CreatePanel(floor, "BossAnchor", new Color(0f, 0f, 0f, 0f), false);
+        a.anchorMin = a.anchorMax = new Vector2(BossX, BossFeetY);
+        a.sizeDelta = Vector2.zero;
+
+        var glow = UIFactory.CreatePanel(a, "BossGlow", new Color(1f, 0.38f, 0.1f, 0.30f), false);
+        glow.GetComponent<Image>().sprite = UIFactory.RadialSprite();
+        glow.anchorMin = glow.anchorMax = new Vector2(0.5f, 0.5f);
+        glow.sizeDelta = new Vector2(720f, 720f);
+        glow.anchoredPosition = new Vector2(0f, 230f);
+
+        // Zemin: lav isigi + koyu tas platform + golge. Seytan havada durmasin.
+        Ellipse(a, "BossLava", new Color(1f, 0.35f, 0.08f, 0.45f), new Vector2(760f, 150f), new Vector2(0f, -10f));
+        Ellipse(a, "BossPlatform", new Color(0.05f, 0.02f, 0.02f, 0.95f), new Vector2(600f, 105f), new Vector2(0f, -2f));
+        Ellipse(a, "BossPlatformTop", new Color(0.2f, 0.07f, 0.05f, 0.9f), new Vector2(470f, 70f), new Vector2(0f, 4f));
+        Ellipse(a, "BossShadow", new Color(0f, 0f, 0f, 0.6f), new Vector2(330f, 52f), new Vector2(0f, 6f));
+
+        // Ayaklarin etrafinda yavasca kayan sis (SpineUI karakteri bunlarin USTUNE ekler)
+        for (int i = 0; i < 3; i++)
         {
-            var alt = Resources.Load<Sprite>("Art/earth/earth");
-            if (alt == null) { var all = Resources.LoadAll<Sprite>("Art/earth"); if (all.Length > 0) alt = all[0]; }
-            if (alt != null) { var im0 = p.GetComponent<Image>(); im0.sprite = alt; im0.color = Color.white; }
+            var fog = Ellipse(a, "Fog" + i, new Color(0.55f, 0.14f, 0.07f, 0.20f), new Vector2(900f - i * 120f, 150f), new Vector2(0f, 18f + i * 14f));
+            fogs.Add(new KeyValuePair<RectTransform, float>(fog, i * 2.1f));
+        }
+        return a;
+    }
+
+    static RectTransform Ellipse(RectTransform parent, string name, Color color, Vector2 size, Vector2 pos)
+    {
+        var e = UIFactory.CreatePanel(parent, name, color, false);
+        e.GetComponent<Image>().sprite = UIFactory.RadialSprite();
+        e.anchorMin = e.anchorMax = new Vector2(0.5f, 0.5f);
+        e.sizeDelta = size;
+        e.anchoredPosition = pos;
+        return e;
+    }
+
+    // Topla'ya basinca seytan sarsilir, kirmiziya doner ve ezilip geri toplanir.
+    void OnHit() { hitT = 0f; }
+
+    void AnimateBoss()
+    {
+        foreach (var f in fogs)
+        {
+            if (f.Key == null) continue;
+            float x = Mathf.Sin(Time.unscaledTime * 0.35f + f.Value) * 60f;
+            f.Key.anchoredPosition = new Vector2(x, f.Key.anchoredPosition.y);
+        }
+        if (hitT < 0f) return;
+        hitT += Time.unscaledDeltaTime / 0.28f;
+        GameObject go;
+        if (!bossSpines.TryGetValue(CurrentFloor, out go) || go == null) { hitT = -1f; return; }
+        var rt = (RectTransform)go.transform;
+        var g = go.GetComponent<Spine.Unity.SkeletonGraphic>();
+        Vector3 bs; Vector2 bp;
+        if (!bossBaseScale.TryGetValue(CurrentFloor, out bs)) bs = rt.localScale;
+        if (!bossBasePos.TryGetValue(CurrentFloor, out bp)) bp = rt.anchoredPosition;
+        if (hitT >= 1f)
+        {
+            hitT = -1f;
+            rt.localScale = bs; rt.anchoredPosition = bp;
+            if (g != null) g.color = Color.white;
+            return;
+        }
+        float k = 1f - hitT;                       // 1 -> 0
+        float pulse = Mathf.Sin(hitT * Mathf.PI);  // 0 -> 1 -> 0
+        rt.localScale = new Vector3(bs.x * (1f + 0.07f * pulse), bs.y * (1f - 0.09f * pulse), bs.z);
+        rt.anchoredPosition = bp + new Vector2(Mathf.Sin(hitT * 55f) * 14f * k, 0f);
+        if (g != null) g.color = Color.Lerp(Color.white, new Color(1f, 0.42f, 0.38f), pulse);
+    }
+
+    // Sadece gorunen (ve yanindaki) kattaki seytan canli tutulur; digerleri uyutulur.
+    void UpdateBosses()
+    {
+        foreach (var kv in bossAnchors)
+        {
+            int f = kv.Key;
+            bool want = Mathf.Abs(f - CurrentFloor) <= 1;
+            GameObject go;
+            if (!bossSpines.TryGetValue(f, out go))
+            {
+                if (!want) continue;
+                int k = Mathf.Clamp(-f, 1, MaxFloor);
+                go = SpineUI.CreateGraphic(kv.Value, SpineUI.Find("tan_spine"), "Kukla_0" + k, "iblis_idle_01", H * BossSpineH);
+                bossSpines[f] = go;   // null olsa bile tekrar denenmesin
+                if (go != null)
+                {
+                    var grt = (RectTransform)go.transform;
+                    bossBaseScale[f] = grt.localScale;
+                    bossBasePos[f] = grt.anchoredPosition;
+                }
+            }
+            if (go != null && go.activeSelf != want) go.SetActive(want);
         }
     }
 
@@ -130,10 +258,15 @@ public class TowerView : MonoBehaviour
     void Update()
     {
         if (tcRt == null) return;
+        UpdateBosses();
+        AnimateBoss();
         var r = tcRt.rect;
         if (r.width < 1f || r.height < 1f) return;
         if (Mathf.Abs(r.width - W) < 1f && Mathf.Abs(r.height - H) < 1f) return;
         W = r.width; H = r.height;
+        foreach (var kv in bossSpines) if (kv.Value != null) Destroy(kv.Value);
+        bossBaseScale.Clear(); bossBasePos.Clear();
+        bossSpines.Clear();   // boyutlar degisti: seytan yeni olcuyle yeniden kurulur
         root.sizeDelta = new Vector2(W, H);
         foreach (var kv in floors) { kv.Value.sizeDelta = new Vector2(W, H); kv.Value.anchoredPosition = new Vector2(0, kv.Key * H); }
         foreach (var b in bosses) b.Key.sizeDelta = new Vector2(H * BossH * b.Value, H * BossH);

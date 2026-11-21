@@ -56,6 +56,9 @@ public class UpgradePanel : MonoBehaviour
 
         headerLabel = UIFactory.CreateText(root, "HeaderLabel", Loc.T("YÜKSELTMELER"), 22f, TextAlignmentOptions.MidlineLeft, Color.white,
             Vector2.zero, Vector2.one, new Vector2(14f, 0f), new Vector2(-62f, 0f), true);
+        headerLabel.enableAutoSizing = true;
+        headerLabel.fontSizeMin = 16f;
+        headerLabel.fontSizeMax = 20f;
         headerButton = UIFactory.CreateButton(root, "ExpandButton", "+", 26f, out plusLabel);
         var headerRt = (RectTransform)headerButton.transform;
         // Tum baslik tiklanir; "+" yazisi sagda, buton gorunmez

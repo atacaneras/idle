@@ -118,7 +118,7 @@ public class HUDController : MonoBehaviour
         fastTestButton = UIFactory.CreateButton(canvas.rootCanvas.transform, "FastTestToggle", "", 24f, out var label);
         fastTestButtonLabel = label;
         var rt = (RectTransform)fastTestButton.transform;
-        HudLayout.PlaceCornerButton(rt, 2);   // alt sol: Basarimlar | Ayarlar | test
+        HudLayout.PlaceCornerButton(rt, 1);   // editor test dugmesi, ayarlarin yaninda
         fastTestButton.onClick.AddListener(GameManager.Instance.ToggleFastTestMode);
         UIArt.StyleButton(fastTestButton, label);
         RefreshFastTestButton();
@@ -212,8 +212,8 @@ public class HUDController : MonoBehaviour
                 if (vp != null)
                 {
                     vp.anchorMin = Vector2.zero; vp.anchorMax = Vector2.one;
-                    vp.offsetMin = new Vector2(106f, 112f);
-                    vp.offsetMax = new Vector2(-106f, -112f);
+                    vp.offsetMin = new Vector2(HudLayout.PanelVisibleInset, 112f);
+                    vp.offsetMax = new Vector2(-HudLayout.PanelVisibleInset, -112f);
                     var viewportImage = vp.GetComponent<Image>();
                     if (viewportImage != null)
                     {
@@ -340,13 +340,13 @@ public class HUDController : MonoBehaviour
             gatherLabel.fontStyle = FontStyles.Bold;
             gatherLabel.enableAutoSizing = true;
             gatherLabel.fontSizeMin = 28f;
-            gatherLabel.fontSizeMax = 46f;
+            gatherLabel.fontSizeMax = 42f;
             gatherLabel.alignment = TextAlignmentOptions.Midline;
             gatherLabel.color = UIArt.Has(UIArt.TapInner) ? new Color(0.3f, 0.07f, 0.03f) : HudLayout.AccentInk;
             var lrt = gatherLabel.rectTransform;
             lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one;
-            lrt.offsetMin = new Vector2(HudLayout.GatherW * 0.12f, HudLayout.GatherH * 0.2f);
-            lrt.offsetMax = new Vector2(-HudLayout.GatherW * 0.12f, -HudLayout.GatherH * 0.2f);
+            lrt.offsetMin = new Vector2(HudLayout.GatherW * 0.14f, HudLayout.GatherH * 0.22f);
+            lrt.offsetMax = new Vector2(-HudLayout.GatherW * 0.14f, -HudLayout.GatherH * 0.22f);
         }
     }
 
@@ -399,12 +399,30 @@ public class HUDController : MonoBehaviour
     {
         foreach (var r in rows) Destroy(r.gameObject);
         rows.Clear();
+        FitRowHeight();
         foreach (var b in GameManager.Instance.CurrentAge.buildings)
         {
             var row = Instantiate(rowPrefab, rowParent);
             row.Setup(b);
             rows.Add(row);
         }
+    }
+
+    // Kart yuksekligi = listenin gorunen yuksekligi / 5. Boylece 5 kart her ekran oraninda parsomene tam oturur.
+    void FitRowHeight()
+    {
+        float viewportH = 0f;
+        var scroll = rowParent != null ? rowParent.GetComponentInParent<ScrollRect>() : null;
+        if (scroll != null && scroll.viewport != null)
+        {
+            Canvas.ForceUpdateCanvases();
+            viewportH = scroll.viewport.rect.height;
+        }
+        if (viewportH < 200f) viewportH = 728f;   // 1920x1080 referans degeri
+        var layout = rowParent != null ? rowParent.GetComponent<VerticalLayoutGroup>() : null;
+        float spacing = layout != null ? layout.spacing : 2f;
+        float pad = layout != null ? layout.padding.top + layout.padding.bottom : 8f;
+        UIBuildingRow.RowHeight = Mathf.Clamp(Mathf.Floor((viewportH - pad - spacing * 4f) / 5f), 110f, 190f);
     }
 
     // Kaynak hapleri: her kaynak icin ikonlu bir hap. Kat degisince sayi degisebilir; fazlalar gizlenir.

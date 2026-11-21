@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Gorevler: ortada kucuk bir GOREVLER butonu. Tiklayinca bekleyen ilk 4 gorev acilir.
+// Sol gezinme alaninda tam genislikli bir gorev sekmesi. Tiklayinca bekleyen ilk 4 gorev acilir.
 // Odulu alinacak gorev varsa buton altin renkte yanar ve sayiyi gosterir.
 // Gorevler AgeData.quests'ten gelir, icerik content.json'da yazilir.
 public class QuestPanel : MonoBehaviour
@@ -35,21 +35,24 @@ public class QuestPanel : MonoBehaviour
         return qp;
     }
 
-    // Sol sutunda, Yukseltmeler basliginin hemen altinda ayni stilde bir baslik; tiklayinca asagiya acilir.
+    // Sol gezinmenin altinda, tam genislikte gorev sekmesi.
     void Build(RectTransform r)
     {
         toggle = UIFactory.CreateButton(r, "QuestHeader", "", 22f, out toggleLabel);
         var trt = (RectTransform)toggle.transform;
         trt.anchorMin = trt.anchorMax = new Vector2(0f, 1f);
         trt.pivot = new Vector2(0f, 1f);
-        trt.anchoredPosition = new Vector2(HudLayout.LeftInset, -(HudLayout.LeftButtonsTop + HeaderH + 8f));
-        trt.sizeDelta = new Vector2(HudLayout.UpgradeHeaderW, HeaderH);
+        float questX = HudLayout.LeftInset;
+        trt.anchoredPosition = new Vector2(questX, -HudLayout.QuestHeaderY);
+        trt.sizeDelta = new Vector2(HudLayout.QuestHeaderW, HeaderH);
         toggleImg = toggle.GetComponent<Image>();
         toggleLabel.alignment = TextAlignmentOptions.MidlineLeft;
         var lrt = toggleLabel.rectTransform;
-        lrt.offsetMin = new Vector2(14f, 0f); lrt.offsetMax = new Vector2(-56f, 0f);
+        lrt.offsetMin = new Vector2(18f, 0f); lrt.offsetMax = new Vector2(-52f, 0f);
+        toggleLabel.enableAutoSizing = true;
+        toggleLabel.fontSizeMin = 18f; toggleLabel.fontSizeMax = 22f;
         plusLabel = UIFactory.CreateText(trt, "Plus", "+", 26f, TextAlignmentOptions.Center, Color.white,
-            new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(-50f, 0f), new Vector2(-4f, 0f), true);
+            new Vector2(1f, 0f), new Vector2(1f, 1f), new Vector2(-38f, 0f), new Vector2(-10f, 0f), true);
         toggle.onClick.AddListener(Toggle);
         skinned = UIArt.StyleButton(toggle, toggleLabel);
         if (skinned) plusLabel.color = UIArt.ButtonText;
@@ -57,7 +60,7 @@ public class QuestPanel : MonoBehaviour
         popup = UIFactory.CreatePanel(r, "QuestPopup", new Color(0.12f, 0.1f, 0.12f, 0.97f), true);
         popup.anchorMin = popup.anchorMax = new Vector2(0f, 1f);
         popup.pivot = new Vector2(0f, 1f);
-        popup.anchoredPosition = new Vector2(HudLayout.LeftInset, -(HudLayout.LeftButtonsTop + HeaderH * 2f + 16f));
+        popup.anchoredPosition = new Vector2(questX, -HudLayout.QuestHeaderY - HeaderH - 8f);
         popup.sizeDelta = new Vector2(HudLayout.LeftW, Pad * 2f + Slots * RowH + (Slots - 1) * RowGap);
 
         for (int i = 0; i < Slots; i++)

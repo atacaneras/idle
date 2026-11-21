@@ -9,7 +9,7 @@ public class SettingsPanel : MonoBehaviour
     const float ConfirmSeconds = 4f;
     const float VolumeStep = 0.1f;
     const float WindowWidth = 780f;
-    const float WindowHeight = 760f;
+    const float WindowHeight = 840f;
 
     static readonly Color DimColor = new Color(0f, 0f, 0f, 0.7f);
     static readonly Color WindowColor = new Color(0.1f, 0.09f, 0.13f, 0.98f);
@@ -46,15 +46,19 @@ public class SettingsPanel : MonoBehaviour
         var btn = UIFactory.CreateButton(canvas, "OpenSettingsButton", Loc.T("Ayarlar"), 28f, out label);
         var rt = (RectTransform)btn.transform;
         rt.SetAsLastSibling();
-        HudLayout.PlaceCornerButton(rt, 1);   // alt sol: Basarimlar | Ayarlar
+        HudLayout.PlaceCornerButton(rt, 0);
         var icon = UIArt.Load(UIArt.IconSettings);
         if (icon != null)
         {
-            var image = btn.GetComponent<Image>();
-            image.sprite = icon;
-            image.type = Image.Type.Simple;
-            image.preserveAspect = true;
-            image.color = Color.white;
+            UIArt.StyleButton(btn, label, 14f);
+            var iconImage = new GameObject("SettingsIcon", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
+            iconImage.transform.SetParent(btn.transform, false);
+            iconImage.sprite = icon;
+            iconImage.preserveAspect = true;
+            iconImage.raycastTarget = false;
+            var iconRt = (RectTransform)iconImage.transform;
+            iconRt.anchorMin = Vector2.zero; iconRt.anchorMax = Vector2.one;
+            iconRt.offsetMin = new Vector2(13f, 13f); iconRt.offsetMax = new Vector2(-13f, -13f);
             rt.sizeDelta = new Vector2(68f, 68f);
             label.text = "";
         }
@@ -138,14 +142,20 @@ public class SettingsPanel : MonoBehaviour
         var quit = ButtonAt(win, "Quit", Loc.T("Oyundan Çık"), 468f, -540f, 282f, 56f, 24f, out quitLabel);
         quit.onClick.AddListener(QuitGame);
 
-        infoText = TextAt(win, "Info", "", 28f, -620f, 722f, 110f, 20f,
+        // Başarımlar ayarlar içinden açılır; ana HUD'da ayrı bir köşe butonu kullanmaz.
+        RowLabel(win, Loc.T("Başarımlar"), -620f);
+        TextMeshProUGUI achievementsLabel;
+        var achievements = ButtonAt(win, "Achievements", Loc.T("Aç"), 468f, -620f, 282f, 56f, 24f, out achievementsLabel);
+        achievements.onClick.AddListener(OpenAchievements);
+
+        infoText = TextAt(win, "Info", "", 28f, -690f, 722f, 70f, 20f,
             TextAlignmentOptions.TopLeft, GrayColor);
         infoText.enableAutoSizing = true;
         infoText.fontSizeMin = 15f;
         infoText.fontSizeMax = 20f;
 
         TextAt(win, "Version", Loc.F("Sürüm {0}  •  {1}", Application.version, SaveSystem.SaveFolder),
-            28f, -720f, 722f, 26f, 16f, TextAlignmentOptions.BottomLeft, GrayColor);
+            28f, -780f, 722f, 26f, 16f, TextAlignmentOptions.BottomLeft, GrayColor);
     }
 
     void RefreshLanguage()
@@ -262,6 +272,13 @@ public class SettingsPanel : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    void OpenAchievements()
+    {
+        Close();
+        var panel = GetComponent<AchievementPanel>();
+        if (panel != null) panel.Open();
     }
 
     void Refresh()

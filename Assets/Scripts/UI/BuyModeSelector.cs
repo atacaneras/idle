@@ -21,15 +21,15 @@ public class BuyModeSelector : MonoBehaviour
         var bar = new GameObject("BuyModeBar", typeof(RectTransform), typeof(HorizontalLayoutGroup));
         var rt = (RectTransform)bar.transform;
         rt.SetParent(canvas.transform, false);
-        rt.SetAsFirstSibling();   // diger arayuzun arkasinda kalsin, yuzen yazilari engellemesin
+        rt.SetAsLastSibling();    // parsomenin seffaf alt kenarinin USTUNDE kalsin; yoksa tiklamalari parsomen yutar
         // Bina listesinin hemen altinda [x1 x10 x100 Max]; Ses butonu bunun altinda, en sagda
         rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
         rt.pivot = new Vector2(1f, 0f);
-        rt.anchoredPosition = new Vector2(-(HudLayout.Margin + 42f), HudLayout.BuyModeBottom);
-        rt.sizeDelta = new Vector2(HudLayout.RightW * 0.70f, HudLayout.BuyModeHeight);
+        rt.anchoredPosition = new Vector2(-HudLayout.BuyModeRightInset, HudLayout.BuyModeBottom);
+        rt.sizeDelta = new Vector2(HudLayout.BuyModeWidth, HudLayout.BuyModeHeight);
 
         var layout = bar.GetComponent<HorizontalLayoutGroup>();
-        layout.spacing = 12f;
+        layout.spacing = 10f;
         layout.childControlWidth = layout.childControlHeight = true;
         layout.childForceExpandWidth = layout.childForceExpandHeight = true;
 
@@ -37,7 +37,10 @@ public class BuyModeSelector : MonoBehaviour
         {
             int mode = i;
             TextMeshProUGUI lbl;
-            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 42f, out lbl);
+            var btn = UIFactory.CreateButton(bar.transform, "Buy" + Labels[i], Labels[i], 36f, out lbl);
+            lbl.enableAutoSizing = true;   // etiket butona sigmazsa kuculur
+            lbl.fontSizeMin = 20f; lbl.fontSizeMax = 36f;
+            lbl.rectTransform.offsetMin = new Vector2(8f, 4f); lbl.rectTransform.offsetMax = new Vector2(-8f, -4f);
             if (UIArt.ModeSpriteHasText) lbl.text = "";
             btn.onClick.AddListener(() => Select(mode));
             images[i] = btn.GetComponent<Image>();

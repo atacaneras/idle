@@ -28,10 +28,8 @@ public class AchievementPanel : MonoBehaviour
 
     readonly List<Row> rows = new List<Row>();
     GameObject overlay;
-    TextMeshProUGUI titleText, openLabel;
-    Button openButton;
+    TextMeshProUGUI titleText;
     bool open;
-    int lastCount = -1;
 
     public bool IsOpen { get { return open; } }
 
@@ -39,14 +37,11 @@ public class AchievementPanel : MonoBehaviour
     {
         var canvas = GetComponentInParent<Canvas>();
         if (canvas == null) { Debug.LogWarning("AchievementPanel: Canvas bulunamadi."); return; }
-        BuildOpenButton(canvas.rootCanvas.transform);
         BuildWindow(canvas.rootCanvas.transform);
         overlay.SetActive(false);
 
         var gm = GameManager.Instance;
         gm.OnAchievementUnlocked += OnUnlocked;
-        gm.OnStateChanged += RefreshButton;
-        RefreshButton();
     }
 
     void OnDestroy()
@@ -54,20 +49,6 @@ public class AchievementPanel : MonoBehaviour
         var gm = GameManager.Instance;
         if (gm == null) return;
         gm.OnAchievementUnlocked -= OnUnlocked;
-        gm.OnStateChanged -= RefreshButton;
-    }
-
-    void BuildOpenButton(Transform canvas)
-    {
-        openButton = UIFactory.CreateButton(canvas, "OpenAchievementsButton", Loc.T("Başarımlar"), 22f, out openLabel);
-        var rt = (RectTransform)openButton.transform;
-        rt.SetAsLastSibling();
-        HudLayout.PlaceCornerButton(rt, 0);   // alt sol: Basarimlar | Ayarlar
-        openLabel.fontSizeMin = 16f;
-        openLabel.fontSizeMax = 22f;
-        openLabel.enableAutoSizing = true;
-        openButton.onClick.AddListener(Open);
-        UIArt.StyleButton(openButton, openLabel);
     }
 
     void BuildWindow(Transform canvas)
@@ -157,19 +138,7 @@ public class AchievementPanel : MonoBehaviour
 
     void OnUnlocked(string id)
     {
-        lastCount = -1;
-        RefreshButton();
         if (open) RefreshRows();
-    }
-
-    void RefreshButton()
-    {
-        var gm = GameManager.Instance;
-        if (gm == null || openLabel == null) return;
-        int n = gm.AchievementCount;
-        if (n == lastCount) return;
-        lastCount = n;
-        openLabel.text = Loc.T("Başarımlar") + " " + n + "/" + AchievementSystem.All.Count;
     }
 
     void RefreshRows()

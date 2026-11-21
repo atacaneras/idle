@@ -12,8 +12,12 @@ public class UIBuildingRow : MonoBehaviour
 
     BuildingData data;
 
-    const float RowHeight = 140f;   // Referanstaki geniş kartlar, beşi tek parşömene sığar.
-    const float RightColumn = 176f;
+    // Kart yuksekligi HUDController tarafindan listenin gorunen alanina gore hesaplanir (5 kart tam sigar).
+    public static float RowHeight = 142f;
+    const float PadTop = 12f;      // kart cercevesinin ust/alt suslemesi icin ic bosluk
+    const float PadBottom = 16f;
+    const float IconPad = 24f;
+    const float RightColumn = 168f;
     Image buyImage;
     TMP_Text buyLabel;
 
@@ -21,50 +25,57 @@ public class UIBuildingRow : MonoBehaviour
     {
         data = d;
         var iconSprite = UIArt.BuildingIcon(d);
-        float textLeft = icon != null && iconSprite != null ? 162f : 36f;
+        float h = RowHeight;
+        float usable = h - PadTop - PadBottom;
+        float iconSize = Mathf.Min(usable, 112f);
+        float textLeft = icon != null && iconSprite != null ? IconPad + iconSize + 12f : 36f;
+        const float nameH = 36f;
 
-        // Kart yuksekligi: ekranda 5 kart gorunsun (mockup)
         var le = GetComponent<LayoutElement>();
         if (le == null) le = gameObject.AddComponent<LayoutElement>();
-        le.minHeight = RowHeight;
-        le.preferredHeight = RowHeight;
+        le.minHeight = h;
+        le.preferredHeight = h;
 
-        // Metin sutunu ikon ile AL butonu arasinda kalir.
+        // Ad: ust satir. Bilgi: altindaki 3 satir. Ikisi de ikon ile sag sutun arasinda kalir ve karttan tasmaz.
         SetRect(nameText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f),
-            new Vector2(textLeft, -48f), new Vector2(-RightColumn, -4f), new Vector2(0f, 1f));
+            new Vector2(textLeft, -(PadTop + nameH)), new Vector2(-RightColumn, -PadTop), new Vector2(0f, 1f));
         SetRect(infoText.rectTransform, new Vector2(0f, 1f), new Vector2(1f, 1f),
-            new Vector2(textLeft, -138f), new Vector2(-RightColumn, -48f), new Vector2(0f, 1f));
+            new Vector2(textLeft, -(h - PadBottom)), new Vector2(-RightColumn, -(PadTop + nameH)), new Vector2(0f, 1f));
 
-        // AL butonu kartin saginda, maliyet hemen altinda.
+        // Sag sutun: AL butonu ve hemen altinda maliyet. Ikisi de sutunun ortasinda, karta sigar.
+        float colCenterX = -(RightColumn * 0.5f + 8f);
+        float btnH = Mathf.Min(52f, usable * 0.46f);
+        float btnY = (PadBottom - PadTop) * 0.5f + usable * 0.12f;
         RectTransform buttonRt = buyButton.GetComponent<RectTransform>();
         buttonRt.anchorMin = buttonRt.anchorMax = new Vector2(1f, 0.5f);
-        buttonRt.pivot = new Vector2(1f, 0.5f);
-        buttonRt.anchoredPosition = new Vector2(-28f, 10f);
-        buttonRt.sizeDelta = new Vector2(150f, 56f);
-        SetRect(costText.rectTransform, new Vector2(1f, 0f), new Vector2(1f, 0f),
-            Vector2.zero, Vector2.zero, new Vector2(1f, 0f));
-        costText.rectTransform.anchoredPosition = new Vector2(-18f, 5f);
-        costText.rectTransform.sizeDelta = new Vector2(164f, 24f);
+        buttonRt.pivot = new Vector2(0.5f, 0.5f);
+        buttonRt.anchoredPosition = new Vector2(colCenterX, btnY);
+        buttonRt.sizeDelta = new Vector2(RightColumn - 36f, btnH);
+        SetRect(costText.rectTransform, new Vector2(1f, 0.5f), new Vector2(1f, 0.5f),
+            Vector2.zero, Vector2.zero, new Vector2(0.5f, 1f));
+        costText.rectTransform.anchoredPosition = new Vector2(colCenterX, btnY - btnH * 0.5f - 3f);
+        costText.rectTransform.sizeDelta = new Vector2(RightColumn - 12f, 26f);
 
         nameText.enableAutoSizing = true;
-        nameText.fontSizeMin = 28f;
-        nameText.fontSizeMax = 42f;
+        nameText.fontSizeMin = 22f;
+        nameText.fontSizeMax = 36f;
         nameText.textWrappingMode = TextWrappingModes.NoWrap;
-        nameText.overflowMode = TextOverflowModes.Truncate;
+        nameText.overflowMode = TextOverflowModes.Ellipsis;
         nameText.alignment = TextAlignmentOptions.MidlineLeft;
         nameText.fontStyle = FontStyles.Bold;
         nameText.color = new Color(0.22f, 0.12f, 0.07f);
         infoText.enableAutoSizing = true;
-        infoText.fontSizeMin = 20f;
-        infoText.fontSizeMax = 28f;
+        infoText.fontSizeMin = 16f;
+        infoText.fontSizeMax = 27f;
         infoText.textWrappingMode = TextWrappingModes.Normal;
+        infoText.overflowMode = TextOverflowModes.Ellipsis;
         infoText.alignment = TextAlignmentOptions.TopLeft;
         infoText.color = new Color(0.29f, 0.2f, 0.14f);
         costText.enableAutoSizing = true;
-        costText.fontSizeMin = 11f;
-        costText.fontSizeMax = 14f;
+        costText.fontSizeMin = 15f;
+        costText.fontSizeMax = 23f;
         costText.textWrappingMode = TextWrappingModes.NoWrap;
-        costText.overflowMode = TextOverflowModes.Truncate;
+        costText.overflowMode = TextOverflowModes.Ellipsis;
         costText.alignment = TextAlignmentOptions.Top;
         costText.fontStyle = FontStyles.Bold;
         costText.color = new Color(0.36f, 0.2f, 0.1f);
@@ -82,8 +93,8 @@ public class UIBuildingRow : MonoBehaviour
             RectTransform iconRt = icon.rectTransform;
             iconRt.anchorMin = iconRt.anchorMax = new Vector2(0f, 0.5f);
             iconRt.pivot = new Vector2(0f, 0.5f);
-            iconRt.anchoredPosition = new Vector2(28f, 0f);
-            iconRt.sizeDelta = new Vector2(128f, 128f);
+            iconRt.anchoredPosition = new Vector2(IconPad, (PadBottom - PadTop) * 0.5f);
+            iconRt.sizeDelta = new Vector2(iconSize, iconSize);
         }
 
         buyImage = buyButton.GetComponent<Image>();
@@ -93,8 +104,10 @@ public class UIBuildingRow : MonoBehaviour
             buyLabel.text = UIArt.ClaimSpriteHasText && UIArt.Has(UIArt.ClaimReady) ? "" : Loc.T("AL");
             buyLabel.fontStyle = FontStyles.Bold;
             buyLabel.enableAutoSizing = true;
-            buyLabel.fontSizeMin = 18f;
-            buyLabel.fontSizeMax = 30f;
+            buyLabel.fontSizeMin = 16f;
+            buyLabel.fontSizeMax = 28f;
+            buyLabel.rectTransform.offsetMin = new Vector2(8f, 2f);
+            buyLabel.rectTransform.offsetMax = new Vector2(-8f, -2f);
         }
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() => GameManager.Instance.TryBuyCurrent(data));
@@ -140,7 +153,6 @@ public class UIBuildingRow : MonoBehaviour
 
         int next = gm.GetNextMilestone(data);
         string info = Loc.F("+{0}/sn {1}", NumberFormatter.Format(gm.GetUnitProduction(data)), Loc.T(data.produces.displayName));
-        info += "\n" + Loc.F("Toplam: {0}/sn", NumberFormatter.Format(gm.GetBuildingProductionPerSecond(data)));
         if (next > 0) info += "\n" + Loc.F("Sonraki x{0}: {1} adet", NumberFormatter.Format(gm.MilestoneMultiplier), next);
         else info += "\n" + Loc.T("MAKS SEVİYE");
         infoText.text = info;

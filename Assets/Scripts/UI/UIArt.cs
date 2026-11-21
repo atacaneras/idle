@@ -80,6 +80,37 @@ public static class UIArt
         return sb.ToString();
     }
 
+
+    // ---- Kat arka plani ----
+    // Sanatci dosyayi "background.png" yerine "Hell_01_background.png" gibi adlandirsa da bulunur.
+    static readonly Dictionary<string, Sprite> floorBackgrounds = new Dictionary<string, Sprite>();
+
+    public static Sprite FloorBackground(string key)
+    {
+        Sprite found;
+        if (floorBackgrounds.TryGetValue(key, out found)) return found;
+
+        string folder = "Art/" + key;
+        found = Resources.Load<Sprite>(folder + "/background");
+        if (found == null)
+        {
+            float bestScore = 0f;
+            foreach (var sp in Resources.LoadAll<Sprite>(folder))
+            {
+                string n = sp.name.ToLowerInvariant();
+                if (n.Contains("boss") || n.Contains("ikon") || n.Contains("icon") || n.Contains("_lv") ||
+                    n.Contains("iblis") || n.Contains("spine") || n.Contains("ghost") || n.Contains("export") || n.Contains("atlas"))
+                    continue;
+                float w = sp.rect.width, h = sp.rect.height;
+                if (w < 800f || h < 450f || w / h < 1.2f) continue;   // arka plan genis ve buyuk bir gorsel olmali
+                float score = w * h + (n.Contains("background") ? 1e9f : 0f);
+                if (score > bestScore) { bestScore = score; found = sp; }
+            }
+        }
+        floorBackgrounds[key] = found;
+        return found;
+    }
+
     public static bool Has(string path) { return Load(path) != null; }
 
     // Kaynak kimligine gore ikon (kaynak ikonu yoksa null)
