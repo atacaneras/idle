@@ -1,0 +1,3058 @@
+fileFormatVersion: 2
+guid: 4e7a0ab265d523b4d8b7e49e4463dece
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6277931935271403498
+    second: "\u015Feytan_spine_0"
+  - first:
+      213: -3424873791240500329
+    second: "\u015Feytan_spine_1"
+  - first:
+      213: 771509317093091831
+    second: "\u015Feytan_spine_2"
+  - first:
+      213: 1123693866459923583
+    second: "\u015Feytan_spine_3"
+  - first:
+      213: -8176986637479502898
+    second: "\u015Feytan_spine_4"
+  - first:
+      213: 4419622347905215023
+    second: "\u015Feytan_spine_5"
+  - first:
+      213: -5881418879017518605
+    second: "\u015Feytan_spine_6"
+  - first:
+      213: -8962207942289789620
+    second: "\u015Feytan_spine_7"
+  - first:
+      213: 2393371548519276834
+    second: "\u015Feytan_spine_8"
+  - first:
+      213: -6423844833706966927
+    second: "\u015Feytan_spine_9"
+  - first:
+      213: -4381874138847567312
+    second: "\u015Feytan_spine_10"
+  - first:
+      213: 2467169446478759392
+    second: "\u015Feytan_spine_11"
+  - first:
+      213: -1005023470572201495
+    second: "\u015Feytan_spine_12"
+  - first:
+      213: -2597905836530024107
+    second: "\u015Feytan_spine_13"
+  - first:
+      213: 7673524118245008864
+    second: "\u015Feytan_spine_14"
+  - first:
+      213: 8300218827879263665
+    second: "\u015Feytan_spine_15"
+  - first:
+      213: 318282366519854135
+    second: "\u015Feytan_spine_16"
+  - first:
+      213: -8697024809807293797
+    second: "\u015Feytan_spine_17"
+  - first:
+      213: -2074304402817397058
+    second: "\u015Feytan_spine_18"
+  - first:
+      213: 8499876318043292715
+    second: "\u015Feytan_spine_19"
+  - first:
+      213: 3777664741240834189
+    second: "\u015Feytan_spine_20"
+  - first:
+      213: 6521141712948014928
+    second: "\u015Feytan_spine_21"
+  - first:
+      213: -9152743294100872193
+    second: "\u015Feytan_spine_22"
+  - first:
+      213: -1998070224457944290
+    second: "\u015Feytan_spine_23"
+  - first:
+      213: -6458895721707072538
+    second: "\u015Feytan_spine_24"
+  - first:
+      213: 8691805965256259034
+    second: "\u015Feytan_spine_25"
+  - first:
+      213: -2133188421245060245
+    second: "\u015Feytan_spine_26"
+  - first:
+      213: -379710241230241900
+    second: "\u015Feytan_spine_27"
+  - first:
+      213: 2682645977594296378
+    second: "\u015Feytan_spine_28"
+  - first:
+      213: -786493888209260034
+    second: "\u015Feytan_spine_29"
+  - first:
+      213: 2171522126162974484
+    second: "\u015Feytan_spine_30"
+  - first:
+      213: -8600387802136889029
+    second: "\u015Feytan_spine_31"
+  - first:
+      213: -5065138711760452826
+    second: "\u015Feytan_spine_32"
+  - first:
+      213: 1992062132427340689
+    second: "\u015Feytan_spine_33"
+  - first:
+      213: 511988811618245162
+    second: "\u015Feytan_spine_34"
+  - first:
+      213: 1515507770076849816
+    second: "\u015Feytan_spine_35"
+  - first:
+      213: -1557021607324999257
+    second: "\u015Feytan_spine_36"
+  - first:
+      213: -457103341523737361
+    second: "\u015Feytan_spine_37"
+  - first:
+      213: -7310645290171439939
+    second: "\u015Feytan_spine_38"
+  - first:
+      213: -5889477880036865314
+    second: "\u015Feytan_spine_39"
+  - first:
+      213: -3793938604299284785
+    second: "\u015Feytan_spine_40"
+  - first:
+      213: -8284856168819434976
+    second: "\u015Feytan_spine_41"
+  - first:
+      213: 8622294684714065451
+    second: "\u015Feytan_spine_42"
+  - first:
+      213: 197853906003517639
+    second: "\u015Feytan_spine_43"
+  - first:
+      213: -7581395707404856240
+    second: "\u015Feytan_spine_44"
+  - first:
+      213: 2747711549483232717
+    second: "\u015Feytan_spine_45"
+  - first:
+      213: -4357127053998132653
+    second: "\u015Feytan_spine_46"
+  - first:
+      213: 8640492245634517018
+    second: "\u015Feytan_spine_47"
+  - first:
+      213: -2929281024705843373
+    second: "\u015Feytan_spine_48"
+  - first:
+      213: 8693952438638328347
+    second: "\u015Feytan_spine_49"
+  - first:
+      213: 6115857966193670321
+    second: "\u015Feytan_spine_50"
+  - first:
+      213: 6800743545099521738
+    second: "\u015Feytan_spine_51"
+  - first:
+      213: -5642141863297605912
+    second: "\u015Feytan_spine_52"
+  - first:
+      213: -719231499760686412
+    second: "\u015Feytan_spine_53"
+  - first:
+      213: -2745210347217743595
+    second: "\u015Feytan_spine_54"
+  - first:
+      213: -605389161539709441
+    second: "\u015Feytan_spine_55"
+  - first:
+      213: -8129396292657528212
+    second: "\u015Feytan_spine_56"
+  - first:
+      213: 6692723144695452652
+    second: "\u015Feytan_spine_57"
+  - first:
+      213: 2756916098576170210
+    second: "\u015Feytan_spine_58"
+  - first:
+      213: -1576254654231417844
+    second: "\u015Feytan_spine_59"
+  - first:
+      213: -7381038527688097515
+    second: "\u015Feytan_spine_60"
+  - first:
+      213: 3686135174729662848
+    second: "\u015Feytan_spine_61"
+  - first:
+      213: 3433640380985657933
+    second: "\u015Feytan_spine_62"
+  - first:
+      213: -8237880941752824887
+    second: "\u015Feytan_spine_63"
+  - first:
+      213: 1708627988617240361
+    second: "\u015Feytan_spine_64"
+  - first:
+      213: -7699357168727896544
+    second: "\u015Feytan_spine_65"
+  - first:
+      213: 4288149692675613627
+    second: "\u015Feytan_spine_66"
+  - first:
+      213: 4284939238484736665
+    second: "\u015Feytan_spine_67"
+  - first:
+      213: -1912102901297983876
+    second: "\u015Feytan_spine_68"
+  - first:
+      213: 3553388057964799373
+    second: "\u015Feytan_spine_69"
+  - first:
+      213: 6219269950529989746
+    second: "\u015Feytan_spine_70"
+  - first:
+      213: -2300903528072530189
+    second: "\u015Feytan_spine_71"
+  - first:
+      213: 6931550693276662155
+    second: "\u015Feytan_spine_72"
+  - first:
+      213: -1032705355551080926
+    second: "\u015Feytan_spine_73"
+  - first:
+      213: -33576143280848402
+    second: "\u015Feytan_spine_74"
+  - first:
+      213: 1023862301656027032
+    second: "\u015Feytan_spine_75"
+  - first:
+      213: -50721892634706608
+    second: "\u015Feytan_spine_76"
+  - first:
+      213: 3971973490342365387
+    second: "\u015Feytan_spine_77"
+  - first:
+      213: 1165518059228264623
+    second: "\u015Feytan_spine_78"
+  - first:
+      213: 4471824559289779412
+    second: "\u015Feytan_spine_79"
+  - first:
+      213: 5728006525554698122
+    second: "\u015Feytan_spine_80"
+  - first:
+      213: 294484342001973295
+    second: "\u015Feytan_spine_81"
+  - first:
+      213: -650756615411303295
+    second: "\u015Feytan_spine_82"
+  - first:
+      213: 54999747093390439
+    second: "\u015Feytan_spine_83"
+  - first:
+      213: -5202798719065730746
+    second: "\u015Feytan_spine_84"
+  - first:
+      213: -2951012117365803137
+    second: "\u015Feytan_spine_85"
+  - first:
+      213: -898333268318717187
+    second: "\u015Feytan_spine_86"
+  - first:
+      213: 6013201817440666192
+    second: "\u015Feytan_spine_87"
+  - first:
+      213: -7133139452824870358
+    second: "\u015Feytan_spine_88"
+  - first:
+      213: -1338139825198216043
+    second: "\u015Feytan_spine_89"
+  - first:
+      213: -1719387526273338547
+    second: "\u015Feytan_spine_90"
+  - first:
+      213: -9189051462923841383
+    second: "\u015Feytan_spine_91"
+  - first:
+      213: 7104740939088397359
+    second: "\u015Feytan_spine_92"
+  - first:
+      213: 5014125294510139408
+    second: "\u015Feytan_spine_93"
+  - first:
+      213: -4594435444208538273
+    second: "\u015Feytan_spine_94"
+  - first:
+      213: 2885426417284790612
+    second: "\u015Feytan_spine_95"
+  - first:
+      213: 8009071184308767117
+    second: "\u015Feytan_spine_96"
+  - first:
+      213: 5698991670112637302
+    second: "\u015Feytan_spine_97"
+  - first:
+      213: 8427202890059546890
+    second: "\u015Feytan_spine_98"
+  - first:
+      213: -2150959236094113396
+    second: "\u015Feytan_spine_99"
+  - first:
+      213: 3627417482537210005
+    second: "\u015Feytan_spine_100"
+  - first:
+      213: -8520317236155797324
+    second: "\u015Feytan_spine_101"
+  - first:
+      213: 3345633427921335914
+    second: "\u015Feytan_spine_102"
+  - first:
+      213: 4046182002078604953
+    second: "\u015Feytan_spine_103"
+  - first:
+      213: -1023982410155877700
+    second: "\u015Feytan_spine_104"
+  - first:
+      213: -5657575052235282070
+    second: "\u015Feytan_spine_105"
+  - first:
+      213: -7954833329498338822
+    second: "\u015Feytan_spine_106"
+  - first:
+      213: -6584351453817486376
+    second: "\u015Feytan_spine_107"
+  - first:
+      213: -28541939373089641
+    second: "\u015Feytan_spine_108"
+  - first:
+      213: 5787205430298672331
+    second: "\u015Feytan_spine_109"
+  - first:
+      213: -4672611132222127398
+    second: "\u015Feytan_spine_110"
+  - first:
+      213: 7297604420166410714
+    second: "\u015Feytan_spine_111"
+  - first:
+      213: 1864516316884957148
+    second: "\u015Feytan_spine_112"
+  - first:
+      213: 9086458993500229155
+    second: "\u015Feytan_spine_113"
+  - first:
+      213: 7494142434606252217
+    second: "\u015Feytan_spine_114"
+  - first:
+      213: 2074960304407644262
+    second: "\u015Feytan_spine_115"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_0"
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2772
+        width: 204
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aefbeed45d1bf1750800000000000000
+      internalID: 6277931935271403498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_1"
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 2773
+        width: 205
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79b8090ce676870d0800000000000000
+      internalID: -3424873791240500329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_2"
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 2773
+        width: 265
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f9ec32e2a3f4ba00800000000000000
+      internalID: 771509317093091831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_3"
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 2671
+        width: 331
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7401a23e99289f00800000000000000
+      internalID: 1123693866459923583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_4"
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 2572
+        width: 588
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecb1beb0af1858e80800000000000000
+      internalID: -8176986637479502898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_5"
+      rect:
+        serializedVersion: 2
+        x: 1601
+        y: 2572
+        width: 429
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2aa448fb17a55d30800000000000000
+      internalID: 4419622347905215023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_6"
+      rect:
+        serializedVersion: 2
+        x: 2032
+        y: 2564
+        width: 241
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f972ecc0b0016ea0800000000000000
+      internalID: -5881418879017518605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_7"
+      rect:
+        serializedVersion: 2
+        x: 2275
+        y: 2559
+        width: 210
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4de1ac3c57df9380800000000000000
+      internalID: -8962207942289789620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_8"
+      rect:
+        serializedVersion: 2
+        x: 2487
+        y: 2558
+        width: 211
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 221a4052eb6f63120800000000000000
+      internalID: 2393371548519276834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_9"
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 2557
+        width: 442
+        height: 419
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1700ba2a82be9d6a0800000000000000
+      internalID: -6423844833706966927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_10"
+      rect:
+        serializedVersion: 2
+        x: 3144
+        y: 2549
+        width: 357
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0322587dfa47033c0800000000000000
+      internalID: -4381874138847567312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_11"
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 2780
+        width: 173
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e5401a3a852d3220800000000000000
+      internalID: 2467169446478759392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_12"
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 2779
+        width: 179
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e91d957a707d02f0800000000000000
+      internalID: -1005023470572201495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_13"
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1854
+        width: 494
+        height: 917
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 551c6bde76262fbd0800000000000000
+      internalID: -2597905836530024107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_14"
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 1850
+        width: 431
+        height: 820
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e5e26b8785dd7a60800000000000000
+      internalID: 7673524118245008864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_15"
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 2633
+        width: 220
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bda0c92c0d403370800000000000000
+      internalID: 8300218827879263665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_16"
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 2641
+        width: 168
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 734cfa24024ca6400800000000000000
+      internalID: 318282366519854135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_17"
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 1850
+        width: 351
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b925da8a306fd4780800000000000000
+      internalID: -8697024809807293797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_18"
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 2383
+        width: 387
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe4a02c2279633e0800000000000000
+      internalID: -2074304402817397058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_19"
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 2370
+        width: 222
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b24c9bb1a70a5f570800000000000000
+      internalID: 8499876318043292715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_20"
+      rect:
+        serializedVersion: 2
+        x: 1897
+        y: 2365
+        width: 184
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d888d263116fc6430800000000000000
+      internalID: 3777664741240834189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_21"
+      rect:
+        serializedVersion: 2
+        x: 2083
+        y: 2307
+        width: 213
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05faf3266dfbf7a50800000000000000
+      internalID: 6521141712948014928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_22"
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 2307
+        width: 453
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff367c2a77ceaf080800000000000000
+      internalID: -9152743294100872193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_23"
+      rect:
+        serializedVersion: 2
+        x: 2753
+        y: 2269
+        width: 165
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1336e297bd6544e0800000000000000
+      internalID: -1998070224457944290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_24"
+      rect:
+        serializedVersion: 2
+        x: 2920
+        y: 2246
+        width: 245
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e31c52df846d56a0800000000000000
+      internalID: -6458895721707072538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_25"
+      rect:
+        serializedVersion: 2
+        x: 3167
+        y: 2245
+        width: 174
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad578b7697f7f9870800000000000000
+      internalID: 8691805965256259034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_26"
+      rect:
+        serializedVersion: 2
+        x: 3344
+        y: 2201
+        width: 223
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6b36b8de646562e0800000000000000
+      internalID: -2133188421245060245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_27"
+      rect:
+        serializedVersion: 2
+        x: 3570
+        y: 2410
+        width: 230
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49fb4e12c8ffabaf0800000000000000
+      internalID: -379710241230241900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_28"
+      rect:
+        serializedVersion: 2
+        x: 3802
+        y: 2411
+        width: 192
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3873a8ad4caa3520800000000000000
+      internalID: 2682645977594296378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_29"
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 1838
+        width: 274
+        height: 543
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef17547c9ffc515f0800000000000000
+      internalID: -786493888209260034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_30"
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 1826
+        width: 266
+        height: 542
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41758d75edbc22e10800000000000000
+      internalID: 2171522126162974484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_31"
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 1825
+        width: 252
+        height: 539
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b39370b5cd845a880800000000000000
+      internalID: -8600387802136889029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_32"
+      rect:
+        serializedVersion: 2
+        x: 2077
+        y: 1821
+        width: 483
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 623407b8d2305b9b0800000000000000
+      internalID: -5065138711760452826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_33"
+      rect:
+        serializedVersion: 2
+        x: 2562
+        y: 1819
+        width: 217
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19bb6dd74f935ab10800000000000000
+      internalID: 1992062132427340689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_34"
+      rect:
+        serializedVersion: 2
+        x: 2782
+        y: 1812
+        width: 372
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2ada7d8c13fa1700800000000000000
+      internalID: 511988811618245162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_35"
+      rect:
+        serializedVersion: 2
+        x: 3156
+        y: 1984
+        width: 144
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89666c1994a280510800000000000000
+      internalID: 1515507770076849816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_36"
+      rect:
+        serializedVersion: 2
+        x: 3302
+        y: 1957
+        width: 141
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a129cbf819546ae0800000000000000
+      internalID: -1557021607324999257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_37"
+      rect:
+        serializedVersion: 2
+        x: 3445
+        y: 1957
+        width: 228
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe465d6ceea08a9f0800000000000000
+      internalID: -457103341523737361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_38"
+      rect:
+        serializedVersion: 2
+        x: 3675
+        y: 2183
+        width: 294
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db4e27097de5b8a90800000000000000
+      internalID: -7310645290171439939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_39"
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 1808
+        width: 123
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edac1e7621f544ea0800000000000000
+      internalID: -5889477880036865314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_40"
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 1973
+        width: 291
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fce8917c0f8395bc0800000000000000
+      internalID: -3793938604299284785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_41"
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 930
+        width: 477
+        height: 922
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02a5052a537460d80800000000000000
+      internalID: -8284856168819434976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_42"
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 931
+        width: 465
+        height: 916
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2ede17355b88a770800000000000000
+      internalID: 8622294684714065451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_43"
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 1555
+        width: 186
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c063c8441beeb200800000000000000
+      internalID: 197853906003517639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_44"
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 1554
+        width: 84
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0545676a5c879c690800000000000000
+      internalID: -7581395707404856240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_45"
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1555
+        width: 328
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcdaf24a815d12620800000000000000
+      internalID: 2747711549483232717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_46"
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 1547
+        width: 460
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 352723987006883c0800000000000000
+      internalID: -4357127053998132653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_47"
+      rect:
+        serializedVersion: 2
+        x: 2011
+        y: 1545
+        width: 169
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1800990be139e770800000000000000
+      internalID: 8640492245634517018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_48"
+      rect:
+        serializedVersion: 2
+        x: 2182
+        y: 1545
+        width: 231
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35fad139d6a1957d0800000000000000
+      internalID: -2929281024705843373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_49"
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 1546
+        width: 165
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1abd2f2eaf17a870800000000000000
+      internalID: 8693952438638328347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_50"
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 1543
+        width: 245
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b877b3ca64efd450800000000000000
+      internalID: 6115857966193670321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_51"
+      rect:
+        serializedVersion: 2
+        x: 2829
+        y: 1542
+        width: 209
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace003ee838116e50800000000000000
+      internalID: 6800743545099521738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_52"
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1542
+        width: 243
+        height: 265
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ee19c16ed513b1b0800000000000000
+      internalID: -5642141863297605912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_53"
+      rect:
+        serializedVersion: 2
+        x: 3285
+        y: 1718
+        width: 311
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ba2e79f2c6c406f0800000000000000
+      internalID: -719231499760686412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_54"
+      rect:
+        serializedVersion: 2
+        x: 3597
+        y: 1736
+        width: 182
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5111c54ebbd07e9d0800000000000000
+      internalID: -2745210347217743595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_55"
+      rect:
+        serializedVersion: 2
+        x: 3780
+        y: 1737
+        width: 221
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5dd8bd3c93997f0800000000000000
+      internalID: -605389161539709441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_56"
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 930
+        width: 306
+        height: 623
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6245c9a4259e2f80800000000000000
+      internalID: -8129396292657528212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_57"
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 927
+        width: 324
+        height: 618
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce39b939d3451ec50800000000000000
+      internalID: 6692723144695452652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_58"
+      rect:
+        serializedVersion: 2
+        x: 1616
+        y: 1427
+        width: 220
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec303bb598824620800000000000000
+      internalID: 2756916098576170210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_59"
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 1416
+        width: 190
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ceafa4eb4002ae0800000000000000
+      internalID: -1576254654231417844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_60"
+      rect:
+        serializedVersion: 2
+        x: 2034
+        y: 1416
+        width: 190
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 511cda3c098419990800000000000000
+      internalID: -7381038527688097515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_61"
+      rect:
+        serializedVersion: 2
+        x: 2226
+        y: 1409
+        width: 262
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08185d35968c72330800000000000000
+      internalID: 3686135174729662848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_62"
+      rect:
+        serializedVersion: 2
+        x: 2490
+        y: 1352
+        width: 245
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4a461bfbbdb6af20800000000000000
+      internalID: 3433640380985657933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_63"
+      rect:
+        serializedVersion: 2
+        x: 2737
+        y: 1297
+        width: 377
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cbccdcfdea2dad80800000000000000
+      internalID: -8237880941752824887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_64"
+      rect:
+        serializedVersion: 2
+        x: 3116
+        y: 1288
+        width: 179
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92f12da5a1446b710800000000000000
+      internalID: 1708627988617240361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_65"
+      rect:
+        serializedVersion: 2
+        x: 3297
+        y: 1529
+        width: 320
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ecd1fa273662590800000000000000
+      internalID: -7699357168727896544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_66"
+      rect:
+        serializedVersion: 2
+        x: 3619
+        y: 1518
+        width: 321
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb361a70d61928b30800000000000000
+      internalID: 4288149692675613627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_67"
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 1326
+        width: 96
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99af30ae889277b30800000000000000
+      internalID: 4284939238484736665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_68"
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 918
+        width: 223
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ec322ca88d675e0800000000000000
+      internalID: -1912102901297983876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_69"
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 917
+        width: 318
+        height: 497
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d856b10bc9b205130800000000000000
+      internalID: 3553388057964799373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_70"
+      rect:
+        serializedVersion: 2
+        x: 2162
+        y: 915
+        width: 225
+        height: 492
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ce993a1194f4650800000000000000
+      internalID: 6219269950529989746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_71"
+      rect:
+        serializedVersion: 2
+        x: 3296
+        y: 1287
+        width: 126
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f63bc29e6c8110e0800000000000000
+      internalID: -2300903528072530189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_72"
+      rect:
+        serializedVersion: 2
+        x: 3423
+        y: 1303
+        width: 194
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b893e5f61a0d13060800000000000000
+      internalID: 6931550693276662155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_73"
+      rect:
+        serializedVersion: 2
+        x: 3619
+        y: 1386
+        width: 325
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22efbbc53f71ba1f0800000000000000
+      internalID: -1032705355551080926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_74"
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 912
+        width: 344
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee141d2fca6b88ff0800000000000000
+      internalID: -33576143280848402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_75"
+      rect:
+        serializedVersion: 2
+        x: 2735
+        y: 908
+        width: 185
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f0f15b65d753e00800000000000000
+      internalID: 1023862301656027032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_76"
+      rect:
+        serializedVersion: 2
+        x: 2922
+        y: 903
+        width: 157
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05d3c2715bccb4ff0800000000000000
+      internalID: -50721892634706608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_77"
+      rect:
+        serializedVersion: 2
+        x: 3081
+        y: 903
+        width: 170
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc8002558d84f1730800000000000000
+      internalID: 3971973490342365387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_78"
+      rect:
+        serializedVersion: 2
+        x: 3253
+        y: 903
+        width: 169
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa87a9bef70cc2010800000000000000
+      internalID: 1165518059228264623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_79"
+      rect:
+        serializedVersion: 2
+        x: 3424
+        y: 1078
+        width: 194
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4c5527ebc1f0e30800000000000000
+      internalID: 4471824559289779412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_80"
+      rect:
+        serializedVersion: 2
+        x: 3620
+        y: 1251
+        width: 325
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a87aec23697fd7f40800000000000000
+      internalID: 5728006525554698122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_81"
+      rect:
+        serializedVersion: 2
+        x: 3619
+        y: 1118
+        width: 348
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2831f4e2f7361400800000000000000
+      internalID: 294484342001973295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_82"
+      rect:
+        serializedVersion: 2
+        x: 3622
+        y: 975
+        width: 351
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18c7c2f5e4c08f6f0800000000000000
+      internalID: -650756615411303295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_83"
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3
+        width: 485
+        height: 925
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 764ec348af563c000800000000000000
+      internalID: 54999747093390439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_84"
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 722
+        width: 201
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641da307122fbc7b0800000000000000
+      internalID: -5202798719065730746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_85"
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 722
+        width: 238
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f77b9884d16eb07d0800000000000000
+      internalID: -2951012117365803137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_86"
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 656
+        width: 317
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa72fbe6aa7883f0800000000000000
+      internalID: -898333268318717187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_87"
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 636
+        width: 269
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052c843913f237350800000000000000
+      internalID: 6013201817440666192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_88"
+      rect:
+        serializedVersion: 2
+        x: 1523
+        y: 636
+        width: 564
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a22ac0de57ff10d90800000000000000
+      internalID: -7133139452824870358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_89"
+      rect:
+        serializedVersion: 2
+        x: 2090
+        y: 547
+        width: 172
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59cc1433be8fd6de0800000000000000
+      internalID: -1338139825198216043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_90"
+      rect:
+        serializedVersion: 2
+        x: 2264
+        y: 546
+        width: 161
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d437d3197228328e0800000000000000
+      internalID: -1719387526273338547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_91"
+      rect:
+        serializedVersion: 2
+        x: 2426
+        y: 547
+        width: 161
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99014a1516ee97080800000000000000
+      internalID: -9189051462923841383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_92"
+      rect:
+        serializedVersion: 2
+        x: 2589
+        y: 548
+        width: 330
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f240a87dd3c199260800000000000000
+      internalID: 7104740939088397359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_93"
+      rect:
+        serializedVersion: 2
+        x: 2921
+        y: 546
+        width: 350
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 018e39ea360c59540800000000000000
+      internalID: 5014125294510139408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_94"
+      rect:
+        serializedVersion: 2
+        x: 3424
+        y: 894
+        width: 197
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5d6c7c4e494d30c0800000000000000
+      internalID: -4594435444208538273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_95"
+      rect:
+        serializedVersion: 2
+        x: 3623
+        y: 634
+        width: 349
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 459b9c3f9081b0820800000000000000
+      internalID: 2885426417284790612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_96"
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 2
+        width: 391
+        height: 718
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d898a89eecfe52f60800000000000000
+      internalID: 8009071184308767117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_97"
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 2
+        width: 325
+        height: 652
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67159fabab2e61f40800000000000000
+      internalID: 5698991670112637302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_98"
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 2
+        width: 496
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a010528116073f470800000000000000
+      internalID: 8427202890059546890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_99"
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 2
+        width: 324
+        height: 618
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c89c34698f14622e0800000000000000
+      internalID: -2150959236094113396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_100"
+      rect:
+        serializedVersion: 2
+        x: 2033
+        y: 2
+        width: 299
+        height: 543
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5901ca24bfc275230800000000000000
+      internalID: 3627417482537210005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_101"
+      rect:
+        serializedVersion: 2
+        x: 2334
+        y: 229
+        width: 327
+        height: 316
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0bb45cd90c1c980800000000000000
+      internalID: -8520317236155797324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_102"
+      rect:
+        serializedVersion: 2
+        x: 2663
+        y: 392
+        width: 346
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a667ce370e31e6e20800000000000000
+      internalID: 3345633427921335914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_103"
+      rect:
+        serializedVersion: 2
+        x: 3273
+        y: 538
+        width: 348
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e5972e71de62830800000000000000
+      internalID: 4046182002078604953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_104"
+      rect:
+        serializedVersion: 2
+        x: 3727
+        y: 492
+        width: 261
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba196a5c651ac1f0800000000000000
+      internalID: -1023982410155877700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_105"
+      rect:
+        serializedVersion: 2
+        x: 3011
+        y: 392
+        width: 260
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a69676117714c71b0800000000000000
+      internalID: -5657575052235282070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_106"
+      rect:
+        serializedVersion: 2
+        x: 3273
+        y: 380
+        width: 172
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af940dbbb31ca9190800000000000000
+      internalID: -7954833329498338822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_107"
+      rect:
+        serializedVersion: 2
+        x: 3502
+        y: 229
+        width: 223
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3c1e6fc3faf94a0800000000000000
+      internalID: -6584351453817486376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_108"
+      rect:
+        serializedVersion: 2
+        x: 3727
+        y: 229
+        width: 261
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c5772e1499a9ff0800000000000000
+      internalID: -28541939373089641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_109"
+      rect:
+        serializedVersion: 2
+        x: 2334
+        y: 3
+        width: 296
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bccf92b4da8405050800000000000000
+      internalID: 5787205430298672331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_110"
+      rect:
+        serializedVersion: 2
+        x: 2631
+        y: 1
+        width: 195
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad24d5a8eec872fb0800000000000000
+      internalID: -4672611132222127398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_111"
+      rect:
+        serializedVersion: 2
+        x: 2829
+        y: 175
+        width: 335
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1e6574e8c464560800000000000000
+      internalID: 7297604420166410714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_112"
+      rect:
+        serializedVersion: 2
+        x: 3167
+        y: 151
+        width: 333
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd7f8d926b710e910800000000000000
+      internalID: 1864516316884957148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_113"
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 2
+        width: 417
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32e0cbdff46991e70800000000000000
+      internalID: 9086458993500229155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_114"
+      rect:
+        serializedVersion: 2
+        x: 2829
+        y: 2
+        width: 325
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b003eea6da800860800000000000000
+      internalID: 7494142434606252217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u015Feytan_spine_115"
+      rect:
+        serializedVersion: 2
+        x: 3156
+        y: 2
+        width: 345
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 668014b376dbbcc10800000000000000
+      internalID: 2074960304407644262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
