@@ -1,25 +1,28 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Esc ile acilan ayarlar penceresi: ses, tam ekran, kayit disa aktarma, kaydi sifirlama ve cikis.
+// Esc ile acilan, oyunun temasina uygun sade ayarlar penceresi.
 // Sahneye elle eklenmez; HUDController tarafindan kodla olusturulur.
 public class SettingsPanel : MonoBehaviour
 {
-    const float ConfirmSeconds = 4f;
-    const float VolumeStep = 0.1f;
-    const float WindowWidth = 780f;
-    const float WindowHeight = 840f;
+    const float WindowWidth = 700f;
+    const float WindowHeight = 640f;
 
-    static readonly Color DimColor = new Color(0f, 0f, 0f, 0.7f);
-    static readonly Color WindowColor = new Color(0.1f, 0.09f, 0.13f, 0.98f);
-    static readonly Color TextColor = new Color(0.95f, 0.95f, 0.98f);
-    static readonly Color GrayColor = new Color(0.68f, 0.68f, 0.74f);
-    static readonly Color DangerColor = new Color(0.62f, 0.2f, 0.2f, 1f);
+    static readonly Color DimColor = new Color(0.015f, 0.008f, 0.012f, 0.82f);
+    static readonly Color WindowColor = new Color(0.24f, 0.12f, 0.055f, 0.98f);
+    static readonly Color TextColor = new Color(0.24f, 0.085f, 0.035f, 1f);
+    static readonly Color MutedTextColor = new Color(0.42f, 0.22f, 0.11f, 1f);
 
     GameObject overlay;
-    TextMeshProUGUI volumeValue, muteLabel, fullscreenLabel, resetLabel, infoText, languageLabel;
-    float resetTimer = -1f;
+    GameObject settingsPage, aboutPage;
+    TextMeshProUGUI titleLabel, closeLabel, muteLabel, fullscreenLabel, languageLabel;
+    TextMeshProUGUI backLabel, aboutName, aboutVersion, openButtonLabel;
+    readonly Dictionary<string, TextMeshProUGUI> rowValues = new Dictionary<string, TextMeshProUGUI>();
+    float windowWidth, windowHeight;
+    float rowHeight;
+    bool previousCursorVisible;
     bool open;
 
     public bool IsOpen { get { return open; } }
@@ -32,25 +35,28 @@ public class SettingsPanel : MonoBehaviour
         BuildOpenButton(canvas.rootCanvas.transform);
         BuildWindow(canvas.rootCanvas.transform);
         SoundManager.MuteChanged += RefreshMuteLabel;
+        Loc.OnLanguageChanged += RefreshLocalization;
         overlay.SetActive(false);
-        Refresh();
-        RefreshMuteLabel();
+        RefreshLocalization();
     }
 
-    void OnDestroy() { SoundManager.MuteChanged -= RefreshMuteLabel; }
+    void OnDestroy()
+    {
+        SoundManager.MuteChanged -= RefreshMuteLabel;
+        Loc.OnLanguageChanged -= RefreshLocalization;
+    }
 
     // ---- Kurulum ----
     void BuildOpenButton(Transform canvas)
     {
-        TextMeshProUGUI label;
-        var btn = UIFactory.CreateButton(canvas, "OpenSettingsButton", Loc.T("Ayarlar"), 28f, out label);
+        var btn = UIFactory.CreateButton(canvas, "OpenSettingsButton", Loc.T("Ayarlar"), 28f, out openButtonLabel);
         var rt = (RectTransform)btn.transform;
         rt.SetAsLastSibling();
         HudLayout.PlaceCornerButton(rt, 0);
         var icon = UIArt.Load(UIArt.IconSettings);
         if (icon != null)
         {
-            UIArt.StyleButton(btn, label, 14f);
+            UIArt.StyleButton(btn, openButtonLabel, 14f);
             var iconImage = new GameObject("SettingsIcon", typeof(RectTransform), typeof(Image)).GetComponent<Image>();
             iconImage.transform.SetParent(btn.transform, false);
             iconImage.sprite = icon;
@@ -60,17 +66,17 @@ public class SettingsPanel : MonoBehaviour
             iconRt.anchorMin = Vector2.zero; iconRt.anchorMax = Vector2.one;
             iconRt.offsetMin = new Vector2(13f, 13f); iconRt.offsetMax = new Vector2(-13f, -13f);
             rt.sizeDelta = new Vector2(68f, 68f);
-            label.text = "";
+            openButtonLabel.text = "";
         }
         else
         {
-            label.fontSize = 22f;
-            label.fontSizeMin = 17f;
-            label.fontSizeMax = 22f;
-            label.enableAutoSizing = true;
+            openButtonLabel.fontSize = 22f;
+            openButtonLabel.fontSizeMin = 17f;
+            openButtonLabel.fontSizeMax = 22f;
+            openButtonLabel.enableAutoSizing = true;
         }
         btn.onClick.AddListener(Toggle);
-        if (icon == null) UIArt.StyleButton(btn, label);
+        if (icon == null) UIArt.StyleButton(btn, openButtonLabel);
     }
 
     void BuildWindow(Transform canvas)
@@ -89,73 +95,132 @@ public class SettingsPanel : MonoBehaviour
         dim.offsetMin = Vector2.zero;
         dim.offsetMax = Vector2.zero;
 
+        Canvas.ForceUpdateCanvases();
+        Vector2 available = ((RectTransform)canvas).rect.size;
+        windowWidth = available.x > 0f ? Mathf.Min(WindowWidth, Mathf.Max(260f, available.x - 32f)) : WindowWidth;
+        windowHeight = available.y > 0f ? Mathf.Min(WindowHeight, Mathf.Max(380f, available.y - 32f)) : WindowHeight;
+        rowHeight = Mathf.Clamp((windowHeight - 180f) / 5f, 40f, 68f);
+
         var win = UIFactory.CreatePanel(dim, "Window", WindowColor, true);
         win.anchorMin = win.anchorMax = win.pivot = new Vector2(0.5f, 0.5f);
         win.anchoredPosition = Vector2.zero;
-        win.sizeDelta = new Vector2(WindowWidth, WindowHeight);
+        win.sizeDelta = new Vector2(windowWidth, windowHeight);
+        UIArt.Skin(win.GetComponent<Image>(), UIArt.ListPanel, WindowColor);
 
-        TextAt(win, "Title", Loc.T("Ayarlar"), 28f, -84f, 400f, 56f, 44f, TextAlignmentOptions.MidlineLeft, Color.white, true);
+        var plaqueRt = UIFactory.CreatePanel(win, "TitlePlaque", Color.white, false);
+        var plaque = plaqueRt.GetComponent<Image>();
+        UIArt.Skin(plaque, UIArt.TitlePlaque, new Color(0.42f, 0.12f, 0.035f, 0.95f));
+        plaque.raycastTarget = false;
+        plaque.preserveAspect = false;
+        plaqueRt.anchorMin = plaqueRt.anchorMax = new Vector2(0.5f, 1f);
+        plaqueRt.pivot = new Vector2(0.5f, 1f);
+        plaqueRt.anchoredPosition = new Vector2(0f, -8f);
+        plaqueRt.sizeDelta = new Vector2(Mathf.Min(500f, windowWidth * 0.68f), 138f);
 
-        TextMeshProUGUI closeLabel;
-        var close = ButtonAt(win, "Close", Loc.T("Kapat"), 600f, -20f, 150f, 56f, 26f, out closeLabel);
+        titleLabel = TextAt(win, "Title", Loc.T("Ayarlar"), 0f, -38f, windowWidth, 60f, 36f,
+            TextAlignmentOptions.Center, TextColor, true);
+
+        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 14f, out closeLabel);
+        var closeRt = (RectTransform)close.transform;
+        closeRt.anchorMin = closeRt.anchorMax = new Vector2(1f, 1f);
+        closeRt.pivot = new Vector2(1f, 1f);
+        closeRt.anchoredPosition = new Vector2(-18f, -18f);
+        closeRt.sizeDelta = new Vector2(60f, 42f);
+        StyleThemedButton(close, closeLabel);
         close.onClick.AddListener(Close);
 
-        // 1) Ses
-        TextAt(win, "Label_Ses", Loc.T("Ses"), 28f, -140f, 190f, 56f, 30f,
-            TextAlignmentOptions.MidlineLeft, TextColor);
-        var mute = ButtonAt(win, "MuteToggle", "", 220f, -140f, 220f, 56f, 22f, out muteLabel);
-        mute.onClick.AddListener(SoundManager.ToggleMuted);
-        volumeValue = TextAt(win, "VolumeValue", "60%", 468f, -140f, 110f, 56f, 30f,
-            TextAlignmentOptions.MidlineRight, TextColor);
-        ButtonAt(win, "VolumeDown", "-", 596f, -140f, 70f, 56f, 34f, out closeLabel)
-            .onClick.AddListener(delegate { AdjustVolume(-VolumeStep); });
-        ButtonAt(win, "VolumeUp", "+", 680f, -140f, 70f, 56f, 34f, out closeLabel)
-            .onClick.AddListener(delegate { AdjustVolume(VolumeStep); });
+        settingsPage = new GameObject("SettingsOptions", typeof(RectTransform));
+        var pageRt = (RectTransform)settingsPage.transform;
+        pageRt.SetParent(win, false);
+        pageRt.anchorMin = Vector2.zero; pageRt.anchorMax = Vector2.one;
+        pageRt.offsetMin = Vector2.zero; pageRt.offsetMax = Vector2.zero;
 
-        // 2) Tam ekran
-        RowLabel(win, Loc.T("Ekran"), -220f);
-        var full = ButtonAt(win, "Fullscreen", Loc.T("Tam Ekran"), 468f, -220f, 282f, 56f, 24f, out fullscreenLabel);
-        full.onClick.AddListener(ToggleFullscreen);
+        float firstRowY = -Mathf.Max(112f, windowHeight * 0.25f);
+        float rowStep = rowHeight + Mathf.Clamp(windowHeight * 0.015f, 8f, 12f);
+        muteLabel = BuildRow(settingsPage.transform, "Sound", Loc.T("Ses"), firstRowY, out var soundButton);
+        soundButton.onClick.AddListener(SoundManager.ToggleMuted);
+        languageLabel = BuildRow(settingsPage.transform, "Language", Loc.T("Dil"), firstRowY - rowStep, out var languageButton);
+        languageButton.onClick.AddListener(Loc.Toggle);
+        fullscreenLabel = BuildRow(settingsPage.transform, "Display", Loc.T("Ekran"), firstRowY - rowStep * 2f, out var fullscreenButton);
+        fullscreenButton.onClick.AddListener(ToggleFullscreen);
 
-        // 3) Kaydi disa aktar
-        RowLabel(win, Loc.T("Kayıt"), -300f);
-        TextMeshProUGUI exportLabel;
-        var export = ButtonAt(win, "ExportSave", Loc.T("Dışa Aktar"), 468f, -300f, 282f, 56f, 24f, out exportLabel);
-        export.onClick.AddListener(ExportSave);
+        BuildRow(settingsPage.transform, "Achievements", Loc.T("Başarımlar"), firstRowY - rowStep * 3f, out var achievementsButton);
+        achievementsButton.onClick.AddListener(OpenAchievements);
+        BuildRow(settingsPage.transform, "About", Loc.T("Hakkında"), firstRowY - rowStep * 4f, out var aboutButton);
+        aboutButton.onClick.AddListener(ShowAbout);
 
-        // 4) Kaydi sifirla (iki kademeli onay)
-        RowLabel(win, Loc.T("Tehlikeli Bölge"), -380f);
-        var reset = ButtonAt(win, "ResetSave", Loc.T("Kaydı Sıfırla"), 468f, -380f, 282f, 56f, 24f, out resetLabel);
-        reset.GetComponent<Image>().color = DangerColor;
-        reset.onClick.AddListener(ResetProgress);
+        BuildAboutPage(win);
+    }
 
-        // 5) Dil (degistirince sahne bastan yuklenir, butun metinler yenilenir)
-        RowLabel(win, Loc.T("Dil"), -460f);
-        TextMeshProUGUI langLabel;
-        var lang = ButtonAt(win, "Language", "", 468f, -460f, 282f, 56f, 24f, out langLabel);
-        languageLabel = langLabel;
-        RefreshLanguage();
-        lang.onClick.AddListener(Loc.ToggleAndReload);
+    TextMeshProUGUI BuildRow(Transform parent, string id, string text, float topY, out Button button)
+    {
+        var rowImage = UIFactory.CreateRoundedPanel(parent, "Row_" + id, new Color(0.42f, 0.16f, 0.055f, 0.12f), false);
+        var rowRt = rowImage.rectTransform;
+        rowRt.anchorMin = new Vector2(0.12f, 1f);
+        rowRt.anchorMax = new Vector2(0.88f, 1f);
+        rowRt.pivot = new Vector2(0.5f, 1f);
+        rowRt.anchoredPosition = new Vector2(0f, topY);
+        rowRt.sizeDelta = new Vector2(0f, rowHeight);
+        rowImage.gameObject.AddComponent<Outline>().effectColor = new Color(0.55f, 0.29f, 0.1f, 0.32f);
 
-        // 6) Cikis
-        TextMeshProUGUI quitLabel;
-        var quit = ButtonAt(win, "Quit", Loc.T("Oyundan Çık"), 468f, -540f, 282f, 56f, 24f, out quitLabel);
-        quit.onClick.AddListener(QuitGame);
+        button = UIFactory.CreateButton(rowRt, "Value", "", 20f, out var buttonLabel);
+        var buttonRt = (RectTransform)button.transform;
+        buttonRt.anchorMin = new Vector2(0.025f, 0.05f);
+        buttonRt.anchorMax = new Vector2(0.975f, 0.95f);
+        buttonRt.offsetMin = buttonRt.offsetMax = Vector2.zero;
+        buttonRt.sizeDelta = Vector2.zero;
+        StyleThemedButton(button, buttonLabel);
+        buttonLabel.rectTransform.offsetMin = new Vector2(10f, 2f);
+        buttonLabel.rectTransform.offsetMax = new Vector2(-10f, -2f);
 
-        // Başarımlar ayarlar içinden açılır; ana HUD'da ayrı bir köşe butonu kullanmaz.
-        RowLabel(win, Loc.T("Başarımlar"), -620f);
-        TextMeshProUGUI achievementsLabel;
-        var achievements = ButtonAt(win, "Achievements", Loc.T("Aç"), 468f, -620f, 282f, 56f, 24f, out achievementsLabel);
-        achievements.onClick.AddListener(OpenAchievements);
+        if (id == "Sound") buttonLabel.text = SoundManager.IsMuted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık");
+        else if (id == "Language") buttonLabel.text = Loc.T("Dil") + ": " + (Loc.IsEnglish ? "English" : "Türkçe");
+        else if (id == "Display") buttonLabel.text = Screen.fullScreen ? Loc.T("Tam Ekran: Açık") : Loc.T("Pencere Modu");
+        else buttonLabel.text = Loc.T(text);
+        rowValues[id] = buttonLabel;
+        return buttonLabel;
+    }
 
-        infoText = TextAt(win, "Info", "", 28f, -690f, 722f, 70f, 20f,
-            TextAlignmentOptions.TopLeft, GrayColor);
-        infoText.enableAutoSizing = true;
-        infoText.fontSizeMin = 15f;
-        infoText.fontSizeMax = 20f;
+    void BuildAboutPage(RectTransform win)
+    {
+        aboutPage = new GameObject("AboutPage", typeof(RectTransform));
+        var rt = (RectTransform)aboutPage.transform;
+        rt.SetParent(win, false);
+        rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
+        aboutPage.SetActive(false);
 
-        TextAt(win, "Version", Loc.F("Sürüm {0}  •  {1}", Application.version, SaveSystem.SaveFolder),
-            28f, -780f, 722f, 26f, 16f, TextAlignmentOptions.BottomLeft, GrayColor);
+        aboutName = TextAt(rt, "GameName", Loc.T("ARAF"), windowWidth * 0.1f, -windowHeight * 0.34f,
+            windowWidth * 0.8f, 82f, 56f,
+            TextAlignmentOptions.Center, TextColor, true);
+        aboutVersion = TextAt(rt, "Version", Loc.F("Sürüm {0}", Application.version), windowWidth * 0.1f,
+            -windowHeight * 0.46f, windowWidth * 0.8f, 50f, 22f,
+            TextAlignmentOptions.Center, MutedTextColor);
+
+        var back = ButtonAt(rt, "Back", Loc.T("Geri"), (windowWidth - 200f) * 0.5f,
+            -windowHeight * 0.75f, 200f, 58f, 22f, out backLabel);
+        StyleThemedButton(back, backLabel);
+        back.onClick.AddListener(ShowSettings);
+    }
+
+    static void StyleThemedButton(Button button, TextMeshProUGUI label)
+    {
+        UIArt.StyleButton(button, label, 12f);
+        if (label != null) label.color = UIArt.ButtonText;
+    }
+
+    void ShowAbout()
+    {
+        settingsPage.SetActive(false);
+        aboutPage.SetActive(true);
+        titleLabel.text = Loc.T("Hakkında");
+    }
+
+    void ShowSettings()
+    {
+        aboutPage.SetActive(false);
+        settingsPage.SetActive(true);
+        titleLabel.text = Loc.T("Ayarlar");
     }
 
     void RefreshLanguage()
@@ -164,16 +229,29 @@ public class SettingsPanel : MonoBehaviour
             languageLabel.text = Loc.T("Dil") + ": " + (Loc.IsEnglish ? "English" : "Türkçe");
     }
 
+    void RefreshLocalization()
+    {
+        if (titleLabel != null) titleLabel.text = Loc.T(aboutPage != null && aboutPage.activeSelf ? "Hakkında" : "Ayarlar");
+        if (closeLabel != null) closeLabel.text = Loc.T("Kapat");
+        if (openButtonLabel != null && UIArt.Load(UIArt.IconSettings) == null) openButtonLabel.text = Loc.T("Ayarlar");
+        SetRowValue("Achievements", "Başarımlar");
+        SetRowValue("About", "Hakkında");
+        if (backLabel != null) backLabel.text = Loc.T("Geri");
+        if (aboutName != null) aboutName.text = Loc.T("ARAF");
+        if (aboutVersion != null) aboutVersion.text = Loc.F("Sürüm {0}", Application.version);
+        Refresh();
+    }
+
+    void SetRowValue(string id, string text)
+    {
+        TextMeshProUGUI label;
+        if (rowValues.TryGetValue(id, out label)) label.text = Loc.T(text);
+    }
+
     void RefreshMuteLabel()
     {
         if (muteLabel != null)
             muteLabel.text = SoundManager.IsMuted ? Loc.T("Ses: Kapalı") : Loc.T("Ses: Açık");
-    }
-
-    TextMeshProUGUI RowLabel(RectTransform parent, string text, float y)
-    {
-        return TextAt(parent, "Label_" + text, text, 28f, y, 420f, 56f, 30f,
-            TextAlignmentOptions.MidlineLeft, TextColor);
     }
 
     static TextMeshProUGUI TextAt(RectTransform parent, string name, string text, float x, float topY,
@@ -200,8 +278,10 @@ public class SettingsPanel : MonoBehaviour
     public void Open()
     {
         if (overlay == null) return;
+        previousCursorVisible = Cursor.visible;
+        Cursor.visible = true;
         open = true;
-        resetTimer = -1f;
+        ShowSettings();
         overlay.SetActive(true);
         overlay.transform.SetAsLastSibling();
         Refresh();
@@ -211,67 +291,17 @@ public class SettingsPanel : MonoBehaviour
     {
         if (overlay == null) return;
         open = false;
-        resetTimer = -1f;
         overlay.SetActive(false);
+        Cursor.visible = previousCursorVisible;
     }
 
     public void Toggle() { if (open) Close(); else Open(); }
 
-    void Update()
-    {
-        if (resetTimer < 0f) return;
-        resetTimer -= Time.unscaledDeltaTime;
-        if (resetTimer < 0f) { resetTimer = -1f; Refresh(); }
-    }
-
     // ---- Eylemler ----
-    void AdjustVolume(float delta)
-    {
-        SoundManager.Volume = Mathf.Clamp01(SoundManager.Volume + delta);
-        SoundManager.Play(SoundId.Click, 1f, 1f);
-        Refresh();
-    }
-
     void ToggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
         Refresh();
-    }
-
-    void ExportSave()
-    {
-        var gm = GameManager.Instance;
-        if (gm != null) gm.SaveGame();
-        string path = SaveSystem.ExportCopy();
-        infoText.text = path != null
-            ? Loc.F("Kayıt kopyalandı:\n{0}", path)
-            : Loc.T("Dışa aktarılacak kayıt bulunamadı.");
-    }
-
-    void ResetProgress()
-    {
-        if (resetTimer < 0f)
-        {
-            resetTimer = ConfirmSeconds;
-            Refresh();
-            return;
-        }
-
-        resetTimer = -1f;
-        var gm = GameManager.Instance;
-        if (gm != null) gm.ResetProgress();
-        Close();
-    }
-
-    void QuitGame()
-    {
-        var gm = GameManager.Instance;
-        if (gm != null) gm.SaveGame();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     void OpenAchievements()
@@ -283,12 +313,9 @@ public class SettingsPanel : MonoBehaviour
 
     void Refresh()
     {
-        if (volumeValue != null)
-            volumeValue.text = Mathf.RoundToInt(SoundManager.Volume * 100f) + "%";
         if (fullscreenLabel != null)
             fullscreenLabel.text = Screen.fullScreen ? Loc.T("Tam Ekran: Açık") : Loc.T("Pencere Modu");
-        if (resetLabel != null)
-            resetLabel.text = resetTimer >= 0f ? Loc.T("Emin misin? Tekrar bas") : Loc.T("Kaydı Sıfırla");
         RefreshLanguage();
+        RefreshMuteLabel();
     }
 }

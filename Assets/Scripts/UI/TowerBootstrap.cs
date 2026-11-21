@@ -16,7 +16,7 @@ public class TowerBootstrap : MonoBehaviour
     static void Init()
     {
         if (GameManager.Instance == null) return;
-        var canvas = FindFirstObjectByType<Canvas>();
+        var canvas = FindAnyObjectByType<Canvas>();
         if (canvas == null) return;
         canvas = canvas.rootCanvas;
         canvas.gameObject.AddComponent<TowerBootstrap>().Begin(canvas);

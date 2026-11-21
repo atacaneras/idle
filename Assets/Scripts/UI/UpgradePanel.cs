@@ -112,6 +112,7 @@ public class UpgradePanel : MonoBehaviour
         var gm = GameManager.Instance;
         gm.OnUpgradesChanged += Rebuild;
         gm.OnStateChanged += Refresh;
+        Loc.OnLanguageChanged += Rebuild;
         HudLayout.LeftPanelOpened += OnOtherPanelOpened;
         Rebuild();
     }
@@ -121,6 +122,7 @@ public class UpgradePanel : MonoBehaviour
     void OnDestroy()
     {
         var gm = GameManager.Instance;
+        Loc.OnLanguageChanged -= Rebuild;
         if (gm == null) return;
         gm.OnUpgradesChanged -= Rebuild;
         gm.OnStateChanged -= Refresh;

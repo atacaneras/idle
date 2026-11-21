@@ -15,6 +15,7 @@ public class HUDController : MonoBehaviour
 
     [Header("Butonlar")]
     [SerializeField] Button gatherButton;
+    TMP_Text gatherButtonLabel;
     [SerializeField] Button advanceButton;
     [SerializeField] TMP_Text advanceButtonLabel;
 #if UNITY_EDITOR || DEBUG
@@ -45,6 +46,7 @@ public class HUDController : MonoBehaviour
         var gm = GameManager.Instance;
         PolishHud();
         BuildFastTestButton();
+        Loc.OnLanguageChanged += Refresh;
         gm.OnAgeChanged += RebuildRows;
         gm.OnStateChanged += Refresh;
         gatherButton.onClick.AddListener(gm.Gather);
@@ -312,7 +314,7 @@ public class HUDController : MonoBehaviour
     void SkinGatherButton()
     {
         var img = gatherButton.GetComponent<Image>();
-        var gatherLabel = gatherButton.GetComponentInChildren<TMP_Text>();
+        gatherButtonLabel = gatherButton.GetComponentInChildren<TMP_Text>();
         if (img != null)
         {
             bool framed = UIArt.Skin(img, UIArt.TapOuter, HudLayout.Accent);
@@ -334,16 +336,16 @@ public class HUDController : MonoBehaviour
             c.pressedColor = Color.white;   // basili hali ic yuzey sprite'i gosterir
             gatherButton.colors = c;
         }
-        if (gatherLabel != null)
+        if (gatherButtonLabel != null)
         {
-            gatherLabel.text = Loc.T("TOPLA");
-            gatherLabel.fontStyle = FontStyles.Bold;
-            gatherLabel.enableAutoSizing = true;
-            gatherLabel.fontSizeMin = 28f;
-            gatherLabel.fontSizeMax = 42f;
-            gatherLabel.alignment = TextAlignmentOptions.Midline;
-            gatherLabel.color = UIArt.Has(UIArt.TapInner) ? new Color(0.3f, 0.07f, 0.03f) : HudLayout.AccentInk;
-            var lrt = gatherLabel.rectTransform;
+            gatherButtonLabel.text = Loc.T("TOPLA");
+            gatherButtonLabel.fontStyle = FontStyles.Bold;
+            gatherButtonLabel.enableAutoSizing = true;
+            gatherButtonLabel.fontSizeMin = 28f;
+            gatherButtonLabel.fontSizeMax = 42f;
+            gatherButtonLabel.alignment = TextAlignmentOptions.Midline;
+            gatherButtonLabel.color = UIArt.Has(UIArt.TapInner) ? new Color(0.3f, 0.07f, 0.03f) : HudLayout.AccentInk;
+            var lrt = gatherButtonLabel.rectTransform;
             lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one;
             lrt.offsetMin = new Vector2(HudLayout.GatherW * 0.14f, HudLayout.GatherH * 0.22f);
             lrt.offsetMax = new Vector2(-HudLayout.GatherW * 0.14f, -HudLayout.GatherH * 0.22f);
@@ -388,6 +390,7 @@ public class HUDController : MonoBehaviour
 
     void OnDestroy()
     {
+        Loc.OnLanguageChanged -= Refresh;
         var gm = GameManager.Instance;
         if (gm == null) return;
         gm.OnAgeChanged -= RebuildRows;
@@ -497,6 +500,7 @@ public class HUDController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         var age = gm.CurrentAge;
+        if (gatherButtonLabel != null) gatherButtonLabel.text = Loc.T("TOPLA");
 #if UNITY_EDITOR || DEBUG
         RefreshFastTestButton();
 #endif

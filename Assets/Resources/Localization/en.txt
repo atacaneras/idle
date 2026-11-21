@@ -97,6 +97,9 @@ Ses: Açık|Sound: On
 Ses: Kapalı|Sound: Off
 Başarımlar|Achievements
 Başarımlar •|Achievements •
+Hakkında|About
+Geri|Back
+Aç|Open
 İstatistikler|Statistics
 Görevler|Objectives
 Açık|Unlocked

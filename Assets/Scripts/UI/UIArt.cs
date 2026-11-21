@@ -29,8 +29,8 @@ public static class UIArt
     public const string SettingsButton = "Art/Icons/Settings_Button_S";
 
     // Gorsellerin uzerinde yazi zaten VARSA true yap; kod ayni yaziyi ikinci kez basmaz.
-    public const bool ClaimSpriteHasText = false;
-    public const bool ModeSpriteHasText = false;
+    public static readonly bool ClaimSpriteHasText = false;
+    public static readonly bool ModeSpriteHasText = false;
 
     static readonly Dictionary<string, Sprite> cache = new Dictionary<string, Sprite>();
 

@@ -28,7 +28,7 @@ public class AchievementPanel : MonoBehaviour
 
     readonly List<Row> rows = new List<Row>();
     GameObject overlay;
-    TextMeshProUGUI titleText;
+    TextMeshProUGUI titleText, closeLabel;
     bool open;
 
     public bool IsOpen { get { return open; } }
@@ -42,11 +42,13 @@ public class AchievementPanel : MonoBehaviour
 
         var gm = GameManager.Instance;
         gm.OnAchievementUnlocked += OnUnlocked;
+        Loc.OnLanguageChanged += RefreshRows;
     }
 
     void OnDestroy()
     {
         var gm = GameManager.Instance;
+        Loc.OnLanguageChanged -= RefreshRows;
         if (gm == null) return;
         gm.OnAchievementUnlocked -= OnUnlocked;
     }
@@ -67,8 +69,7 @@ public class AchievementPanel : MonoBehaviour
         titleText = UIFactory.CreateText(win, "Title", "", 44f, TextAlignmentOptions.MidlineLeft, Color.white,
             new Vector2(0f, 1f), new Vector2(0.7f, 1f), new Vector2(28f, -80f), new Vector2(0f, -10f), true);
 
-        TextMeshProUGUI closeLbl;
-        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 28f, out closeLbl);
+        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 28f, out closeLabel);
         var crt = (RectTransform)close.transform;
         crt.anchorMin = crt.anchorMax = new Vector2(1f, 1f);
         crt.pivot = new Vector2(1f, 1f);
@@ -146,10 +147,13 @@ public class AchievementPanel : MonoBehaviour
         var gm = GameManager.Instance;
         if (gm == null) return;
         titleText.text = Loc.T("Başarımlar") + "   " + gm.AchievementCount + "/" + AchievementSystem.All.Count;
+        closeLabel.text = Loc.T("Kapat");
         foreach (var r in rows)
         {
             bool done = gm.IsAchievementUnlocked(r.def.id);
             r.bg.color = done ? UnlockedColor : LockedColor;
+            r.name.text = Loc.T(r.def.name);
+            r.desc.text = Loc.T(r.def.description);
             r.name.color = done ? GoldColor : new Color(0.85f, 0.85f, 0.9f);
             r.tag.text = done ? Loc.T("Açıldı") : Loc.T("Kilitli");
             r.tag.color = done ? GoldColor : new Color(0.55f, 0.55f, 0.62f);

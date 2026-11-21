@@ -51,10 +51,13 @@ public class SideSelectScreen : MonoBehaviour
     Vector2 bgBasePos, bgBaseScale, titleBasePos;
     [SerializeField] Image bg, hellImg, heavenImg, flash, hintPlate;
     Outline hintOutline;
+    TextMeshProUGUI menuTitle, settingsButtonLabel;
     Image logoTint;
     float logoTintAlpha;
     [SerializeField] SkeletonGraphic spineBg;
     [SerializeField] SkeletonAnimation spineAnimation;
+    SkeletonGraphic hellActorForeground;
+    SkeletonAnimation hellActorForegroundAnimation;
     Coroutine doorTransition;
     int activeDoorSide;
     float ghostFacingYaw, ghostFacingYawVelocity;
@@ -66,6 +69,8 @@ public class SideSelectScreen : MonoBehaviour
     readonly List<Mote> motes = new List<Mote>();
     [SerializeField] TextMeshProUGUI hintText;
     [SerializeField] AudioSource audioSrc;
+    RectTransform settingsButtonRect;
+    bool settingsButtonHovered;
     AudioClip hellClip, heavenClip;
     float introT, findTimer, hellTint, heavenTint;
     int zone;                               // 0 kopru, 1 cehennem, 2 cennet
@@ -154,8 +159,11 @@ public class SideSelectScreen : MonoBehaviour
         BuildMotes(heavenRt, 18, new Color(1f, 0.95f, 0.7f), new Color(0.65f, 0.85f, 1f), 2);
 
         BuildTheaterFrame(r);
+        BuildHellActorForeground(r, spineData);
         BuildTitle(r);
         BuildHint(r);
+        BuildSettingsButton(r);
+        Loc.OnLanguageChanged += RefreshLocalization;
 
         // Ana menu acikken oyun ici Ayarlar/Basarimlar butonlari cakismasin.
         settingsOpenButton = GameObject.Find("OpenSettingsButton");
@@ -265,6 +273,54 @@ public class SideSelectScreen : MonoBehaviour
         }
     }
 
+    void BuildHellActorForeground(RectTransform parent, SkeletonDataAsset skeletonData)
+    {
+        if (skeletonData == null || spineBg == null || bgRt == null) return;
+
+        var go = new GameObject("HellActorForeground", typeof(RectTransform));
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(parent, false);
+        rt.anchorMin = bgRt.anchorMin;
+        rt.anchorMax = bgRt.anchorMax;
+        rt.pivot = bgRt.pivot;
+        rt.sizeDelta = bgRt.sizeDelta;
+        rt.offsetMin = bgRt.offsetMin;
+        rt.offsetMax = bgRt.offsetMax;
+        rt.anchoredPosition = bgRt.anchoredPosition;
+        rt.localRotation = bgRt.localRotation;
+        rt.localScale = bgRt.localScale;
+
+        hellActorForeground = go.AddComponent<SkeletonGraphic>();
+        hellActorForeground.skeletonDataAsset = skeletonData;
+        hellActorForeground.material = spineBg.material;
+        hellActorForeground.allowMultipleCanvasRenderers = true;
+        hellActorForeground.raycastTarget = false;
+
+        hellActorForegroundAnimation = go.AddComponent<SkeletonAnimation>();
+        hellActorForegroundAnimation.skeletonDataAsset = skeletonData;
+        hellActorForegroundAnimation.unscaledTime = true;
+        hellActorForegroundAnimation.Initialize(false);
+
+        var ambient = FindAnim(skeletonData.GetSkeletonData(true), "maın_menu_stabil", "cehennnem_seçmeden_ıdle");
+        if (ambient != null) hellActorForegroundAnimation.AnimationState.SetAnimation(0, ambient, true);
+        hellActorForegroundAnimation.UpdateComplete += KeepHellActorOnly;
+    }
+
+    void KeepHellActorOnly(ISkeletonRenderer renderer)
+    {
+        if (hellActorForegroundAnimation == null || hellActorForegroundAnimation.Skeleton == null) return;
+        var slots = hellActorForegroundAnimation.Skeleton.Slots;
+        for (int i = 0; i < slots.Count; i++)
+        {
+            var slot = slots.Items[i];
+            if (slot.Data.Name == "ChatGPT Görseli 16 Kas 2026 14_35_32") continue;
+            var color = slot.Pose.GetColor();
+            color.a = 0f;
+            slot.Pose.SetColor(color);
+        }
+        if (hellActorForeground != null) hellActorForeground.UpdateMesh();
+    }
+
     // Spine animasyon adlari disa aktarimda Turkce karakterlerle/yazim farklariyla
     // degisebiliyor. Once tam adi, sonra Turkce karakterleri sadelestirilmis adi,
     // en son da onek eslesmesini dene. Boylece ufak bir harf farki animasyonu
@@ -330,8 +386,11 @@ public class SideSelectScreen : MonoBehaviour
 
     void OnDestroy()
     {
+        Loc.OnLanguageChanged -= RefreshLocalization;
         if (ghost != null && ghost.spineAnimation != null)
             ghost.spineAnimation.UpdateComplete -= ApplyDemonEyeTint;
+        if (hellActorForegroundAnimation != null)
+            hellActorForegroundAnimation.UpdateComplete -= KeepHellActorOnly;
         if (settingsOpenButton != null) settingsOpenButton.SetActive(true);
         if (achievementsOpenButton != null) achievementsOpenButton.SetActive(true);
         SetCursorHidden(false);
@@ -397,13 +456,13 @@ public class SideSelectScreen : MonoBehaviour
         logoTintAlpha = 0.16f;
         logoTint.color = new Color(1f, 1f, 1f, logoTintAlpha);
 
-        var title = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 110f,
+        menuTitle = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 110f,
             TextAlignmentOptions.Center, new Color(0.39f, 0.065f, 0.035f),
             new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -226f), new Vector2(0f, -92f), true);
-        title.characterSpacing = 12f;
-        title.enableAutoSizing = true;
-        title.fontSizeMin = 56f;
-        title.fontSizeMax = 110f;
+        menuTitle.characterSpacing = 12f;
+        menuTitle.enableAutoSizing = true;
+        menuTitle.fontSizeMin = 56f;
+        menuTitle.fontSizeMax = 110f;
 
     }
 
@@ -485,6 +544,54 @@ public class SideSelectScreen : MonoBehaviour
             TextAlignmentOptions.Center, new Color(0.9f, 0.86f, 0.78f, 0.92f),
             Vector2.zero, Vector2.one, new Vector2(18f, 4f), new Vector2(-18f, -4f), true, true);
         hintText.characterSpacing = 2f;
+    }
+
+    void BuildSettingsButton(RectTransform r)
+    {
+        TextMeshProUGUI label;
+        var btn = UIFactory.CreateButton(r, "MenuSettingsButton", Loc.T("Ayarlar"), 20f, out label);
+        settingsButtonLabel = label;
+        settingsButtonRect = (RectTransform)btn.transform;
+        settingsButtonRect.anchorMin = settingsButtonRect.anchorMax = new Vector2(0.5f, 0f);
+        settingsButtonRect.pivot = new Vector2(0.5f, 0f);
+        settingsButtonRect.anchoredPosition = new Vector2(0f, 46f);
+        settingsButtonRect.sizeDelta = new Vector2(220f, 52f);
+
+        UIArt.StyleButton(btn, label, 12f);
+        label.text = Loc.T("Ayarlar");
+        label.alignment = TextAlignmentOptions.Center;
+        label.enableAutoSizing = true;
+        label.fontSizeMin = 16f;
+        label.fontSizeMax = 20f;
+        label.rectTransform.offsetMin = new Vector2(38f, 2f);
+        label.rectTransform.offsetMax = new Vector2(-12f, -2f);
+
+        var settingsIcon = UIArt.Load(UIArt.IconSettings);
+        if (settingsIcon != null)
+        {
+            var icon = Panel(settingsButtonRect, "SettingsIcon", Color.white, false);
+            icon.sprite = settingsIcon;
+            icon.preserveAspect = true;
+            var iconRt = icon.rectTransform;
+            iconRt.anchorMin = new Vector2(0f, 0.5f);
+            iconRt.anchorMax = new Vector2(0f, 0.5f);
+            iconRt.pivot = new Vector2(0f, 0.5f);
+            iconRt.anchoredPosition = new Vector2(18f, 0f);
+            iconRt.sizeDelta = new Vector2(25f, 25f);
+        }
+
+        btn.onClick.AddListener(() =>
+        {
+            ResolveSettings(true);
+            if (settings != null) settings.Open();
+        });
+    }
+
+    void RefreshLocalization()
+    {
+        if (menuTitle != null) menuTitle.text = Loc.T(GameTitle);
+        if (settingsButtonLabel != null) settingsButtonLabel.text = Loc.T("Ayarlar");
+        AnimateHint(0f);
     }
 
     // ---- Hayalet imleci ----
@@ -649,6 +756,7 @@ public class SideSelectScreen : MonoBehaviour
         {
             int target = zone;
             var state = spineAnimation.AnimationState;
+            var foregroundState = hellActorForegroundAnimation != null ? hellActorForegroundAnimation.AnimationState : null;
 
             // Close the currently open side by playing its opening animation backwards.
             if (activeDoorSide != 0 && activeDoorSide != target)
@@ -659,14 +767,26 @@ public class SideSelectScreen : MonoBehaviour
                 if (close != null)
                 {
                     var entry = state.SetAnimation(0, close, false);
+                    var foregroundEntry = foregroundState != null ? foregroundState.SetAnimation(0, close, false) : null;
                     entry.Reverse = true;
                     entry.TimeScale = closeSpeed;
                     entry.MixDuration = mixDuration;
+                    if (foregroundEntry != null)
+                    {
+                        foregroundEntry.Reverse = true;
+                        foregroundEntry.TimeScale = closeSpeed;
+                        foregroundEntry.MixDuration = mixDuration;
+                    }
                     var stable = FindAnim(spineAnimation.Skeleton.Data, "maın_menu_stabil");
                     if (stable != null)
                     {
                         var stableEntry = state.AddAnimation(0, stable, true, 0f);
                         stableEntry.SetMixDuration(mixDuration, 0f);
+                        if (foregroundState != null)
+                        {
+                            var foregroundStableEntry = foregroundState.AddAnimation(0, stable, true, 0f);
+                            foregroundStableEntry.SetMixDuration(mixDuration, 0f);
+                        }
                     }
                     yield return WaitForZoneOrDuration(target, close.Duration / closeSpeed);
                 }
@@ -677,6 +797,11 @@ public class SideSelectScreen : MonoBehaviour
                     {
                         var stableEntry = state.SetAnimation(0, stable, true);
                         stableEntry.MixDuration = mixDuration;
+                        if (foregroundState != null)
+                        {
+                            var foregroundStableEntry = foregroundState.SetAnimation(0, stable, true);
+                            foregroundStableEntry.MixDuration = mixDuration;
+                        }
                     }
                     yield return WaitForZoneOrDuration(target, mixDuration);
                 }
@@ -691,12 +816,19 @@ public class SideSelectScreen : MonoBehaviour
                 if (opening != null)
                 {
                     var entry = state.SetAnimation(0, opening, false);
+                    var foregroundEntry = foregroundState != null ? foregroundState.SetAnimation(0, opening, false) : null;
                     entry.MixDuration = mixDuration;
+                    if (foregroundEntry != null) foregroundEntry.MixDuration = mixDuration;
                     var ambient = DoorAmbient(target);
                     if (ambient != null)
                     {
                         var ambientEntry = state.AddAnimation(0, ambient, true, 0f);
                         ambientEntry.SetMixDuration(mixDuration, 0f);
+                        if (foregroundState != null)
+                        {
+                            var foregroundAmbientEntry = foregroundState.AddAnimation(0, ambient, true, 0f);
+                            foregroundAmbientEntry.SetMixDuration(mixDuration, 0f);
+                        }
                     }
                     yield return WaitForZoneOrDuration(target, opening.Duration);
                 }
@@ -820,7 +952,7 @@ public class SideSelectScreen : MonoBehaviour
         if (settings != null) return;
         if (!force && findTimer > 0f) return;
         findTimer = 0.25f;
-        settings = FindFirstObjectByType<SettingsPanel>();
+        settings = FindAnyObjectByType<SettingsPanel>();
     }
 
     void SetSettingsMode(bool open)
@@ -871,7 +1003,8 @@ public class SideSelectScreen : MonoBehaviour
 
         Vector2 screenPos = ReadPointerPosition();
 
-        int z = settingsMode || closing ? 0 : ComputeZone(screenPos);
+        settingsButtonHovered = IsPointerOverSettingsButton(screenPos);
+        int z = settingsMode || closing || settingsButtonHovered ? 0 : ComputeZone(screenPos);
         if (!chosen && !closing && z != zone) SetZone(z);
 
         AnimateBackground(dt);
@@ -879,6 +1012,14 @@ public class SideSelectScreen : MonoBehaviour
         AnimateHint(dt);
         AnimateGhost(screenPos, dt);
         AnimateMotes(dt);
+    }
+
+    bool IsPointerOverSettingsButton(Vector2 screenPos)
+    {
+        if (settingsButtonRect == null || !settingsButtonRect.gameObject.activeInHierarchy) return false;
+        Camera eventCamera = ownCanvas != null && ownCanvas.renderMode != RenderMode.ScreenSpaceOverlay
+            ? ownCanvas.worldCamera : null;
+        return RectTransformUtility.RectangleContainsScreenPoint(settingsButtonRect, screenPos, eventCamera);
     }
 
     void AnimateBackground(float dt)
@@ -894,6 +1035,11 @@ public class SideSelectScreen : MonoBehaviour
             bgRt.anchoredPosition = bgBasePos + new Vector2(
                 Mathf.Sin(t * 0.13f) * 8f,
                 Mathf.Sin(t * 0.19f) * 5f);
+            if (hellActorForeground != null)
+            {
+                hellActorForeground.rectTransform.localScale = bgRt.localScale;
+                hellActorForeground.rectTransform.anchoredPosition = bgRt.anchoredPosition;
+            }
         }
 
         // Secili tarafin rengi hafifce tum yariyi yikar.
@@ -921,7 +1067,9 @@ public class SideSelectScreen : MonoBehaviour
     void AnimateHint(float dt)
     {
         if (hintText == null) return;
-        string text = zone == 0 ? Loc.T("BİR TARAFA YAKLAŞ  •  TIKLAYARAK SEÇ") : Loc.T("KAPIYI AÇMAK İÇİN TIKLA");
+        string text = settingsButtonHovered
+            ? Loc.T("AYARLARI AÇMAK İÇİN TIKLA")
+            : zone == 0 ? Loc.T("BİR TARAFA YAKLAŞ  •  TIKLAYARAK SEÇ") : Loc.T("KAPIYI AÇMAK İÇİN TIKLA");
         if (hintText.text != text) hintText.text = text;
 
         float pulse = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * (zone == 0 ? 2.2f : 5.5f));

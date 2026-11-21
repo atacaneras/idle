@@ -31,7 +31,7 @@ public class TimeMachinePanel : MonoBehaviour
 
     readonly List<Node> nodes = new List<Node>();
     GameObject overlay;
-    TextMeshProUGUI balanceText, tmInfoText, tmLabel;
+    TextMeshProUGUI balanceText, tmInfoText, tmLabel, titleLabel, closeLabel;
     Button tmButton;
     Button openButton;
     TextMeshProUGUI openLabel;
@@ -52,6 +52,7 @@ public class TimeMachinePanel : MonoBehaviour
         gm.OnStateChanged += Refresh;
         gm.OnPermanentChanged += Refresh;
         gm.OnTimeMachineUsed += OnUsed;
+        Loc.OnLanguageChanged += Refresh;
         overlay.SetActive(false);
         Refresh();
     }
@@ -59,6 +60,7 @@ public class TimeMachinePanel : MonoBehaviour
     void OnDestroy()
     {
         var gm = GameManager.Instance;
+        Loc.OnLanguageChanged -= Refresh;
         if (gm == null) return;
         gm.OnStateChanged -= Refresh;
         gm.OnPermanentChanged -= Refresh;
@@ -99,13 +101,12 @@ public class TimeMachinePanel : MonoBehaviour
         win.anchoredPosition = Vector2.zero;
         win.sizeDelta = new Vector2(winW, Mathf.Min(winH, 1040f));
 
-        UIFactory.CreateText(win, "Title", Loc.T("Bilgi Ağacı"), 44f, TextAlignmentOptions.MidlineLeft, Color.white,
+        titleLabel = UIFactory.CreateText(win, "Title", Loc.T("Bilgi Ağacı"), 44f, TextAlignmentOptions.MidlineLeft, Color.white,
             new Vector2(0f, 1f), new Vector2(0.6f, 1f), new Vector2(24f, -80f), new Vector2(0f, -10f), true);
         balanceText = UIFactory.CreateText(win, "Balance", "", 34f, TextAlignmentOptions.MidlineRight, GoldColor,
             new Vector2(0.45f, 1f), new Vector2(1f, 1f), new Vector2(0f, -80f), new Vector2(-170f, -10f), true);
 
-        TextMeshProUGUI closeLbl;
-        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 28f, out closeLbl);
+        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 28f, out closeLabel);
         var crt = (RectTransform)close.transform;
         crt.anchorMin = crt.anchorMax = new Vector2(1f, 1f);
         crt.pivot = new Vector2(1f, 1f);
@@ -219,6 +220,8 @@ public class TimeMachinePanel : MonoBehaviour
     {
         var gm = GameManager.Instance;
         if (gm == null || gm.CurrentAge == null) return;
+        if (titleLabel != null) titleLabel.text = Loc.T("Bilgi Ağacı");
+        if (closeLabel != null) closeLabel.text = Loc.T("Kapat");
 
         // Sag ustteki buton: alinabilir bir sey varsa nokta ile isaretle
         bool any = false;

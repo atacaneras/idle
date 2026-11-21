@@ -90,6 +90,7 @@ public class QuestPanel : MonoBehaviour
         popup.gameObject.SetActive(false);
 
         HudLayout.LeftPanelOpened += OnOtherPanelOpened;
+        Loc.OnLanguageChanged += Refresh;
         var gm = GameManager.Instance;
         gm.OnAgeChanged += Refresh; gm.OnStateChanged += Refresh;
         Refresh();
@@ -113,6 +114,7 @@ public class QuestPanel : MonoBehaviour
 
     void OnDestroy()
     {
+        Loc.OnLanguageChanged -= Refresh;
         HudLayout.LeftPanelOpened -= OnOtherPanelOpened;
         var gm = GameManager.Instance;
         if (gm != null) { gm.OnAgeChanged -= Refresh; gm.OnStateChanged -= Refresh; }

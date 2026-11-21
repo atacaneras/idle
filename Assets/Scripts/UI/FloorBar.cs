@@ -54,12 +54,14 @@ public class FloorBar : MonoBehaviour
 
         var gm = GameManager.Instance;
         gm.OnStateChanged += Refresh; gm.OnAgeChanged += Refresh;
+        Loc.OnLanguageChanged += Refresh;
         Refresh();
     }
 
     void OnDestroy()
     {
         var gm = GameManager.Instance;
+        Loc.OnLanguageChanged -= Refresh;
         if (gm != null) { gm.OnStateChanged -= Refresh; gm.OnAgeChanged -= Refresh; }
     }
 

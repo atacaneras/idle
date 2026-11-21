@@ -100,13 +100,4 @@ public static class Loc
 
     public static void Toggle() { SetLanguage(IsEnglish ? Turkish : English); }
 
-    // Dil degisince arayuz metinleri yeniden kurulsun diye sahne bastan yuklenir.
-    public static void ToggleAndReload()
-    {
-        Toggle();
-        var gm = GameManager.Instance;
-        if (gm != null) gm.SaveGame();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-    }
 }

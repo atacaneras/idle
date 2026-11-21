@@ -68,7 +68,7 @@ public class SceneBuildingSpawner : MonoBehaviour
     Transform fxRoot;
     Camera cam;
     // true: <bina_id>_lv1.png olmayan binalar sahnede cizilmez. Dev sirasinda eski kutular icin false yap.
-    const bool HidePlaceholders = true;
+    static readonly bool HidePlaceholders = true;
     // Bina sanati (_lv1.png) henuz yokken sahnede kutu yerine binanin ikonu cizilir; bu ikonun sahnedeki boyu (dunya birimi).
     const float IconSceneHeight = 1.9f;
 
