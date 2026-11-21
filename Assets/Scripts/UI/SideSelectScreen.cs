@@ -982,7 +982,9 @@ public class SideSelectScreen : MonoBehaviour
 
     void AnimateSideCard(SideCard c, float dt)
     {
-        if (c == null) return;
+        // Yan kartlar menuden kaldirildi (BuildSideCards cagrilmiyor). Ama [Serializable] sinif oldugu icin
+        // Unity bu alanlari null yapmaz, ici bos nesne olusturur: c != null ama c.root == null olur.
+        if (c == null || c.root == null) return;
 
         float target = zone == c.side && !settingsMode && !closing ? 1f : 0f;
         c.hover = Mathf.MoveTowards(c.hover, target, dt * 4.2f);

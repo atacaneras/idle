@@ -50,7 +50,7 @@ public class UIBuildingRow : MonoBehaviour
         nameText.fontSizeMin = 28f;
         nameText.fontSizeMax = 42f;
         nameText.textWrappingMode = TextWrappingModes.NoWrap;
-        nameText.overflowMode = TextOverflowModes.Ellipsis;
+        nameText.overflowMode = TextOverflowModes.Truncate;
         nameText.alignment = TextAlignmentOptions.MidlineLeft;
         nameText.fontStyle = FontStyles.Bold;
         nameText.color = new Color(0.22f, 0.12f, 0.07f);
@@ -64,7 +64,7 @@ public class UIBuildingRow : MonoBehaviour
         costText.fontSizeMin = 11f;
         costText.fontSizeMax = 14f;
         costText.textWrappingMode = TextWrappingModes.NoWrap;
-        costText.overflowMode = TextOverflowModes.Ellipsis;
+        costText.overflowMode = TextOverflowModes.Truncate;
         costText.alignment = TextAlignmentOptions.Top;
         costText.fontStyle = FontStyles.Bold;
         costText.color = new Color(0.36f, 0.2f, 0.1f);

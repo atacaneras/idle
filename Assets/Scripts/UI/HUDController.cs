@@ -281,7 +281,7 @@ public class HUDController : MonoBehaviour
         rt.sizeDelta = new Vector2(w * 0.60f, h * 0.36f);
         ageText.alignment = TextAlignmentOptions.Midline;
         ageText.textWrappingMode = TextWrappingModes.Normal;
-        ageText.overflowMode = TextOverflowModes.Ellipsis;
+        ageText.overflowMode = TextOverflowModes.Truncate;
         ageText.raycastTarget = false;
     }
 
@@ -360,7 +360,7 @@ public class HUDController : MonoBehaviour
         rt.sizeDelta = size;
         text.alignment = alignment;
         text.textWrappingMode = TextWrappingModes.Normal;
-        text.overflowMode = TextOverflowModes.Ellipsis;
+        text.overflowMode = TextOverflowModes.Truncate;
         text.raycastTarget = false;
     }
 
