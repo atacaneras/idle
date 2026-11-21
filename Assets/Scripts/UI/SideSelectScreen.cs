@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
@@ -26,7 +27,19 @@ public class SideSelectScreen : MonoBehaviour
         public RectTransform rt;
         public Image img;
         public float x, y, speed, sway, phase, size;
+        public int side;              // 1 cehennem, 2 cennet
         public Color color;
+    }
+
+    class SideCard
+    {
+        public int side;
+        public RectTransform root, pill;
+        public Image glow, pillImg;
+        public TextMeshProUGUI label, motto, action;
+        public Vector2 basePos;
+        public float hover, phase;
+        public Color accent, accentBright, accentDim;
     }
 
     class Ghost
@@ -34,7 +47,7 @@ public class SideSelectScreen : MonoBehaviour
         public RectTransform root, wingL, wingR, halo, hornL, hornR;
         public readonly List<Image> bodyParts = new List<Image>();
         public readonly List<Image> eyes = new List<Image>();
-        public Image art;
+        public Image art, glow;
         public Sprite sprNeutral, sprAngel, sprDemon;
         public SkeletonGraphic spineGraphic;
         public SkeletonAnimation spineAnimation;
@@ -43,8 +56,9 @@ public class SideSelectScreen : MonoBehaviour
         public bool useArt;
     }
 
-    RectTransform root, hellRt, heavenRt;
-    Image bg, hellImg, heavenImg;
+    RectTransform root, hellRt, heavenRt, bgRt, titleBlock;
+    Vector2 bgBasePos, bgBaseScale, titleBasePos;
+    Image bg, hellImg, heavenImg, flash;
     SkeletonGraphic spineBg;
     SkeletonAnimation spineAnimation;
     Coroutine doorTransition;
@@ -55,21 +69,30 @@ public class SideSelectScreen : MonoBehaviour
     Canvas ownCanvas;
     SettingsPanel settings;
     readonly List<Mote> motes = new List<Mote>();
+    SideCard hellCard, heavenCard;
+    TextMeshProUGUI hintText;
     AudioSource audioSrc;
     AudioClip hellClip, heavenClip;
-    float introT, findTimer;
+    float introT, findTimer, hellTint, heavenTint;
     int zone;                               // 0 kopru, 1 cehennem, 2 cennet
-    bool chosen, hasBgArt, settingsMode, cursorHidden;
+    bool chosen, closing, hasBgArt, settingsMode, cursorHidden;
 
     static readonly Color Neutral = new Color(0.06f, 0.045f, 0.055f);
     static readonly Color HellDim = new Color(0.3f, 0.04f, 0.04f), HellHot = new Color(0.72f, 0.1f, 0.05f);
     static readonly Color HeavenDim = new Color(0.11f, 0.19f, 0.36f), HeavenHot = new Color(0.28f, 0.52f, 0.86f);
     static readonly Color Gold = new Color(0.88f, 0.68f, 0.31f);
+    static readonly Color GoldBright = new Color(1f, 0.85f, 0.49f);
     static readonly Color GoldDim = new Color(0.48f, 0.35f, 0.17f);
     static readonly Color Ink = new Color(0.09f, 0.055f, 0.045f, 0.97f);
     static readonly Color GhostWhite = new Color(0.97f, 0.95f, 0.9f);
     static readonly Color GhostDemon = new Color(0.62f, 0.13f, 0.1f);
     static readonly Color GhostAngel = new Color(0.9f, 0.96f, 1f);
+    static readonly Color HellAccent = new Color(1f, 0.42f, 0.18f);
+    static readonly Color HellAccentBright = new Color(1f, 0.66f, 0.34f);
+    static readonly Color HellAccentDim = new Color(0.62f, 0.25f, 0.15f);
+    static readonly Color HeavenAccent = new Color(0.55f, 0.78f, 1f);
+    static readonly Color HeavenAccentBright = new Color(0.78f, 0.9f, 1f);
+    static readonly Color HeavenAccentDim = new Color(0.31f, 0.47f, 0.68f);
 
     public static SideSelectScreen Create(Canvas canvas)
     {
@@ -134,12 +157,18 @@ public class SideSelectScreen : MonoBehaviour
         vig.preserveAspect = false;
         Stretch(vig.rectTransform);
 
-        BuildMotes(hellRt, 18, new Color(1f, 0.45f, 0.12f), new Color(1f, 0.7f, 0.2f));
-        BuildMotes(heavenRt, 18, new Color(1f, 0.95f, 0.7f), new Color(0.65f, 0.85f, 1f));
+        BuildMotes(hellRt, 18, new Color(1f, 0.45f, 0.12f), new Color(1f, 0.7f, 0.2f), 1);
+        BuildMotes(heavenRt, 18, new Color(1f, 0.95f, 0.7f), new Color(0.65f, 0.85f, 1f), 2);
 
         BuildTitle(r);
+        BuildSideCards(r);
+        BuildHint(r);
         BuildSettingsButton(r);
         ghost = BuildGhost(r);
+
+        // Secim yapilinca kisa bir renk parlamasi (en ustte, tiklamayi engellemez).
+        flash = Panel(r, "ChooseFlash", new Color(1f, 1f, 1f, 0f), false);
+        Stretch(flash.rectTransform);
 
         hellRt.gameObject.AddComponent<HoverRelay>().onClick = () => ChooseByZone();
         heavenRt.gameObject.AddComponent<HoverRelay>().onClick = () => ChooseByZone();
@@ -186,23 +215,19 @@ public class SideSelectScreen : MonoBehaviour
             spineBg.material = straightMat;
         }
 
-        spineBg.Initialize(false);
-
-        // SkeletonGraphic renders the UI mesh; its paired SkeletonAnimation
-        // component owns and advances the Spine animation state in this runtime.
+        // Animasyon bileseni renderer'dan ONCE eklenmeli: SkeletonGraphic.Initialize
+        // eslesen ISkeletonAnimation'i bulup AnimationState'i ilerletir. Once
+        // renderer kurulursa menu arka plani tek kare cizilip donar.
         spineAnimation = spineGo.AddComponent<SkeletonAnimation>();
         spineAnimation.skeletonDataAsset = skeletonData;
+        spineAnimation.unscaledTime = true;   // Time.timeScale 0 olsa bile menu canli kalsin
         spineAnimation.Initialize(false);
-        spineBg.Animation = spineAnimation;
 
         var data = skeletonData.GetSkeletonData(true);
         if (data != null)
         {
-            if (data.Animations != null && data.Animations.Count > 0)
-            {
-                var ambient = data.FindAnimation("maın_menu_stabil") ?? data.FindAnimation("cehennnem_seçmeden_ıdle");
-                if (ambient != null) spineAnimation.AnimationState.SetAnimation(0, ambient, true);
-            }
+            var ambient = FindAnim(data, "maın_menu_stabil", "cehennnem_seçmeden_ıdle");
+            if (ambient != null) spineAnimation.AnimationState.SetAnimation(0, ambient, true);
 
             // Referans cozunurluk (genelde 1920x1080) ile Spine boyutunu oranla
             Vector2 refSize = parent.rect.size;
@@ -233,7 +258,74 @@ public class SideSelectScreen : MonoBehaviour
             srt.anchoredPosition = new Vector2(
                 (refSize.x - backgroundW * scale) * 0.5f - backgroundX * scale,
                 (refSize.y - backgroundH * scale) * 0.5f - backgroundY * scale);
+
+            bgRt = srt;
+            bgBaseScale = srt.localScale;
+            bgBasePos = srt.anchoredPosition;
         }
+    }
+
+    // Spine animasyon adlari disa aktarimda Turkce karakterlerle/yazim farklariyla
+    // degisebiliyor. Once tam adi, sonra Turkce karakterleri sadelestirilmis adi,
+    // en son da onek eslesmesini dene. Boylece ufak bir harf farki animasyonu
+    // tamamen oldurmuyor.
+    static Spine.Animation FindAnim(Spine.SkeletonData data, params string[] names)
+    {
+        if (data == null) return null;
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (string.IsNullOrEmpty(names[i])) continue;
+            var exact = data.FindAnimation(names[i]);
+            if (exact != null) return exact;
+        }
+
+        var list = data.Animations;
+        if (list == null) return null;
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (string.IsNullOrEmpty(names[i])) continue;
+            string key = NormAnim(names[i]);
+            for (int j = 0; j < list.Count; j++)
+            {
+                var a = list.Items[j];
+                if (a != null && NormAnim(a.Name) == key) return a;
+            }
+        }
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (string.IsNullOrEmpty(names[i])) continue;
+            string key = NormAnim(names[i]);
+            if (key.Length < 4) continue;
+            for (int j = 0; j < list.Count; j++)
+            {
+                var a = list.Items[j];
+                if (a == null) continue;
+                string candidate = NormAnim(a.Name);
+                if (candidate.StartsWith(key, StringComparison.Ordinal)) return a;
+            }
+        }
+        return null;
+    }
+
+    static string NormAnim(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return "";
+        s = s.Replace('ı', 'i').Replace('İ', 'i')
+             .Replace('ş', 's').Replace('Ş', 's')
+             .Replace('ç', 'c').Replace('Ç', 'c')
+             .Replace('ğ', 'g').Replace('Ğ', 'g')
+             .Replace('ö', 'o').Replace('Ö', 'o')
+             .Replace('ü', 'u').Replace('Ü', 'u')
+             .ToLowerInvariant();
+        var sb = new StringBuilder(s.Length);
+        for (int i = 0; i < s.Length; i++)
+        {
+            char ch = s[i];
+            if (char.IsLetterOrDigit(ch)) sb.Append(ch);
+        }
+        return sb.ToString();
     }
 
     void OnDestroy()
@@ -274,39 +366,157 @@ public class SideSelectScreen : MonoBehaviour
     }
 
     // ---- Ust baslik ----
+    // Ince altin cizgiler + kucuk ust baslik + buyuk ARAF + taraf secme cagrisi.
     void BuildTitle(RectTransform r)
     {
-        var titleSprite = Resources.Load<Sprite>("Art/UI/menu_title");
-        RectTransform brt;
-        RectTransform textParent;
-        if (titleSprite != null)
-        {
-            var art = Panel(r, "TitleBanner", Color.white, false);
-            art.sprite = titleSprite;
-            art.preserveAspect = true;
-            brt = art.rectTransform;
-            textParent = brt;
-        }
-        else
-        {
-            var banner = UIFactory.CreateRoundedPanel(r, "TitleBanner", GoldDim, false);
-            brt = banner.rectTransform;
-            var inner = UIFactory.CreateRoundedPanel(brt, "BannerInner", Ink, false);
-            Stretch(inner.rectTransform, 6f);
-            textParent = inner.rectTransform;
-        }
-        brt.anchorMin = brt.anchorMax = new Vector2(0.5f, 1f);
-        brt.pivot = new Vector2(0.5f, 1f);
-        brt.anchoredPosition = new Vector2(0f, -20f);
-        brt.sizeDelta = new Vector2(620f, 170f);
+        var block = new GameObject("TitleBlock", typeof(RectTransform));
+        titleBlock = (RectTransform)block.transform;
+        titleBlock.SetParent(r, false);
+        titleBlock.anchorMin = titleBlock.anchorMax = new Vector2(0.5f, 1f);
+        titleBlock.pivot = new Vector2(0.5f, 1f);
+        titleBlock.sizeDelta = new Vector2(960f, 256f);
+        titleBlock.anchoredPosition = new Vector2(0f, -14f);
+        titleBasePos = titleBlock.anchoredPosition;
 
-        var title = UIFactory.CreateText(textParent, "Title", GameTitle, 92,
-            TextAlignmentOptions.Center, new Color(0.98f, 0.84f, 0.51f),
-            Vector2.zero, Vector2.one, new Vector2(20f, 10f), new Vector2(-20f, -10f), true);
-        title.characterSpacing = 10f;
+        var eyebrow = UIFactory.CreateText(titleBlock, "Eyebrow", Loc.T("CENNET & CEHENNEM"), 24f,
+            TextAlignmentOptions.Center, GoldDim,
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -46f), new Vector2(0f, -12f), true);
+        eyebrow.characterSpacing = 10f;
+
+        Ornament(titleBlock, -1f);
+        Ornament(titleBlock, 1f);
+
+        // Kucuk koyu golge, altin basligi arka plandan ayirir.
+        var shadow = UIFactory.CreateText(titleBlock, "TitleShadow", Loc.T(GameTitle), 116f,
+            TextAlignmentOptions.Center, new Color(0.03f, 0.02f, 0.01f, 0.7f),
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -170f), new Vector2(0f, -50f), true);
+        shadow.characterSpacing = 16f;
+        shadow.enableAutoSizing = true;
+        shadow.fontSizeMin = 52f;
+        shadow.fontSizeMax = 116f;
+        shadow.rectTransform.anchoredPosition = new Vector2(4f, -4f);
+
+        var title = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 116f,
+            TextAlignmentOptions.Center, GoldBright,
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -170f), new Vector2(0f, -50f), true);
+        title.characterSpacing = 16f;
         title.enableAutoSizing = true;
-        title.fontSizeMin = 40f;
-        title.fontSizeMax = 92f;
+        title.fontSizeMin = 52f;
+        title.fontSizeMax = 116f;
+
+        var tagline = UIFactory.CreateText(titleBlock, "Tagline", Loc.T("TARAFINI SEÇ"), 30f,
+            TextAlignmentOptions.Center, new Color(0.86f, 0.8f, 0.69f),
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -222f), new Vector2(0f, -174f), true);
+        tagline.characterSpacing = 8f;
+    }
+
+    static void Ornament(RectTransform parent, float direction)
+    {
+        var line = UIFactory.CreateRoundedPanel(parent, "Ornament", new Color(Gold.r, Gold.g, Gold.b, 0.55f), false);
+        var rt = line.rectTransform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(150f, 2f);
+        rt.anchoredPosition = new Vector2(direction * 250f, -29f);
+        rt.localRotation = Quaternion.Euler(0f, 0f, -direction * 5f);
+
+        var dot = UIFactory.CreateRoundedPanel(parent, "OrnamentDot", Gold, false);
+        var drt = dot.rectTransform;
+        drt.anchorMin = drt.anchorMax = new Vector2(0.5f, 1f);
+        drt.pivot = new Vector2(0.5f, 0.5f);
+        drt.sizeDelta = new Vector2(7f, 7f);
+        drt.anchoredPosition = new Vector2(direction * 334f, -29f);
+    }
+
+    // ---- Iki yan kart: CEHENNEM / CENNET ----
+    void BuildSideCards(RectTransform r)
+    {
+        hellCard = BuildSideCard(r, 1, new Vector2(96f, -292f),
+            Loc.T("CEHENNEM"), Loc.T("Acıyla yüksel"), Loc.T("CEHENNEME İN"),
+            HellAccent, HellAccentBright, HellAccentDim);
+        heavenCard = BuildSideCard(r, 2, new Vector2(-96f, -292f),
+            Loc.T("CENNET"), Loc.T("İyilikle yüksel"), Loc.T("CENNETE ÇIK"),
+            HeavenAccent, HeavenAccentBright, HeavenAccentDim);
+    }
+
+    SideCard BuildSideCard(RectTransform r, int side, Vector2 pos, string label, string motto, string action,
+        Color accent, Color bright, Color dim)
+    {
+        var card = new SideCard
+        {
+            side = side,
+            accent = accent,
+            accentBright = bright,
+            accentDim = dim,
+            basePos = pos,
+            phase = side == 1 ? 0.4f : 2.1f
+        };
+
+        var go = new GameObject(side == 1 ? "HellCard" : "HeavenCard", typeof(RectTransform));
+        card.root = (RectTransform)go.transform;
+        card.root.SetParent(r, false);
+        card.root.anchorMin = card.root.anchorMax = new Vector2(side == 1 ? 0f : 1f, 1f);
+        card.root.pivot = new Vector2(side == 1 ? 0f : 1f, 1f);
+        card.root.sizeDelta = new Vector2(390f, 260f);
+        card.root.anchoredPosition = pos;
+
+        // Yumusak isik halesi (hover'da parlar).
+        var glow = Panel(card.root, "Glow", new Color(accent.r, accent.g, accent.b, 0f), false);
+        glow.sprite = UIFactory.RadialSprite();
+        glow.type = Image.Type.Simple;
+        card.glow = glow;
+        glow.rectTransform.anchorMin = glow.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        glow.rectTransform.sizeDelta = new Vector2(620f, 620f);
+        glow.rectTransform.anchoredPosition = new Vector2(0f, -10f);
+
+        // Yarı saydam zemin ve ust aksan cizgisi.
+        var panel = UIFactory.CreateRoundedPanel(card.root, "Panel", new Color(0.035f, 0.028f, 0.04f, 0.34f), false);
+        Stretch(panel.rectTransform);
+        var accentLine = UIFactory.CreateRoundedPanel(card.root, "AccentLine", new Color(accent.r, accent.g, accent.b, 0.55f), false);
+        var alrt = accentLine.rectTransform;
+        alrt.anchorMin = alrt.anchorMax = new Vector2(0.5f, 1f);
+        alrt.pivot = new Vector2(0.5f, 0.5f);
+        alrt.sizeDelta = new Vector2(86f, 3f);
+        alrt.anchoredPosition = new Vector2(0f, -20f);
+
+        card.label = UIFactory.CreateText(card.root, "Label", label, 58f,
+            TextAlignmentOptions.Center, dim,
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(14f, -92f), new Vector2(-14f, -26f), true);
+        card.label.characterSpacing = 5f;
+        card.label.enableAutoSizing = true;
+        card.label.fontSizeMin = 30f;
+        card.label.fontSizeMax = 58f;
+
+        card.motto = UIFactory.CreateText(card.root, "Motto", motto, 23f,
+            TextAlignmentOptions.Center, new Color(0.78f, 0.75f, 0.72f, 0.72f),
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(14f, -130f), new Vector2(-14f, -94f), false);
+        card.motto.characterSpacing = 2f;
+
+        var pill = UIFactory.CreateRoundedPanel(card.root, "ActionPill", new Color(accent.r, accent.g, accent.b, 0f), false);
+        card.pill = pill.rectTransform;
+        card.pillImg = pill;
+        card.pill.anchorMin = card.pill.anchorMax = new Vector2(0.5f, 0f);
+        card.pill.pivot = new Vector2(0.5f, 0f);
+        card.pill.sizeDelta = new Vector2(280f, 56f);
+        card.pill.anchoredPosition = new Vector2(0f, 18f);
+
+        card.action = UIFactory.CreateText(card.pill, "ActionLabel", action, 25f,
+            TextAlignmentOptions.Center, new Color(Ink.r, Ink.g, Ink.b, 0.35f),
+            Vector2.zero, Vector2.one, new Vector2(8f, 4f), new Vector2(-8f, -4f), true);
+        card.action.characterSpacing = 2f;
+        card.action.enableAutoSizing = true;
+        card.action.fontSizeMin = 17f;
+        card.action.fontSizeMax = 25f;
+
+        return card;
+    }
+
+    void BuildHint(RectTransform r)
+    {
+        hintText = UIFactory.CreateText(r, "MenuHint", Loc.T("Fareyi bir tarafa götür, tıkla"), 23f,
+            TextAlignmentOptions.Center, new Color(0.78f, 0.75f, 0.72f, 0.8f),
+            new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(0f, 76f), new Vector2(0f, 112f), false);
+        hintText.characterSpacing = 3f;
     }
 
     // ---- Alt orta: Ayarlar ----
@@ -316,9 +526,10 @@ public class SideSelectScreen : MonoBehaviour
         var btn = UIFactory.CreateButton(r, "MenuSettingsButton", Loc.T("Ayarlar"), 26f, out label);
         var img = btn.GetComponent<Image>();
         var rt = (RectTransform)btn.transform;
-        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
-        rt.pivot = new Vector2(0.5f, 0f);
-        rt.anchoredPosition = new Vector2(0f, 22f);
+        // Alt sag kose: alt ortadaki ipucu metniyle cakismasin.
+        rt.anchorMin = rt.anchorMax = new Vector2(1f, 0f);
+        rt.pivot = new Vector2(1f, 0f);
+        rt.anchoredPosition = new Vector2(-64f, 34f);
 
         var art = UIArt.Load(UIArt.IconSettings);
         if (art != null)
@@ -358,8 +569,17 @@ public class SideSelectScreen : MonoBehaviour
         g.root.SetParent(r, false);
         g.root.anchorMin = g.root.anchorMax = new Vector2(0.5f, 0.5f);
         g.root.pivot = new Vector2(0.5f, 0.5f);
-        g.root.sizeDelta = new Vector2(120f, 150f);
+        g.root.sizeDelta = new Vector2(150f, 190f);
         g.root.anchoredPosition = g.pos;
+
+        // Hayaletin arkasinda yumusak, tarafa gore renk degistiren isik.
+        var glow = Panel(g.root, "GhostGlow", new Color(1f, 1f, 1f, 0f), false);
+        glow.sprite = UIFactory.RadialSprite();
+        glow.type = Image.Type.Simple;
+        g.glow = glow;
+        glow.rectTransform.anchorMin = glow.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        glow.rectTransform.sizeDelta = new Vector2(360f, 360f);
+        glow.rectTransform.anchoredPosition = new Vector2(0f, -6f);
 
         var spineData = Resources.Load<SkeletonDataAsset>("Art/main_menu/Ghost_Animations/ghost_SkeletonData");
         if (spineData != null)
@@ -386,26 +606,24 @@ public class SideSelectScreen : MonoBehaviour
                     g.spineGraphic.material = mat;
                 }
             }
-            g.spineGraphic.Initialize(false);
-
-            // SkeletonGraphic çizimi yapar; eş bileşen animasyon durumunu ilerletir.
+            // Animasyon bileseni once eklenir; SkeletonGraphic.Initialize onu bulup
+            // AnimationState'i ilerletir. Sira ters olursa hayalet donuk kalir.
             g.spineAnimation = artObject.AddComponent<SkeletonAnimation>();
             g.spineAnimation.skeletonDataAsset = spineData;
+            g.spineAnimation.unscaledTime = true;
             g.spineAnimation.Initialize(false);
-            g.spineGraphic.Animation = g.spineAnimation;
             g.spineAnimation.UpdateComplete += ApplyDemonEyeTint;
+
+            PlayGhostAnimation(g, 0);
             if (g.spineGraphic.MatchRectTransformWithBounds())
             {
                 float artHeight = g.spineGraphic.rectTransform.rect.height;
                 if (artHeight > 0f)
                 {
-                    float artScale = 190f / artHeight;
+                    float artScale = 230f / artHeight;
                     g.spineGraphic.rectTransform.localScale = new Vector3(artScale, artScale, 1f);
                 }
             }
-
-            var idle = g.spineAnimation.Skeleton.Data.FindAnimation("ghost");
-            if (idle != null) g.spineAnimation.AnimationState.SetAnimation(0, idle, true);
             return g;
         }
 
@@ -510,7 +728,7 @@ public class SideSelectScreen : MonoBehaviour
                     entry.Reverse = true;
                     entry.TimeScale = closeSpeed;
                     entry.MixDuration = mixDuration;
-                    var stable = spineAnimation.Skeleton.Data.FindAnimation("maın_menu_stabil");
+                    var stable = FindAnim(spineAnimation.Skeleton.Data, "maın_menu_stabil");
                     if (stable != null)
                     {
                         var stableEntry = state.AddAnimation(0, stable, true, 0f);
@@ -520,7 +738,7 @@ public class SideSelectScreen : MonoBehaviour
                 }
                 else
                 {
-                    var stable = spineAnimation.Skeleton.Data.FindAnimation("maın_menu_stabil");
+                    var stable = FindAnim(spineAnimation.Skeleton.Data, "maın_menu_stabil");
                     if (stable != null)
                     {
                         var stableEntry = state.SetAnimation(0, stable, true);
@@ -569,25 +787,48 @@ public class SideSelectScreen : MonoBehaviour
 
     Spine.Animation DoorOpening(int side)
     {
-        string name = side == 1 ? "cehennnem_seçmeden_önce" : "cennet_seçmeden_önce3";
-        return spineAnimation.Skeleton.Data.FindAnimation(name);
+        var data = spineAnimation.Skeleton.Data;
+        return side == 1
+            ? FindAnim(data, "cehennnem_seçmeden_önce_açılış", "cehennnem_seçmeden_önce")
+            : FindAnim(data, "cennet_seçmeden_önce_açılıs", "cennet_seçmeden_önce");
     }
 
     Spine.Animation DoorAmbient(int side)
     {
-        string name = side == 1 ? "cehennnem_seçmeden_ıdle" : "cennet_seçmeden_önce4";
-        return spineAnimation.Skeleton.Data.FindAnimation(name);
+        var data = spineAnimation.Skeleton.Data;
+        return side == 1
+            ? FindAnim(data, "cehennnem_seçmeden_ıdle")
+            : FindAnim(data, "cennet_seçmeden_önce_ıdle");
     }
 
-    void PlayGhostAnimation(int z)
+    void PlayGhostAnimation(int z) { PlayGhostAnimation(ghost, z); }
+
+    void PlayGhostAnimation(Ghost g, int z)
     {
-        if (ghost == null || ghost.spineAnimation == null || ghost.spineAnimation.Skeleton == null) return;
-        string name = z == 1 ? "evil_ghost" : z == 2 ? "angel_ghost" : "ghost";
-        var data = ghost.spineAnimation.Skeleton.Data;
-        var animation = data.FindAnimation(name) ?? data.FindAnimation("ghost");
-        if (animation != null)
+        if (g == null || g.spineAnimation == null || g.spineAnimation.Skeleton == null) return;
+        var data = g.spineAnimation.Skeleton.Data;
+
+        // Disa aktarimdaki gercek adlar: ghost_idle / evil_ghost_ıdle /
+        // angel_ghosT_ıdle. Eski kod "ghost" aradigi icin hicbir sey oynamiyordu.
+        string idleName = z == 1 ? "evil_ghost_ıdle" : z == 2 ? "angel_ghosT_ıdle" : "ghost_idle";
+        string introName = z == 1 ? "evil_ghost_baslangıc" : z == 2 ? "angel_ghost_baslangıc" : null;
+
+        var idle = FindAnim(data, idleName, "ghost_idle");
+        if (idle == null) return;
+
+        var state = g.spineAnimation.AnimationState;
+        var intro = FindAnim(data, introName);
+        if (intro != null && z != 0)
         {
-            var entry = ghost.spineAnimation.AnimationState.SetAnimation(0, animation, true);
+            // Once kisa gecis animasyonu, ardindan sonsuz idle.
+            var entry = state.SetAnimation(0, intro, false);
+            entry.MixDuration = 0.18f;
+            var loop = state.AddAnimation(0, idle, true, 0f);
+            loop.MixDuration = 0.25f;
+        }
+        else
+        {
+            var entry = state.SetAnimation(0, idle, true);
             entry.MixDuration = 0.22f;
         }
     }
@@ -610,7 +851,32 @@ public class SideSelectScreen : MonoBehaviour
 
     IEnumerator PlayDoorThenChoose(Side side)
     {
+        // Kapi acilis animasyonu bitsin, sonra menuyu yumusakca karart.
         while (doorTransition != null) yield return null;
+
+        closing = true;
+        float t = 0f;
+        const float fadeDuration = 0.42f;
+        Color tint = side == Side.Hell ? HellAccent : HeavenAccent;
+
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            float k = Mathf.Clamp01(t / fadeDuration);
+            group.alpha = 1f - Mathf.SmoothStep(0f, 1f, k);
+            if (flash != null)
+            {
+                tint.a = 0.32f * Mathf.Sin(k * Mathf.PI);
+                flash.color = tint;
+            }
+            if (ghost != null && ghost.root != null)
+            {
+                float gs = 1f + 0.35f * k;
+                ghost.root.localScale = new Vector3(gs, gs, 1f);
+                ghost.root.localRotation = Quaternion.Euler(0f, ghostFacingYaw, ghost.tilt + k * 10f);
+            }
+            yield return null;
+        }
 
         if (onChosen != null) onChosen(side);
     }
@@ -637,8 +903,11 @@ public class SideSelectScreen : MonoBehaviour
     void Update()
     {
         float dt = Time.unscaledDeltaTime;
-        introT = Mathf.Min(1f, introT + dt * 2.4f);
-        group.alpha = Mathf.SmoothStep(0f, 1f, introT);
+        if (!closing)
+        {
+            introT = Mathf.Min(1f, introT + dt * 2.4f);
+            group.alpha = Mathf.SmoothStep(0f, 1f, introT);
+        }
 
         findTimer -= dt;
         ResolveSettings();
@@ -647,10 +916,13 @@ public class SideSelectScreen : MonoBehaviour
         var pointer = Pointer.current;
         Vector2 screenPos = pointer != null ? pointer.position.ReadValue() : new Vector2(Screen.width * 0.5f, Screen.height * 0.3f);
 
-        int z = settingsMode ? 0 : ComputeZone(screenPos);
-        if (!chosen && z != zone) SetZone(z);
+        int z = settingsMode || closing ? 0 : ComputeZone(screenPos);
+        if (!chosen && !closing && z != zone) SetZone(z);
 
         AnimateBackground(dt);
+        AnimateTitle(dt);
+        AnimateSideCards(dt);
+        AnimateHint(dt);
         AnimateGhost(screenPos, dt);
         AnimateMotes(dt);
     }
@@ -658,24 +930,120 @@ public class SideSelectScreen : MonoBehaviour
     void AnimateBackground(float dt)
     {
         if (bg != null) bg.color = hasBgArt ? Color.black : Neutral;
-        if (hellImg != null) hellImg.color = new Color(1f, 1f, 1f, 0f);
-        if (heavenImg != null) heavenImg.color = new Color(1f, 1f, 1f, 0f);
+
+        // Arka plan cok yavas nefes alir; menu donuk bir resim gibi durmaz.
+        float t = Time.unscaledTime;
+        if (bgRt != null)
+        {
+            float zoom = 1.012f + Mathf.Sin(t * 0.16f) * 0.006f + (zone != 0 ? 0.004f : 0f);
+            bgRt.localScale = new Vector3(bgBaseScale.x * zoom, bgBaseScale.y * zoom, 1f);
+            bgRt.anchoredPosition = bgBasePos + new Vector2(
+                Mathf.Sin(t * 0.13f) * 8f,
+                Mathf.Sin(t * 0.19f) * 5f);
+        }
+
+        // Secili tarafin rengi hafifce tum yariyi yikar.
+        float hellTarget = zone == 1 ? 0.20f : 0f;
+        float heavenTarget = zone == 2 ? 0.20f : 0f;
+        hellTint = Mathf.MoveTowards(hellTint, hellTarget, dt * 2.4f);
+        heavenTint = Mathf.MoveTowards(heavenTint, heavenTarget, dt * 2.4f);
+        if (hellImg != null) hellImg.color = new Color(HellHot.r, HellHot.g, HellHot.b, hellTint);
+        if (heavenImg != null) heavenImg.color = new Color(HeavenHot.r, HeavenHot.g, HeavenHot.b, heavenTint);
+    }
+
+    void AnimateTitle(float dt)
+    {
+        if (titleBlock == null) return;
+        float k = Mathf.SmoothStep(0f, 1f, introT);
+        titleBlock.anchoredPosition = titleBasePos + new Vector2(0f, (1f - k) * 34f);
+        titleBlock.localScale = Vector3.one * (0.965f + 0.035f * k);
+    }
+
+    void AnimateSideCards(float dt)
+    {
+        AnimateSideCard(hellCard, dt);
+        AnimateSideCard(heavenCard, dt);
+    }
+
+    void AnimateSideCard(SideCard c, float dt)
+    {
+        if (c == null) return;
+
+        float target = zone == c.side && !settingsMode && !closing ? 1f : 0f;
+        c.hover = Mathf.MoveTowards(c.hover, target, dt * 4.2f);
+
+        float t = Time.unscaledTime;
+        float breath = Mathf.Sin(t * 1.35f + c.phase);
+        c.root.anchoredPosition = c.basePos + new Vector2(0f, breath * 5f + c.hover * 9f);
+        float scale = 1f + 0.035f * c.hover + 0.005f * breath;
+        c.root.localScale = new Vector3(scale, scale, 1f);
+
+        if (c.glow != null)
+        {
+            Color glow = c.accent;
+            glow.a = 0.10f + 0.30f * c.hover + 0.025f * breath;
+            c.glow.color = glow;
+            c.glow.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(t * 0.35f + c.phase) * 7f);
+        }
+
+        c.label.color = Color.Lerp(c.accentDim, c.accentBright, c.hover);
+        Color motto = c.motto.color;
+        motto.a = 0.55f + 0.38f * c.hover;
+        c.motto.color = motto;
+
+        if (c.pillImg != null)
+        {
+            Color pill = c.accent;
+            pill.a = 0.10f + 0.85f * c.hover;
+            c.pillImg.color = pill;
+        }
+        if (c.pill != null)
+        {
+            float ps = 0.94f + 0.06f * c.hover;
+            c.pill.localScale = new Vector3(ps, ps, 1f);
+        }
+        c.action.color = new Color(Ink.r, Ink.g, Ink.b, 0.30f + 0.68f * c.hover);
+    }
+
+    void AnimateHint(float dt)
+    {
+        if (hintText == null) return;
+        string text = zone == 0 ? Loc.T("Fareyi bir tarafa götür, tıkla") : Loc.T("TIKLA VE BAŞLA");
+        if (hintText.text != text) hintText.text = text;
+
+        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * (zone == 0 ? 2.2f : 5.5f));
+        Color c = zone == 1 ? HellAccentBright : zone == 2 ? HeavenAccentBright : new Color(0.78f, 0.75f, 0.72f);
+        c.a = 0.55f + 0.35f * pulse;
+        hintText.color = c;
     }
 
     void AnimateGhost(Vector2 screenPos, float dt)
     {
         var g = ghost;
-        if (g.root == null || settingsMode) return;
+        if (g == null || g.root == null || settingsMode || closing) return;
 
         Vector2 local;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screenPos, null, out local);
         Vector2 prev = g.pos;
         g.pos = Vector2.Lerp(g.pos, local, 1f - Mathf.Exp(-20f * dt));
         float vx = dt > 0f ? (g.pos.x - prev.x) / dt : 0f;
-        g.tilt = Mathf.Lerp(g.tilt, Mathf.Clamp(-vx * 0.02f, -16f, 16f), 1f - Mathf.Exp(-10f * dt));
-        float bob = Mathf.Sin(Time.unscaledTime * 2.4f) * 6f;
+        g.tilt = Mathf.Lerp(g.tilt, Mathf.Clamp(-vx * 0.022f, -18f, 18f), 1f - Mathf.Exp(-10f * dt));
+        float t = Time.unscaledTime;
+        float bob = Mathf.Sin(t * 2.4f) * 8f;
 
-        g.root.anchoredPosition = g.pos + new Vector2(0f, bob);
+        // Tarafa gore renklenen yumusak hale.
+        if (g.glow != null)
+        {
+            Color gc = zone == 1 ? new Color(1f, 0.28f, 0.12f)
+                     : zone == 2 ? new Color(0.6f, 0.8f, 1f)
+                     : new Color(0.85f, 0.88f, 1f);
+            gc.a = (zone == 0 ? 0.10f : 0.17f) + 0.055f * (0.5f + 0.5f * Mathf.Sin(t * 3.2f));
+            g.glow.color = gc;
+            float glowScale = 1f + 0.05f * Mathf.Sin(t * 2.1f);
+            g.glow.rectTransform.localScale = new Vector3(glowScale, glowScale, 1f);
+        }
+
+        g.root.anchoredPosition = g.pos + new Vector2(Mathf.Sin(t * 1.1f) * 2f, bob);
         float targetFacing = zone == 1 ? 180f : 0f;
         ghostFacingYaw = Mathf.SmoothDampAngle(ghostFacingYaw, targetFacing,
             ref ghostFacingYawVelocity, 0.22f, 900f, dt);
@@ -724,22 +1092,28 @@ public class SideSelectScreen : MonoBehaviour
 
     void AnimateMotes(float dt)
     {
+        float t = Time.unscaledTime;
         for (int i = 0; i < motes.Count; i++)
         {
             var m = motes[i];
-            m.y += m.speed * dt;
+            float boost = zone == m.side && !settingsMode ? 1f : 0f;
+            m.y += m.speed * (1f + 1.9f * boost) * dt;
             if (m.y > 1.05f)
             {
                 m.y = -0.05f;
                 m.x = UnityEngine.Random.Range(0.06f, 0.94f);
             }
-            float x = m.x + Mathf.Sin(Time.unscaledTime * m.sway + m.phase) * 0.015f;
+            float x = m.x + Mathf.Sin(t * m.sway + m.phase) * (0.015f + 0.01f * boost);
             m.rt.anchorMin = m.rt.anchorMax = new Vector2(x, m.y);
             m.rt.anchoredPosition = Vector2.zero;
+
             float fade = Mathf.Sin(Mathf.Clamp01(m.y) * Mathf.PI);
             var c = m.color;
-            c.a = 0.06f + 0.3f * fade;
+            c.a = 0.06f + 0.3f * fade + 0.26f * boost * fade;
             m.img.color = c;
+
+            float size = m.size * (1f + 0.45f * boost);
+            m.rt.sizeDelta = new Vector2(size, size);
         }
     }
 
@@ -754,7 +1128,7 @@ public class SideSelectScreen : MonoBehaviour
         rt.offsetMin = rt.offsetMax = Vector2.zero;
     }
 
-    void BuildMotes(RectTransform half, int count, Color a, Color b)
+    void BuildMotes(RectTransform half, int count, Color a, Color b, int side)
     {
         for (int i = 0; i < count; i++)
         {
@@ -778,6 +1152,7 @@ public class SideSelectScreen : MonoBehaviour
                 sway = UnityEngine.Random.Range(0.5f, 1.6f),
                 phase = UnityEngine.Random.Range(0f, 6.28f),
                 size = size,
+                side = side,
                 color = Color.Lerp(a, b, UnityEngine.Random.value)
             });
         }

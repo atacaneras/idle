@@ -9,15 +9,20 @@ Bilgi|Knowledge
 
 # ---- Giris ekrani ----
 CENNET & CEHENNEM|HEAVEN & HELL
-TARAFINI SE?|CHOOSE YOUR SIDE
+TARAFINI SEÇ|CHOOSE YOUR SIDE
 CEHENNEM|HELL
 CENNET|HEAVEN
-CEHENNEME ?N|DESCEND INTO HELL
-CENNETE ?IK|ASCEND TO HEAVEN
-Ofis k?yafetiyle gelmeyin, yanar.|Don't come in office attire. It burns.
-Wi-Fi ?ifresi: sevgi.|The Wi-Fi password is love.
+CEHENNEME İN|DESCEND INTO HELL
+CENNETE ÇIK|ASCEND TO HEAVEN
+ARAF|LIMBO
+Acıyla yüksel|Rise through suffering
+İyilikle yüksel|Rise through kindness
+Fareyi bir tarafa götür, tıkla|Move to a side and click
+TIKLA VE BAŞLA|CLICK TO BEGIN
+Ofis kıyafetiyle gelmeyin, yanar.|Don't come in office attire. It burns.
+Wi-Fi şifresi: sevgi.|The Wi-Fi password is love.
 Esc: Ayarlar|Esc: Settings
-S?r?m {0}|Version {0}
+Sürüm {0}|Version {0}
 {0}'na Geç|Advance to {0}
 Bilgi: {0}  (x{1})|Knowledge: {0}  (x{1})
   •  Döngü {0}|  •  Loop {0}
@@ -35,8 +40,8 @@ Toplam: {0}/sn|Total: {0}/s
 Sonraki x{0}: {1} adet|Next x{0}: {1} owned
 Kademe {0}/{1}|Tier {0}/{1}
 Kademe {0}: {1} adet|Tier {0}: {1} owned
-Kademe 4/4 ? Maks|Tier 4/4 ? Max
-MAKS SEV?YE|MAX LEVEL
+Kademe 4/4 — Maks|Tier 4/4 — Max
+MAKS SEVİYE|MAX LEVEL
   (x{0})|  (x{0})
 YÜKSELTMELER|UPGRADES
 YÜKSELTMELER ({0})|UPGRADES ({0})

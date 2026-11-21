@@ -33,6 +33,7 @@ public class SceneBuildingSpawner : MonoBehaviour
         public Transform glowT;
         public Vector3 basePos;
         public Vector3 baseScale = Vector3.one;
+        public Vector3 animScale = Vector3.one;   // satin alma animasyonundan gelen olcek (idle bunun uzerine biner)
         public Color baseColor = Color.white;
         public float width = 1f;    // dunya biriminde, toz/kivilcim konumu icin
         public float height = 1f;
@@ -320,6 +321,7 @@ public class SceneBuildingSpawner : MonoBehaviour
             c = Color.Lerp(c, glowColor, Mathf.Clamp01(tint));
         }
 
+        v.animScale = s;
         v.sr.transform.localScale = s;
         v.sr.color = c;
     }
@@ -440,37 +442,42 @@ public class SceneBuildingSpawner : MonoBehaviour
         {
             v.sr.transform.localPosition = v.basePos;
             v.sr.transform.localRotation = Quaternion.identity;
+            v.sr.transform.localScale = v.animScale;
             if (v.glow != null) v.glow.color = new Color(glowColor.r, glowColor.g, glowColor.b, 0f);
             return;
         }
 
         float tier = v.tier;
-        float speed = 1.05f + tier * 0.55f;
+        float speed = 1.15f + tier * 0.5f;
         float t = Time.time * speed + v.phase;
-        float bob = Mathf.Sin(t) * (0.012f + 0.014f * tier);
-        float sway = Mathf.Sin(t * 0.72f + 1.1f) * (0.8f + 1.25f * tier);
-        if (tier >= 2) sway += Mathf.Sin(t * 2.7f) * (0.35f * (tier - 1));   // ust kademeler daha canli
+        // Yeterince gorunur olsun: ekranda kademe 1'de ~5 px, kademe 4'te ~18 px salinim.
+        float bob = Mathf.Sin(t) * (0.05f + 0.025f * tier);
+        float sway = Mathf.Sin(t * 0.72f + 1.1f) * (2.2f + 1.6f * tier);
+        if (tier >= 2) sway += Mathf.Sin(t * 2.7f) * (0.9f * (tier - 1));   // ust kademeler daha canli
 
         v.sr.transform.localPosition = v.basePos + new Vector3(0f, bob, 0f);
         v.sr.transform.localRotation = Quaternion.Euler(0f, 0f, sway);
-        float breath = 1f + Mathf.Sin(t * 1.5f + 0.7f) * (0.006f + 0.004f * tier);
-        Vector3 sc = v.sr.transform.localScale;
-        v.sr.transform.localScale = new Vector3(sc.x * breath, sc.y * breath, sc.z);
+        float breath = Mathf.Sin(t * 1.5f + 0.7f) * (0.012f + 0.008f * tier);
+        v.sr.transform.localScale = new Vector3(
+            v.animScale.x * (1f - breath * 0.5f),
+            v.animScale.y * (1f + breath),
+            v.animScale.z);
+
+        // Toz/isik parcacigi: her kademede var, ust kademelerde daha sik.
+        v.ambientTimer -= dt;
+        if (v.ambientTimer <= 0f)
+        {
+            v.ambientTimer = Random.Range(Mathf.Max(0.45f, 2.4f - tier * 0.5f), Mathf.Max(0.8f, 3.6f - tier * 0.6f));
+            SpawnAmbient(v);
+        }
 
         if (v.glow == null) return;
         if (v.tier >= 1)
         {
             v.glow.enabled = true;
             float pulse = 0.5f + 0.5f * Mathf.Sin(t * 1.6f + v.phase * 0.7f);
-            float alpha = (0.06f + 0.035f * v.tier) * (0.72f + 0.28f * pulse) + v.flash * 0.35f;
+            float alpha = (0.09f + 0.045f * v.tier) * (0.72f + 0.28f * pulse) + v.flash * 0.4f;
             v.glow.color = new Color(glowColor.r, glowColor.g, glowColor.b, Mathf.Clamp01(alpha));
-
-            v.ambientTimer -= dt;
-            if (v.ambientTimer <= 0f)
-            {
-                v.ambientTimer = Random.Range(0.9f, 2.0f);
-                SpawnAmbient(v);
-            }
         }
     }
 
