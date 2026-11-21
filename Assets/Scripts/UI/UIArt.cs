@@ -54,7 +54,12 @@ public static class UIArt
         Sprite[] all;
         if (!folders.TryGetValue(folder, out all)) { all = Resources.LoadAll<Sprite>(folder); folders[folder] = all; }
         string want = Normalize(path.Substring(slash + 1));
-        foreach (var sp in all) if (Normalize(sp.name) == want) return sp;
+        foreach (var sp in all)
+        {
+            string candidate = Normalize(sp.name);
+            if (candidate == want || (sp.name.EndsWith("_0", System.StringComparison.OrdinalIgnoreCase)
+                && Normalize(sp.name.Substring(0, sp.name.Length - 2)) == want)) return sp;
+        }
         return null;
     }
 
@@ -209,12 +214,24 @@ public static class UIArt
     static readonly Color Cream = new Color(0.98f, 0.92f, 0.8f, 1f);
     public static Color ButtonText { get { return Cream; } }
 
-    // Tum ikincil butonlar icin ortak gorunum: x_untapping cercevesi + krem yazi. Sprite yoksa duz renk.
+    // Tum ikincil butonlar icin ortak gorunum: x_untapping cercevesi + krem yazi.
+    // Sprite yuklenemezse bile ayni yuvarlak, altin kenarli yedek stili kullan.
     public static bool StyleButton(Button btn, TMPro.TMP_Text label, float corner = 14f)
     {
         if (btn == null) return false;
         bool ok = ApplySliced(btn.GetComponent<Image>(), ModeOff, 34f, corner, new Color(0.2f, 0.2f, 0.25f, 0.9f));
-        if (!ok) return false;
+        if (!ok)
+        {
+            var img = btn.GetComponent<Image>();
+            img.sprite = UIFactory.RoundedSprite();
+            img.type = Image.Type.Sliced;
+            img.pixelsPerUnitMultiplier = 1f;
+            img.color = new Color(0.28f, 0.13f, 0.095f, 1f);
+            var outline = btn.GetComponent<Outline>();
+            if (outline == null) outline = btn.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(0.78f, 0.43f, 0.16f, 0.9f);
+            outline.effectDistance = new Vector2(1.5f, -1.5f);
+        }
         var c = btn.colors;
         c.normalColor = Color.white;
         c.highlightedColor = new Color(1f, 0.93f, 0.8f, 1f);
