@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SettingsPanel : MonoBehaviour
 {
     const float WindowWidth = 700f;
-    const float WindowHeight = 640f;
+    const float WindowHeight = 600f;
 
     static readonly Color DimColor = new Color(0.015f, 0.008f, 0.012f, 0.82f);
     static readonly Color WindowColor = new Color(0.24f, 0.12f, 0.055f, 0.98f);
@@ -120,12 +120,12 @@ public class SettingsPanel : MonoBehaviour
         titleLabel = TextAt(win, "Title", Loc.T("Ayarlar"), 0f, -38f, windowWidth, 60f, 36f,
             TextAlignmentOptions.Center, TextColor, true);
 
-        var close = UIFactory.CreateButton(win, "Close", Loc.T("Kapat"), 14f, out closeLabel);
+        var close = UIFactory.CreateButton(win, "Close", "X", 20f, out closeLabel);
         var closeRt = (RectTransform)close.transform;
         closeRt.anchorMin = closeRt.anchorMax = new Vector2(1f, 1f);
         closeRt.pivot = new Vector2(1f, 1f);
-        closeRt.anchoredPosition = new Vector2(-18f, -18f);
-        closeRt.sizeDelta = new Vector2(60f, 42f);
+        closeRt.anchoredPosition = new Vector2(-28f, -18f);
+        closeRt.sizeDelta = new Vector2(42f, 42f);
         StyleThemedButton(close, closeLabel);
         close.onClick.AddListener(Close);
 
@@ -135,8 +135,8 @@ public class SettingsPanel : MonoBehaviour
         pageRt.anchorMin = Vector2.zero; pageRt.anchorMax = Vector2.one;
         pageRt.offsetMin = Vector2.zero; pageRt.offsetMax = Vector2.zero;
 
-        float firstRowY = -Mathf.Max(112f, windowHeight * 0.25f);
-        float rowStep = rowHeight + Mathf.Clamp(windowHeight * 0.015f, 8f, 12f);
+        float firstRowY = -Mathf.Max(104f, windowHeight * 0.18f);
+        float rowStep = rowHeight + Mathf.Clamp(windowHeight * 0.007f, 4f, 6f);
         muteLabel = BuildRow(settingsPage.transform, "Sound", Loc.T("Ses"), firstRowY, out var soundButton);
         soundButton.onClick.AddListener(SoundManager.ToggleMuted);
         languageLabel = BuildRow(settingsPage.transform, "Language", Loc.T("Dil"), firstRowY - rowStep, out var languageButton);
@@ -156,20 +156,19 @@ public class SettingsPanel : MonoBehaviour
     {
         var rowImage = UIFactory.CreateRoundedPanel(parent, "Row_" + id, new Color(0.42f, 0.16f, 0.055f, 0.12f), false);
         var rowRt = rowImage.rectTransform;
-        rowRt.anchorMin = new Vector2(0.12f, 1f);
-        rowRt.anchorMax = new Vector2(0.88f, 1f);
+        rowRt.anchorMin = rowRt.anchorMax = new Vector2(0.5f, 1f);
         rowRt.pivot = new Vector2(0.5f, 1f);
         rowRt.anchoredPosition = new Vector2(0f, topY);
-        rowRt.sizeDelta = new Vector2(0f, rowHeight);
-        rowImage.gameObject.AddComponent<Outline>().effectColor = new Color(0.55f, 0.29f, 0.1f, 0.32f);
+        rowRt.sizeDelta = new Vector2(windowWidth * 0.76f, rowHeight);
+        rowImage.color = new Color(0f, 0f, 0f, 0f);
 
         button = UIFactory.CreateButton(rowRt, "Value", "", 20f, out var buttonLabel);
         var buttonRt = (RectTransform)button.transform;
-        buttonRt.anchorMin = new Vector2(0.025f, 0.05f);
-        buttonRt.anchorMax = new Vector2(0.975f, 0.95f);
-        buttonRt.offsetMin = buttonRt.offsetMax = Vector2.zero;
-        buttonRt.sizeDelta = Vector2.zero;
-        StyleThemedButton(button, buttonLabel);
+        buttonRt.anchorMin = buttonRt.anchorMax = new Vector2(0.5f, 0.5f);
+        buttonRt.pivot = new Vector2(0.5f, 0.5f);
+        buttonRt.anchoredPosition = new Vector2(0f, -rowHeight * 0.5f);
+        buttonRt.sizeDelta = new Vector2(windowWidth * 0.58f, rowHeight * 0.82f);
+        StyleOptionButton(button, buttonLabel);
         buttonLabel.rectTransform.offsetMin = new Vector2(10f, 2f);
         buttonLabel.rectTransform.offsetMax = new Vector2(-10f, -2f);
 
@@ -209,6 +208,22 @@ public class SettingsPanel : MonoBehaviour
         if (label != null) label.color = UIArt.ButtonText;
     }
 
+    static void StyleOptionButton(Button button, TextMeshProUGUI label)
+    {
+        if (!UIArt.StyleButton(button, label, 18f))
+        {
+            var image = button.GetComponent<Image>();
+            image.sprite = UIFactory.RoundedSprite();
+            image.type = Image.Type.Sliced;
+            image.pixelsPerUnitMultiplier = 1f;
+            image.color = new Color(0.28f, 0.13f, 0.095f, 1f);
+            var outline = button.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(0.78f, 0.43f, 0.16f, 0.9f);
+            outline.effectDistance = new Vector2(1.5f, -1.5f);
+        }
+        if (label != null) label.color = UIArt.ButtonText;
+    }
+
     void ShowAbout()
     {
         settingsPage.SetActive(false);
@@ -232,7 +247,6 @@ public class SettingsPanel : MonoBehaviour
     void RefreshLocalization()
     {
         if (titleLabel != null) titleLabel.text = Loc.T(aboutPage != null && aboutPage.activeSelf ? "Hakkında" : "Ayarlar");
-        if (closeLabel != null) closeLabel.text = Loc.T("Kapat");
         if (openButtonLabel != null && UIArt.Load(UIArt.IconSettings) == null) openButtonLabel.text = Loc.T("Ayarlar");
         SetRowValue("Achievements", "Başarımlar");
         SetRowValue("About", "Hakkında");

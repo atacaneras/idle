@@ -19,6 +19,9 @@ Acıyla yüksel|Rise through suffering
 İyilikle yüksel|Rise through kindness
 Fareyi bir tarafa götür, tıkla|Move to a side and click
 TIKLA VE BAŞLA|CLICK TO BEGIN
+BİR TARAFA YAKLAŞ  •  TIKLAYARAK SEÇ|MOVE TO A SIDE  •  CLICK TO CHOOSE
+KAPIYI AÇMAK İÇİN TIKLA|CLICK TO OPEN THE GATE
+AYARLARI AÇMAK İÇİN TIKLA|CLICK TO OPEN SETTINGS
 Ofis kıyafetiyle gelmeyin, yanar.|Don't come in office attire. It burns.
 Wi-Fi şifresi: sevgi.|The Wi-Fi password is love.
 Esc: Ayarlar|Esc: Settings
