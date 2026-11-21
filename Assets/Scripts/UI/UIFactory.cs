@@ -14,6 +14,7 @@ public static class UIFactory
         img.color = new Color(0.2f, 0.2f, 0.25f, 0.9f);
         var btn = go.GetComponent<Button>();
         btn.targetGraphic = img;
+        go.AddComponent<UIButtonMotion>();
 
         var lgo = new GameObject("Label", typeof(RectTransform));
         var lrt = (RectTransform)lgo.transform;
@@ -30,6 +31,7 @@ public static class UIFactory
         labelText.alignment = TextAlignmentOptions.Center;
         labelText.color = Color.white;
         labelText.raycastTarget = false;
+        UIArt.StyleButton(btn, labelText);
         return btn;
     }
 

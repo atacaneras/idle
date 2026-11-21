@@ -33,18 +33,6 @@ public class SideSelectScreen : MonoBehaviour
     }
 
     [System.Serializable]
-    class SideCard
-    {
-        public int side;
-        public RectTransform root, pill;
-        public Image glow, pillImg;
-        public TextMeshProUGUI label, motto, action;
-        public Vector2 basePos;
-        public float hover, phase;
-        public Color accent, accentBright, accentDim;
-    }
-
-    [System.Serializable]
     class Ghost
     {
         public RectTransform root, wingL, wingR, halo, hornL, hornR;
@@ -61,7 +49,10 @@ public class SideSelectScreen : MonoBehaviour
 
     [SerializeField] RectTransform root, hellRt, heavenRt, bgRt, titleBlock;
     Vector2 bgBasePos, bgBaseScale, titleBasePos;
-    [SerializeField] Image bg, hellImg, heavenImg, flash;
+    [SerializeField] Image bg, hellImg, heavenImg, flash, hintPlate;
+    Outline hintOutline;
+    Image logoTint;
+    float logoTintAlpha;
     [SerializeField] SkeletonGraphic spineBg;
     [SerializeField] SkeletonAnimation spineAnimation;
     Coroutine doorTransition;
@@ -73,7 +64,6 @@ public class SideSelectScreen : MonoBehaviour
     [SerializeField] Canvas ownCanvas;
     [SerializeField] SettingsPanel settings;
     readonly List<Mote> motes = new List<Mote>();
-    [SerializeField] SideCard hellCard, heavenCard;
     [SerializeField] TextMeshProUGUI hintText;
     [SerializeField] AudioSource audioSrc;
     AudioClip hellClip, heavenClip;
@@ -93,10 +83,8 @@ public class SideSelectScreen : MonoBehaviour
     static readonly Color GhostAngel = new Color(0.9f, 0.96f, 1f);
     static readonly Color HellAccent = new Color(1f, 0.42f, 0.18f);
     static readonly Color HellAccentBright = new Color(1f, 0.66f, 0.34f);
-    static readonly Color HellAccentDim = new Color(0.62f, 0.25f, 0.15f);
     static readonly Color HeavenAccent = new Color(0.55f, 0.78f, 1f);
     static readonly Color HeavenAccentBright = new Color(0.78f, 0.9f, 1f);
-    static readonly Color HeavenAccentDim = new Color(0.31f, 0.47f, 0.68f);
 
     public static SideSelectScreen Create(Canvas canvas)
     {
@@ -160,8 +148,8 @@ public class SideSelectScreen : MonoBehaviour
         BuildMotes(hellRt, 18, new Color(1f, 0.45f, 0.12f), new Color(1f, 0.7f, 0.2f), 1);
         BuildMotes(heavenRt, 18, new Color(1f, 0.95f, 0.7f), new Color(0.65f, 0.85f, 1f), 2);
 
+        BuildTheaterFrame(r);
         BuildTitle(r);
-        // Yan kartlar (CEHENNEM/CENNET kutulari) kaldirildi.
         BuildHint(r);
         BuildSettingsButton(r);
 
@@ -376,7 +364,7 @@ public class SideSelectScreen : MonoBehaviour
     }
 
     // ---- Ust baslik ----
-    // Ince altin cizgiler + kucuk ust baslik + buyuk ARAF + taraf secme cagrisi.
+    // Kizil-altin arma, belirgin oyun adi ve kisa taraf secme cagrisi.
     void BuildTitle(RectTransform r)
     {
         var block = new GameObject("TitleBlock", typeof(RectTransform));
@@ -384,126 +372,94 @@ public class SideSelectScreen : MonoBehaviour
         titleBlock.SetParent(r, false);
         titleBlock.anchorMin = titleBlock.anchorMax = new Vector2(0.5f, 1f);
         titleBlock.pivot = new Vector2(0.5f, 1f);
-        titleBlock.sizeDelta = new Vector2(960f, 256f);
-        titleBlock.anchoredPosition = new Vector2(0f, -14f);
+        titleBlock.sizeDelta = new Vector2(1000f, 320f);
+        titleBlock.anchoredPosition = new Vector2(0f, -4f);
         titleBasePos = titleBlock.anchoredPosition;
 
-        var eyebrow = UIFactory.CreateText(titleBlock, "Eyebrow", Loc.T("CENNET & CEHENNEM"), 24f,
-            TextAlignmentOptions.Center, GoldDim,
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -46f), new Vector2(0f, -12f), true);
-        eyebrow.characterSpacing = 10f;
+        var logo = Panel(titleBlock, "LogoPlaque", Color.white, false);
+        Stretch(logo.rectTransform);
+        logo.raycastTarget = false;
+        UIArt.Skin(logo, UIArt.TitlePlaque, Color.clear);
+        logo.rectTransform.SetAsFirstSibling();
 
-        Ornament(titleBlock, -1f);
-        Ornament(titleBlock, 1f);
+        // A muted, continuous hell-to-heaven wash keeps the original gold crest readable.
+        var logoMask = logo.gameObject.AddComponent<Mask>();
+        logoMask.showMaskGraphic = true;
+        logoTint = UIFactory.CreatePanel(logo.transform, "LogoWorldGradient", Color.white, false).GetComponent<Image>();
+        Stretch(logoTint.rectTransform);
+        logoTint.sprite = CreateLogoWorldGradient();
+        logoTint.type = Image.Type.Simple;
+        logoTint.raycastTarget = false;
+        logoTintAlpha = 0.16f;
+        logoTint.color = new Color(1f, 1f, 1f, logoTintAlpha);
 
-        // Tek baslik (golge kaldirildi, ortali).
-        var title = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 116f,
-            TextAlignmentOptions.Center, GoldBright,
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -170f), new Vector2(0f, -50f), true);
-        title.characterSpacing = 16f;
+        var title = UIFactory.CreateText(titleBlock, "Title", Loc.T(GameTitle), 110f,
+            TextAlignmentOptions.Center, new Color(0.39f, 0.065f, 0.035f),
+            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -226f), new Vector2(0f, -92f), true);
+        title.characterSpacing = 12f;
         title.enableAutoSizing = true;
-        title.fontSizeMin = 52f;
-        title.fontSizeMax = 116f;
+        title.fontSizeMin = 56f;
+        title.fontSizeMax = 110f;
 
-        var tagline = UIFactory.CreateText(titleBlock, "Tagline", Loc.T("TARAFINI SEÇ"), 30f,
-            TextAlignmentOptions.Center, new Color(0.86f, 0.8f, 0.69f),
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -222f), new Vector2(0f, -174f), true);
-        tagline.characterSpacing = 8f;
     }
 
-    static void Ornament(RectTransform parent, float direction)
+    static Sprite CreateLogoWorldGradient()
     {
-        var line = UIFactory.CreateRoundedPanel(parent, "Ornament", new Color(Gold.r, Gold.g, Gold.b, 0.55f), false);
-        var rt = line.rectTransform;
-        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
-        rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.sizeDelta = new Vector2(150f, 2f);
-        rt.anchoredPosition = new Vector2(direction * 250f, -29f);
-        rt.localRotation = Quaternion.Euler(0f, 0f, -direction * 5f);
-
-        var dot = UIFactory.CreateRoundedPanel(parent, "OrnamentDot", Gold, false);
-        var drt = dot.rectTransform;
-        drt.anchorMin = drt.anchorMax = new Vector2(0.5f, 1f);
-        drt.pivot = new Vector2(0.5f, 0.5f);
-        drt.sizeDelta = new Vector2(7f, 7f);
-        drt.anchoredPosition = new Vector2(direction * 334f, -29f);
-    }
-
-    // ---- Iki yan kart: CEHENNEM / CENNET ----
-    void BuildSideCards(RectTransform r)
-    {
-        hellCard = BuildSideCard(r, 1, new Vector2(96f, -292f),
-            Loc.T("CEHENNEM"), Loc.T("Acıyla yüksel"), Loc.T("CEHENNEME İN"),
-            HellAccent, HellAccentBright, HellAccentDim);
-        heavenCard = BuildSideCard(r, 2, new Vector2(-96f, -292f),
-            Loc.T("CENNET"), Loc.T("İyilikle yüksel"), Loc.T("CENNETE ÇIK"),
-            HeavenAccent, HeavenAccentBright, HeavenAccentDim);
-    }
-
-    SideCard BuildSideCard(RectTransform r, int side, Vector2 pos, string label, string motto, string action,
-        Color accent, Color bright, Color dim)
-    {
-        var card = new SideCard
+        const int width = 256;
+        var texture = new Texture2D(width, 2, TextureFormat.RGBA32, false);
+        texture.name = "LogoWorldGradientTexture";
+        texture.wrapMode = TextureWrapMode.Clamp;
+        texture.filterMode = FilterMode.Bilinear;
+        Color left = new Color(0.78f, 0.20f, 0.10f);
+        Color warm = new Color(0.83f, 0.40f, 0.23f);
+        Color center = new Color(0.83f, 0.69f, 0.52f);
+        Color cool = new Color(0.39f, 0.57f, 0.72f);
+        Color right = new Color(0.25f, 0.43f, 0.62f);
+        for (int x = 0; x < width; x++)
         {
-            side = side,
-            accent = accent,
-            accentBright = bright,
-            accentDim = dim,
-            basePos = pos,
-            phase = side == 1 ? 0.4f : 2.1f
-        };
+            float u = x / (width - 1f);
+            Color color;
+            if (u < 0.38f) color = Color.Lerp(left, warm, Mathf.SmoothStep(0f, 1f, u / 0.38f));
+            else if (u < 0.54f) color = Color.Lerp(warm, center, Mathf.SmoothStep(0f, 1f, (u - 0.38f) / 0.16f));
+            else if (u < 0.68f) color = Color.Lerp(center, cool, Mathf.SmoothStep(0f, 1f, (u - 0.54f) / 0.14f));
+            else color = Color.Lerp(cool, right, Mathf.SmoothStep(0f, 1f, (u - 0.68f) / 0.32f));
+            texture.SetPixel(x, 0, color);
+            texture.SetPixel(x, 1, color);
+        }
+        texture.Apply(false, true);
+        return Sprite.Create(texture, new Rect(0f, 0f, width, 2f), new Vector2(0.5f, 0.5f), 100f);
+    }
 
-        var go = new GameObject(side == 1 ? "HellCard" : "HeavenCard", typeof(RectTransform));
-        card.root = (RectTransform)go.transform;
-        card.root.SetParent(r, false);
-        card.root.anchorMin = card.root.anchorMax = new Vector2(side == 1 ? 0f : 1f, 1f);
-        card.root.pivot = new Vector2(side == 1 ? 0f : 1f, 1f);
-        card.root.sizeDelta = new Vector2(390f, 260f);
-        card.root.anchoredPosition = pos;
-
-        // Yumusak isik halesi (hover'da parlar).
-        var glow = Panel(card.root, "Glow", new Color(accent.r, accent.g, accent.b, 0f), false);
-        glow.sprite = UIFactory.RadialSprite();
-        glow.type = Image.Type.Simple;
-        card.glow = glow;
-        glow.rectTransform.anchorMin = glow.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        glow.rectTransform.sizeDelta = new Vector2(620f, 620f);
-        glow.rectTransform.anchoredPosition = new Vector2(0f, -10f);
-
-        // Yarı saydam zemin ve ust aksan cizgisi.
-        var panel = UIFactory.CreateRoundedPanel(card.root, "Panel", new Color(0.035f, 0.028f, 0.04f, 0.34f), false);
-        Stretch(panel.rectTransform);
-        var accentLine = UIFactory.CreateRoundedPanel(card.root, "AccentLine", new Color(accent.r, accent.g, accent.b, 0.55f), false);
-        var alrt = accentLine.rectTransform;
-        alrt.anchorMin = alrt.anchorMax = new Vector2(0.5f, 1f);
-        alrt.pivot = new Vector2(0.5f, 0.5f);
-        alrt.sizeDelta = new Vector2(86f, 3f);
-        alrt.anchoredPosition = new Vector2(0f, -20f);
-
-        card.label = UIFactory.CreateText(card.root, "Label", label, 58f,
-            TextAlignmentOptions.Center, dim,
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(14f, -92f), new Vector2(-14f, -26f), true);
-        card.label.characterSpacing = 5f;
-        card.label.enableAutoSizing = true;
-        card.label.fontSizeMin = 30f;
-        card.label.fontSizeMax = 58f;
-
-        card.motto = UIFactory.CreateText(card.root, "Motto", motto, 23f,
-            TextAlignmentOptions.Center, new Color(0.78f, 0.75f, 0.72f, 0.72f),
-            new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(14f, -130f), new Vector2(-14f, -94f), false);
-        card.motto.characterSpacing = 2f;
-
-        // Cehenneme in / Cennete cik butonlari kaldirildi (gereksiz).
-
-        return card;
+    void BuildTheaterFrame(RectTransform parent)
+    {
+        var frame = Panel(parent, "TheaterFrame", Color.white, false);
+        var rt = frame.rectTransform;
+        // Keep the top/bottom trim edge-to-edge while overscanning the side curtains
+        // so their fabric stays clear of the two doorways.
+        rt.anchorMin = new Vector2(-0.06f, 0f);
+        rt.anchorMax = new Vector2(1.06f, 1f);
+        rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
+        frame.raycastTarget = false;
+        UIArt.Skin(frame, UIArt.TheaterFrame, Color.white);
+        frame.color = Color.white;
     }
 
     void BuildHint(RectTransform r)
     {
-        hintText = UIFactory.CreateText(r, "MenuHint", Loc.T("Fareyi bir tarafa götür, tıkla"), 23f,
-            TextAlignmentOptions.Center, new Color(0.78f, 0.75f, 0.72f, 0.8f),
-            new Vector2(0f, 0f), new Vector2(1f, 0f), new Vector2(0f, 76f), new Vector2(0f, 112f), false);
-        hintText.characterSpacing = 3f;
+        hintPlate = UIFactory.CreateRoundedPanel(r, "MenuHintPlate", new Color(0.025f, 0.018f, 0.025f, 0.78f), false);
+        var rt = hintPlate.rectTransform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0f);
+        rt.pivot = new Vector2(0.5f, 0f);
+        rt.anchoredPosition = new Vector2(0f, 108f);
+        rt.sizeDelta = new Vector2(540f, 54f);
+        hintOutline = hintPlate.gameObject.AddComponent<Outline>();
+        hintOutline.effectColor = new Color(Gold.r, Gold.g, Gold.b, 0.6f);
+        hintOutline.effectDistance = new Vector2(1.5f, -1.5f);
+
+        hintText = UIFactory.CreateText(rt, "MenuHint", Loc.T("BİR TARAFA YAKLAŞ  •  TIKLAYARAK SEÇ"), 19f,
+            TextAlignmentOptions.Center, new Color(0.9f, 0.86f, 0.78f, 0.92f),
+            Vector2.zero, Vector2.one, new Vector2(18f, 4f), new Vector2(-18f, -4f), true, true);
+        hintText.characterSpacing = 2f;
     }
 
     // ---- Alt orta: Ayarlar ----
@@ -521,13 +477,14 @@ public class SideSelectScreen : MonoBehaviour
         var art = UIArt.Load(UIArt.IconSettings);
         if (art != null)
         {
-            img.sprite = art;
-            img.preserveAspect = true;
-            img.color = Color.white;
-            float h = 84f;
-            float aspect = art.rect.height > 0f ? art.rect.width / art.rect.height : 1f;
-            rt.sizeDelta = new Vector2(h * aspect, h);
-            img.type = Image.Type.Simple;
+            UIArt.StyleButton(btn, label, 14f);
+            var icon = Panel(rt, "SettingsIcon", Color.white, false);
+            icon.sprite = art;
+            icon.preserveAspect = true;
+            var iconRt = icon.rectTransform;
+            iconRt.anchorMin = Vector2.zero; iconRt.anchorMax = Vector2.one;
+            iconRt.offsetMin = new Vector2(14f, 14f); iconRt.offsetMax = new Vector2(-14f, -14f);
+            rt.sizeDelta = new Vector2(84f, 84f);
             label.text = "";
         }
         else
@@ -936,7 +893,6 @@ public class SideSelectScreen : MonoBehaviour
 
         AnimateBackground(dt);
         AnimateTitle(dt);
-        AnimateSideCards(dt);
         AnimateHint(dt);
         AnimateGhost(screenPos, dt);
         AnimateMotes(dt);
@@ -972,67 +928,33 @@ public class SideSelectScreen : MonoBehaviour
         float k = Mathf.SmoothStep(0f, 1f, introT);
         titleBlock.anchoredPosition = titleBasePos + new Vector2(0f, (1f - k) * 34f);
         titleBlock.localScale = Vector3.one * (0.965f + 0.035f * k);
-    }
 
-    void AnimateSideCards(float dt)
-    {
-        AnimateSideCard(hellCard, dt);
-        AnimateSideCard(heavenCard, dt);
-    }
-
-    void AnimateSideCard(SideCard c, float dt)
-    {
-        // Yan kartlar menuden kaldirildi (BuildSideCards cagrilmiyor). Ama [Serializable] sinif oldugu icin
-        // Unity bu alanlari null yapmaz, ici bos nesne olusturur: c != null ama c.root == null olur.
-        if (c == null || c.root == null) return;
-
-        float target = zone == c.side && !settingsMode && !closing ? 1f : 0f;
-        c.hover = Mathf.MoveTowards(c.hover, target, dt * 4.2f);
-
-        float t = Time.unscaledTime;
-        float breath = Mathf.Sin(t * 1.35f + c.phase);
-        c.root.anchoredPosition = c.basePos + new Vector2(0f, breath * 5f + c.hover * 9f);
-        float scale = 1f + 0.035f * c.hover + 0.005f * breath;
-        c.root.localScale = new Vector3(scale, scale, 1f);
-
-        if (c.glow != null)
-        {
-            Color glow = c.accent;
-            glow.a = 0.10f + 0.30f * c.hover + 0.025f * breath;
-            c.glow.color = glow;
-            c.glow.rectTransform.localRotation = Quaternion.Euler(0f, 0f, Mathf.Sin(t * 0.35f + c.phase) * 7f);
-        }
-
-        c.label.color = Color.Lerp(c.accentDim, c.accentBright, c.hover);
-        Color motto = c.motto.color;
-        motto.a = 0.55f + 0.38f * c.hover;
-        c.motto.color = motto;
-
-        if (c.pillImg != null)
-        {
-            Color pill = c.accent;
-            pill.a = 0.10f + 0.85f * c.hover;
-            c.pillImg.color = pill;
-        }
-        if (c.pill != null)
-        {
-            float ps = 0.94f + 0.06f * c.hover;
-            c.pill.localScale = new Vector3(ps, ps, 1f);
-        }
-        if (c.action != null)
-            c.action.color = new Color(Ink.r, Ink.g, Ink.b, 0.30f + 0.68f * c.hover);
+        float tintTarget = zone == 0 ? 0.16f : 0.22f;
+        logoTintAlpha = Mathf.MoveTowards(logoTintAlpha, tintTarget, dt * 0.18f);
+        if (logoTint != null) logoTint.color = new Color(1f, 1f, 1f, logoTintAlpha);
     }
 
     void AnimateHint(float dt)
     {
         if (hintText == null) return;
-        string text = zone == 0 ? Loc.T("Fareyi bir tarafa götür, tıkla") : Loc.T("TIKLA VE BAŞLA");
+        string text = zone == 0 ? Loc.T("BİR TARAFA YAKLAŞ  •  TIKLAYARAK SEÇ") : Loc.T("KAPIYI AÇMAK İÇİN TIKLA");
         if (hintText.text != text) hintText.text = text;
 
         float pulse = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * (zone == 0 ? 2.2f : 5.5f));
         Color c = zone == 1 ? HellAccentBright : zone == 2 ? HeavenAccentBright : new Color(0.78f, 0.75f, 0.72f);
         c.a = 0.55f + 0.35f * pulse;
         hintText.color = c;
+        if (hintPlate != null)
+        {
+            Color plate = new Color(0.025f, 0.018f, 0.025f, 0.7f + 0.1f * pulse);
+            hintPlate.color = plate;
+        }
+        if (hintOutline != null)
+        {
+            Color outline = zone == 1 ? HellAccent : zone == 2 ? HeavenAccent : Gold;
+            outline.a = 0.45f + 0.35f * pulse;
+            hintOutline.effectColor = outline;
+        }
     }
 
     void AnimateGhost(Vector2 screenPos, float dt)

@@ -9,6 +9,7 @@ public static class UIArt
 {
     // ---- Art/UI ----
     public const string TitlePlaque = "Art/UI/Level_UI";         // ust ortadaki kat adi tabelasi
+    public const string TheaterFrame = "Art/UI/Curtain_Frame";   // taraf secim ana menusundeki sahne cercevesi
     public const string ResourcePill = "Art/UI/kazanım_UI";      // sol ustteki kaynak hapi ve sag ustteki Bilgi hapi
     public const string ListPanel = "Art/UI/Panel";              // bina listesinin arkasindaki buyuk dikey parsomen (1424x1668)
     public const string Card = "Art/UI/Panel_UI";                // tek bir bina karti (1174x296)

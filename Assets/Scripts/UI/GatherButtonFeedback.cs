@@ -13,15 +13,15 @@ public class GatherButtonFeedback : MonoBehaviour, IPointerClickHandler, ISubmit
     FloatingTextSpawner spawner;
     RectTransform rt;
     Button button;
-    Vector3 baseScale = Vector3.one;
-    float punchT = -1f;
+    UIButtonMotion motion;
 
     public void Init(FloatingTextSpawner s)
     {
         spawner = s;
         rt = (RectTransform)transform;
         button = GetComponent<Button>();
-        baseScale = rt.localScale;
+        motion = GetComponent<UIButtonMotion>();
+        if (motion == null) motion = gameObject.AddComponent<UIButtonMotion>();
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -46,19 +46,6 @@ public class GatherButtonFeedback : MonoBehaviour, IPointerClickHandler, ISubmit
 
     string Label() { return "+" + NumberFormatter.Format(GameManager.Instance.ClickValue); }
 
-    void Feedback() { if (rt != null && CanGather()) punchT = 0f; }
+    void Feedback() { if (motion != null && CanGather()) motion.Punch(punchAmount, punchDuration); }
 
-    void Update()
-    {
-        if (punchT < 0f) return;
-        punchT += Time.unscaledDeltaTime / punchDuration;
-        if (punchT >= 1f) { punchT = -1f; rt.localScale = baseScale; return; }
-        rt.localScale = baseScale * (1f + punchAmount * Mathf.Sin(punchT * Mathf.PI));
-    }
-
-    void OnDisable()
-    {
-        punchT = -1f;
-        if (rt != null) rt.localScale = baseScale;
-    }
 }

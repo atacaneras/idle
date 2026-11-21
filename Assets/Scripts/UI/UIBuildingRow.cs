@@ -110,6 +110,7 @@ public class UIBuildingRow : MonoBehaviour
             buyLabel.rectTransform.offsetMax = new Vector2(-8f, -2f);
         }
         buyButton.onClick.RemoveAllListeners();
+        if (buyButton.GetComponent<UIButtonMotion>() == null) buyButton.gameObject.AddComponent<UIButtonMotion>();
         buyButton.onClick.AddListener(() => GameManager.Instance.TryBuyCurrent(data));
         Refresh();
     }
