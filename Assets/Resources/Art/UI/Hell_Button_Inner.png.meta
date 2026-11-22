@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4aff904ea1b8d1f4ebab3d19a96e6834
+guid: 535eb106e775f6240bf5f36777f990a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -598766966329010741
-    second: Level_UI_0
+      213: -655350647474227987
+    second: Hell_Button_Inner_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -111,43 +111,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Level_UI_0
+      name: Hell_Button_Inner_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 11
-        width: 2073
-        height: 713
+        x: 187
+        y: 132
+        width: 1800
+        height: 377
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc598b4dd90c0b7f0800000000000000
-      internalID: -598766966329010741
+      spriteID: de4f9fdee0ab7e6f0800000000000000
+      internalID: -655350647474227987
       vertices: []
       indices: 
       edges: []
