@@ -1,0 +1,1607 @@
+fileFormatVersion: 2
+guid: 050f27114fc844f4d8d3959411e2ce4c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7112279368145450662
+    second: gidiklama-hareketli_0
+  - first:
+      213: 2490121901032813599
+    second: gidiklama-hareketli_1
+  - first:
+      213: -9113485816138844429
+    second: gidiklama-hareketli_2
+  - first:
+      213: -2653379941357510333
+    second: gidiklama-hareketli_3
+  - first:
+      213: 3075105518689567789
+    second: gidiklama-hareketli_4
+  - first:
+      213: 4811870700624402132
+    second: gidiklama-hareketli_5
+  - first:
+      213: 1631087542533870675
+    second: gidiklama-hareketli_6
+  - first:
+      213: 200805176604787953
+    second: gidiklama-hareketli_7
+  - first:
+      213: 5076852506435051678
+    second: gidiklama-hareketli_8
+  - first:
+      213: 7491363563529082848
+    second: gidiklama-hareketli_9
+  - first:
+      213: 4481121581646577168
+    second: gidiklama-hareketli_10
+  - first:
+      213: 8385897705707210353
+    second: gidiklama-hareketli_11
+  - first:
+      213: 904498058339963583
+    second: gidiklama-hareketli_12
+  - first:
+      213: -8995605414737260781
+    second: gidiklama-hareketli_13
+  - first:
+      213: 4272402201477768100
+    second: gidiklama-hareketli_14
+  - first:
+      213: 4092734177775060526
+    second: gidiklama-hareketli_15
+  - first:
+      213: -7641357785305716878
+    second: gidiklama-hareketli_16
+  - first:
+      213: -8539902021833346772
+    second: gidiklama-hareketli_17
+  - first:
+      213: -5923069902314663454
+    second: gidiklama-hareketli_18
+  - first:
+      213: -1610387432372098897
+    second: gidiklama-hareketli_19
+  - first:
+      213: -7719529084015643160
+    second: gidiklama-hareketli_20
+  - first:
+      213: 965947979894320320
+    second: gidiklama-hareketli_21
+  - first:
+      213: 2681217121432271931
+    second: gidiklama-hareketli_22
+  - first:
+      213: 5428152744868642418
+    second: gidiklama-hareketli_23
+  - first:
+      213: 7227326454645228953
+    second: gidiklama-hareketli_24
+  - first:
+      213: -2845491977918292535
+    second: gidiklama-hareketli_25
+  - first:
+      213: -9094561100038284360
+    second: gidiklama-hareketli_26
+  - first:
+      213: -4601651212013920799
+    second: gidiklama-hareketli_27
+  - first:
+      213: -2304779267732639855
+    second: gidiklama-hareketli_28
+  - first:
+      213: 6635100990907240759
+    second: gidiklama-hareketli_29
+  - first:
+      213: -8527202533613622111
+    second: gidiklama-hareketli_30
+  - first:
+      213: -6471122908978653843
+    second: gidiklama-hareketli_31
+  - first:
+      213: -8736928855449028041
+    second: gidiklama-hareketli_32
+  - first:
+      213: -6166122728181980172
+    second: gidiklama-hareketli_33
+  - first:
+      213: -5391252695251674251
+    second: gidiklama-hareketli_34
+  - first:
+      213: 5048948696473098668
+    second: gidiklama-hareketli_35
+  - first:
+      213: -2624029243323420672
+    second: gidiklama-hareketli_36
+  - first:
+      213: 3153624036308021003
+    second: gidiklama-hareketli_37
+  - first:
+      213: -2622251502115770258
+    second: gidiklama-hareketli_38
+  - first:
+      213: 2219374860952830276
+    second: gidiklama-hareketli_39
+  - first:
+      213: 5780904119250141661
+    second: gidiklama-hareketli_40
+  - first:
+      213: 5231422847974186314
+    second: gidiklama-hareketli_41
+  - first:
+      213: 7525004985489112795
+    second: gidiklama-hareketli_42
+  - first:
+      213: -2912950209812567512
+    second: gidiklama-hareketli_43
+  - first:
+      213: 8149110146636454658
+    second: gidiklama-hareketli_44
+  - first:
+      213: -2264074761936018165
+    second: gidiklama-hareketli_45
+  - first:
+      213: 6184357018789508822
+    second: gidiklama-hareketli_46
+  - first:
+      213: -3560059026257362247
+    second: gidiklama-hareketli_47
+  - first:
+      213: 63264488987991908
+    second: gidiklama-hareketli_48
+  - first:
+      213: 8678336727949377391
+    second: gidiklama-hareketli_49
+  - first:
+      213: 604273322711872245
+    second: gidiklama-hareketli_50
+  - first:
+      213: -2818679695330805982
+    second: gidiklama-hareketli_51
+  - first:
+      213: -3276826688426843773
+    second: gidiklama-hareketli_52
+  - first:
+      213: -152911124670194913
+    second: gidiklama-hareketli_53
+  - first:
+      213: 621699591745252390
+    second: gidiklama-hareketli_54
+  - first:
+      213: -4918046247011545779
+    second: gidiklama-hareketli_55
+  - first:
+      213: -1337181246135777472
+    second: gidiklama-hareketli_56
+  - first:
+      213: -2005110095740112341
+    second: gidiklama-hareketli_57
+  - first:
+      213: 3395648849577023780
+    second: gidiklama-hareketli_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gidiklama-hareketli_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 618
+        width: 456
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59c95ed89b1c4d90800000000000000
+      internalID: -7112279368145450662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_1
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 621
+        width: 275
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f143b7efca0be8220800000000000000
+      internalID: 2490121901032813599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_2
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 898
+        width: 74
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f6bb7f7fe4668180800000000000000
+      internalID: -9113485816138844429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_3
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 898
+        width: 52
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3412d35600d4d2bd0800000000000000
+      internalID: -2653379941357510333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_4
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 913
+        width: 46
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d24c5583d28fcaa20800000000000000
+      internalID: 3075105518689567789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_5
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 925
+        width: 34
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d6d3d768e237c240800000000000000
+      internalID: 4811870700624402132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_6
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 898
+        width: 41
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 354db426a79c2a610800000000000000
+      internalID: 1631087542533870675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_7
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 907
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f486948e3769c200800000000000000
+      internalID: 200805176604787953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_8
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 898
+        width: 31
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e90ec1fc47a947640800000000000000
+      internalID: 5076852506435051678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_9
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 898
+        width: 33
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e79477587ba6f760800000000000000
+      internalID: 7491363563529082848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_10
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 898
+        width: 35
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01e71652654203e30800000000000000
+      internalID: 4481121581646577168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_11
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 909
+        width: 35
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176017f6881b06470800000000000000
+      internalID: 8385897705707210353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_12
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 880
+        width: 158
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb2526b113c6d8c00800000000000000
+      internalID: 904498058339963583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_13
+      rect:
+        serializedVersion: 2
+        x: 1213
+        y: 880
+        width: 124
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31f410b3980392380800000000000000
+      internalID: -8995605414737260781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_14
+      rect:
+        serializedVersion: 2
+        x: 1337
+        y: 872
+        width: 141
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a3eda48a2f9a4b30800000000000000
+      internalID: 4272402201477768100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_15
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 834
+        width: 275
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26026aec005cc830800000000000000
+      internalID: 4092734177775060526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_16
+      rect:
+        serializedVersion: 2
+        x: 1753
+        y: 810
+        width: 134
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277ef25749174f590800000000000000
+      internalID: -7641357785305716878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_17
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 568
+        width: 309
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21bbf38b5c2c7980800000000000000
+      internalID: -8539902021833346772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_18
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 794
+        width: 169
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e11abc3e470dcda0800000000000000
+      internalID: -5923069902314663454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_19
+      rect:
+        serializedVersion: 2
+        x: 1216
+        y: 794
+        width: 29
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa825b69921c6a9e0800000000000000
+      internalID: -1610387432372098897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_20
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 797
+        width: 34
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e573f9a239bed490800000000000000
+      internalID: -7719529084015643160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_21
+      rect:
+        serializedVersion: 2
+        x: 1269
+        y: 802
+        width: 32
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cc6b15e19cb76d00800000000000000
+      internalID: 965947979894320320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_22
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 794
+        width: 37
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c7aa824c8953520800000000000000
+      internalID: 2681217121432271931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_23
+      rect:
+        serializedVersion: 2
+        x: 1321
+        y: 784
+        width: 80
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ef470792ca45b40800000000000000
+      internalID: 5428152744868642418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_24
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 796
+        width: 68
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99589e45e1f9c4460800000000000000
+      internalID: 7227326454645228953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_25
+      rect:
+        serializedVersion: 2
+        x: 1404
+        y: 804
+        width: 35
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cdd4f44f18c288d0800000000000000
+      internalID: -2845491977918292535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_26
+      rect:
+        serializedVersion: 2
+        x: 1473
+        y: 536
+        width: 149
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bbd1245dd0a9c180800000000000000
+      internalID: -9094561100038284360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_27
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 637
+        width: 160
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed1aaf6a96a320c0800000000000000
+      internalID: -4601651212013920799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 464
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19f6c1d9777c300e0800000000000000
+      internalID: -2304779267732639855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_29
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 587
+        width: 50
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7315edb623d941c50800000000000000
+      internalID: 6635100990907240759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_30
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 586
+        width: 54
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac2628897a49a980800000000000000
+      internalID: -8527202533613622111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_31
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 568
+        width: 21
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d655f60fff3f136a0800000000000000
+      internalID: -6471122908978653843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_32
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 569
+        width: 27
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73ab9170f7130c680800000000000000
+      internalID: -8736928855449028041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_33
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 554
+        width: 238
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f320495c088d6aa0800000000000000
+      internalID: -6166122728181980172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_34
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 536
+        width: 188
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b182ddc3c6e25b0800000000000000
+      internalID: -5391252695251674251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_35
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 606
+        width: 130
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca95376c618711640800000000000000
+      internalID: 5048948696473098668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_36
+      rect:
+        serializedVersion: 2
+        x: 1622
+        y: 475
+        width: 131
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 000787f4e43959bd0800000000000000
+      internalID: -2624029243323420672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_37
+      rect:
+        serializedVersion: 2
+        x: 1753
+        y: 475
+        width: 172
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0fe5473a5ce3cb20800000000000000
+      internalID: 3153624036308021003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_38
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 568
+        width: 54
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e60b7a0f624eb9bd0800000000000000
+      internalID: -2622251502115770258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_39
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 568
+        width: 54
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44186826dadccce10800000000000000
+      internalID: 2219374860952830276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_40
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 531
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd14f7cfaa5e93050800000000000000
+      internalID: 5780904119250141661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_41
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 1
+        width: 369
+        height: 552
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4d1d5bec5fb99840800000000000000
+      internalID: 5231422847974186314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_42
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 333
+        width: 362
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bde3f154a203e6860800000000000000
+      internalID: 7525004985489112795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_43
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 505
+        width: 59
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82ae8b7b73f1397d0800000000000000
+      internalID: -2912950209812567512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_44
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 326
+        width: 258
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b1cc5a084771170800000000000000
+      internalID: 8149110146636454658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_45
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 1
+        width: 276
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0560e5eff36490e0800000000000000
+      internalID: -2264074761936018165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_46
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 199
+        width: 272
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d6742541ff33d550800000000000000
+      internalID: 6184357018789508822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_47
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 199
+        width: 153
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b2c1887d21289ec0800000000000000
+      internalID: -3560059026257362247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_48
+      rect:
+        serializedVersion: 2
+        x: 1482
+        y: 323
+        width: 240
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46f9601b7b2c0e000800000000000000
+      internalID: 63264488987991908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_49
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 310
+        width: 130
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ff5a63645af6870800000000000000
+      internalID: 8678336727949377391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_50
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 281
+        width: 95
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f27c7ba26fc26800800000000000000
+      internalID: 604273322711872245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_51
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 243
+        width: 26
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 227733840c902e8d0800000000000000
+      internalID: -2818679695330805982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_52
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 196
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3816ccdfc7f5682d0800000000000000
+      internalID: -3276826688426843773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_53
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 196
+        width: 147
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1bd3db6420c0edf0800000000000000
+      internalID: -152911124670194913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_54
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 166
+        width: 100
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62c2bfa1c78b0a800800000000000000
+      internalID: 621699591745252390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_55
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 1
+        width: 349
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d0fe9cef69fbbb0800000000000000
+      internalID: -4918046247011545779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_56
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 4
+        width: 247
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04743c7cdb0617de0800000000000000
+      internalID: -1337181246135777472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_57
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 4
+        width: 213
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b227cdfcdfa6c24e0800000000000000
+      internalID: -2005110095740112341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gidiklama-hareketli_58
+      rect:
+        serializedVersion: 2
+        x: 1776
+        y: 1
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 429900543a4cf1f20800000000000000
+      internalID: 3395648849577023780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

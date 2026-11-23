@@ -1,0 +1,932 @@
+fileFormatVersion: 2
+guid: 9ae152abb89fa66478146acd3a9ad94c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9045703599196609341
+    second: fisilti-iblisler_0
+  - first:
+      213: -7078648006864373849
+    second: fisilti-iblisler_1
+  - first:
+      213: 3335773671092940924
+    second: fisilti-iblisler_2
+  - first:
+      213: 9197454271397646674
+    second: fisilti-iblisler_3
+  - first:
+      213: -7074625736906070258
+    second: fisilti-iblisler_4
+  - first:
+      213: -4376656230278535494
+    second: fisilti-iblisler_5
+  - first:
+      213: -5303628187668950495
+    second: fisilti-iblisler_6
+  - first:
+      213: -8555750924595267078
+    second: fisilti-iblisler_7
+  - first:
+      213: -687511823173805976
+    second: fisilti-iblisler_8
+  - first:
+      213: 7577428403742164943
+    second: fisilti-iblisler_9
+  - first:
+      213: 8822112081444777263
+    second: fisilti-iblisler_10
+  - first:
+      213: -1293215643713191737
+    second: fisilti-iblisler_11
+  - first:
+      213: 7310389793974150917
+    second: fisilti-iblisler_12
+  - first:
+      213: 3456395418041006949
+    second: fisilti-iblisler_13
+  - first:
+      213: -8801235415889293714
+    second: fisilti-iblisler_14
+  - first:
+      213: -8659340372588457205
+    second: fisilti-iblisler_15
+  - first:
+      213: -6216190696712005738
+    second: fisilti-iblisler_16
+  - first:
+      213: -8147156151571625273
+    second: fisilti-iblisler_17
+  - first:
+      213: 3758841120711293270
+    second: fisilti-iblisler_18
+  - first:
+      213: -2683401990920304487
+    second: fisilti-iblisler_19
+  - first:
+      213: -8536185686338010539
+    second: fisilti-iblisler_20
+  - first:
+      213: 914992549758624936
+    second: fisilti-iblisler_21
+  - first:
+      213: -5512546495360007136
+    second: fisilti-iblisler_22
+  - first:
+      213: -3693994564871145319
+    second: fisilti-iblisler_23
+  - first:
+      213: 8637562770700374764
+    second: fisilti-iblisler_24
+  - first:
+      213: 138302789830983899
+    second: fisilti-iblisler_25
+  - first:
+      213: -3583632452494627997
+    second: fisilti-iblisler_26
+  - first:
+      213: 5944912962747313200
+    second: fisilti-iblisler_27
+  - first:
+      213: 2160308700790018040
+    second: fisilti-iblisler_28
+  - first:
+      213: 3458338418345265768
+    second: fisilti-iblisler_29
+  - first:
+      213: -6620365943061892253
+    second: fisilti-iblisler_30
+  - first:
+      213: -5745837578752075502
+    second: fisilti-iblisler_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fisilti-iblisler_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 359
+        height: 535
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b169d4f7bc88d70800000000000000
+      internalID: 9045703599196609341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_1
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 469
+        width: 157
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a772dc542793cd90800000000000000
+      internalID: -7078648006864373849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_2
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 1
+        width: 461
+        height: 468
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70789cea7c0b4e20800000000000000
+      internalID: 3335773671092940924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_3
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 469
+        width: 239
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2515e8cfdebe3af70800000000000000
+      internalID: 9197454271397646674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_4
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 469
+        width: 203
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e07a0e01061e1dd90800000000000000
+      internalID: -7074625736906070258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_5
+      rect:
+        serializedVersion: 2
+        x: 959
+        y: 435
+        width: 172
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab66f3ad85ef243c0800000000000000
+      internalID: -4376656230278535494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_6
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 411
+        width: 203
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1225e3d534ab566b0800000000000000
+      internalID: -5303628187668950495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_7
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 411
+        width: 316
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af977c84dddd34980800000000000000
+      internalID: -8555750924595267078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_8
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 408
+        width: 190
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86818d0b3a77576f0800000000000000
+      internalID: -687511823173805976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_9
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 372
+        width: 307
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc7c10c7cfe682960800000000000000
+      internalID: 7577428403742164943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_10
+      rect:
+        serializedVersion: 2
+        x: 2147
+        y: 372
+        width: 117
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2da23f42307e6a70800000000000000
+      internalID: 8822112081444777263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_11
+      rect:
+        serializedVersion: 2
+        x: 2264
+        y: 372
+        width: 234
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c04f7a49339d0ee0800000000000000
+      internalID: -1293215643713191737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_12
+      rect:
+        serializedVersion: 2
+        x: 2498
+        y: 359
+        width: 108
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 507687719c8b37560800000000000000
+      internalID: 7310389793974150917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_13
+      rect:
+        serializedVersion: 2
+        x: 2606
+        y: 331
+        width: 177
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b3f97e15597ff20800000000000000
+      internalID: 3456395418041006949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_14
+      rect:
+        serializedVersion: 2
+        x: 2783
+        y: 330
+        width: 105
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6ec45b250bbbd580800000000000000
+      internalID: -8801235415889293714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_15
+      rect:
+        serializedVersion: 2
+        x: 2888
+        y: 309
+        width: 136
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b039aae6fc7d3d780800000000000000
+      internalID: -8659340372588457205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_16
+      rect:
+        serializedVersion: 2
+        x: 3024
+        y: 425
+        width: 275
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69794620f77abb9a0800000000000000
+      internalID: -6216190696712005738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_17
+      rect:
+        serializedVersion: 2
+        x: 3299
+        y: 425
+        width: 116
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ca4fe745ac7fee80800000000000000
+      internalID: -8147156151571625273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_18
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 4
+        width: 223
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 659b02785161a2430800000000000000
+      internalID: 3758841120711293270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_19
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 1
+        width: 277
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9988e954b14a2cad0800000000000000
+      internalID: -2683401990920304487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_20
+      rect:
+        serializedVersion: 2
+        x: 1402
+        y: 1
+        width: 290
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5528c0d4850698980800000000000000
+      internalID: -8536185686338010539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_21
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 1
+        width: 362
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a4ed7c40e4b2bc00800000000000000
+      internalID: 914992549758624936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_22
+      rect:
+        serializedVersion: 2
+        x: 2054
+        y: 1
+        width: 214
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0240e305b208f73b0800000000000000
+      internalID: -5512546495360007136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_23
+      rect:
+        serializedVersion: 2
+        x: 2268
+        y: 1
+        width: 281
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 998b1aec38b4cbcc0800000000000000
+      internalID: -3693994564871145319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_24
+      rect:
+        serializedVersion: 2
+        x: 2549
+        y: 1
+        width: 130
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce21cb08399ced770800000000000000
+      internalID: 8637562770700374764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_25
+      rect:
+        serializedVersion: 2
+        x: 2682
+        y: 4
+        width: 176
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0425397a95be100800000000000000
+      internalID: 138302789830983899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_26
+      rect:
+        serializedVersion: 2
+        x: 2861
+        y: 1
+        width: 156
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36bee777541644ec0800000000000000
+      internalID: -3583632452494627997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_27
+      rect:
+        serializedVersion: 2
+        x: 3017
+        y: 1
+        width: 134
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03c2b2597d2908250800000000000000
+      internalID: 5944912962747313200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_28
+      rect:
+        serializedVersion: 2
+        x: 3151
+        y: 283
+        width: 262
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ff46cb4155fafd10800000000000000
+      internalID: 2160308700790018040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_29
+      rect:
+        serializedVersion: 2
+        x: 3151
+        y: 1
+        width: 264
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a4e8ae77c7eff20800000000000000
+      internalID: 3458338418345265768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_30
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 137
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363b3b0404cbf14a0800000000000000
+      internalID: -6620365943061892253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisilti-iblisler_31
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 2
+        width: 86
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21954653a2fa240b0800000000000000
+      internalID: -5745837578752075502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: 38aadd70b17f4ff4e9c76fa39157fb01
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8583066448944811093
+    second: kamp-cini_0
+  - first:
+      213: 2155852196768627171
+    second: kamp-cini_1
+  - first:
+      213: 3290190900033324880
+    second: kamp-cini_2
+  - first:
+      213: -579298688665002359
+    second: kamp-cini_3
+  - first:
+      213: -4748366152028131873
+    second: kamp-cini_4
+  - first:
+      213: 3246165372621835071
+    second: kamp-cini_5
+  - first:
+      213: 2852076947919056307
+    second: kamp-cini_6
+  - first:
+      213: 3352643673523520873
+    second: kamp-cini_7
+  - first:
+      213: -5293166306651496322
+    second: kamp-cini_8
+  - first:
+      213: 2459569969549655562
+    second: kamp-cini_9
+  - first:
+      213: 4824924741129891779
+    second: kamp-cini_10
+  - first:
+      213: -3001561651918123036
+    second: kamp-cini_11
+  - first:
+      213: 6455822252017101982
+    second: kamp-cini_12
+  - first:
+      213: -4163949525479019997
+    second: kamp-cini_13
+  - first:
+      213: -703293424947111743
+    second: kamp-cini_14
+  - first:
+      213: 5532178193319002390
+    second: kamp-cini_15
+  - first:
+      213: -4623648976025984178
+    second: kamp-cini_16
+  - first:
+      213: -5327274433288063640
+    second: kamp-cini_17
+  - first:
+      213: 6198297425286497368
+    second: kamp-cini_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kamp-cini_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 519
+        width: 200
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba3321b2a82d2e880800000000000000
+      internalID: -8583066448944811093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 519
+        width: 172
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9b3a896202bed10800000000000000
+      internalID: 2155852196768627171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_2
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 519
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05785bff03b19ad20800000000000000
+      internalID: 3290190900033324880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_3
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 503
+        width: 229
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ed54379eae5f7f0800000000000000
+      internalID: -579298688665002359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_4
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 452
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fddefd4842a6a1eb0800000000000000
+      internalID: -4748366152028131873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_5
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 452
+        width: 133
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b4c4d1532bc0d20800000000000000
+      internalID: 3246165372621835071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_6
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 450
+        width: 208
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bdabc88fdc949720800000000000000
+      internalID: 2852076947919056307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_7
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 450
+        width: 119
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96584d278abf68e20800000000000000
+      internalID: 3352643673523520873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_8
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 372
+        width: 97
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e70a8fad945ea86b0800000000000000
+      internalID: -5293166306651496322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_9
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 372
+        width: 286
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0eb93f1bd5222220800000000000000
+      internalID: 2459569969549655562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_10
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 313
+        width: 121
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf6a0f0d7395f240800000000000000
+      internalID: 4824924741129891779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_11
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 313
+        width: 128
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef4cfd949f4856d0800000000000000
+      internalID: -3001561651918123036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 398
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9caa804220b79950800000000000000
+      internalID: 6455822252017101982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_13
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 1
+        width: 173
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32aaa27d7fda636c0800000000000000
+      internalID: -4163949525479019997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_14
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1
+        width: 440
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c8d8213b566d36f0800000000000000
+      internalID: -703293424947111743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_15
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 1
+        width: 326
+        height: 449
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61101fe81ce36cc40800000000000000
+      internalID: 5532178193319002390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_16
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 1
+        width: 258
+        height: 371
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e436fd1e0cf75dfb0800000000000000
+      internalID: -4623648976025984178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_17
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 1
+        width: 106
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86538d6c028b116b0800000000000000
+      internalID: -5327274433288063640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kamp-cini_18
+      rect:
+        serializedVersion: 2
+        x: 1708
+        y: 4
+        width: 288
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8548b661ba6c40650800000000000000
+      internalID: 6198297425286497368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,557 @@
+fileFormatVersion: 2
+guid: 181b8b689feef6b489b5820ee73ebc31
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3445722657637834076
+    second: kapi-muhafizi_0
+  - first:
+      213: 4913479623698626334
+    second: kapi-muhafizi_1
+  - first:
+      213: 4543142693930673345
+    second: kapi-muhafizi_2
+  - first:
+      213: -8127780127123723063
+    second: kapi-muhafizi_3
+  - first:
+      213: 6044121039830388100
+    second: kapi-muhafizi_4
+  - first:
+      213: -2966750574925691611
+    second: kapi-muhafizi_5
+  - first:
+      213: -4286030677641839247
+    second: kapi-muhafizi_6
+  - first:
+      213: -4214557346123435939
+    second: kapi-muhafizi_7
+  - first:
+      213: -381324225671244524
+    second: kapi-muhafizi_8
+  - first:
+      213: -480914132845282374
+    second: kapi-muhafizi_9
+  - first:
+      213: 6741540885897185114
+    second: kapi-muhafizi_10
+  - first:
+      213: 1770936724063527319
+    second: kapi-muhafizi_11
+  - first:
+      213: 6240733126808287065
+    second: kapi-muhafizi_12
+  - first:
+      213: -4630111900361087739
+    second: kapi-muhafizi_13
+  - first:
+      213: -7261623872501810959
+    second: kapi-muhafizi_14
+  - first:
+      213: 6491389475140698960
+    second: kapi-muhafizi_15
+  - first:
+      213: 8388627352874815138
+    second: kapi-muhafizi_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kapi-muhafizi_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 564
+        width: 1410
+        height: 905
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5d940b308aa1df20800000000000000
+      internalID: 3445722657637834076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 343
+        width: 1115
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e173dad5faf203440800000000000000
+      internalID: 4913479623698626334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 82
+        width: 228
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c426a3a53c7c0f30800000000000000
+      internalID: 4543142693930673345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_3
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 85
+        width: 144
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ccaf468903543f80800000000000000
+      internalID: -8127780127123723063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_4
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 90
+        width: 156
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48d0e86001801e350800000000000000
+      internalID: 6044121039830388100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_5
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 106
+        width: 315
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5254e54121cf3d6d0800000000000000
+      internalID: -2966750574925691611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_6
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 114
+        width: 276
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d3bba9ec5f484c0800000000000000
+      internalID: -4286030677641839247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_7
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 125
+        width: 304
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50bcc26c62e285c0800000000000000
+      internalID: -4214557346123435939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_8
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 1
+        width: 247
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4155d9813a345baf0800000000000000
+      internalID: -381324225671244524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_9
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 78
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abbba48e4237359f0800000000000000
+      internalID: -480914132845282374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_10
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1
+        width: 228
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a578caea7b3ce8d50800000000000000
+      internalID: 6741540885897185114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_11
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 1
+        width: 98
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79120855191a39810800000000000000
+      internalID: 1770936724063527319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_12
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1
+        width: 175
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 957bb69c6b98b9650800000000000000
+      internalID: 6240733126808287065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_13
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 1
+        width: 217
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5052bac02c98ebfb0800000000000000
+      internalID: -4630111900361087739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_14
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 1
+        width: 126
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f8780bcf87893b90800000000000000
+      internalID: -7261623872501810959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_15
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1
+        width: 120
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0538874b55c061a50800000000000000
+      internalID: 6491389475140698960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kapi-muhafizi_16
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ae8a31f1246a6470800000000000000
+      internalID: 8388627352874815138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

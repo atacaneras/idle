@@ -1,0 +1,932 @@
+fileFormatVersion: 2
+guid: 3318aa31c7083a14ca40683f268214f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5089861641855465543
+    second: takip-run_0
+  - first:
+      213: 383831333593707226
+    second: takip-run_1
+  - first:
+      213: 805611782214622077
+    second: takip-run_2
+  - first:
+      213: 4294827762891463871
+    second: takip-run_3
+  - first:
+      213: -2143164326901543397
+    second: takip-run_4
+  - first:
+      213: -8997677776565847088
+    second: takip-run_5
+  - first:
+      213: -7109240527254139474
+    second: takip-run_6
+  - first:
+      213: -6191454292236148312
+    second: takip-run_7
+  - first:
+      213: -8435044169214334286
+    second: takip-run_8
+  - first:
+      213: 575511894044180802
+    second: takip-run_9
+  - first:
+      213: 8840189823356132536
+    second: takip-run_10
+  - first:
+      213: -7472675719866325136
+    second: takip-run_11
+  - first:
+      213: 1301844602686617894
+    second: takip-run_12
+  - first:
+      213: -9133112849877864740
+    second: takip-run_13
+  - first:
+      213: -8991125721521302269
+    second: takip-run_14
+  - first:
+      213: -765007806264561825
+    second: takip-run_15
+  - first:
+      213: -590455900149000710
+    second: takip-run_16
+  - first:
+      213: -8901821726409094308
+    second: takip-run_17
+  - first:
+      213: 4031352338805288708
+    second: takip-run_18
+  - first:
+      213: -8734322982127730454
+    second: takip-run_19
+  - first:
+      213: -1166373049701498977
+    second: takip-run_20
+  - first:
+      213: 3327300897956937003
+    second: takip-run_21
+  - first:
+      213: -5523669654105371170
+    second: takip-run_22
+  - first:
+      213: -3112865931382395386
+    second: takip-run_23
+  - first:
+      213: -7957463298154359337
+    second: takip-run_24
+  - first:
+      213: 2435901224129551693
+    second: takip-run_25
+  - first:
+      213: 97741212450708030
+    second: takip-run_26
+  - first:
+      213: -3762761837504583381
+    second: takip-run_27
+  - first:
+      213: -7933427582839371938
+    second: takip-run_28
+  - first:
+      213: -7369159709238320493
+    second: takip-run_29
+  - first:
+      213: -7975518500728335630
+    second: takip-run_30
+  - first:
+      213: 8491051276750203027
+    second: takip-run_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: takip-run_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 461
+        height: 499
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7487eae2232d2a640800000000000000
+      internalID: 5089861641855465543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_1
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 362
+        width: 153
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad274847094a35500800000000000000
+      internalID: 383831333593707226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_2
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 362
+        width: 120
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b95c9c5ab1e2b00800000000000000
+      internalID: 805611782214622077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_3
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 309
+        width: 208
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbc91aa681b4a9b30800000000000000
+      internalID: 4294827762891463871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_4
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 309
+        width: 217
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1e8ebf4663f142e0800000000000000
+      internalID: -2143164326901543397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_5
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 292
+        width: 97
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dbbd54ebb3d12380800000000000000
+      internalID: -8997677776565847088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_6
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 292
+        width: 137
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eadc4362867e65d90800000000000000
+      internalID: -7109240527254139474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_7
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 272
+        width: 80
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1623cff19831aa0800000000000000
+      internalID: -6191454292236148312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_8
+      rect:
+        serializedVersion: 2
+        x: 1474
+        y: 272
+        width: 228
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2baef35d404b0fa80800000000000000
+      internalID: -8435044169214334286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_9
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 272
+        width: 172
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2410488b401acf700800000000000000
+      internalID: 575511894044180802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_10
+      rect:
+        serializedVersion: 2
+        x: 1874
+        y: 264
+        width: 107
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bc5a289ec9aeaa70800000000000000
+      internalID: 8840189823356132536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_11
+      rect:
+        serializedVersion: 2
+        x: 1981
+        y: 254
+        width: 218
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0776ea35609bb4890800000000000000
+      internalID: -7472675719866325136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_12
+      rect:
+        serializedVersion: 2
+        x: 2199
+        y: 386
+        width: 125
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62935e7c4c4111210800000000000000
+      internalID: 1301844602686617894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_13
+      rect:
+        serializedVersion: 2
+        x: 2199
+        y: 195
+        width: 183
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde6979904aa04180800000000000000
+      internalID: -9133112849877864740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_14
+      rect:
+        serializedVersion: 2
+        x: 2324
+        y: 386
+        width: 97
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30558d51bca193380800000000000000
+      internalID: -8991125721521302269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_15
+      rect:
+        serializedVersion: 2
+        x: 2421
+        y: 370
+        width: 135
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f233114752265f0800000000000000
+      internalID: -765007806264561825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_16
+      rect:
+        serializedVersion: 2
+        x: 2556
+        y: 360
+        width: 131
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af5d518bc774ec7f0800000000000000
+      internalID: -590455900149000710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_17
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 1
+        width: 249
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b088fbd40667480800000000000000
+      internalID: -8901821726409094308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_18
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 6
+        width: 250
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40fede6d79d32f730800000000000000
+      internalID: 4031352338805288708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_19
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 1
+        width: 140
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae00fb0368379c680800000000000000
+      internalID: -8734322982127730454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_20
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 1
+        width: 174
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9ff3f814e530dfe0800000000000000
+      internalID: -1166373049701498977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_21
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 1
+        width: 552
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2dbf83b982fc2e20800000000000000
+      internalID: 3327300897956937003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_22
+      rect:
+        serializedVersion: 2
+        x: 1838
+        y: 1
+        width: 88
+        height: 263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eddc17a17bbf753b0800000000000000
+      internalID: -5523669654105371170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_23
+      rect:
+        serializedVersion: 2
+        x: 1926
+        y: 1
+        width: 130
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e69869de0ecc4d0800000000000000
+      internalID: -3112865931382395386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_24
+      rect:
+        serializedVersion: 2
+        x: 2056
+        y: 1
+        width: 131
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d51d407a49619190800000000000000
+      internalID: -7957463298154359337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_25
+      rect:
+        serializedVersion: 2
+        x: 2187
+        y: 1
+        width: 143
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d5e24e14f0ec120800000000000000
+      internalID: 2435901224129551693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_26
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 1
+        width: 73
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a5a086d1f3b5100800000000000000
+      internalID: 97741212450708030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_27
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 188
+        width: 173
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b29a4257b0cf7cbc0800000000000000
+      internalID: -3762761837504583381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_28
+      rect:
+        serializedVersion: 2
+        x: 2555
+        y: 181
+        width: 93
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e57c29185adc6e190800000000000000
+      internalID: -7933427582839371938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_29
+      rect:
+        serializedVersion: 2
+        x: 2648
+        y: 179
+        width: 128
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 392aab5b94c7bb990800000000000000
+      internalID: -7369159709238320493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_30
+      rect:
+        serializedVersion: 2
+        x: 2403
+        y: 1
+        width: 162
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f218800e24415190800000000000000
+      internalID: -7975518500728335630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: takip-run_31
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 1
+        width: 168
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398a250162646d570800000000000000
+      internalID: 8491051276750203027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
