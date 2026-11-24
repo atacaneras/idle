@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 980c8e98f949cd84e9561c9d11431eda
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7230855226172434809
+    second: ayna-prova_0
+  - first:
+      213: 5215510318313961269
+    second: ayna-prova_1
+  - first:
+      213: 8889663696204328536
+    second: ayna-prova_2
+  - first:
+      213: 3932139353625230500
+    second: ayna-prova_3
+  - first:
+      213: 5722980201250293565
+    second: ayna-prova_4
+  - first:
+      213: 4083534190552877036
+    second: ayna-prova_5
+  - first:
+      213: 4031597751642866075
+    second: ayna-prova_6
+  - first:
+      213: -1258592562367853713
+    second: ayna-prova_7
+  - first:
+      213: 6883291766372720698
+    second: ayna-prova_8
+  - first:
+      213: -5571981774840577115
+    second: ayna-prova_9
+  - first:
+      213: 6649057643626696355
+    second: ayna-prova_10
+  - first:
+      213: 4463506066831950531
+    second: ayna-prova_11
+  - first:
+      213: -2888893381731642263
+    second: ayna-prova_12
+  - first:
+      213: -7749978544213076101
+    second: ayna-prova_13
+  - first:
+      213: -1472021969768280951
+    second: ayna-prova_14
+  - first:
+      213: 6270151762722872791
+    second: ayna-prova_15
+  - first:
+      213: -7784470821300317672
+    second: ayna-prova_16
+  - first:
+      213: 6564016464891879448
+    second: ayna-prova_17
+  - first:
+      213: -4641294161039269353
+    second: ayna-prova_18
+  - first:
+      213: 5051593233726522157
+    second: ayna-prova_19
+  - first:
+      213: -4640217794245343084
+    second: ayna-prova_20
+  - first:
+      213: -4719682875876700221
+    second: ayna-prova_21
+  - first:
+      213: -7554330376145786710
+    second: ayna-prova_22
+  - first:
+      213: 423657505917030153
+    second: ayna-prova_23
+  - first:
+      213: 2567689048652320304
+    second: ayna-prova_24
+  - first:
+      213: -6396923412384691799
+    second: ayna-prova_25
+  - first:
+      213: 3168452412660281572
+    second: ayna-prova_26
+  - first:
+      213: -2072505015525650353
+    second: ayna-prova_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ayna-prova_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 934
+        width: 157
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78617b58b77d6ab90800000000000000
+      internalID: -7230855226172434809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_1
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 973
+        width: 36
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 537fc756007316840800000000000000
+      internalID: 5215510318313961269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_2
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 953
+        width: 59
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85ee1f0480e6e5b70800000000000000
+      internalID: 8889663696204328536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_3
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 934
+        width: 57
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac7a24a8e3c19630800000000000000
+      internalID: 3932139353625230500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_4
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 917
+        width: 223
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d370e10eb2c1c6f40800000000000000
+      internalID: 5722980201250293565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_5
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 853
+        width: 114
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce70118f5b0aba830800000000000000
+      internalID: 4083534190552877036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_6
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 922
+        width: 200
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91cfe77bcc13f730800000000000000
+      internalID: 4031597751642866075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_7
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 938
+        width: 158
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6b8d1b9bb4988ee0800000000000000
+      internalID: -1258592562367853713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_8
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 646
+        width: 412
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a30640c646d568f50800000000000000
+      internalID: 6883291766372720698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_9
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 796
+        width: 260
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a34dafe8185ca2b0800000000000000
+      internalID: -5571981774840577115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_10
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 793
+        width: 196
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae077bd2b2364c50800000000000000
+      internalID: 6649057643626696355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_11
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 725
+        width: 252
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2c15e7e1f81fd30800000000000000
+      internalID: 4463506066831950531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_12
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 725
+        width: 223
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96498eb76c698e7d0800000000000000
+      internalID: -2888893381731642263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_13
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 725
+        width: 177
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b77d74f339b827490800000000000000
+      internalID: -7749978544213076101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_14
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 820
+        width: 237
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98c046e41d3529be0800000000000000
+      internalID: -1472021969768280951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_15
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 725
+        width: 273
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ddd2e8becd040750800000000000000
+      internalID: 6270151762722872791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_16
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 725
+        width: 54
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812500c280108f390800000000000000
+      internalID: -7784470821300317672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 1001
+        height: 724
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81022b97232181b50800000000000000
+      internalID: 6564016464891879448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_18
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 1
+        width: 369
+        height: 645
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 712e8291d8fc69fb0800000000000000
+      internalID: -4641294161039269353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_19
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 408
+        width: 312
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d234906184dda1640800000000000000
+      internalID: 5051593233726522157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_20
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 625
+        width: 287
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4984f854082aa9fb0800000000000000
+      internalID: -4640217794245343084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_21
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 621
+        width: 85
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf00ea2e61508eb0800000000000000
+      internalID: -4719682875876700221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_22
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 555
+        width: 70
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa823e52c80a92790800000000000000
+      internalID: -7554330376145786710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_23
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 1
+        width: 316
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90fcc9ac14221e500800000000000000
+      internalID: 423657505917030153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_24
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 408
+        width: 107
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e0596e59342a320800000000000000
+      internalID: 2567689048652320304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_25
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 378
+        width: 86
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a94e6d7c009937a0800000000000000
+      internalID: -6396923412384691799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_26
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 220
+        width: 184
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e07850aeaa98fb20800000000000000
+      internalID: 3168452412660281572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ayna-prova_27
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 1
+        width: 180
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40d0624babfc33e0800000000000000
+      internalID: -2072505015525650353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
