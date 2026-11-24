@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6d173770f6b2a744b0078fe5530dc89
+guid: 2fa7be4a0a39a4341ac77972972d2d63
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6152346892665510107
-    second: "Cefa_\u0130kon_0"
+      213: -8882094498958789663
+    second: Heaven_Button_Shadow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -111,43 +111,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Cefa_\u0130kon_0"
+      name: Heaven_Button_Shadow_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 247
-        height: 243
+        x: 49
+        y: 23
+        width: 302
+        height: 63
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd85e4007e6816550800000000000000
-      internalID: 6152346892665510107
+      spriteID: 1e33c10dc167cb480800000000000000
+      internalID: -8882094498958789663
       vertices: []
       indices: 
       edges: []

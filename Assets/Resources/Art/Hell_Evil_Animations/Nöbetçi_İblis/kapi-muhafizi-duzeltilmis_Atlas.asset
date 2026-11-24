@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: kapi-muhafizi_Atlas
+  m_Name: kapi-muhafizi-duzeltilmis_Atlas
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SpineAtlasAsset
   serializedMaterialOverrides: []
   textureLoadingMode: 0
   onDemandTextureLoader: {fileID: 0}
-  atlasFile: {fileID: 4900000, guid: dcffcbafb8a66ba47bae9c374a876b45, type: 3}
+  atlasFile: {fileID: 4900000, guid: 3e6af0c014f65af41ac7d580874eced3, type: 3}
   materials:
-  - {fileID: 2100000, guid: 6e0a435679984634299823f67c05f94c, type: 2}
+  - {fileID: 2100000, guid: b4cacaf72706c5645ab3881a0c4920b9, type: 2}
+  - {fileID: 2100000, guid: 7e2cb0ba8063e7241b92f93289797c25, type: 2}

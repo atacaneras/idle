@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 726087de9ec8e704ba539848191bdd8e
+guid: 9281b93488d19cd42a034c321e93ed3b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3568019005454452391
-    second: Hell_Button_Frame_0
+      213: 4334678416736342561
+    second: Heaven_Button_Inner_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hell_Button_Frame_0
+      name: Heaven_Button_Inner_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 11
-        width: 2073
-        height: 713
+        x: 177
+        y: 135
+        width: 1818
+        height: 372
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a684fb9166248130800000000000000
-      internalID: 3568019005454452391
+      spriteID: 1225f1dcd0fd72c30800000000000000
+      internalID: 4334678416736342561
       vertices: []
       indices: 
       edges: []
